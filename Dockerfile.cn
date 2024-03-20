@@ -1,0 +1,35 @@
+# There are issues with CN network connecting dockerHub 
+# Network issue is resolved by creating a new dockerfile and referring to a new mirror image registry.
+
+ARG REGISTRY
+
+# build environment
+FROM ${REGISTRY}/node:21-alpine3.18 as react-build
+
+RUN apk upgrade --available
+
+# create a new non-root USER
+RUN addgroup -S new-group && adduser -S new-user -G new-group
+USER new-user
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+RUN corepack enable
+WORKDIR /app
+# Copy the React App to the container
+COPY . /app/
+# Prepare the container for building React
+RUN pnpm install
+# Want the production version
+RUN pnpm run build
+# server environment
+FROM ${REGISTRY}/nginx:alpine
+RUN apk upgrade --available
+COPY nginx.conf /etc/nginx/conf.d/configfile.template
+COPY --from=react-build /app/build /usr/share/nginx/html
+ENV PORT 8080
+ENV HOST 0.0.0.0
+# Fire up nginx
+EXPOSE 8080
+CMD sh -c "envsubst '\$PORT' < /etc/nginx/conf.d/configfile.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+

@@ -1,0 +1,72 @@
+image: node:21-alpine3.18
+
+include:
+  - project: 'd9/infrastructure/gitlab-ci-templates'
+    ref: master
+    file: '.k8s-nodejs-gitlab-ci-template.yml'
+  - project: 'D9/infrastructure/gitlab-ci-templates'
+    ref: master
+    file: '.k8s-nodejs-gitlab-ci-template-cn.patch.yml'
+
+install:
+  stage: install
+  script:
+    - npm i pnpm -g
+    - pnpm i
+  artifacts:
+    expire_in: 1 days
+    when: on_success
+    paths:
+      - node_modules/
+
+audit:
+  stage: validate
+  script:
+    - npm i pnpm -g
+    - pnpm i
+    - pnpm audit --production
+
+lint:
+  stage: validate
+  image: node:21-alpine3.18
+  dependencies:
+    - install
+  script:
+    - npm i pnpm -g
+    - pnpm run lint
+
+# unittests:
+#   stage: validate
+#   image: node:21-alpine3.18
+#   dependencies:
+#     - install
+#   allow_failure: true
+#   script:
+#     - npm i pnpm -g
+#     - pnpm run test.coverage
+#   artifacts:
+#     paths:
+#       - coverage
+#       - coverage/lcov.info
+#     when: always
+#   coverage: '/^All files\s+\|\s+(\d+\.*\d*)\s+\|/'
+
+#################
+#     BUILD     #
+#################
+
+# Pulled in from .k8s-base-gitlab-ci-template.yml
+
+build:
+  image: node:21-alpine3.18
+  cache:
+    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+    paths:
+      - node_modules/
+      - '**/node_modules/'
+    policy: pull
+
+# Pulled in from security/.k8s-base-sec-gitlab-ci-template.yml
+
+sonarqube:
+  allow_failure: true
