@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Collapse, Form, Checkbox, Radio, Input } from 'antd';
 
+/*
+  every form should be a component, based on the mode(create/edit/observe), the form item 
+  could be input/select(disable or available) or plain text.
+  formItem: flexInput, flexSelect, etc
+*/
 const text = `
   A dog is a type of domesticated animal.
   Known for its loyalty and faithfulness,
@@ -61,22 +66,42 @@ const genVehicleForm = () => {
 const items = [
   {
     key: '1',
-    label: 'This is panel header 1',
+    label: '车辆基本信息',
     children: genVehicleForm()
   },
   {
     key: '2',
-    label: 'This is panel header 2',
+    label: '车载充电机信息',
     children: <p>{text}</p>
   },
   {
     key: '3',
-    label: 'This is panel header 3',
+    label: '驱动电机信息',
     children: <p>{text}</p>
   }
 ];
 
 const Flow = () => {
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'mock') {
+      fetch('./resource')
+        .then(res => {
+          return res.text();
+        })
+        .then(data => {
+          console.log('resource', data);
+        });
+
+      fetch('./auth', { method: 'POST' })
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
+          console.log('auth', data);
+        });
+    }
+  }, []);
+
   return (
     <div>
       <Collapse items={items} />
