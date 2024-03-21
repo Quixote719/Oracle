@@ -4,7 +4,7 @@
 ARG REGISTRY
 
 # build environment
-FROM ${REGISTRY}/node:21-alpine3.18 as react-build
+FROM ${REGISTRY}/node:latest as react-build
 
 RUN apk upgrade --available
 

@@ -73,17 +73,9 @@ build_image_aws_cn:
    tags:
      - rms-cn-dev
 
-trivy:
-  rules:
-    - when: never
-
 # Pulled in from security/.k8s-base-sec-gitlab-ci-template.yml
 sonarqube:
   allow_failure: true
-
-deploy_aws_dev:
-  rules:
-    - when: never
 
 deploy_aws_preprod:
   rules:
@@ -101,6 +93,10 @@ snyk-preprod-upload:
   rules:
     - when: never
     
-deploy_aws_prod:
+snyk-production-upload:
+  rules:
+    - when: never
+
+e2e_test:
   rules:
     - when: never
