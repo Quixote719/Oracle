@@ -1,5 +1,3 @@
-image: node:21-alpine3.18
-
 include:
   - project: 'd9/infrastructure/gitlab-ci-templates'
     ref: master
@@ -10,6 +8,7 @@ include:
 
 install:
   stage: install
+  image: node:21-alpine3.18
   script:
     - npm i pnpm -g
     - pnpm i
@@ -23,6 +22,7 @@ install:
 
 audit:
   stage: validate
+  image: node:21-alpine3.18
   script:
     - npm i pnpm -g
     - pnpm i
@@ -63,19 +63,13 @@ lint:
 
 # Pulled in from .k8s-base-gitlab-ci-template.yml
 
-build:
-  image: node:21-alpine3.18
-  cache:
+build_image_aws_cn:
+   cache:
     key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
     paths:
       - node_modules/
       - '**/node_modules/'
     policy: pull
-  tags:
-     - rms-cn-dev
-
-build_image_aws_cn:
-   extends: build_image_aws
    tags:
      - rms-cn-dev
 
@@ -87,10 +81,6 @@ trivy:
 sonarqube:
   allow_failure: true
 
-build_image_aws:
-  rules:
-    - when: never
-
 deploy_aws_dev:
   rules:
     - when: never
@@ -99,6 +89,18 @@ deploy_aws_preprod:
   rules:
     - when: never
 
+deploy_aws_prod:
+  rules:
+    - when: never
+
+snyk-dev-upload:
+  rules:
+    - when: never
+
+snyk-preprod-upload:
+  rules:
+    - when: never
+    
 deploy_aws_prod:
   rules:
     - when: never
