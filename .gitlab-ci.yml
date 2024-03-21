@@ -75,12 +75,14 @@ build:
      - rms-cn-dev
 
 build_image_aws_cn:
+   extends: build_image_aws
    tags:
      - rms-cn-dev
 
 trivy:
-  needs:
-    - build_image_aws_cn
+  rules:
+    - when: never
+
 # Pulled in from security/.k8s-base-sec-gitlab-ci-template.yml
 sonarqube:
   allow_failure: true
