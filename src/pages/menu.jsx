@@ -47,11 +47,6 @@ const items = [
 ];
 
 const MenuApp = () => {
-  // const [collapsed, setCollapsed] = useState(false);
-  // const toggleCollapsed = () => {
-  //   setCollapsed(!collapsed);
-  // };
-
   const menuClick = key => {
     console.log('menuClick', key);
   };
@@ -73,15 +68,6 @@ const MenuApp = () => {
           }
         }}
       >
-        {/* <Button
-          type="primary"
-          onClick={toggleCollapsed}
-          style={{
-            marginBottom: 16,
-          }}
-        >
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </Button> */}
         <div className={styles.leftSider}>
           <Menu
             defaultSelectedKeys={['1']}

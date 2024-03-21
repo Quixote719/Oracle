@@ -5,12 +5,15 @@ import AppContextProvider from '@/store/appContext.jsx';
 import '@/styles/index.less';
 
 const AsyncRMSPortal = lazy(() => import('./pages/rmsPortal'));
-const AsyncEarth = lazy(() => import('./pages/earth'));
-const AsyncCompLab = lazy(() => import('./pages/compLab'));
 const AsyncMenu = lazy(() => import('./pages/menu'));
 const AsyncFlow = lazy(() => import('./pages/flow'));
 
-console.log('process', process.env.NODE_ENV, import.meta.env.VITE_RMS_COLOR);
+async function enableMocking() {
+  if (process.env.NODE_ENV === 'mock') {
+    const { worker } = await import('./msw/browser');
+    return worker.start();
+  }
+}
 
 class App extends React.PureComponent {
   render() {
@@ -18,12 +21,10 @@ class App extends React.PureComponent {
       <AppContextProvider>
         <Router>
           <Routes>
-            <Route path="/Earth" element={<AsyncEarth />} />
             <Route path="/RMS" element={<AsyncRMSPortal />} />
-            <Route path="/compLab" element={<AsyncCompLab />} />
             <Route path="/menu" element={<AsyncMenu />} />
             <Route path="/flow" element={<AsyncFlow />} />
-            <Route path="/" element={<AsyncEarth />} />
+            <Route path="/" element={<AsyncMenu />} />
           </Routes>
         </Router>
       </AppContextProvider>
@@ -33,8 +34,10 @@ class App extends React.PureComponent {
 
 const root = createRoot(document.getElementById('root'));
 
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+enableMocking().then(() => {
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+});
