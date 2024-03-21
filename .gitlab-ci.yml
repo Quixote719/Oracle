@@ -18,6 +18,8 @@ install:
     when: on_success
     paths:
       - node_modules/
+  tags:
+    - rms-cn-dev
 
 audit:
   stage: validate
@@ -25,6 +27,8 @@ audit:
     - npm i pnpm -g
     - pnpm i
     - pnpm audit --production
+  tags:
+    - rms-cn-dev
 
 lint:
   stage: validate
@@ -34,6 +38,8 @@ lint:
   script:
     - npm i pnpm -g
     - pnpm run lint
+  tags:
+   - rms-cn-dev
 
 # unittests:
 #   stage: validate
@@ -65,8 +71,29 @@ build:
       - node_modules/
       - '**/node_modules/'
     policy: pull
+  tags:
+     - rms-cn-dev
 
+build_image_aws_cn:
+   tags:
+     - rms-cn-dev
 # Pulled in from security/.k8s-base-sec-gitlab-ci-template.yml
 
 sonarqube:
   allow_failure: true
+
+build_image_aws:
+  rules:
+    - when: never
+
+deploy_aws_dev:
+  rules:
+    - when: never
+
+deploy_aws_preprod:
+  rules:
+    - when: never
+
+deploy_aws_prod:
+  rules:
+    - when: never
