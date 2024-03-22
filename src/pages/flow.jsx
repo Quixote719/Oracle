@@ -1,83 +1,30 @@
 import React, { useEffect } from 'react';
-import { Collapse, Form, Checkbox, Radio, Input } from 'antd';
-
+import { Collapse } from 'antd';
+import vehicleBasicInfoForm from '@/component/vehicleBasicInfoForm';
+import vehicleChargerForm from '@/component/vehicleChargerForm';
+import vehicleMotorForm from '@/component/vehicleMotorForm';
+import styles from './index.module.less';
 /*
   every form should be a component, based on the mode(create/edit/observe), the form item 
   could be input/select(disable or available) or plain text.
   formItem: flexInput, flexSelect, etc
 */
-const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
-
-const genVehicleForm = () => {
-  return (
-    <div>
-      <Form
-        labelCol={{
-          span: 4
-        }}
-        wrapperCol={{
-          span: 14
-        }}
-        layout="horizontal"
-        style={{
-          maxWidth: 600
-        }}
-      >
-        <Form.Item label="Checkbox" name="disabled" valuePropName="checked">
-          <Checkbox>Checkbox</Checkbox>
-        </Form.Item>
-        <Form.Item label="Radio">
-          <Radio.Group>
-            <Radio value="apple"> Apple </Radio>
-            <Radio value="pear"> Pear </Radio>
-          </Radio.Group>
-        </Form.Item>
-        <Form.Item label="Url" name="Url" rules={[{ required: true }, { type: 'string', min: 6 }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Email"
-          name="Email"
-          rules={[
-            { required: true },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                console.log(value, getFieldValue('Email'));
-                const regExp = /[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}/;
-                if (regExp.exec(value)) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(new Error('please input an email'));
-              }
-            })
-          ]}
-        >
-          <Input />
-        </Form.Item>
-      </Form>
-    </div>
-  );
-};
 
 const items = [
   {
     key: '1',
     label: '车辆基本信息',
-    children: genVehicleForm()
+    children: vehicleBasicInfoForm()
   },
   {
     key: '2',
     label: '车载充电机信息',
-    children: <p>{text}</p>
+    children: vehicleChargerForm()
   },
   {
     key: '3',
     label: '驱动电机信息',
-    children: <p>{text}</p>
+    children: vehicleMotorForm()
   }
 ];
 
@@ -104,7 +51,7 @@ const Flow = () => {
 
   return (
     <div>
-      <Collapse items={items} />
+      <Collapse items={items} className={styles.collapse} />
     </div>
   );
 };
