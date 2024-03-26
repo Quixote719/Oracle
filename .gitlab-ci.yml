@@ -28,6 +28,8 @@ install:
 audit:
   stage: validate
   image: node:21-alpine3.18
+  dependencies:
+    - install
   script:
     - npm i pnpm -g
     - pnpm i
