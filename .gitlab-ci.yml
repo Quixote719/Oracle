@@ -1,7 +1,7 @@
 .variables_cn: &variables_cn
-    SHARED_SERVICES_ACCOUNT: 068946021388
-    ECR_REGION: cn-northwest-1
-    AWS_DOMAIN: amazonaws.com.cn
+  SHARED_SERVICES_ACCOUNT: 068946021388
+  ECR_REGION: cn-northwest-1
+  AWS_DOMAIN: amazonaws.com.cn
 
 include:
   - project: 'd9/infrastructure/gitlab-ci-templates'
@@ -44,7 +44,7 @@ lint:
     - npm i pnpm -g
     - pnpm run lint
   tags:
-   - rms-cn-dev
+    - rms-cn-dev
 
 # unittests:
 #   stage: validate
@@ -69,14 +69,14 @@ lint:
 # Pulled in from .k8s-base-gitlab-ci-template.yml
 
 build_image_aws_cn:
-   cache:
+  cache:
     key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
     paths:
       - node_modules/
       - '**/node_modules/'
     policy: pull
-   tags:
-     - rms-cn-dev
+  tags:
+    - rms-cn-dev
 
 trivy_cn:
   extends: trivy
@@ -84,7 +84,7 @@ trivy_cn:
     - build_image_aws_cn
   image:
     name: 068946021388.dkr.ecr.cn-northwest-1.amazonaws.com.cn/aquasec/trivy:latest
-    entrypoint: [""]
+    entrypoint: ['']
   variables: *variables_cn
   before_script:
     # - apk add curl
@@ -92,22 +92,21 @@ trivy_cn:
     - cat global_trivyignore >> ${CI_PROJECT_DIR}/.trivyignore
   script:
     # cache cleanup is needed when scanning images with the same tags, it does not remove the database
-    - trivy image --clear-cache  # trivy cache folder is .trivycache 
+    - trivy image --clear-cache # trivy cache folder is .trivycache
     - trivy image --download-db-only --username AWS --password $(aws ecr get-login-password)
       --db-repository 068946021388.dkr.ecr.cn-northwest-1.amazonaws.com.cn/ghcr.io/aquasecurity/trivy-db
     - trivy image --download-java-db-only --username AWS --password $(aws ecr get-login-password)
       --java-db-repository 068946021388.dkr.ecr.cn-northwest-1.amazonaws.com.cn/ghcr.io/aquasecurity/trivy-java-db
-    - trivy image --username AWS --password $(aws ecr get-login-password) --skip-db-update --skip-java-db-update 
+    - trivy image --username AWS --password $(aws ecr get-login-password) --skip-db-update --skip-java-db-update
       --exit-code 0 --no-progress --format json --output "$CI_PROJECT_DIR/trivy-container-scan.json"
       "${KANIKO_IMAGE_TAG}:${CI_COMMIT_SHA}"
-    - trivy image --username AWS --password $(aws ecr get-login-password) --skip-db-update --skip-java-db-update 
+    - trivy image --username AWS --password $(aws ecr get-login-password) --skip-db-update --skip-java-db-update
       --exit-code 0 --no-progress "${KANIKO_IMAGE_TAG}:${CI_COMMIT_SHA}"
-    - trivy image --username AWS --password $(aws ecr get-login-password) --skip-db-update --skip-java-db-update 
+    - trivy image --username AWS --password $(aws ecr get-login-password) --skip-db-update --skip-java-db-update
       --exit-code 1 --no-progress --severity "$TRIVY_FAIL_THRESHOLD" "${KANIKO_IMAGE_TAG}:${CI_COMMIT_SHA}"
     # - ls -la ./ && ls -la .trivycache
   tags:
     - rms-cn-dev
-
 
 # Pulled in from security/.k8s-base-sec-gitlab-ci-template.yml
 sonarqube:
@@ -128,7 +127,7 @@ snyk-dev-upload:
 snyk-preprod-upload:
   rules:
     - when: never
-    
+
 snyk-production-upload:
   rules:
     - when: never

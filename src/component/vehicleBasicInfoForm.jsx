@@ -9,7 +9,7 @@ const form = () => {
         <Row gutter={24}>
           <Col span={12} key={0}>
             <FlexFormItem
-              type="edit"
+              formMode="edit"
               label="上报平台"
               name="reportPlatform"
               rules={[{ required: true }]}
@@ -17,7 +17,7 @@ const form = () => {
           </Col>
           <Col span={12} key={1}>
             <FlexFormItem
-              type="edit"
+              formMode="edit"
               label="后轮距(MM)"
               name="rearWheelbase"
               rules={[{ required: true }]}
@@ -25,15 +25,15 @@ const form = () => {
           </Col>
           <Col span={12} key={0}>
             <FlexFormItem
-              type="edit"
+              formMode="edit"
               label="车辆登记品牌"
-              name="reportPlatform"
+              name="vehicleBrand"
               rules={[{ required: true }]}
             />
           </Col>
           <Col span={12} key={0}>
             <FlexFormItem
-              type="edit"
+              formMode="edit"
               label="最小转弯直径(MM)"
               name="MinimumTurningDiameter"
               rules={[{ required: true }]}
