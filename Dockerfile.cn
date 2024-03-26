@@ -4,7 +4,8 @@
 ARG REGISTRY
 
 # build environment
-FROM ${REGISTRY}/node:21-alpine3.18 as react-build
+#FROM ${REGISTRY}/node:21-alpine3.18 as react-build
+FROM ${REGISTRY}/node:18-alpine3.17 as react-build
 ENV npm_config_registry=https://registry.npmmirror.com
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 RUN apk upgrade --available
