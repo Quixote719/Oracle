@@ -5,7 +5,8 @@ ARG REGISTRY
 
 # build environment
 FROM ${REGISTRY}/node:21-alpine3.18 as react-build
-
+ENV npm_config_registry=https://registry.npmmirror.com
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 RUN apk upgrade --available
 
 # create a new non-root USER
@@ -24,6 +25,7 @@ RUN pnpm install
 RUN pnpm run build
 # server environment
 FROM ${REGISTRY}/nginx:alpine
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 RUN apk upgrade --available
 COPY nginx.conf /etc/nginx/conf.d/configfile.template
 COPY --from=react-build /app/build /usr/share/nginx/html
