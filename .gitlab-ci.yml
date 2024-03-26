@@ -70,9 +70,9 @@ lint:
 
 # Pulled in from .k8s-base-gitlab-ci-template.yml
 
-# build_image_aws_cn:
-#   tags:
-#     - rms-cn-dev
+build_image_aws_cn:
+  tags:
+    - rms-cn-dev
 
 trivy_cn:
   extends: trivy
