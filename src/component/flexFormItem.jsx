@@ -3,7 +3,7 @@ import { Form, Input } from 'antd';
 import PropTypes from 'prop-types';
 
 const FlexFormItem = props => {
-  return props.type === 'edit' ? (
+  return props.formMode === 'edit' ? (
     <Form.Item label={props.label} name={props.name} rules={props.rules}>
       <Input />
     </Form.Item>
@@ -13,7 +13,7 @@ const FlexFormItem = props => {
 };
 
 FlexFormItem.propTypes = {
-  type: PropTypes.string,
+  formMode: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string,
   rules: PropTypes.object,

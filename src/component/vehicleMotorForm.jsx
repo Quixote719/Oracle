@@ -9,7 +9,7 @@ const form = () => {
         <Row gutter={24}>
           <Col span={12} key={0}>
             <FlexFormItem
-              type="edit"
+              formMode="edit"
               label="驱动电机生产企业"
               name="DriveMotorManufacturer"
               rules={[{ required: true }]}
@@ -17,7 +17,7 @@ const form = () => {
           </Col>
           <Col span={12} key={1}>
             <FlexFormItem
-              type="edit"
+              formMode="edit"
               label="驱动电机控制器型号"
               name="DriveMotorControllerModel"
               rules={[{ required: true }]}
