@@ -7,10 +7,10 @@ ARG REGISTRY
 FROM ${REGISTRY}/node:21-alpine3.18 as react-build
 
 
-ENV npm_config_registry=https://registry.npmmirror.com
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 RUN apk upgrade --available
 RUN corepack enable
+RUN pnpm config set registry https://registry.npmmirror.com/
 # create a new non-root USER
 RUN addgroup -S new-group && adduser -S new-user -G new-group
 USER new-user
@@ -22,15 +22,16 @@ WORKDIR /app
 COPY . /app/
 # Prepare the container for building React
 
-RUN pnpm install
-# Want the production version
-RUN pnpm run build
+RUN pnpm install 
+RUN pnpm run build 
+
 # server environment
+# FROM ${REGISTRY}/nginx:alpine
 FROM ${REGISTRY}/nginx:alpine
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 RUN apk upgrade --available
 COPY nginx.conf /etc/nginx/conf.d/configfile.template
-COPY --from=react-build /app/build /usr/share/nginx/html
+COPY --from=react-build /app/dist /usr/share/nginx/html
 ENV PORT 8080
 ENV HOST 0.0.0.0
 # Fire up nginx
