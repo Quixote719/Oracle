@@ -2,12 +2,12 @@ import React from 'react';
 import { Row, Col, Form } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
 
-const form = () => {
+const form = props => {
   return (
     <div>
-      <Form layout="vertical">
+      <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
-          <Col span={12} key={0}>
+          <Col span={12} key={'vehicleChargingEnterprise'}>
             <FlexFormItem
               formMode="edit"
               label="车载充电机生产企业"
@@ -15,7 +15,7 @@ const form = () => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={1}>
+          <Col span={12} key={'vehicleChargingInputMax'}>
             <FlexFormItem
               formMode="edit"
               label="车载充电机额定输入最大频率(Hz)"
@@ -23,7 +23,7 @@ const form = () => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={1}>
+          <Col span={12} key={'vehicleChargingModel'}>
             <FlexFormItem
               formMode="edit"
               label="车载充电机型号"
@@ -31,7 +31,7 @@ const form = () => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={1}>
+          <Col span={12} key={'vehicleChargingOutputVoltage'}>
             <FlexFormItem
               formMode="edit"
               label="车载充电机输出电压(V)"
