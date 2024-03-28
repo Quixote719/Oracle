@@ -7,7 +7,7 @@ const FlexFormItem = props => {
     return Array.isArray(options) ? (
       <Select options={options} mode={props.selectMode} />
     ) : (
-      <Input />
+      <Input placeholder={props.placeholder} />
     );
   };
 
@@ -27,7 +27,8 @@ FlexFormItem.propTypes = {
   rules: PropTypes.array,
   text: PropTypes.string,
   options: PropTypes.array,
-  selectMode: PropTypes.string
+  selectMode: PropTypes.string,
+  placeholder: PropTypes.string
 };
 
 export default FlexFormItem;
