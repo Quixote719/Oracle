@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Form, Collapse, Button } from 'antd';
-import VehicleBasicInfoForm from '@/component/VehicleBasicInfoForm';
-import VehicleChargerForm from '@/component/VehicleChargerForm';
-import VehicleMotorForm from '@/component/VehicleMotorForm';
+import VehicleBasicInfoForm from '@/component/vehicleBasicInfoForm';
+import VehicleChargerForm from '@/component/vehicleChargerForm';
+import VehicleMotorForm from '@/component/vehicleMotorForm';
 import styles from './index.module.less';
 /*
   every form should be a component, based on the mode(create/edit/observe), the form item 
