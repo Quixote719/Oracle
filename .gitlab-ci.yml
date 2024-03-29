@@ -114,11 +114,10 @@ build_image_aws:
 sonarqube:
   allow_failure: true
 
-trivy:
-  rules:
-    - when: never
-
 deploy_aws_dev:
+  allow_failure: true
+
+trivy:
   rules:
     - when: never
 
