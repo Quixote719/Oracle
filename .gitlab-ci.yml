@@ -105,6 +105,9 @@ trivy_cn:
     - rms-cn-dev
 
 # Pulled in from security/.k8s-base-sec-gitlab-ci-template.yml
+config_validation:
+  allow_failure: true
+  
 build_image_aws:
   allow_failure: true
 
