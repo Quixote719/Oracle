@@ -9,7 +9,7 @@ const form = props => {
     <div>
       <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
-          <Col span={12} key={'reportPlatform'}>
+          <Col span={12} key={'reportPlatform'} id={'reportPlatform'}>
             <FlexFormItem
               formMode="edit"
               label="上报平台"
@@ -19,7 +19,7 @@ const form = props => {
               selectMode="multiple"
             />
           </Col>
-          <Col span={12} key={'vehicleBrand'}>
+          <Col span={12} key={'vehicleBrand'} id={'vehicleBrand'}>
             <FlexFormItem
               formMode="edit"
               label="车辆登记品牌"
@@ -27,7 +27,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'productionEnterprise'}>
+          <Col span={12} key={'productionEnterprise'} id={'productionEnterprise'}>
             <FlexFormItem
               formMode="edit"
               label="生产企业全称"
@@ -35,7 +35,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'vehicleSellingName'}>
+          <Col span={12} key={'vehicleSellingName'} id={'vehicleSellingName'}>
             <FlexFormItem
               formMode="edit"
               label="车型销售名称"
@@ -43,7 +43,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'minPrice'}>
+          <Col span={12} key={'minPrice'} id={'minPrice'}>
             <FlexFormItem
               formMode="edit"
               label="出厂销售价格下限（元）"
@@ -64,7 +64,7 @@ const form = props => {
               ]}
             />
           </Col>
-          <Col span={12} key={'maxPrice'}>
+          <Col span={12} key={'maxPrice'} id={'maxPrice'}>
             <FlexFormItem
               formMode="edit"
               label="出厂销售价格上限（元）"
@@ -85,7 +85,7 @@ const form = props => {
               ]}
             />
           </Col>
-          <Col span={12} key={'productionMethod'}>
+          <Col span={12} key={'productionMethod'} id={'productionMethod'}>
             <FlexFormItem
               formMode="edit"
               label="生产方式"
@@ -93,7 +93,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'brandSeries'}>
+          <Col span={12} key={'brandSeries'} id={'brandSeries'}>
             <FlexFormItem
               formMode="edit"
               label="品牌系别"
@@ -101,7 +101,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'vehicleRegistrationModel'}>
+          <Col span={12} key={'vehicleRegistrationModel'} id={'vehicleRegistrationModel'}>
             <FlexFormItem
               formMode="edit"
               label="车型登记型号"
@@ -109,7 +109,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'vehicleConfigurationName'}>
+          <Col span={12} key={'vehicleConfigurationName'} id={'vehicleConfigurationName'}>
             <FlexFormItem
               formMode="edit"
               label="车辆配置名称"
@@ -117,7 +117,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'vehicleType'}>
+          <Col span={12} key={'vehicleType'} id={'vehicleType'}>
             <FlexFormItem
               formMode="edit"
               label="车辆种类"
@@ -125,7 +125,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'vehicleLevel'}>
+          <Col span={12} key={'vehicleLevel'} id={'vehicleLevel'}>
             <FlexFormItem
               formMode="edit"
               label="乘用车级别"
@@ -133,7 +133,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'energyType'}>
+          <Col span={12} key={'energyType'} id={'energyType'}>
             <FlexFormItem
               formMode="edit"
               label="能源类型"
@@ -141,7 +141,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'EMileAge'}>
+          <Col span={12} key={'EMileAge'} id={'EMileAge'}>
             <FlexFormItem
               formMode="edit"
               label="纯电工况法续驶里程(KM)"
@@ -150,7 +150,7 @@ const form = props => {
               rules={[integerValidator(), numberLimitValidator(0, 2000), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'constantSpeedMileage'}>
+          <Col span={12} key={'constantSpeedMileage'} id={'constantSpeedMileage'}>
             <FlexFormItem
               formMode="edit"
               label="匀速法续驶里程(KM)"
@@ -159,7 +159,7 @@ const form = props => {
               rules={[integerValidator(), numberLimitValidator(0, 2000), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'vehicleWarrantyPeriod'}>
+          <Col span={12} key={'vehicleWarrantyPeriod'} id={'vehicleWarrantyPeriod'}>
             <FlexFormItem
               formMode="edit"
               label="整车质保期(年/万公里)"
@@ -167,7 +167,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'permissibleCapacity'}>
+          <Col span={12} key={'permissibleCapacity'} id={'permissibleCapacity'}>
             <FlexFormItem
               formMode="edit"
               label="准载人数"
@@ -176,7 +176,7 @@ const form = props => {
               rules={[integerValidator(), numberLimitValidator(0, 10), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'totalMass'}>
+          <Col span={12} key={'totalMass'} id={'totalMass'}>
             <FlexFormItem
               formMode="edit"
               label="总质量(KG)"
@@ -185,7 +185,7 @@ const form = props => {
               rules={[integerValidator(), numberLimitValidator(0, 100000), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'curbWeight'}>
+          <Col span={12} key={'curbWeight'} id={'curbWeight'}>
             <FlexFormItem
               formMode="edit"
               label="整备质量(KG)"
@@ -194,7 +194,7 @@ const form = props => {
               rules={[integerValidator(), numberLimitValidator(0, 100000), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'maximumLoadingMass'}>
+          <Col span={12} key={'maximumLoadingMass'} id={'maximumLoadingMass'}>
             <FlexFormItem
               formMode="edit"
               label="最大允许装载质量(KG)"
@@ -202,7 +202,7 @@ const form = props => {
               rules={[digitValidator(3), numberLimitValidator(0), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'addtionalMass'}>
+          <Col span={12} key={'addtionalMass'} id={'addtionalMass'}>
             <FlexFormItem
               formMode="edit"
               label="附加质量(KG)"
@@ -210,7 +210,7 @@ const form = props => {
               rules={[digitValidator(3), numberLimitValidator(0), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'frontTrack'}>
+          <Col span={12} key={'frontTrack'} id={'frontTrack'}>
             <FlexFormItem
               formMode="edit"
               label="前轮距(MM)"
@@ -218,7 +218,7 @@ const form = props => {
               rules={[digitValidator(3), numberLimitValidator(0), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'rearWheelbase'}>
+          <Col span={12} key={'rearWheelbase'} id={'rearWheelbase'}>
             <FlexFormItem
               formMode="edit"
               label="后轮距(MM)"
@@ -226,7 +226,7 @@ const form = props => {
               rules={[digitValidator(3), numberLimitValidator(0), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'MinimumTurningDiameter'}>
+          <Col span={12} key={'MinimumTurningDiameter'} id={'MinimumTurningDiameter'}>
             <FlexFormItem
               formMode="edit"
               label="最小转弯直径(MM)"
@@ -234,7 +234,7 @@ const form = props => {
               rules={[digitValidator(3), numberLimitValidator(0), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'maxSpeed'}>
+          <Col span={12} key={'maxSpeed'} id={'maxSpeed'}>
             <FlexFormItem
               formMode="edit"
               label="最高车速(KM/H)"
@@ -243,7 +243,7 @@ const form = props => {
               rules={[integerValidator(), numberLimitValidator(0, 1000), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'powerRecycleComp'}>
+          <Col span={12} key={'powerRecycleComp'} id={'powerRecycleComp'}>
             <FlexFormItem
               formMode="edit"
               label="能量回收装置"
@@ -252,7 +252,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'chargingMethod'}>
+          <Col span={12} key={'chargingMethod'} id={'chargingMethod'}>
             <FlexFormItem
               formMode="edit"
               label="充电方式"
@@ -260,7 +260,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'chargingTime'}>
+          <Col span={12} key={'chargingTime'} id={'chargingTime'}>
             <FlexFormItem
               formMode="edit"
               label="充电时间（慢/快）(H)"
@@ -268,7 +268,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'transmissionRatio'}>
+          <Col span={12} key={'transmissionRatio'} id={'transmissionRatio'}>
             <FlexFormItem
               formMode="edit"
               label="各档位传动比"
@@ -277,7 +277,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'timeToMarket'}>
+          <Col span={12} key={'timeToMarket'} id={'timeToMarket'}>
             <FlexFormItem
               formMode="edit"
               label="上市时间"
@@ -285,7 +285,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'size'}>
+          <Col span={12} key={'size'} id={'size'}>
             <FlexFormItem
               formMode="edit"
               label="尺寸（长*宽*高）"
@@ -294,7 +294,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'Wheelbase'}>
+          <Col span={12} key={'Wheelbase'} id={'Wheelbase'}>
             <FlexFormItem
               formMode="edit"
               label="轴距"
@@ -303,7 +303,7 @@ const form = props => {
               rules={[integerValidator(), numberLimitValidator(0, 10000), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'accelerationTime100K'}>
+          <Col span={12} key={'accelerationTime100K'} id={'accelerationTime100K'}>
             <FlexFormItem
               formMode="edit"
               label="百公里加速时间（秒）"
@@ -312,7 +312,7 @@ const form = props => {
               rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'accelerationTime50K'}>
+          <Col span={12} key={'accelerationTime50K'} id={'accelerationTime50K'}>
             <FlexFormItem
               formMode="edit"
               label="50公里加速时间(秒)"
@@ -321,7 +321,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'powerConsumption'}>
+          <Col span={12} key={'powerConsumption'} id={'powerConsumption'}>
             <FlexFormItem
               formMode="edit"
               label="百公里电耗(KWH)"
@@ -330,7 +330,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'stateAPowerConsumption'}>
+          <Col span={12} key={'stateAPowerConsumption'} id={'stateAPowerConsumption'}>
             <FlexFormItem
               formMode="edit"
               label="状态A电能消耗量(WH/KM)"
@@ -338,7 +338,7 @@ const form = props => {
               rules={[digitValidator(3), numberLimitValidator(0), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'stateBPowerConsumption'}>
+          <Col span={12} key={'stateBPowerConsumption'} id={'stateBPowerConsumption'}>
             <FlexFormItem
               formMode="edit"
               label="状态B燃料消耗量(L/100km)"
@@ -346,7 +346,7 @@ const form = props => {
               rules={[digitValidator(3), numberLimitValidator(0), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'WLTCPpowerConsumption'}>
+          <Col span={12} key={'WLTCPpowerConsumption'} id={'WLTCPpowerConsumption'}>
             <FlexFormItem
               formMode="edit"
               label="WLTC电量消耗量(CD,Wh/km)"
@@ -354,7 +354,7 @@ const form = props => {
               rules={[digitValidator(3), numberLimitValidator(0), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'WLTCFuelConsumption'}>
+          <Col span={12} key={'WLTCFuelConsumption'} id={'WLTCFuelConsumption'}>
             <FlexFormItem
               formMode="edit"
               label="WLTC燃料消耗量(CS,L/100km)"
@@ -362,7 +362,7 @@ const form = props => {
               rules={[digitValidator(3), numberLimitValidator(0), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'fuelSavingRate'}>
+          <Col span={12} key={'fuelSavingRate'} id={'reportPlatform'}>
             <FlexFormItem
               formMode="edit"
               label="节油率(%)"
@@ -370,7 +370,7 @@ const form = props => {
               rules={[digitValidator(3), numberLimitValidator(0, 100), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'hybridStructureType'}>
+          <Col span={12} key={'hybridStructureType'} id={'hybridStructureType'}>
             <FlexFormItem
               formMode="edit"
               label="混合动力结构类型"
@@ -378,7 +378,7 @@ const form = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'manualModeExist'}>
+          <Col span={12} key={'manualModeExist'} id={'manualModeExist'}>
             <FlexFormItem
               formMode="edit"
               label="是否有行驶模式手动选择模式"
