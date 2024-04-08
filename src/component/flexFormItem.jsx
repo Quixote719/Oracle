@@ -12,7 +12,7 @@ const FlexFormItem = props => {
   };
 
   return props.formMode === 'edit' ? (
-    <Form.Item label={props.label} name={props.name} rules={props.rules}>
+    <Form.Item label={props.label} name={props.name} rules={props.rules} style={{ width: '70%' }}>
       {genFormItem(props.options)}
     </Form.Item>
   ) : (

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Form, Collapse, Button } from 'antd';
+import Menu from '@/component/menu';
 import VehicleBasicInfoForm from '@/component/vehicleBasicInfoForm';
 import VehicleChargerForm from '@/component/vehicleChargerForm';
 import VehicleMotorForm from '@/component/vehicleMotorForm';
@@ -30,65 +31,56 @@ const Flow = () => {
   const [vcfform] = Form.useForm();
   const [vthform] = Form.useForm();
 
+  console.log(vbiform, vcform, vmform);
   const formItems = [
     {
       key: 'VehicleBasicInfoForm',
       label: '车辆基本信息',
-      style: { padding: 5 },
       children: <VehicleBasicInfoForm form={vbiform} />
     },
     {
       key: 'VehicleChargerForm',
       label: '车载充电机信息',
-      style: { padding: 5 },
       children: <VehicleChargerForm form={vcform} />
     },
     {
       key: 'VehicleMotorForm',
       label: '驱动电机信息',
-      style: { padding: 5 },
       children: <VehicleMotorForm form={vmform} />
     },
     {
       key: 'VehicleEnergyStorageForm',
       label: '车载储能信息',
-      style: { padding: 5 },
       children: <VehicleEnergyStorageForm form={vesform} />
     },
     {
       key: 'VehicleDynamoForm',
       label: '车型发电机信息',
-      style: { padding: 5 },
       children: <VehicleDynamoForm form={vdmform} />
     },
     {
       key: 'VehicleTerminalForm',
       label: '终端信息',
-      style: { padding: 5 },
       children: <VehicleTerminalForm form={vtform} />
     },
     {
       key: 'VehicleHybridFuelForm',
       label: '混动燃油部分信息',
-      style: { padding: 5 },
       children: <VehicleHybridFuelForm form={vhfform} />
     },
     {
       key: 'VehicleControllerForm',
       label: '整车控制器信息',
-      style: { padding: 5 },
       children: <VehicleControllerForm form={vclform} />
     },
     {
       key: 'VehicleCertificateForm',
       label: '公告/认证相关信息',
-      style: { padding: 5 },
       children: <VehicleCertificateForm form={vcfform} />
     },
     {
       key: 'VehicleThresholdForm',
       label: '阈值信息',
-      style: { padding: 5 },
       children: <VehicleThresholdForm form={vthform} />
     }
   ];
@@ -119,15 +111,18 @@ const Flow = () => {
 
   const genCollapse = () => {
     return formItems.map((formCollapse, index) => (
-      <Collapse key={index} style={{ marginBottom: 20 }} items={[formCollapse]} />
+      <Collapse key={index} style={{ marginBottom: 15 }} items={[formCollapse]} />
     ));
   };
 
   return (
-    <div className={styles.collapsePage}>
-      {/* <Collapse items={[formItems[0]]} /> */}
-      {genCollapse()}
-      <Button onClick={() => onVehicleModelFinish()}>提交</Button>
+    <div className={styles.flowPage}>
+      <Menu />
+      <div className={styles.collapsePage}>
+        {/* <Collapse items={[formItems[0]]} /> */}
+        {genCollapse()}
+        <Button onClick={() => onVehicleModelFinish()}>提交</Button>
+      </div>
     </div>
   );
 };

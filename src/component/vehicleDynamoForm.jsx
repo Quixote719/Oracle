@@ -2,8 +2,9 @@ import React from 'react';
 import { Row, Col, Form } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
 import { digitValidator } from '@/utils/validator';
+import PropTypes from 'prop-types';
 
-const form = props => {
+const VehicleForm = props => {
   return (
     <div>
       <Form layout="vertical" form={props.form}>
@@ -46,4 +47,8 @@ const form = props => {
   );
 };
 
-export default form;
+VehicleForm.propTypes = {
+  form: PropTypes.object
+};
+
+export default VehicleForm;

@@ -5,7 +5,6 @@ import AppContextProvider from '@/store/appContext.jsx';
 import '@/styles/index.less';
 
 const AsyncRMSPortal = lazy(() => import('./pages/rmsPortal'));
-const AsyncMenu = lazy(() => import('./pages/menu'));
 const AsyncFlow = lazy(() => import('./pages/flow'));
 
 async function enableMocking() {
@@ -22,9 +21,8 @@ class App extends React.PureComponent {
         <Router>
           <Routes>
             <Route path="/RMS" element={<AsyncRMSPortal />} />
-            <Route path="/menu" element={<AsyncMenu />} />
             <Route path="/flow" element={<AsyncFlow />} />
-            <Route path="/" element={<AsyncMenu />} />
+            <Route path="/" element={<AsyncFlow />} />
           </Routes>
         </Router>
       </AppContextProvider>
