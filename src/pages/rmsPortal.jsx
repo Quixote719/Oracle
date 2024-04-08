@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
+import Menu from '@/component/menu';
+import styles from './index.module.less';
 
 const RMSPortal = () => {
   const getTrendOption = param => {
@@ -124,43 +126,46 @@ const RMSPortal = () => {
   };
 
   return (
-    <div>
-      <ReactECharts
-        option={getTrendOption('bar')}
-        notMerge={true}
-        lazyUpdate={true}
-        theme={'theme_name'}
-        onChartReady={() => {}}
-        // onEvents={EventsDict}
-        // opts={}
-      />
-      <ReactECharts
-        option={getTrendOption('line')}
-        notMerge={true}
-        lazyUpdate={true}
-        theme={'theme_name'}
-        onChartReady={() => {}}
-        // onEvents={EventsDict}
-        // opts={}
-      />
-      <ReactECharts
-        option={getPieOption('pie')}
-        notMerge={true}
-        lazyUpdate={true}
-        theme={'theme_name'}
-        onChartReady={() => {}}
-        // onEvents={EventsDict}
-        // opts={}
-      />
-      <ReactECharts
-        option={getRoseOption('area')}
-        notMerge={true}
-        lazyUpdate={true}
-        theme={'theme_name'}
-        onChartReady={() => {}}
-        // onEvents={EventsDict}
-        // opts={}
-      />
+    <div className={styles.rmsPortalpage}>
+      <Menu />
+      <div className={styles.chartBlock}>
+        <ReactECharts
+          option={getTrendOption('bar')}
+          notMerge={true}
+          lazyUpdate={true}
+          theme={'theme_name'}
+          onChartReady={() => {}}
+          // onEvents={EventsDict}
+          // opts={}
+        />
+        <ReactECharts
+          option={getTrendOption('line')}
+          notMerge={true}
+          lazyUpdate={true}
+          theme={'theme_name'}
+          onChartReady={() => {}}
+          // onEvents={EventsDict}
+          // opts={}
+        />
+        <ReactECharts
+          option={getPieOption('pie')}
+          notMerge={true}
+          lazyUpdate={true}
+          theme={'theme_name'}
+          onChartReady={() => {}}
+          // onEvents={EventsDict}
+          // opts={}
+        />
+        <ReactECharts
+          option={getRoseOption('area')}
+          notMerge={true}
+          lazyUpdate={true}
+          theme={'theme_name'}
+          onChartReady={() => {}}
+          // onEvents={EventsDict}
+          // opts={}
+        />
+      </div>
     </div>
   );
 };
