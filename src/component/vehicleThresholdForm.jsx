@@ -10,7 +10,7 @@ const VehicleForm = props => {
         <Row gutter={24}>
           <Col span={12} key={'vehicleChargingEnterprise'}>
             <FlexFormItem
-              formMode="edit"
+              formMode={props.mode}
               label="车载充电机生产企业"
               name="vehicleChargingEnterprise"
               rules={[{ required: true }]}
@@ -18,7 +18,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'vehicleChargingInputMax'}>
             <FlexFormItem
-              formMode="edit"
+              formMode={props.mode}
               label="车载充电机额定输入最大频率(Hz)"
               name="vehicleChargingInputMax"
               rules={[{ required: true }]}
@@ -26,7 +26,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'vehicleChargingModel'}>
             <FlexFormItem
-              formMode="edit"
+              formMode={props.mode}
               label="车载充电机型号"
               name="vehicleChargingModel"
               rules={[{ required: true }]}
@@ -34,7 +34,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'vehicleChargingOutputVoltage'}>
             <FlexFormItem
-              formMode="edit"
+              formMode={props.mode}
               label="车载充电机输出电压(V)"
               name="vehicleChargingOutputVoltage"
               rules={[{ required: true }]}
@@ -47,7 +47,8 @@ const VehicleForm = props => {
 };
 
 VehicleForm.propTypes = {
-  form: PropTypes.object
+  form: PropTypes.object,
+  mode: PropTypes.string
 };
 
 export default VehicleForm;

@@ -1,11 +1,14 @@
 import React from 'react';
-import { Form, Input, Select } from 'antd';
+import { Form, Input, Select, DatePicker } from 'antd';
 import PropTypes from 'prop-types';
+import styles from './compStyle.module.less';
 
 const FlexFormItem = props => {
-  const genFormItem = options => {
-    return Array.isArray(options) ? (
-      <Select options={options} mode={props.selectMode} />
+  const genFormItem = () => {
+    return Array.isArray(props.options) ? (
+      <Select options={props.options} mode={props.selectMode} />
+    ) : props.isDatePicker ? (
+      <DatePicker style={{ width: '100%' }} placeholder={props.placeholder} />
     ) : (
       <Input placeholder={props.placeholder} />
     );
@@ -13,10 +16,13 @@ const FlexFormItem = props => {
 
   return props.formMode === 'edit' ? (
     <Form.Item label={props.label} name={props.name} rules={props.rules} style={{ width: '70%' }}>
-      {genFormItem(props.options)}
+      {genFormItem()}
     </Form.Item>
   ) : (
-    <div>{props.text}</div>
+    <div className={styles.itemInfo}>
+      <div>{props.label}</div>
+      <div>{props.text}</div>
+    </div>
   );
 };
 
@@ -28,7 +34,8 @@ FlexFormItem.propTypes = {
   text: PropTypes.string,
   options: PropTypes.array,
   selectMode: PropTypes.string,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  isDatePicker: PropTypes.bool
 };
 
 export default FlexFormItem;

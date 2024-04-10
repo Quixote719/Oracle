@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Collapse, Button } from 'antd';
 import Menu from '@/component/menu';
+import { useLocation } from 'react-router-dom';
 import VehicleBasicInfoForm from '@/component/vehicleBasicInfoForm';
 import VehicleChargerForm from '@/component/vehicleChargerForm';
 import VehicleMotorForm from '@/component/vehicleMotorForm';
@@ -21,9 +22,9 @@ import styles from './index.module.less';
 
 const Flow = () => {
   const [vbiform] = Form.useForm();
-  const [vcform] = Form.useForm();
-  const [vmform] = Form.useForm();
-  const [vesform] = Form.useForm();
+  // const [vcform] = Form.useForm();
+  // const [vmform] = Form.useForm();
+  // const [vesform] = Form.useForm();
   const [vdmform] = Form.useForm();
   const [vtform] = Form.useForm();
   const [vhfform] = Form.useForm();
@@ -31,62 +32,74 @@ const Flow = () => {
   const [vcfform] = Form.useForm();
   const [vthform] = Form.useForm();
 
-  console.log(vbiform, vcform, vmform);
+  const [formState, setFormState] = useState('edit');
+  const pagePath = useLocation();
+
+  let vcFormRefs = {};
+  let vmFormRefs = {};
+  let vesFormRefs = {};
+
+  useEffect(() => {
+    if (pagePath.pathname === '/vehicleModelManagement') {
+      setFormState('edit');
+    }
+  }, []);
+
   const formItems = [
     {
       key: 'VehicleBasicInfoForm',
       label: '车辆基本信息',
-      children: <VehicleBasicInfoForm form={vbiform} />
+      children: <VehicleBasicInfoForm form={vbiform} mode={formState} />
     },
     {
       key: 'VehicleChargerForm',
       label: '车载充电机信息',
-      children: <VehicleChargerForm form={vcform} />
+      children: <VehicleChargerForm refInfo={vcFormRefs} mode={formState} />
     },
     {
       key: 'VehicleMotorForm',
       label: '驱动电机信息',
-      children: <VehicleMotorForm form={vmform} />
+      children: <VehicleMotorForm refInfo={vmFormRefs} mode={formState} />
     },
     {
       key: 'VehicleEnergyStorageForm',
       label: '车载储能信息',
-      children: <VehicleEnergyStorageForm form={vesform} />
+      children: <VehicleEnergyStorageForm refInfo={vesFormRefs} mode={formState} />
     },
     {
       key: 'VehicleDynamoForm',
       label: '车型发电机信息',
-      children: <VehicleDynamoForm form={vdmform} />
+      children: <VehicleDynamoForm form={vdmform} mode={formState} />
     },
     {
       key: 'VehicleTerminalForm',
       label: '终端信息',
-      children: <VehicleTerminalForm form={vtform} />
+      children: <VehicleTerminalForm form={vtform} mode={formState} />
     },
     {
       key: 'VehicleHybridFuelForm',
       label: '混动燃油部分信息',
-      children: <VehicleHybridFuelForm form={vhfform} />
+      children: <VehicleHybridFuelForm form={vhfform} mode={formState} />
     },
     {
       key: 'VehicleControllerForm',
       label: '整车控制器信息',
-      children: <VehicleControllerForm form={vclform} />
+      children: <VehicleControllerForm form={vclform} mode={formState} />
     },
     {
       key: 'VehicleCertificateForm',
       label: '公告/认证相关信息',
-      children: <VehicleCertificateForm form={vcfform} />
+      children: <VehicleCertificateForm form={vcfform} mode={formState} />
     },
     {
       key: 'VehicleThresholdForm',
       label: '阈值信息',
-      children: <VehicleThresholdForm form={vthform} />
+      children: <VehicleThresholdForm form={vthform} mode={formState} />
     }
   ];
 
   const onVehicleModelFinish = () => {
-    console.log('VF', vbiform.getFieldsValue(), vcform.getFieldsValue(), vmform.getFieldsValue());
+    // console.log('VF', vcFormRefs.info[0].current.getFieldsValue());
   };
 
   useEffect(() => {
@@ -121,7 +134,9 @@ const Flow = () => {
       <div className={styles.collapsePage}>
         {/* <Collapse items={[formItems[0]]} /> */}
         {genCollapse()}
-        <Button onClick={() => onVehicleModelFinish()}>提交</Button>
+        <Button onClick={() => onVehicleModelFinish()} type="primary">
+          提交
+        </Button>
       </div>
     </div>
   );

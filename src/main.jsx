@@ -1,11 +1,10 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import RMSPortal from './pages/rmsPortal';
+import Flow from './pages/flow';
 import AppContextProvider from '@/store/appContext.jsx';
 import '@/styles/index.less';
-
-const AsyncRMSPortal = lazy(() => import('./pages/rmsPortal'));
-const AsyncFlow = lazy(() => import('./pages/flow'));
 
 async function enableMocking() {
   if (process.env.NODE_ENV === 'mock') {
@@ -20,9 +19,9 @@ class App extends React.PureComponent {
       <AppContextProvider>
         <Router>
           <Routes>
-            <Route path="/RMS" element={<AsyncRMSPortal />} />
-            <Route path="/flow" element={<AsyncFlow />} />
-            <Route path="/" element={<AsyncFlow />} />
+            <Route path="/vehicleManagement" element={<RMSPortal />} />
+            <Route path="/vehicleModelManagement" element={<Flow />} />
+            <Route path="/" element={<Flow />} />
           </Routes>
         </Router>
       </AppContextProvider>

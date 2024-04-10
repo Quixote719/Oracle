@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Row, Col, Form, Collapse, Input, Button } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
 import styles from './compStyle.module.less';
 import { numberLimitValidator, digitValidator } from '@/utils/validator';
 import PropTypes from 'prop-types';
 
-const subForm = () => {
+const subForm = props => {
   return (
-    <Form layout="vertical">
+    <Form layout="vertical" ref={props.ref}>
       <Row gutter={24}>
         <Col span={12} key={'driveMotorManufacturer'} id={'driveMotorManufacturer'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机生产企业"
             name="driveMotorManufacturer"
             rules={[{ required: true }]}
@@ -19,23 +19,25 @@ const subForm = () => {
         </Col>
         <Col span={12} key={'driveMotorType'} id={'driveMotorType'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机类型"
             name="driveMotorType"
             rules={[{ required: true }]}
+            options={[]}
           />
         </Col>
         <Col span={12} key={'driveMotorCoolingMode'} id={'driveMotorCoolingMode'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机冷却方式"
             name="driveMotorCoolingMode"
             rules={[{ required: true }]}
+            options={[]}
           />
         </Col>
         <Col span={12} key={'ratedVoltageofDriveMotor'} id={'ratedVoltageofDriveMotor'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机额定电压(V)"
             name="ratedVoltageofDriveMotor"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
@@ -44,7 +46,7 @@ const subForm = () => {
 
         <Col span={12} key={'ratedPowerofheDriveMotor'} id={'ratedPowerofheDriveMotor'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机额定功率(KW)"
             name="ratedPowerofheDriveMotor"
             rules={[digitValidator(3), numberLimitValidator(0, 10000000), { required: true }]}
@@ -52,7 +54,7 @@ const subForm = () => {
         </Col>
         <Col span={12} key={'ratedSpeedofTheDriveMotor'} id={'ratedSpeedofTheDriveMotor'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机额定转速(r/min)"
             name="ratedSpeedofTheDriveMotor"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
@@ -61,7 +63,7 @@ const subForm = () => {
 
         <Col span={12} key={'ratedTorqueoftheDriveMotor'} id={'ratedTorqueoftheDriveMotor'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机额定转距(N.m)"
             name="ratedTorqueoftheDriveMotor"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
@@ -69,7 +71,7 @@ const subForm = () => {
         </Col>
         <Col span={12} key={'driveMotorModel'} id={'driveMotorModel'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机型号"
             name="driveMotorModel"
             rules={[{ required: true }]}
@@ -82,7 +84,7 @@ const subForm = () => {
           id={'driveMotorControllerManufacturer'}
         >
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机控制器生产企业"
             name="driveMotorControllerManufacturer"
             rules={[{ required: true }]}
@@ -90,7 +92,7 @@ const subForm = () => {
         </Col>
         <Col span={12} key={'driveMotorControllerModel'} id={'driveMotorControllerModel'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机控制器型号"
             name="driveMotorControllerModel"
             rules={[{ required: true }]}
@@ -98,7 +100,7 @@ const subForm = () => {
         </Col>
         <Col span={12} key={'driveMotorArrangementTypePos'} id={'driveMotorArrangementTypePos'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机布置型式/位置"
             name="driveMotorArrangementTypePos"
             placeholder="如：横置/后置"
@@ -111,7 +113,7 @@ const subForm = () => {
           id={'maxOperatingCurrentofdriveMotor'}
         >
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机最大工作电流(A)"
             name="maxOperatingCurrentofdriveMotor"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
@@ -119,7 +121,7 @@ const subForm = () => {
         </Col>
         <Col span={12} key={'driveMotorPeakPower'} id={'driveMotorPeakPower'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机峰值功率(KW)"
             name="driveMotorPeakPower"
             rules={[digitValidator(3), numberLimitValidator(0, 10000000), { required: true }]}
@@ -127,7 +129,7 @@ const subForm = () => {
         </Col>
         <Col span={12} key={'maxSpeedDriveMotor'} id={'maxSpeedDriveMotor'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机最高转速(r/min)"
             name="maxSpeedDriveMotor"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
@@ -136,7 +138,7 @@ const subForm = () => {
 
         <Col span={12} key={'driveMotorPeakTorque'} id={'driveMotorPeakTorque'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机峰值转矩(N.m)"
             name="driveMotorPeakTorque"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
@@ -144,7 +146,7 @@ const subForm = () => {
         </Col>
         <Col span={12} key={'maxOutputTorqueDriveMotor'} id={'maxOutputTorqueDriveMotor'}>
           <FlexFormItem
-            formMode="edit"
+            formMode={props.mode}
             label="驱动电机最大输出转矩(N.m)"
             name="maxOutputTorqueDriveMotor"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
@@ -154,8 +156,14 @@ const subForm = () => {
     </Form>
   );
 };
-const VehicleForm = () => {
+const VehicleForm = props => {
   const [subFormList, setSubFormList] = useState([]);
+  let ref1 = useRef();
+  let ref2 = useRef();
+  let ref3 = useRef();
+  let ref4 = useRef();
+  let refArr = [ref1, ref2, ref3, ref4];
+  props.refInfo.info = refArr;
 
   useEffect(() => {
     let initSubForm = [
@@ -163,22 +171,30 @@ const VehicleForm = () => {
         key: 'VehicleCharger1',
         label: '驱动电机1',
         style: { padding: 5 },
-        children: subForm()
+        children: subForm({ mode: props.mode, ref: refArr[0] })
       }
     ];
     setSubFormList(initSubForm);
   }, []);
 
-  const addCharger = () => {
+  const addMotor = () => {
     let subFormLen = subFormList.length;
     if (subFormLen < 4) {
       let newSubForm = {
         key: `VehicleCharger${subFormLen + 1}`,
         label: `驱动电机${subFormLen + 1}`,
         style: { padding: 5 },
-        children: subForm()
+        children: subForm({ mode: props.mode, ref: refArr[subFormLen] })
       };
       setSubFormList([...subFormList, newSubForm]);
+    }
+  };
+
+  const removeMotor = () => {
+    let subFormLen = subFormList.length;
+    if (subFormLen > 1) {
+      let updatedFormList = subFormList.slice(0, subFormLen - 1);
+      setSubFormList(updatedFormList);
     }
   };
 
@@ -189,15 +205,24 @@ const VehicleForm = () => {
         <Input style={{ width: '35%' }}></Input>
       </div>
       <Collapse items={subFormList} />
-      <Button className={styles.addFormBtn} onClick={() => addCharger()}>
+      <Button className={styles.addFormBtn} onClick={() => addMotor()} type="primary">
         增加
+      </Button>
+      <Button
+        className={styles.removeFormBtn}
+        onClick={() => removeMotor()}
+        disabled={subFormList.length <= 1}
+      >
+        删除
       </Button>
     </div>
   );
 };
 
 VehicleForm.propTypes = {
-  form: PropTypes.object
+  form: PropTypes.object,
+  mode: PropTypes.string,
+  refInfo: PropTypes.object
 };
 
 export default VehicleForm;

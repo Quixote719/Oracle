@@ -10,7 +10,7 @@ const VehicleForm = props => {
         <Row gutter={24}>
           <Col span={12} key={'OnBoardTerminalModel'}>
             <FlexFormItem
-              formMode="edit"
+              formMode={props.mode}
               label="终端型号"
               name="OnBoardTerminalModel"
               rules={[{ required: true }]}
@@ -18,7 +18,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'OnBoardTerminalBrand'}>
             <FlexFormItem
-              formMode="edit"
+              formMode={props.mode}
               label="终端品牌"
               name="OnBoardTerminalBrand"
               rules={[{ required: true }]}
@@ -31,7 +31,8 @@ const VehicleForm = props => {
 };
 
 VehicleForm.propTypes = {
-  form: PropTypes.object
+  form: PropTypes.object,
+  mode: PropTypes.string
 };
 
 export default VehicleForm;
