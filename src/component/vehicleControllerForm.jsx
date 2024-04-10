@@ -14,7 +14,7 @@ const VehicleForm = props => {
             id={'VehicleControllerManufacturers'}
           >
             <FlexFormItem
-              formMode="edit"
+              formMode={props.mode}
               label="整车控制器生产企业"
               name="VehicleControllerManufacturers"
               rules={[{ required: true }]}
@@ -22,7 +22,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'VehicleControllerModel'} id={'VehicleControllerModel'}>
             <FlexFormItem
-              formMode="edit"
+              formMode={props.mode}
               label="整车控制器型号"
               name="VehicleControllerModel"
               rules={[{ required: true }]}
@@ -35,7 +35,8 @@ const VehicleForm = props => {
 };
 
 VehicleForm.propTypes = {
-  form: PropTypes.object
+  form: PropTypes.object,
+  mode: PropTypes.string
 };
 
 export default VehicleForm;

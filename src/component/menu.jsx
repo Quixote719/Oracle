@@ -1,6 +1,7 @@
 import React from 'react';
 import { Menu } from 'antd';
 import styles from './compStyle.module.less';
+import { useNavigate } from 'react-router-dom';
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -41,14 +42,20 @@ function getItem(label, key, icon, children, type) {
 // ];
 
 const menuItems = [
-  getItem('车型管理', 'vehicleModelManagement'),
-  getItem('车辆管理', 'vehicleManagement')
+  getItem(
+    <div style={{ fontSize: '1rem', padding: '10%' }}>车型管理</div>,
+    'vehicleModelManagement'
+  ),
+  getItem(<div style={{ fontSize: '1rem', padding: '10%' }}>车辆管理</div>, 'vehicleManagement')
 ];
 
 const MenuApp = () => {
-  const menuClick = key => {
-    console.log('menuClick', key);
+  const navigate = useNavigate();
+
+  const menuClick = param => {
+    navigate(`/${param.key}`, { state: { key: param.key } });
   };
+
   return (
     <div className={styles.leftSider}>
       <Menu
