@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RMSPortal from './pages/rmsPortal';
 import Flow from './pages/flow';
-import AppContextProvider from '@/store/appContext.jsx';
 import '@/styles/index.less';
 
 async function enableMocking() {
@@ -16,15 +15,13 @@ async function enableMocking() {
 class App extends React.PureComponent {
   render() {
     return (
-      <AppContextProvider>
-        <Router>
-          <Routes>
-            <Route path="/vehicleManagement" element={<RMSPortal />} />
-            <Route path="/vehicleModelManagement" element={<Flow />} />
-            <Route path="/" element={<Flow />} />
-          </Routes>
-        </Router>
-      </AppContextProvider>
+      <Router>
+        <Routes>
+          <Route path="/vehicleManagement" element={<RMSPortal />} />
+          <Route path="/vehicleModelManagement" element={<Flow />} />
+          <Route path="/" element={<Flow />} />
+        </Routes>
+      </Router>
     );
   }
 }

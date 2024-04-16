@@ -8,11 +8,11 @@ const VehicleForm = props => {
     <div>
       <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
-          <Col span={12} key={'bulletinBatch'} id={'bulletinBatch'}>
+          <Col span={12} key={'batch'} id={'batch'}>
             <FlexFormItem
               formMode={props.mode}
               label="公告批次"
-              name="bulletinBatch"
+              name="batch"
               rules={[{ required: true }]}
             />
           </Col>
@@ -22,6 +22,7 @@ const VehicleForm = props => {
               label="发布日期"
               name="releaseDate"
               rules={[{ required: true }]}
+              isDatePicker={true}
             />
           </Col>
           <Col span={12} key={'englishBrand'} id={'englishBrand'}>
@@ -32,63 +33,63 @@ const VehicleForm = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'exemptOrNot'} id={'exemptOrNot'}>
+          <Col span={12} key={'exempt'} id={'exempt'}>
             <FlexFormItem
               formMode={props.mode}
               label="是否免征"
-              name="exemptOrNot"
+              name="exempt"
               rules={[{ required: true }]}
               options={[]}
             />
           </Col>
-          <Col span={12} key={'FuelOrNot'} id={'FuelOrNot'}>
+          <Col span={12} key={'fuel'} id={'fuel'}>
             <FlexFormItem
               formMode={props.mode}
               label="是否燃油"
-              name="FuelOrNot"
+              name="fuel"
               rules={[{ required: true }]}
               options={[]}
             />
           </Col>
-          <Col span={12} key={'environmentallyFriendlyOrNot'} id={'environmentallyFriendlyOrNot'}>
+          <Col span={12} key={'environmentallyFriendly'} id={'environmentallyFriendly'}>
             <FlexFormItem
               formMode={props.mode}
               label="是否环保"
-              name="environmentallyFriendlyOrNot"
+              name="environmentallyFriendly"
               rules={[{ required: true }]}
               options={[]}
             />
           </Col>
-          <Col span={12} key={'thisInstitutionOrNot'} id={'thisInstitutionOrNot'}>
+          <Col span={12} key={'fromOrganization'} id={'fromOrganization'}>
             <FlexFormItem
               formMode={props.mode}
               label="是否本机构"
-              name="thisInstitutionOrNot"
+              name="fromOrganization"
               rules={[{ required: true }]}
               options={[]}
             />
           </Col>
-          <Col span={12} key={'testingInstitution'} id={'testingInstitution'}>
+          <Col span={12} key={'testingOrganization'} id={'testingOrganization'}>
             <FlexFormItem
               formMode={props.mode}
               label="检测机构"
-              name="testingInstitution"
+              name="testingOrganization"
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'testReportNumber'} id={'testReportNumber'}>
+          <Col span={12} key={'testingReportNumber'} id={'testingReportNumber'}>
             <FlexFormItem
               formMode={props.mode}
               label="检测报告编号"
-              name="testReportNumber"
+              name="testingReportNumber"
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'complianceReport'} id={'complianceReport'}>
+          <Col span={12} key={'uploadComplianceTestingReport'} id={'uploadComplianceTestingReport'}>
             <FlexFormItem
               formMode={props.mode}
               label="上传检测符合性报告"
-              name="complianceReport"
+              name="uploadComplianceTestingReport"
               rules={[{ required: true }]}
             />
           </Col>
@@ -100,20 +101,24 @@ const VehicleForm = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'standard'} id={'standard'}>
+          <Col span={12} key={'specifications'} id={'specifications'}>
             <FlexFormItem
               formMode={props.mode}
               label="规约"
-              name="standard"
+              name="specifications"
               rules={[{ required: true }]}
               options={[]}
             />
           </Col>
-          <Col span={12} key={'3CcertificateNumber'} id={'3CcertificateNumber'}>
+          <Col
+            span={12}
+            key={'importedVehicle3cCertificateNumber'}
+            id={'importedVehicle3cCertificateNumber'}
+          >
             <FlexFormItem
               formMode={props.mode}
               label="进口车3C证书号"
-              name="3CcertificateNumber"
+              name="importedVehicle3cCertificateNumber"
               rules={[{ required: true }]}
             />
           </Col>
@@ -127,33 +132,29 @@ const VehicleForm = props => {
           </Col>
           <Col
             span={12}
-            key={'recommendedVehicleCatalogNumber'}
-            id={'recommendedVehicleCatalogNumber'}
+            key={'recommendedVehicleCatalogBatch'}
+            id={'recommendedVehicleCatalogBatch'}
           >
             <FlexFormItem
               formMode={props.mode}
               label="推荐车型目录序号"
-              name="recommendedVehicleCatalogNumber"
+              name="recommendedVehicleCatalogBatch"
               rules={[{ required: true }]}
             />
           </Col>
-          <Col
-            span={12}
-            key={'roadMotorVehicleCertificatePhotocopy'}
-            id={'roadMotorVehicleCertificatePhotocopy'}
-          >
+          <Col span={12} key={'roadMotorVehicleProducer'} id={'roadMotorVehicleProducer'}>
             <FlexFormItem
               formMode={props.mode}
               label="《道路机动车辆生产企业及产品公告》汽车产品技术参数页或机动车整车出厂合格证影印件"
-              name="roadMotorVehicleCertificatePhotocopy"
+              name="roadMotorVehicleProducer"
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'nationalPlatformCertification'} id={'nationalPlatformCertification'}>
+          <Col span={12} key={'nationalPlatformCertificate'} id={'nationalPlatformCertificate'}>
             <FlexFormItem
               formMode={props.mode}
               label="车型接入国家平台认证证书附件上传"
-              name="nationalPlatformCertification"
+              name="nationalPlatformCertificate"
               rules={[{ required: true }]}
             />
           </Col>
@@ -165,43 +166,47 @@ const VehicleForm = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'applicationModelChange'} id={'applicationModelChange'}>
+          <Col span={12} key={'modelChangeApplication'} id={'modelChangeApplication'}>
             <FlexFormItem
               formMode={props.mode}
               label="车型变更申请附件"
-              name="applicationModelChange"
+              name="modelChangeApplication"
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'GBDataProtocolComparison'} id={'GBDataProtocolComparison'}>
+          <Col span={12} key={'gbDataProtocolComparisonTable'} id={'gbDataProtocolComparisonTable'}>
             <FlexFormItem
               formMode={props.mode}
               label="国标数据协议对照表"
-              name="GBDataProtocolComparison"
+              name="gbDataProtocolComparisonTable"
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'modelSafetyPlan'} id={'modelSafetyPlan'}>
+          <Col span={12} key={'safetyPlan'} id={'safetyPlan'}>
             <FlexFormItem
               formMode={props.mode}
               label="车型安全预案"
-              name="modelSafetyPlan"
+              name="safetyPlan"
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'mainTechnicalParameters'} id={'mainTechnicalParameters'}>
+          <Col
+            span={12}
+            key={'noticeMainTechnicalParametersPage'}
+            id={'noticeMainTechnicalParametersPage'}
+          >
             <FlexFormItem
               formMode={props.mode}
               label="公告主要技术参数页"
-              name="mainTechnicalParameters"
+              name="noticeMainTechnicalParametersPage"
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'vehicleChargingOutputVoltage'} id={'vehicleChargingOutputVoltage'}>
+          <Col span={12} key={'alarmContactEmail'} id={'alarmContactEmail'}>
             <FlexFormItem
               formMode={props.mode}
               label="报警事宜联系邮箱"
-              name="vehicleChargingOutputVoltage"
+              name="alarmContactEmail"
               rules={[{ required: true }]}
             />
           </Col>

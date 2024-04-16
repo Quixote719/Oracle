@@ -17,11 +17,11 @@ const VehicleForm = props => {
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'ROZ'} id={'ROZ'}>
+          <Col span={12} key={'roz'} id={'roz'}>
             <FlexFormItem
               formMode={props.mode}
               label="燃油标号"
-              name="ROZ"
+              name="roz"
               rules={[{ required: true }]}
             />
           </Col>
@@ -42,35 +42,35 @@ const VehicleForm = props => {
             />
           </Col>
 
-          <Col span={12} key={'maximumOutputPpower'} id={'maximumOutputPpower'}>
+          <Col span={12} key={'maxOutputPower'} id={'maxOutputPower'}>
             <FlexFormItem
               formMode={props.mode}
               label="最大输出功率(KW)"
-              name="maximumOutputPpower"
+              name="maxOutputPower"
               rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'ratedPower'} id={'ratedPower'}>
+          <Col span={12} key={'ratedPowerKw'} id={'ratedPowerKw'}>
             <FlexFormItem
               formMode={props.mode}
               label="额定功率(KW)"
-              name="ratedPower"
+              name="ratedPowerKw"
               rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'fuelConsumptionCom'} id={'fuelConsumptionCom'}>
+          <Col span={12} key={'fuelConsumptionCombined'} id={'fuelConsumptionCombined'}>
             <FlexFormItem
               formMode={props.mode}
               label="综合工况油耗(L/百公里)"
-              name="fuelConsumptionCom"
+              name="fuelConsumptionCombined"
               rules={[digitValidator(3), numberLimitValidator(0, 100), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'maximumOutputTorque'} id={'maximumOutputTorque'}>
+          <Col span={12} key={'maxOutputTorque'} id={'maxOutputTorque'}>
             <FlexFormItem
               formMode={props.mode}
               label="最大输出转矩(N.m)"
-              name="maximumOutputTorque"
+              name="maxOutputTorque"
               rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
             />
           </Col>
