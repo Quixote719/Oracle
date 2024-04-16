@@ -6,18 +6,15 @@ import { digitValidator, numberLimitValidator, integerValidator } from '@/utils/
 import PropTypes from 'prop-types';
 
 const subForm = props => {
+  console.log(props.selectInfo);
   return (
     <Form layout="vertical" ref={props.ref}>
       <Row gutter={24}>
-        <Col
-          span={12}
-          key={'vehicleEnergyStorageDeviceManufacturer'}
-          id={'vehicleEnergyStorageDeviceManufacturer'}
-        >
+        <Col span={12} key={'producer'} id={'producer'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置生产企业"
-            name="vehicleEnergyStorageDeviceManufacturer"
+            name="producer"
             rules={[{ required: true }]}
           />
         </Col>
@@ -29,59 +26,72 @@ const subForm = props => {
             rules={[{ required: true }]}
           />
         </Col>
-        <Col
-          span={12}
-          key={'numberOfVehicleEnergyStoragePMC'}
-          id={'numberOfVehicleEnergyStoragePMC'}
-        >
+        <Col span={12} key={'devicePackCount'} id={'devicePackCount'}>
           <FlexFormItem
             formMode={props.mode}
-            label="车载储能装置、模组、单体个数"
-            name="numberOfVehicleEnergyStoragePMC"
+            label="车载储能装置个数"
+            name="devicePackCount"
             rules={[integerValidator(), { required: true }]}
           />
         </Col>
 
-        <Col span={12} key={'vehicleEnergyStorageConnection'} id={'vehicleEnergyStorageConnection'}>
+        <Col span={12} key={'modulesCount'} id={'modulesCount'}>
+          <FlexFormItem
+            formMode={props.mode}
+            label="车载储能模组个数"
+            name="modulesCount"
+            rules={[integerValidator(), { required: true }]}
+          />
+        </Col>
+
+        <Col span={12} key={'cellCount'} id={'cellCount'}>
+          <FlexFormItem
+            formMode={props.mode}
+            label="车载储能单体个数"
+            name="cellCount"
+            rules={[integerValidator(), { required: true }]}
+          />
+        </Col>
+        <Col span={12} key={'connectionMethodPack'} id={'connectionMethodPack'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置连接方式(_箱总共_并_串)"
-            name="vehicleEnergyStorageConnection"
+            name="connectionMethodPack"
             rules={[integerValidator(), { required: true }]}
           />
         </Col>
-        <Col span={12} key={'numberOfProbes'} id={'numberOfProbes'}>
+        <Col span={12} key={'probeCount'} id={'probeCount'}>
           <FlexFormItem
             formMode={props.mode}
             label="探针个数"
-            name="numberOfProbes"
+            name="probeCount"
             rules={[integerValidator(), { required: true }]}
           />
         </Col>
 
-        <Col span={12} key={'vehicleEnergyStorageDeviceType'} id={'vehicleEnergyStorageDeviceType'}>
+        <Col span={12} key={'type'} id={'type'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置类型"
-            name="vehicleEnergyStorageDeviceType"
+            name="type"
             rules={[{ required: true }]}
-            options={[]}
+            options={props.selectInfo?.vehicleEnergyStorageDeviceType || []}
           />
         </Col>
-        <Col span={12} key={'vehicleEnergyStorageModel'} id={'vehicleEnergyStorageModel'}>
+        <Col span={12} key={'assemblyModel'} id={'assemblyModel'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置总成型号"
-            name="vehicleEnergyStorageModel"
+            name="assemblyModel"
             rules={[{ required: true }]}
           />
         </Col>
 
-        <Col span={12} key={'nominalCapacity'} id={'nominalCapacity'}>
+        <Col span={12} key={'assemblyCapacity'} id={'assemblyCapacity'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置总成标称容量(Ah)"
-            name="nominalCapacity"
+            name="assemblyCapacity"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
           />
         </Col>
@@ -93,119 +103,103 @@ const subForm = props => {
             rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
           />
         </Col>
-        <Col span={12} key={'ratedVoltageofVehicleEnergy'} id={'ratedVoltageofVehicleEnergy'}>
+        <Col span={12} key={'ratedTotalEnergy'} id={'ratedTotalEnergy'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置额定电压(V)"
-            name="ratedVoltageofVehicleEnergy"
+            name="ratedTotalEnergy"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
           />
         </Col>
-        <Col span={12} key={'ratedOutputCurrent'} id={'ratedOutputCurrent'}>
+        <Col span={12} key={'assemblyOutputCurrent'} id={'assemblyOutputCurrent'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置总成额定输出电流(A)"
-            name="ratedOutputCurrent"
+            name="assemblyOutputCurrent"
             rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
           />
         </Col>
-        <Col
-          span={12}
-          key={'vehicleEnergyStorageDeviceCoolingMethod'}
-          id={'vehicleEnergyStorageDeviceCoolingMethod'}
-        >
+        <Col span={12} key={'coolingMethod'} id={'coolingMethod'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置冷却方式"
-            name="vehicleEnergyStorageDeviceCoolingMethod"
+            name="coolingMethod"
             rules={[{ required: true }]}
-            options={[]}
+            options={props.selectInfo?.vehicleEnergyStorageDeviceCoolingMethod || []}
           />
         </Col>
-        <Col span={12} key={'vehicleEnergyStorageWeight'} id={'vehicleEnergyStorageWeight'}>
+        <Col span={12} key={'assemblyMass'} id={'assemblyMass'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置总成质量(KG)"
-            name="vehicleEnergyStorageWeight"
+            name="assemblyMass"
             rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
           />
         </Col>
 
-        <Col
-          span={12}
-          key={'vehicleEnergyStorageDeviceHeatingMethod'}
-          id={'vehicleEnergyStorageDeviceHeatingMethod'}
-        >
+        <Col span={12} key={'heatingMethod'} id={'heatingMethod'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置加热方式"
-            name="vehicleEnergyStorageDeviceHeatingMethod"
+            name="heatingMethod"
             rules={[{ required: true }]}
           />
         </Col>
-        <Col span={12} key={'powerBatteryCellManufacturer'} id={'powerBatteryCellManufacturer'}>
+        <Col span={12} key={'batteryCellProducer'} id={'batteryCellProducer'}>
           <FlexFormItem
             formMode={props.mode}
             label="动力电池单体生产企业"
-            name="powerBatteryCellManufacturer"
+            name="batteryCellProducer"
             rules={[{ required: true }]}
           />
         </Col>
 
-        <Col span={12} key={'powerBatteryCellCapacity'} id={'powerBatteryCellCapacity'}>
+        <Col span={12} key={'batteryCellCapacity'} id={'batteryCellCapacity'}>
           <FlexFormItem
             formMode={props.mode}
             label="动力电池单体容量(Ah)"
-            name="powerBatteryCellCapacity"
+            name="batteryCellCapacity"
             rules={[digitValidator(3), { required: true }]}
           />
         </Col>
-        <Col span={12} key={'nominalVoltageDeviceCell'} id={'nominalVoltageDeviceCell'}>
+        <Col span={12} key={'cellNominalVoltage'} id={'cellNominalVoltage'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置单体标称电压(V)"
-            name="nominalVoltageDeviceCell"
+            name="cellNominalVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
           />
         </Col>
-        <Col
-          span={12}
-          key={'vehicleEnergyStorageDeviceCellModel'}
-          id={'vehicleEnergyStorageDeviceCellModel'}
-        >
+        <Col span={12} key={'cellModel'} id={'cellModel'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置单体型号"
-            name="vehicleEnergyStorageDeviceCellModel"
+            name="cellModel"
             rules={[{ required: true }]}
           />
         </Col>
-        <Col
-          span={12}
-          key={'shapeofVehicleEnergyStorageDeviceCell'}
-          id={'shapeofVehicleEnergyStorageDeviceCell'}
-        >
+        <Col span={12} key={'cellShape'} id={'cellShape'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置单体外形"
-            name="shapeofVehicleEnergyStorageDeviceCell"
+            name="cellShape"
             rules={[{ required: true }]}
             placeholder={'可填写多个尺寸，例：10×20×30,40×50×60（英文逗号隔开）'}
           />
         </Col>
-        <Col span={12} key={'vehicleEnergyStorageDeviceCell'} id={'vehicleEnergyStorageDeviceCell'}>
+        <Col span={12} key={'cellShapeDimensions'} id={'cellShapeDimensions'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置单体外形尺寸(mm)"
-            name="vehicleEnergyStorageDeviceCell)"
+            name="cellShapeDimensions)"
             rules={[{ required: true }]}
           />
         </Col>
-        <Col span={12} key={'energyDensityofDeviceSystem'} id={'energyDensityofDeviceSystem'}>
+        <Col span={12} key={'systemEnergyDensity'} id={'systemEnergyDensity'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置系统能量密度(Wh/kg)"
-            name="energyDensityofDeviceSystem"
+            name="systemEnergyDensity"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
           />
         </Col>
@@ -229,7 +223,7 @@ const VehicleForm = props => {
         key: 'VehicleCharger1',
         label: '车载储能装置1',
         style: { padding: 5 },
-        children: subForm({ mode: props.mode, ref: refArr[0] })
+        children: subForm({ mode: props.mode, ref: refArr[0], selectInfo: props.selectInfo })
       }
     ];
     setSubFormList(initSubForm);
@@ -242,7 +236,11 @@ const VehicleForm = props => {
         key: `VehicleCharger${subFormLen + 1}`,
         label: `车载储能装置${subFormLen + 1}`,
         style: { padding: 5 },
-        children: subForm({ mode: props.mode, ref: refArr[subFormLen] })
+        children: subForm({
+          mode: props.mode,
+          ref: refArr[subFormLen],
+          selectInfo: props.selectInfo
+        })
       };
       setSubFormList([...subFormList, newSubForm]);
     }
@@ -280,7 +278,8 @@ const VehicleForm = props => {
 VehicleForm.propTypes = {
   form: PropTypes.object,
   mode: PropTypes.string,
-  refInfo: PropTypes.object
+  refInfo: PropTypes.object,
+  selectInfo: PropTypes.object
 };
 
 export default VehicleForm;

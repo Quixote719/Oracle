@@ -9,35 +9,35 @@ const VehicleForm = props => {
     <div>
       <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
-          <Col span={12} key={'generatorType'} id={'generatorType'}>
+          <Col span={12} key={'type'} id={'type'}>
             <FlexFormItem
               formMode={props.mode}
               label="发电机类型"
-              name="generatorType"
+              name="type"
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'generatorModel'} id={'generatorModel'}>
+          <Col span={12} key={'model'} id={'model'}>
             <FlexFormItem
               formMode={props.mode}
               label="发电机型号"
-              name="generatorModel"
+              name="model"
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'ratedPowerofGenerator'} id={'ratedPowerofGenerator'}>
+          <Col span={12} key={'ratedPower'} id={'ratedPower'}>
             <FlexFormItem
               formMode={props.mode}
               label="发电机额定功率(kw)"
-              name="ratedPowerofGenerator"
+              name="ratedPower"
               rules={[digitValidator(3), { required: true }]}
             />
           </Col>
-          <Col span={12} key={'generatorManufacturer'} id={'generatorManufacturer'}>
+          <Col span={12} key={'producer'} id={'producer'}>
             <FlexFormItem
               formMode={props.mode}
               label="发电机生产企业"
-              name="generatorManufacturer"
+              name="producer"
               rules={[{ required: true }]}
             />
           </Col>

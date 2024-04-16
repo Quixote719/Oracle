@@ -8,23 +8,19 @@ const VehicleForm = props => {
     <div>
       <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
-          <Col
-            span={12}
-            key={'VehicleControllerManufacturers'}
-            id={'VehicleControllerManufacturers'}
-          >
+          <Col span={12} key={'vehicleControllerProducer'} id={'vehicleControllerProducer'}>
             <FlexFormItem
               formMode={props.mode}
               label="整车控制器生产企业"
-              name="VehicleControllerManufacturers"
+              name="vehicleControllerProducer"
               rules={[{ required: true }]}
             />
           </Col>
-          <Col span={12} key={'VehicleControllerModel'} id={'VehicleControllerModel'}>
+          <Col span={12} key={'vehicleControllerModel'} id={'vehicleControllerModel'}>
             <FlexFormItem
               formMode={props.mode}
               label="整车控制器型号"
-              name="VehicleControllerModel"
+              name="vehicleControllerModel"
               rules={[{ required: true }]}
             />
           </Col>

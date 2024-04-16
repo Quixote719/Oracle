@@ -9,159 +9,123 @@ const subForm = props => {
   return (
     <Form layout="vertical" ref={props.ref}>
       <Row gutter={24}>
-        <Col
-          span={12}
-          key={'onBoardChargerProductionEnterprise'}
-          id={'onBoardChargerProductionEnterprise'}
-        >
+        <Col span={12} key={'producer'} id={'producer'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机生产企业"
-            name="onBoardChargerProductionEnterprise"
+            name="producer"
             rules={[{ required: true }]}
           />
         </Col>
-        <Col span={12} key={'onBoardChargerModel'} id={'onBoardChargerModel'}>
+        <Col span={12} key={'model'} id={'model'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机型号"
-            name="onBoardChargerModel"
+            name="model"
             rules={[{ required: true }]}
           />
         </Col>
-        <Col
-          span={12}
-          key={'onBoardChargerRatedInputVoltage'}
-          id={'onBoardChargerRatedInputVoltage'}
-        >
+        <Col span={12} key={'inputVoltage'} id={'inputVoltage'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机额定输入电压(V)"
-            name="onBoardChargerRatedInputVoltage"
+            name="inputVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
           />
         </Col>
-        <Col
-          span={12}
-          key={'maxRatedInputVoltageofonBoardCharger'}
-          id={'maxRatedInputVoltageofonBoardCharger'}
-        >
+        <Col span={12} key={'maxInputVoltage'} id={'maxInputVoltage'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机额定输入最大电压(V)"
-            name="maxRatedInputVoltageofonBoardCharger"
+            name="maxInputVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
             placeholder="若电压为固定值，在上一个文本框填写"
           />
         </Col>
 
-        <Col
-          span={12}
-          key={'onBoardChargerRatedInputCurrent'}
-          id={'onBoardChargerRatedInputCurrent'}
-        >
+        <Col span={12} key={'inputCurrent'} id={'inputCurrent'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机额定输入电流(A)"
-            name="onBoardChargerRatedInputCurrent"
+            name="inputCurrent"
             rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
           />
         </Col>
-        <Col
-          span={12}
-          key={'maxRatedInputCurrentofonBoardCharger'}
-          id={'maxRatedInputCurrentofonBoardCharger'}
-        >
+        <Col span={12} key={'maxInputCurrent'} id={'maxInputCurrent'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机额定输入最大电流(A)"
-            name="maxRatedInputCurrentofonBoardCharger"
+            name="maxInputCurrent"
             rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
             placeholder="若电流为固定值，在上一个文本框填写"
           />
         </Col>
 
-        <Col
-          span={12}
-          key={'ratedInputFrequencyofonBoardCharger'}
-          id={'ratedInputFrequencyofonBoardCharger'}
-        >
+        <Col span={12} key={'inputFrequency'} id={'inputFrequency'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机额定输入频率(Hz)"
-            name="ratedInputFrequencyofonBoardCharger"
+            name="inputFrequency"
             rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
           />
         </Col>
-        <Col
-          span={12}
-          key={'maxRatedInputFrequencyofonBoardCharger'}
-          id={'maxRatedInputFrequencyofonBoardCharger'}
-        >
+        <Col span={12} key={'maxInputFrequency'} id={'maxInputFrequency'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机额定输入最大频率(Hz)"
-            name="maxRatedInputFrequencyofonBoardCharger"
+            name="maxInputFrequency"
             rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
             placeholder="若频率为固定值，在上一个文本框填写"
           />
         </Col>
 
-        <Col span={12} key={'onBoardChargerOutputVoltage'} id={'onBoardChargerOutputVoltage'}>
+        <Col span={12} key={'outputVoltage'} id={'outputVoltage'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机输出电压(V)"
-            name="onBoardChargerOutputVoltage"
+            name="outputVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
           />
         </Col>
-        <Col
-          span={12}
-          key={'maxOutputVoltageofonBoardCharger'}
-          id={'maxOutputVoltageofonBoardCharger'}
-        >
+        <Col span={12} key={'maxOutputVoltage'} id={'maxOutputVoltage'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机输出最大电压(V)"
-            name="maxOutputVoltageofonBoardCharger"
+            name="maxOutputVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
             placeholder="若电压为固定值，在上一个文本框填写"
           />
         </Col>
-        <Col span={12} key={'onBoardChargerOutputCurrent'} id={'onBoardChargerOutputCurrent'}>
+        <Col span={12} key={'outputCurrent'} id={'outputCurrent'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机输出电流(A)"
-            name="onBoardChargerOutputCurrent"
+            name="outputCurrent"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
           />
         </Col>
-        <Col
-          span={12}
-          key={'maxOutputCurrentofonBoardCharger'}
-          id={'maxOutputCurrentofonBoardCharger'}
-        >
+        <Col span={12} key={'maxOutputCurrent'} id={'maxOutputCurrent'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机输出最大电流(A)"
-            name="maxOutputCurrentofonBoardCharger"
+            name="maxOutputCurrent"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
             placeholder="若电流为固定值，在上一个文本框填写"
           />
         </Col>
-        <Col span={12} key={'onBoardChargerOutputPower'} id={'onBoardChargerOutputPower'}>
+        <Col span={12} key={'outputPower'} id={'outputPower'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机输出功率(KW)"
-            name="onBoardChargerOutputPower"
+            name="outputPower"
             rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
           />
         </Col>
-        <Col span={12} key={'maxOutputPowerofonBoardCharger'} id={'maxOutputPowerofonBoardCharger'}>
+        <Col span={12} key={'maxOutputPower'} id={'maxOutputPower'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机输出最大功率(KW)"
-            name="maxOutputPowerofonBoardCharger"
+            name="maxOutputPower"
             rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
             placeholder="若功率为固定值，在上一个文本框填写"
           />

@@ -9,146 +9,138 @@ const subForm = props => {
   return (
     <Form layout="vertical" ref={props.ref}>
       <Row gutter={24}>
-        <Col span={12} key={'driveMotorManufacturer'} id={'driveMotorManufacturer'}>
+        <Col span={12} key={'producer'} id={'producer'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机生产企业"
-            name="driveMotorManufacturer"
+            name="producer"
             rules={[{ required: true }]}
           />
         </Col>
-        <Col span={12} key={'driveMotorType'} id={'driveMotorType'}>
+        <Col span={12} key={'type'} id={'type'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机类型"
-            name="driveMotorType"
+            name="type"
             rules={[{ required: true }]}
-            options={[]}
+            options={props.selectInfo?.driverMotorType}
           />
         </Col>
-        <Col span={12} key={'driveMotorCoolingMode'} id={'driveMotorCoolingMode'}>
+        <Col span={12} key={'coolingMethod'} id={'coolingMethod'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机冷却方式"
-            name="driveMotorCoolingMode"
+            name="coolingMethod"
             rules={[{ required: true }]}
-            options={[]}
+            options={props.selectInfo?.vehicleEnergyStorageDeviceCoolingMethod}
           />
         </Col>
-        <Col span={12} key={'ratedVoltageofDriveMotor'} id={'ratedVoltageofDriveMotor'}>
+        <Col span={12} key={'ratedVoltage'} id={'ratedVoltage'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机额定电压(V)"
-            name="ratedVoltageofDriveMotor"
+            name="ratedVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
           />
         </Col>
 
-        <Col span={12} key={'ratedPowerofheDriveMotor'} id={'ratedPowerofheDriveMotor'}>
+        <Col span={12} key={'ratedPower'} id={'ratedPower'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机额定功率(KW)"
-            name="ratedPowerofheDriveMotor"
+            name="ratedPower"
             rules={[digitValidator(3), numberLimitValidator(0, 10000000), { required: true }]}
           />
         </Col>
-        <Col span={12} key={'ratedSpeedofTheDriveMotor'} id={'ratedSpeedofTheDriveMotor'}>
+        <Col span={12} key={'ratedSpeed'} id={'ratedSpeed'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机额定转速(r/min)"
-            name="ratedSpeedofTheDriveMotor"
+            name="ratedSpeed"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
           />
         </Col>
 
-        <Col span={12} key={'ratedTorqueoftheDriveMotor'} id={'ratedTorqueoftheDriveMotor'}>
+        <Col span={12} key={'ratedTorque'} id={'ratedTorque'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机额定转距(N.m)"
-            name="ratedTorqueoftheDriveMotor"
+            name="ratedTorque"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
           />
         </Col>
-        <Col span={12} key={'driveMotorModel'} id={'driveMotorModel'}>
+        <Col span={12} key={'model'} id={'model'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机型号"
-            name="driveMotorModel"
+            name="model"
             rules={[{ required: true }]}
           />
         </Col>
 
-        <Col
-          span={12}
-          key={'driveMotorControllerManufacturer'}
-          id={'driveMotorControllerManufacturer'}
-        >
+        <Col span={12} key={'controllerProducer'} id={'controllerProducer'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机控制器生产企业"
-            name="driveMotorControllerManufacturer"
+            name="controllerProducer"
             rules={[{ required: true }]}
           />
         </Col>
-        <Col span={12} key={'driveMotorControllerModel'} id={'driveMotorControllerModel'}>
+        <Col span={12} key={'controllerModel'} id={'controllerModel'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机控制器型号"
-            name="driveMotorControllerModel"
+            name="controllerModel"
             rules={[{ required: true }]}
           />
         </Col>
-        <Col span={12} key={'driveMotorArrangementTypePos'} id={'driveMotorArrangementTypePos'}>
+        <Col span={12} key={'layoutTypePosition'} id={'layoutTypePosition'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机布置型式/位置"
-            name="driveMotorArrangementTypePos"
+            name="layoutTypePosition"
             placeholder="如：横置/后置"
             rules={[{ required: true }]}
           />
         </Col>
-        <Col
-          span={12}
-          key={'maxOperatingCurrentofdriveMotor'}
-          id={'maxOperatingCurrentofdriveMotor'}
-        >
+        <Col span={12} key={'maxOperatingCurrent'} id={'maxOperatingCurrent'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机最大工作电流(A)"
-            name="maxOperatingCurrentofdriveMotor"
+            name="maxOperatingCurrent"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
           />
         </Col>
-        <Col span={12} key={'driveMotorPeakPower'} id={'driveMotorPeakPower'}>
+        <Col span={12} key={'peakPower'} id={'peakPower'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机峰值功率(KW)"
-            name="driveMotorPeakPower"
+            name="peakPower"
             rules={[digitValidator(3), numberLimitValidator(0, 10000000), { required: true }]}
           />
         </Col>
-        <Col span={12} key={'maxSpeedDriveMotor'} id={'maxSpeedDriveMotor'}>
+        <Col span={12} key={'maxSpeed'} id={'maxSpeed'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机最高转速(r/min)"
-            name="maxSpeedDriveMotor"
+            name="maxSpeed"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
           />
         </Col>
 
-        <Col span={12} key={'driveMotorPeakTorque'} id={'driveMotorPeakTorque'}>
+        <Col span={12} key={'peakTorque'} id={'peakTorque'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机峰值转矩(N.m)"
-            name="driveMotorPeakTorque"
+            name="peakTorque"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
           />
         </Col>
-        <Col span={12} key={'maxOutputTorqueDriveMotor'} id={'maxOutputTorqueDriveMotor'}>
+        <Col span={12} key={'maxOutputTorque'} id={'maxOutputTorque'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机最大输出转矩(N.m)"
-            name="maxOutputTorqueDriveMotor"
+            name="maxOutputTorque"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
           />
         </Col>
@@ -171,7 +163,7 @@ const VehicleForm = props => {
         key: 'VehicleCharger1',
         label: '驱动电机1',
         style: { padding: 5 },
-        children: subForm({ mode: props.mode, ref: refArr[0] })
+        children: subForm({ mode: props.mode, ref: refArr[0], selectInfo: props.selectInfo })
       }
     ];
     setSubFormList(initSubForm);
@@ -184,7 +176,11 @@ const VehicleForm = props => {
         key: `VehicleCharger${subFormLen + 1}`,
         label: `驱动电机${subFormLen + 1}`,
         style: { padding: 5 },
-        children: subForm({ mode: props.mode, ref: refArr[subFormLen] })
+        children: subForm({
+          mode: props.mode,
+          ref: refArr[subFormLen],
+          selectInfo: props.selectInfo
+        })
       };
       setSubFormList([...subFormList, newSubForm]);
     }
@@ -222,7 +218,8 @@ const VehicleForm = props => {
 VehicleForm.propTypes = {
   form: PropTypes.object,
   mode: PropTypes.string,
-  refInfo: PropTypes.object
+  refInfo: PropTypes.object,
+  selectInfo: PropTypes.object
 };
 
 export default VehicleForm;
