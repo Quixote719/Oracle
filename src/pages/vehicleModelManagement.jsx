@@ -13,7 +13,7 @@ import VehicleControllerForm from '@/component/vehicleControllerForm';
 import VehicleCertificateForm from '@/component/vehicleCertificateForm';
 import VehicleThresholdNSGForm from '@/component/vehicleThresholdNSGForm';
 import VehicleThresholdTJForm from '@/component/vehicleThresholdTJForm';
-import VehicleAlarmHandlingInfoTJForm from '@/component/vehicleAlarmHandlingTJForm.jsx';
+import VehicleAlarmHandlingInfoTJForm from '@/component/vehicleAlarmTJForm.jsx';
 import { getVehicleEnumList } from '@/api/vehicleModelApi';
 
 import styles from './index.module.less';
@@ -132,14 +132,32 @@ const Flow = () => {
   ];
 
   const validateFields = () => {
-    const normalForms = [vbiform, vdmform, vtform, vhfform, vclform, vcfform, vtNSGForm, vahTJform];
-    const formLists = [vcFormRefs, vmFormRefs, vesFormRefs, vtTJFormRefs];
-    console.log('formLists', formLists);
+    const normalForms = {
+      vbiform,
+      vdmform,
+      vtform,
+      vhfform,
+      vclform,
+      vcfform,
+      vtNSGForm,
+      vahTJform
+    };
+    const formLists = { vcFormRefs, vmFormRefs, vesFormRefs, vtTJFormRefs };
     let res = {};
-    normalForms.forEach(item => {
-      if (item && typeof item.validateFields === 'function') {
-        item.validateFields();
-        res = { ...res, ...item.getFieldsValue() };
+    Object.keys(normalForms).forEach(formName => {
+      if (normalForms[formName] && typeof normalForms[formName].validateFields === 'function') {
+        normalForms[formName].validateFields();
+        res[formName] = normalForms[formName].getFieldsValue();
+      }
+    });
+    Object.keys(formLists).forEach(formName => {
+      res[formName] = [];
+      if (Array.isArray(formLists[formName].info)) {
+        formLists[formName].info.forEach(form => {
+          if (typeof form?.current?.getFieldsValue === 'function') {
+            res[formName].push(form.current.getFieldsValue());
+          }
+        });
       }
     });
     return res;
@@ -147,14 +165,7 @@ const Flow = () => {
 
   const onVehicleModelFinish = () => {
     const validateRes = validateFields();
-
     console.log('validateRes', validateRes);
-
-    console.log(3, vbiform.getFieldsValue(), vbiform.validateFields());
-    // console.log('VF', vcFormRefs.info[0].current.getFieldsValue());
-    // console.log('VF', vmFormRefs.info[0].current.getFieldsValue());
-    // console.log('VF', vesFormRefs.info[0].current.getFieldsValue());
-    // console.log('VF', vtTJFormRefs.info[0].current.getFieldsValue());
   };
 
   // useEffect(() => {

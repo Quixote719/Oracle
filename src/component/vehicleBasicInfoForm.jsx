@@ -56,8 +56,11 @@ const VehicleForm = props => {
                 numberLimitValidator(0, 10000000),
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    const maxPrice = getFieldValue('maxPrice');
-                    if (Number(maxPrice) >= 0 && maxPrice >= value) {
+                    const maxSalesPrice = getFieldValue('maxSalesPrice');
+                    if (!maxSalesPrice) {
+                      return Promise.resolve();
+                    }
+                    if (Number(maxSalesPrice) >= 0 && Number(maxSalesPrice) >= Number(value)) {
                       return Promise.resolve();
                     }
                     return Promise.reject(new Error('输入值不能大于出厂销售价格上限'));
@@ -77,8 +80,11 @@ const VehicleForm = props => {
                 numberLimitValidator(0, 10000000),
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    const minPrice = getFieldValue('minPrice');
-                    if (Number(minPrice) >= 0 && minPrice <= value) {
+                    const minSalesPrice = getFieldValue('minSalesPrice');
+                    if (!minSalesPrice) {
+                      return Promise.resolve();
+                    }
+                    if (Number(minSalesPrice) >= 0 && Number(minSalesPrice) <= Number(value)) {
                       return Promise.resolve();
                     }
                     return Promise.reject(new Error('输入值不能小于出厂销售价格下限'));

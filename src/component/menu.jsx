@@ -43,10 +43,10 @@ function getItem(label, key, icon, children, type) {
 
 const menuItems = [
   getItem(
-    <div style={{ fontSize: '1rem', padding: '10%' }}>车型管理</div>,
+    <div style={{ fontSize: '1rem', padding: '20%' }}>车型管理</div>,
     'vehicleModelManagement'
   ),
-  getItem(<div style={{ fontSize: '1rem', padding: '10%' }}>车辆管理</div>, 'vehicleManagement')
+  getItem(<div style={{ fontSize: '1rem', padding: '20%' }}>车辆管理</div>, 'vehicleManagement')
 ];
 
 const MenuApp = () => {
