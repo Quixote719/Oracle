@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Row, Col, Form, Collapse, Input, Button } from 'antd';
+import { Row, Col, Form, Collapse, Button } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
 import styles from './compStyle.module.less';
 import { digitValidator, numberLimitValidator } from '@/utils/validator';
@@ -179,8 +179,13 @@ const VehicleForm = props => {
   return (
     <div>
       <div className={styles.singleItem}>
-        <div className={styles.inputTitle}>车载充电机数量</div>
-        <Input style={{ width: '35%' }}></Input>
+        {props.mode === 'display' && (
+          <div>
+            <div className={styles.inputTitle}>车载充电机数量</div>
+            <div>{props?.formData?.vehicleChargerNum}</div>
+          </div>
+        )}
+        {/* <Input style={{ width: '35%' }}></Input> */}
       </div>
       <Collapse items={subFormList} />
       <Button className={styles.addFormBtn} onClick={() => addCharger()} type="primary">
@@ -200,7 +205,8 @@ const VehicleForm = props => {
 VehicleForm.propTypes = {
   form: PropTypes.object,
   mode: PropTypes.string,
-  refInfo: PropTypes.object
+  refInfo: PropTypes.object,
+  formData: PropTypes.object
 };
 
 export default VehicleForm;

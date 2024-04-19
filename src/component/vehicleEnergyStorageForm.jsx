@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Row, Col, Form, Collapse, Input, Button } from 'antd';
+import { Row, Col, Form, Collapse, Button } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
 import styles from './compStyle.module.less';
 import { digitValidator, numberLimitValidator, integerValidator } from '@/utils/validator';
 import PropTypes from 'prop-types';
 
 const subForm = props => {
-  console.log(props.selectInfo);
   return (
     <Form layout="vertical" ref={props.ref}>
       <Row gutter={24}>
@@ -103,11 +102,11 @@ const subForm = props => {
             rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
           />
         </Col>
-        <Col span={12} key={'ratedTotalEnergy'} id={'ratedTotalEnergy'}>
+        <Col span={12} key={'ratedVoltage'} id={'ratedVoltage'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置额定电压(V)"
-            name="ratedTotalEnergy"
+            name="ratedVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
           />
         </Col>
@@ -257,8 +256,13 @@ const VehicleForm = props => {
   return (
     <div>
       <div className={styles.singleItem}>
-        <div className={styles.inputTitle}>车载储能装置安装数量</div>
-        <Input style={{ width: '35%' }}></Input>
+        {props.mode === 'display' && (
+          <div>
+            <div className={styles.inputTitle}>车载储能装置安装数量</div>
+            <div>{props?.formData?.vehicleChargerNum}</div>
+          </div>
+        )}
+        {/* <Input style={{ width: '35%' }}></Input> */}
       </div>
       <Collapse items={subFormList} />
       <Button className={styles.addFormBtn} onClick={() => addEnergyStorage()} type="primary">
@@ -279,7 +283,8 @@ VehicleForm.propTypes = {
   form: PropTypes.object,
   mode: PropTypes.string,
   refInfo: PropTypes.object,
-  selectInfo: PropTypes.object
+  selectInfo: PropTypes.object,
+  formData: PropTypes.object
 };
 
 export default VehicleForm;
