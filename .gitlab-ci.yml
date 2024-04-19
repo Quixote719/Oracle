@@ -73,6 +73,11 @@ lint:
 build_image_aws_cn:
   tags:
     - rms-cn-dev
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
+    - if: "$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH"
+      when: on_success
 
 trivy_cn:
   extends: trivy
@@ -109,13 +114,22 @@ config_validation:
   allow_failure: true
 
 build_image_aws:
-  allow_failure: true
+  rules:
+    - when: never
 
 sonarqube:
   allow_failure: true
 
 deploy_aws_dev:
-  allow_failure: true
+  rules:
+    - when: never
+
+deploy_aws_cn_dev:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
+    - if: "$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH"
+      when: on_success
 
 trivy:
   rules:
