@@ -124,7 +124,7 @@ deploy_aws_dev:
   rules:
     - when: never
 
-deploy_aws_dev_cn:
+deploy_aws_cn_dev:
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
