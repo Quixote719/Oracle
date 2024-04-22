@@ -63,7 +63,6 @@ const MenuApp = () => {
         defaultOpenKeys={['sub1']}
         onClick={menuClick}
         mode="inline"
-        theme="dark"
         // inlineCollapsed={collapsed}
         items={menuItems}
       />
