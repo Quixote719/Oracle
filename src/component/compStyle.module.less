@@ -1,3 +1,5 @@
+@import '@/styles/index.less';
+
 .pageContainer {
   min-width: 100%;
   min-height: 100%;
@@ -62,8 +64,13 @@
 
 .addFormBtn,
 .removeFormBtn {
+  @platFormBtn();
   margin-top: 15px;
   margin-right: 20px;
+}
+
+.addFormBtn {
+  @darkBtn();
 }
 
 .leftSider {
@@ -72,11 +79,15 @@
   height: 100%;
   position: absolute;
   overflow: auto;
-  background: #001628;
+  background: #ffffff;
   display: inline-block;
   vertical-align: top;
 }
 
 .itemInfo {
   margin: 20px;
+}
+
+.formItem {
+  width: 75% !important;
 }

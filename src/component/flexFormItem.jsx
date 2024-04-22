@@ -6,11 +6,15 @@ import styles from './compStyle.module.less';
 const FlexFormItem = props => {
   const genFormItem = () => {
     return Array.isArray(props.options) ? (
-      <Select options={props.options} mode={props.selectMode} />
+      <Select className={styles.formItem} options={props.options} mode={props.selectMode} />
     ) : props.isDatePicker ? (
-      <DatePicker style={{ width: '100%' }} placeholder={props.placeholder} />
+      <DatePicker
+        className={styles.formItem}
+        style={{ width: '100%' }}
+        placeholder={props.placeholder}
+      />
     ) : (
-      <Input placeholder={props.placeholder} />
+      <Input className={styles.formItem} placeholder={props.placeholder} />
     );
   };
 

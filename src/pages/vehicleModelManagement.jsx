@@ -14,7 +14,7 @@ import VehicleCertificateForm from '@/component/vehicleCertificateForm';
 import VehicleThresholdNSGForm from '@/component/vehicleThresholdNSGForm';
 import VehicleThresholdTJForm from '@/component/vehicleThresholdTJForm';
 import VehicleAlarmHandlingInfoTJForm from '@/component/vehicleAlarmTJForm.jsx';
-import { getVehicleEnumList } from '@/api/vehicleModelApi';
+import { getVehicleEnumList, submitVehicleModel } from '@/api/vehicleModelApi';
 
 import styles from './index.module.less';
 /*
@@ -42,6 +42,15 @@ const Flow = () => {
   let vesFormRefs = {};
   let vtTJFormRefs = {};
 
+  useEffect(() => {
+    getVehicleEnumList().then(data => {
+      setSelectInfo(parseVehicleModelSelectOptions(data));
+    });
+    if (pagePath.pathname === '/vehicleModelManagement') {
+      setFormState('edit');
+    }
+  }, []);
+
   const parseVehicleModelSelectOptions = param => {
     let options = param.data || [];
     let selectDataByType = {};
@@ -57,14 +66,52 @@ const Flow = () => {
     return selectDataByType;
   };
 
-  useEffect(() => {
-    getVehicleEnumList.then(data => {
-      setSelectInfo(parseVehicleModelSelectOptions(data));
+  const validateFields = () => {
+    const normalForms = {
+      vbiform,
+      vdmform,
+      vtform,
+      vhfform,
+      vclform,
+      vcfform,
+      vtNSGForm,
+      vahTJform
+    };
+    const formLists = { vcFormRefs, vmFormRefs, vesFormRefs, vtTJFormRefs };
+    let res = {};
+    Object.keys(normalForms).forEach(formName => {
+      if (normalForms[formName] && typeof normalForms[formName].validateFields === 'function') {
+        normalForms[formName].validateFields();
+        res[formName] = normalForms[formName].getFieldsValue();
+      }
     });
-    if (pagePath.pathname === '/vehicleModelManagement') {
-      setFormState('edit');
-    }
-  }, []);
+    Object.keys(formLists).forEach(formName => {
+      res[formName] = [];
+      if (Array.isArray(formLists[formName].info)) {
+        formLists[formName].info.forEach(form => {
+          if (typeof form?.current?.getFieldsValue === 'function') {
+            res[formName].push(form.current.getFieldsValue());
+          }
+        });
+      }
+    });
+    return res;
+  };
+
+  const parseVehicleModel = param => {
+    console.log(333, param);
+    let res = {};
+    res = { ...param.vbiform };
+    return res;
+  };
+
+  const onVehicleModelFinish = () => {
+    const validateRes = validateFields();
+    let res = parseVehicleModel(validateRes);
+    submitVehicleModel(res).then(data => {
+      console.log(data);
+    });
+  };
 
   const formItems = [
     {
@@ -131,43 +178,6 @@ const Flow = () => {
     }
   ];
 
-  const validateFields = () => {
-    const normalForms = {
-      vbiform,
-      vdmform,
-      vtform,
-      vhfform,
-      vclform,
-      vcfform,
-      vtNSGForm,
-      vahTJform
-    };
-    const formLists = { vcFormRefs, vmFormRefs, vesFormRefs, vtTJFormRefs };
-    let res = {};
-    Object.keys(normalForms).forEach(formName => {
-      if (normalForms[formName] && typeof normalForms[formName].validateFields === 'function') {
-        normalForms[formName].validateFields();
-        res[formName] = normalForms[formName].getFieldsValue();
-      }
-    });
-    Object.keys(formLists).forEach(formName => {
-      res[formName] = [];
-      if (Array.isArray(formLists[formName].info)) {
-        formLists[formName].info.forEach(form => {
-          if (typeof form?.current?.getFieldsValue === 'function') {
-            res[formName].push(form.current.getFieldsValue());
-          }
-        });
-      }
-    });
-    return res;
-  };
-
-  const onVehicleModelFinish = () => {
-    const validateRes = validateFields();
-    console.log('validateRes', validateRes);
-  };
-
   // useEffect(() => {
   //   if (process.env.NODE_ENV === 'mock') {
   //     fetch('./resource')
@@ -200,8 +210,8 @@ const Flow = () => {
       <div className={styles.collapsePage}>
         {/* <Collapse items={[formItems[0]]} /> */}
         {genCollapse()}
-        <Button onClick={() => onVehicleModelFinish()} type="primary">
-          提交
+        <Button className={styles.darkBtn} onClick={() => onVehicleModelFinish()}>
+          保存
         </Button>
       </div>
     </div>

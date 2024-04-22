@@ -1,5 +1,29 @@
 body {
   margin: 0px;
   padding: 0px;
+  color: #0c121c;
   background: #f7f7f7;
+}
+
+@platFormBtn: {
+  width: 180px;
+  height: 48px;
+  border-radius: 2px;
+};
+
+@darkBtn: {
+  background: #302e2b;
+  color: #ffffff;
+  margin-right: 10px;
+  &:hover {
+    background: #666666 !important;
+    color: #ffffff !important;
+    border: none;
+  }
+};
+
+:global {
+  .ant-collapse {
+    border-radius: 0px;
+  }
 }

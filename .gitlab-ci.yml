@@ -15,6 +15,7 @@ install:
   stage: install
   image: node:21-alpine3.18
   script:
+    - npm config set registry https://registry.npmmirror.com/
     - npm i pnpm -g
     - pnpm i
   artifacts:
@@ -28,21 +29,20 @@ install:
 audit:
   stage: validate
   image: node:21-alpine3.18
-  dependencies:
-    - install
   script:
+    - npm config set registry https://registry.npmmirror.com/
     - npm i pnpm -g
-    - pnpm i
-    - pnpm audit --production
+    - pnpm i --lockfile-only
+    - npm config set registry https://registry.npmjs.org/
+    - pnpm audit
   tags:
     - rms-cn-dev
 
 lint:
   stage: validate
   image: node:21-alpine3.18
-  dependencies:
-    - install
   script:
+    - npm config set registry https://registry.npmmirror.com/
     - npm i pnpm -g
     - pnpm run lint
   tags:
@@ -55,6 +55,7 @@ lint:
 #     - install
 #   allow_failure: true
 #   script:
+#     - npm config set registry https://registry.npmmirror.com/
 #     - npm i pnpm -g
 #     - pnpm run test.coverage
 #   artifacts:
