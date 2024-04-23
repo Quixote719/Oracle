@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Form } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
+import { yesOrNo } from '@/constant/vehicleModel';
 import PropTypes from 'prop-types';
 
 const VehicleForm = props => {
@@ -39,7 +40,7 @@ const VehicleForm = props => {
               label="是否免征"
               name="exempt"
               rules={[{ required: true }]}
-              options={[]}
+              options={yesOrNo || []}
             />
           </Col>
           <Col span={12} key={'fuel'} id={'fuel'}>
@@ -48,7 +49,7 @@ const VehicleForm = props => {
               label="是否燃油"
               name="fuel"
               rules={[{ required: true }]}
-              options={[]}
+              options={yesOrNo || []}
             />
           </Col>
           <Col span={12} key={'environmentallyFriendly'} id={'environmentallyFriendly'}>
@@ -57,7 +58,7 @@ const VehicleForm = props => {
               label="是否环保"
               name="environmentallyFriendly"
               rules={[{ required: true }]}
-              options={[]}
+              options={yesOrNo || []}
             />
           </Col>
           <Col span={12} key={'fromOrganization'} id={'fromOrganization'}>
@@ -66,7 +67,7 @@ const VehicleForm = props => {
               label="是否本机构"
               name="fromOrganization"
               rules={[{ required: true }]}
-              options={[]}
+              options={yesOrNo || []}
             />
           </Col>
           <Col span={12} key={'testingOrganization'} id={'testingOrganization'}>

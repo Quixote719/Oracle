@@ -13,7 +13,7 @@ import VehicleControllerForm from '@/component/vehicleControllerForm';
 import VehicleCertificateForm from '@/component/vehicleCertificateForm';
 import VehicleThresholdNSGForm from '@/component/vehicleThresholdNSGForm';
 import VehicleThresholdTJForm from '@/component/vehicleThresholdTJForm';
-import VehicleAlarmHandlingInfoTJForm from '@/component/vehicleAlarmTJForm.jsx';
+import VehicleAlarmTJForm from '@/component/vehicleAlarmTJForm.jsx';
 import { getVehicleEnumList, submitVehicleModel } from '@/api/vehicleModelApi';
 
 import styles from './index.module.less';
@@ -98,10 +98,49 @@ const Flow = () => {
     return res;
   };
 
+  const getLvl = param => {
+    if (param.includes(1)) return 1;
+    else if (param.includes(2)) return 2;
+    else if (param.includes(3)) return 3;
+  };
+
   const parseVehicleModel = param => {
-    console.log(333, param);
     let res = {};
-    res = { ...param.vbiform };
+    res = {
+      ...param.vbiform,
+      ...param.vclform,
+      onboardChargers: param.vcFormRefs,
+      driverMotors: param.vmFormRefs,
+      energyStorageDevices: param.vesFormRefs,
+      generatorTerminal: {
+        ...param.vtform
+      },
+      hybridFuelPart: {
+        ...param.vhfform
+      },
+      bulletinCertInfo: {
+        ...param.vcfform
+      },
+      alarmRegistration: {
+        ...param.vahTJform
+      },
+      levelOneAlarms: {
+        ...param.vtTJFormRefs[2]
+      },
+      levelTwoAlarms: {
+        ...param.vtTJFormRefs[1]
+      },
+      levelThreeAlarms: {
+        ...param.vtTJFormRefs[0]
+      }
+    };
+    res.alarmThresholds = Object.keys(param.vtNSGForm).map(vtKey => {
+      return {
+        alarmType: vtKey,
+        level: getLvl(vtKey),
+        value: param.vtNSGForm[vtKey]
+      };
+    });
     return res;
   };
 
@@ -172,9 +211,9 @@ const Flow = () => {
       children: <VehicleThresholdTJForm refInfo={vtTJFormRefs} mode={formState} />
     },
     {
-      key: 'VehicleAlarmHandlingInfoTJForm',
+      key: 'VehicleAlarmTJForm',
       label: '报警处置措施备案信息（天津）',
-      children: <VehicleAlarmHandlingInfoTJForm refInfo={vahTJform} mode={formState} />
+      children: <VehicleAlarmTJForm refInfo={vahTJform} mode={formState} />
     }
   ];
 
@@ -210,7 +249,7 @@ const Flow = () => {
       <div className={styles.collapsePage}>
         {/* <Collapse items={[formItems[0]]} /> */}
         {genCollapse()}
-        <Button className={styles.darkBtn} onClick={() => onVehicleModelFinish()}>
+        <Button className={styles.saveBtn} onClick={() => onVehicleModelFinish()}>
           保存
         </Button>
       </div>

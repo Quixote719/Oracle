@@ -37,8 +37,8 @@ const vehicleModelManagement = () => {
         </div>
         <div>
           <div className={styles.btnBlock}>
-            <Button className={styles.platFormBtn}>重制</Button>
-            <Button className={styles.platFormBtn} type="primary">
+            <Button className={styles.resetBtn}>重制</Button>
+            <Button className={styles.searchBtn} type="primary">
               查询
             </Button>
           </div>

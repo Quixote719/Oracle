@@ -136,6 +136,8 @@ const subForm = props => {
 };
 const VehicleForm = props => {
   const [subFormList, setSubFormList] = useState([]);
+  const listCopy = useRef([]);
+  const maxIndex = useRef(1);
   let ref1 = useRef();
   let ref2 = useRef();
   let ref3 = useRef();
@@ -144,36 +146,55 @@ const VehicleForm = props => {
   props.refInfo.info = refArr;
 
   useEffect(() => {
+    const curIndex = maxIndex.current;
     let initSubForm = [
       {
-        key: 'VehicleCharger1',
-        label: '车载充电机1',
+        key: `VehicleCharger${curIndex}`,
+        label: <div>{`车载充电机${curIndex}`}</div>,
         style: { padding: 5 },
         children: subForm({ mode: props.mode, ref: refArr[0] })
       }
     ];
+    listCopy.current = initSubForm;
     setSubFormList(initSubForm);
+    maxIndex.current++;
   }, []);
 
   const addCharger = () => {
-    let subFormLen = subFormList.length;
+    const subFormLen = subFormList.length;
+    const curIndex = maxIndex.current;
     if (subFormLen < 4) {
       let newSubForm = {
-        key: `VehicleCharger${subFormLen + 1}`,
-        label: `车载充电机${subFormLen + 1}`,
+        key: `VehicleCharger${curIndex}`,
+        label: (
+          <div>
+            {`车载充电机${curIndex}`}
+            {subFormLen > 0 && (
+              <div className={styles.deleteBtn} onClick={e => removeCharger(e, curIndex)}>
+                删除
+              </div>
+            )}
+          </div>
+        ),
         style: { padding: 5 },
         children: subForm({ mode: props.mode, ref: refArr[subFormLen] })
       };
+      listCopy.current = [...subFormList, newSubForm];
       setSubFormList([...subFormList, newSubForm]);
+      maxIndex.current++;
     }
   };
 
-  const removeCharger = () => {
-    let subFormLen = subFormList.length;
-    if (subFormLen > 1) {
-      let updatedFormList = subFormList.slice(0, subFormLen - 1);
-      setSubFormList(updatedFormList);
-    }
+  const removeCharger = (e, param) => {
+    e.stopPropagation();
+    let res = [];
+    listCopy.current.forEach(item => {
+      if (item.key !== `VehicleCharger${param}`) {
+        res.push(item);
+      }
+    });
+    listCopy.current = res;
+    setSubFormList(res);
   };
 
   return (
@@ -190,13 +211,6 @@ const VehicleForm = props => {
       <Collapse items={subFormList} />
       <Button className={styles.addFormBtn} onClick={() => addCharger()} type="primary">
         增加
-      </Button>
-      <Button
-        className={styles.removeFormBtn}
-        onClick={() => removeCharger()}
-        disabled={subFormList.length <= 1}
-      >
-        删除
       </Button>
     </div>
   );

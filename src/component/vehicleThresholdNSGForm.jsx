@@ -12,7 +12,7 @@ const VehicleForm = props => {
             <FlexFormItem
               formMode={props.mode}
               label="温度差异报警一级"
-              name="temperatureDifferenceWarningLevel1)"
+              name="temperatureDifferenceWarningLevel1"
               rules={[{ required: true }]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />

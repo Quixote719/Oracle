@@ -150,6 +150,8 @@ const subForm = props => {
 };
 const VehicleForm = props => {
   const [subFormList, setSubFormList] = useState([]);
+  const listCopy = useRef([]);
+  const maxIndex = useRef(1);
   let ref1 = useRef();
   let ref2 = useRef();
   let ref3 = useRef();
@@ -158,23 +160,36 @@ const VehicleForm = props => {
   props.refInfo.info = refArr;
 
   useEffect(() => {
+    const curIndex = maxIndex.current;
     let initSubForm = [
       {
-        key: 'VehicleCharger1',
-        label: '驱动电机1',
+        key: `VehicleMotor1${curIndex}`,
+        label: <div>{`驱动电机${curIndex}`}</div>,
         style: { padding: 5 },
         children: subForm({ mode: props.mode, ref: refArr[0], selectInfo: props.selectInfo })
       }
     ];
+    listCopy.current = initSubForm;
     setSubFormList(initSubForm);
+    maxIndex.current++;
   }, []);
 
   const addMotor = () => {
-    let subFormLen = subFormList.length;
+    const subFormLen = subFormList.length;
+    const curIndex = maxIndex.current;
     if (subFormLen < 4) {
       let newSubForm = {
-        key: `VehicleCharger${subFormLen + 1}`,
-        label: `驱动电机${subFormLen + 1}`,
+        key: `VehicleMotor${curIndex}`,
+        label: (
+          <div>
+            {`驱动电机${curIndex}`}
+            {subFormLen > 0 && (
+              <div className={styles.deleteBtn} onClick={e => removeMotor(e, curIndex)}>
+                删除
+              </div>
+            )}
+          </div>
+        ),
         style: { padding: 5 },
         children: subForm({
           mode: props.mode,
@@ -182,16 +197,22 @@ const VehicleForm = props => {
           selectInfo: props.selectInfo
         })
       };
+      listCopy.current = [...subFormList, newSubForm];
       setSubFormList([...subFormList, newSubForm]);
+      maxIndex.current++;
     }
   };
 
-  const removeMotor = () => {
-    let subFormLen = subFormList.length;
-    if (subFormLen > 1) {
-      let updatedFormList = subFormList.slice(0, subFormLen - 1);
-      setSubFormList(updatedFormList);
-    }
+  const removeMotor = (e, param) => {
+    e.stopPropagation();
+    let res = [];
+    listCopy.current.forEach(item => {
+      if (item.key !== `VehicleMotor${param}`) {
+        res.push(item);
+      }
+    });
+    listCopy.current = res;
+    setSubFormList(res);
   };
 
   return (
@@ -208,13 +229,6 @@ const VehicleForm = props => {
       <Collapse items={subFormList} />
       <Button className={styles.addFormBtn} onClick={() => addMotor()} type="primary">
         增加
-      </Button>
-      <Button
-        className={styles.removeFormBtn}
-        onClick={() => removeMotor()}
-        disabled={subFormList.length <= 1}
-      >
-        删除
       </Button>
     </div>
   );
