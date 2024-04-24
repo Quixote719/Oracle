@@ -1,9 +1,11 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
 import RMSPortal from '@/pages/rmsPortal';
 import VehicleModelList from '@/pages/vehicleModelList';
 import VehicleModelManagement from '@/pages/vehicleModelManagement';
+import zhCN from 'antd/es/locale/zh_CN';
 import '@/styles/index.less';
 
 async function enableMocking() {
@@ -31,5 +33,9 @@ class App extends React.PureComponent {
 const root = createRoot(document.getElementById('root'));
 
 enableMocking().then(() => {
-  root.render(<App />);
+  root.render(
+    <ConfigProvider locale={zhCN}>
+      <App />
+    </ConfigProvider>
+  );
 });

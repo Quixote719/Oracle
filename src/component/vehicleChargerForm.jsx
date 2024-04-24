@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Row, Col, Form, Collapse, Button } from 'antd';
+import { Row, Col, Form, Collapse, Button, Modal } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
 import styles from './compStyle.module.less';
 import { digitValidator, numberLimitValidator } from '@/utils/validator';
@@ -131,8 +131,10 @@ const subForm = props => {
 };
 const VehicleForm = props => {
   const [subFormList, setSubFormList] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const listCopy = useRef([]);
   const maxIndex = useRef(1);
+  const deleteIndex = useRef(null);
   let ref1 = useRef();
   let ref2 = useRef();
   let ref3 = useRef();
@@ -182,14 +184,27 @@ const VehicleForm = props => {
 
   const removeCharger = (e, param) => {
     e.stopPropagation();
+    deleteIndex.current = param;
+    setIsModalOpen(true);
+  };
+
+  const deleteConfirm = () => {
+    if (!Number.isInteger(deleteIndex.current)) {
+      return setIsModalOpen(false);
+    }
     let res = [];
     listCopy.current.forEach(item => {
-      if (item.key !== `VehicleCharger${param}`) {
+      if (item.key !== `VehicleCharger${deleteIndex.current}`) {
         res.push(item);
       }
     });
     listCopy.current = res;
     setSubFormList(res);
+    setIsModalOpen(false);
+  };
+
+  const deleteCancel = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -204,9 +219,28 @@ const VehicleForm = props => {
         {/* <Input style={{ width: '35%' }}></Input> */}
       </div>
       <Collapse items={subFormList} />
-      <Button className={styles.addFormBtn} onClick={() => addCharger()} type="primary">
+      <Button
+        className={styles.addFormBtn}
+        onClick={() => addCharger()}
+        disabled={subFormList.length >= 4}
+      >
         增加
       </Button>
+      <Modal
+        open={isModalOpen}
+        onOk={deleteConfirm}
+        onCancel={deleteCancel}
+        footer={[
+          <Button key="cancel" className={styles.cancelBtn} onClick={deleteCancel}>
+            取消
+          </Button>,
+          <Button key="submit" className={styles.confirmBtn} onClick={deleteConfirm}>
+            确认
+          </Button>
+        ]}
+      >
+        <p>{`确认删除车载充电机${deleteIndex.current}吗？`}</p>
+      </Modal>
     </div>
   );
 };
