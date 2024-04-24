@@ -13,7 +13,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="整车控制器生产企业"
               name="vehicleControllerProducer"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'vehicleControllerModel'} id={'vehicleControllerModel'}>
@@ -21,7 +21,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="整车控制器型号"
               name="vehicleControllerModel"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
         </Row>

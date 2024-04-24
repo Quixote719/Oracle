@@ -10,36 +10,26 @@ const VehicleForm = props => {
       <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
           <Col span={12} key={'batch'} id={'batch'}>
-            <FlexFormItem
-              formMode={props.mode}
-              label="公告批次"
-              name="batch"
-              rules={[{ required: true }]}
-            />
+            <FlexFormItem formMode={props.mode} label="公告批次" name="batch" rules={[]} />
           </Col>
           <Col span={12} key={'releaseDate'} id={'releaseDate'}>
             <FlexFormItem
               formMode={props.mode}
               label="发布日期"
               name="releaseDate"
-              rules={[{ required: true }]}
+              rules={[]}
               isDatePicker={true}
             />
           </Col>
           <Col span={12} key={'englishBrand'} id={'englishBrand'}>
-            <FlexFormItem
-              formMode={props.mode}
-              label="英文品牌"
-              name="englishBrand"
-              rules={[{ required: true }]}
-            />
+            <FlexFormItem formMode={props.mode} label="英文品牌" name="englishBrand" rules={[]} />
           </Col>
           <Col span={12} key={'exempt'} id={'exempt'}>
             <FlexFormItem
               formMode={props.mode}
               label="是否免征"
               name="exempt"
-              rules={[{ required: true }]}
+              rules={[]}
               options={yesOrNo || []}
             />
           </Col>
@@ -48,7 +38,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="是否燃油"
               name="fuel"
-              rules={[{ required: true }]}
+              rules={[]}
               options={yesOrNo || []}
             />
           </Col>
@@ -57,7 +47,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="是否环保"
               name="environmentallyFriendly"
-              rules={[{ required: true }]}
+              rules={[]}
               options={yesOrNo || []}
             />
           </Col>
@@ -66,7 +56,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="是否本机构"
               name="fromOrganization"
-              rules={[{ required: true }]}
+              rules={[]}
               options={yesOrNo || []}
             />
           </Col>
@@ -75,7 +65,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="检测机构"
               name="testingOrganization"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'testingReportNumber'} id={'testingReportNumber'}>
@@ -83,7 +73,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="检测报告编号"
               name="testingReportNumber"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'uploadComplianceTestingReport'} id={'uploadComplianceTestingReport'}>
@@ -91,7 +81,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="上传检测符合性报告"
               name="uploadComplianceTestingReport"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'vehicleConfigurationName'} id={'vehicleConfigurationName'}>
@@ -99,7 +89,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="车辆配置名称"
               name="vehicleConfigurationName"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'specifications'} id={'specifications'}>
@@ -107,7 +97,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="规约"
               name="specifications"
-              rules={[{ required: true }]}
+              rules={[]}
               options={[]}
             />
           </Col>
@@ -120,7 +110,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="进口车3C证书号"
               name="importedVehicle3cCertificateNumber"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'recommendedModelCatalogBatch'} id={'recommendedModelCatalogBatch'}>
@@ -128,7 +118,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="推荐车型目录批次"
               name="recommendedModelCatalogBatch"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col
@@ -140,7 +130,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="推荐车型目录序号"
               name="recommendedVehicleCatalogBatch"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'roadMotorVehicleProducer'} id={'roadMotorVehicleProducer'}>
@@ -148,7 +138,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="《道路机动车辆生产企业及产品公告》汽车产品技术参数页或机动车整车出厂合格证影印件"
               name="roadMotorVehicleProducer"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'nationalPlatformCertificate'} id={'nationalPlatformCertificate'}>
@@ -156,7 +146,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="车型接入国家平台认证证书附件上传"
               name="nationalPlatformCertificate"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'modelTestReport'} id={'modelTestReport'}>
@@ -164,7 +154,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="车型检测报告（佐证车型技术参数）附件上传"
               name="modelTestReport"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'modelChangeApplication'} id={'modelChangeApplication'}>
@@ -172,7 +162,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="车型变更申请附件"
               name="modelChangeApplication"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'gbDataProtocolComparisonTable'} id={'gbDataProtocolComparisonTable'}>
@@ -180,16 +170,11 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="国标数据协议对照表"
               name="gbDataProtocolComparisonTable"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'safetyPlan'} id={'safetyPlan'}>
-            <FlexFormItem
-              formMode={props.mode}
-              label="车型安全预案"
-              name="safetyPlan"
-              rules={[{ required: true }]}
-            />
+            <FlexFormItem formMode={props.mode} label="车型安全预案" name="safetyPlan" rules={[]} />
           </Col>
           <Col
             span={12}
@@ -200,7 +185,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="公告主要技术参数页"
               name="noticeMainTechnicalParametersPage"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'alarmContactEmail'} id={'alarmContactEmail'}>
@@ -208,7 +193,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="报警事宜联系邮箱"
               name="alarmContactEmail"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
         </Row>

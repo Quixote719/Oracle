@@ -14,23 +14,18 @@ const subForm = props => {
             formMode={props.mode}
             label="车载充电机生产企业"
             name="producer"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'model'} id={'model'}>
-          <FlexFormItem
-            formMode={props.mode}
-            label="车载充电机型号"
-            name="model"
-            rules={[{ required: true }]}
-          />
+          <FlexFormItem formMode={props.mode} label="车载充电机型号" name="model" rules={[]} />
         </Col>
         <Col span={12} key={'inputVoltage'} id={'inputVoltage'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载充电机额定输入电压(V)"
             name="inputVoltage"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
           />
         </Col>
         <Col span={12} key={'maxInputVoltage'} id={'maxInputVoltage'}>
@@ -38,7 +33,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载充电机额定输入最大电压(V)"
             name="maxInputVoltage"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
             placeholder="若电压为固定值，在上一个文本框填写"
           />
         </Col>
@@ -48,7 +43,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载充电机额定输入电流(A)"
             name="inputCurrent"
-            rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
           />
         </Col>
         <Col span={12} key={'maxInputCurrent'} id={'maxInputCurrent'}>
@@ -56,7 +51,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载充电机额定输入最大电流(A)"
             name="maxInputCurrent"
-            rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
             placeholder="若电流为固定值，在上一个文本框填写"
           />
         </Col>
@@ -66,7 +61,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载充电机额定输入频率(Hz)"
             name="inputFrequency"
-            rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
           />
         </Col>
         <Col span={12} key={'maxInputFrequency'} id={'maxInputFrequency'}>
@@ -74,7 +69,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载充电机额定输入最大频率(Hz)"
             name="maxInputFrequency"
-            rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
             placeholder="若频率为固定值，在上一个文本框填写"
           />
         </Col>
@@ -84,7 +79,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载充电机输出电压(V)"
             name="outputVoltage"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
           />
         </Col>
         <Col span={12} key={'maxOutputVoltage'} id={'maxOutputVoltage'}>
@@ -92,7 +87,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载充电机输出最大电压(V)"
             name="maxOutputVoltage"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
             placeholder="若电压为固定值，在上一个文本框填写"
           />
         </Col>
@@ -101,7 +96,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载充电机输出电流(A)"
             name="outputCurrent"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
           />
         </Col>
         <Col span={12} key={'maxOutputCurrent'} id={'maxOutputCurrent'}>
@@ -109,7 +104,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载充电机输出最大电流(A)"
             name="maxOutputCurrent"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
             placeholder="若电流为固定值，在上一个文本框填写"
           />
         </Col>
@@ -118,7 +113,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载充电机输出功率(KW)"
             name="outputPower"
-            rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
           />
         </Col>
         <Col span={12} key={'maxOutputPower'} id={'maxOutputPower'}>
@@ -126,7 +121,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载充电机输出最大功率(KW)"
             name="maxOutputPower"
-            rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
             placeholder="若功率为固定值，在上一个文本框填写"
           />
         </Col>

@@ -12,6 +12,7 @@ const FlexFormItem = props => {
         className={styles.formItem}
         style={{ width: '100%' }}
         placeholder={props.placeholder}
+        format="YYYY-MM-DD"
       />
     ) : (
       <Input className={styles.formItem} placeholder={props.placeholder} />
