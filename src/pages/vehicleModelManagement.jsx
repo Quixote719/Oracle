@@ -141,6 +141,11 @@ const Flow = () => {
         value: param.vtNSGForm[vtKey]
       };
     });
+    if (res.bulletinCertInfo.releaseDate) {
+      res.bulletinCertInfo.releaseDate = new Date(res.bulletinCertInfo.releaseDate)
+        .toLocaleDateString()
+        .replaceAll('/', '-');
+    }
     return res;
   };
 

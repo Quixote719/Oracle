@@ -13,7 +13,7 @@ const genLvl3Alarm = props => {
             formMode={props.mode}
             label="动力蓄电池包过压报警(V)"
             name="pbPackageOverVoltageAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col
@@ -25,7 +25,7 @@ const genLvl3Alarm = props => {
             formMode={props.mode}
             label="动力蓄电池总电流过流(A)充电： 放电："
             name="pbTotalCurrentOverCurrentChargingDischarging"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'cellOverVoltageAlarm'} id={'cellOverVoltageAlarm'}>
@@ -33,7 +33,7 @@ const genLvl3Alarm = props => {
             formMode={props.mode}
             label="单体电池过压报警(V)"
             name="cellOverVoltageAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'pbPackOverCharged'} id={'pbPackOverCharged'}>
@@ -41,7 +41,7 @@ const genLvl3Alarm = props => {
             formMode={props.mode}
             label="动力蓄电池包过充"
             name="pbPackOverCharged"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'highTempAlarm'} id={'highTempAlarm'}>
@@ -49,7 +49,7 @@ const genLvl3Alarm = props => {
             formMode={props.mode}
             label="电池高温报警(℃)"
             name="highTempAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'tempDiffAlarm'} id={'tempDiffAlarm'}>
@@ -57,7 +57,7 @@ const genLvl3Alarm = props => {
             formMode={props.mode}
             label="温度差异报警(℃)"
             name="tempDiffAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'insulationAlarm'} id={'insulationAlarm'}>
@@ -65,7 +65,7 @@ const genLvl3Alarm = props => {
             formMode={props.mode}
             label="绝缘报警(Ω/V)"
             name="insulationAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
       </Row>
@@ -82,7 +82,7 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="动力蓄电池包欠压报警(V)"
             name="pbPackUnderVoltageAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'cellUnderVoltageAlarm'} id={'cellUnderVoltageAlarm'}>
@@ -90,7 +90,7 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="单体电池欠压报警(V)"
             name="cellUnderVoltageAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'motorHighCurrentAlarm'} id={'motorHighCurrentAlarm'}>
@@ -98,7 +98,7 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="驱动电机电流过高报警(A)"
             name="motorHighCurrentAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'pbPackMismatchAlarm'} id={'pbPackMismatchAlarm'}>
@@ -106,7 +106,7 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="动力蓄电池包不匹配报警"
             name="pbPackMismatchAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'cellConsistencyAlarm'} id={'cellConsistencyAlarm'}>
@@ -114,7 +114,7 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="电池单体一致性差报警"
             name="cellConsistencyAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'motorCanError'} id={'motorCanError'}>
@@ -122,7 +122,7 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="驱动电机CAN通讯故障"
             name="motorCanError"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'pbCanError'} id={'pbCanError'}>
@@ -130,7 +130,7 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="动力蓄电池CAN通讯故障"
             name="pbCanError"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'hvInterlockingAlarm'} id={'hvInterlockingAlarm'}>
@@ -138,7 +138,7 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="高压互锁状态报警"
             name="hvInterlockingAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'brakeSystemAlarm'} id={'brakeSystemAlarm'}>
@@ -146,7 +146,7 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="制动系统报警"
             name="brakeSystemAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'dcDcStateAlarm'} id={'dcDcStateAlarm'}>
@@ -154,7 +154,7 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="DC-DC状态报警"
             name="dcDcStateAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'emControllerTempAlarm'} id={'emControllerTempAlarm'}>
@@ -162,7 +162,7 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="驱动电机控制器温度报警(℃)"
             name="emControllerTempAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'emTempAlarm'} id={'emTempAlarm'}>
@@ -170,7 +170,7 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="驱动电机温度报警(℃)"
             name="emTempAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'batteryTempAlarm'} id={'batteryTempAlarm'}>
@@ -178,23 +178,18 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="电池高温报警(℃)"
             name="batteryTempAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'socJumpAlarm'} id={'socJumpAlarm'}>
-          <FlexFormItem
-            formMode={props.mode}
-            label="SOC跳变报警"
-            name="socJumpAlarm"
-            rules={[{ required: true }]}
-          />
+          <FlexFormItem formMode={props.mode} label="SOC跳变报警" name="socJumpAlarm" rules={[]} />
         </Col>
         <Col span={12} key={'vehicleCanError'} id={'vehicleCanError'}>
           <FlexFormItem
             formMode={props.mode}
             label="整车CAN通讯故障"
             name="vehicleCanError"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'highSocAlarm'} id={'highSocAlarm'}>
@@ -202,7 +197,7 @@ const genLvl2Alarm = props => {
             formMode={props.mode}
             label="SOC过高报警(%)"
             name="highSocAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
       </Row>
@@ -219,7 +214,7 @@ const genLvl1Alarm = props => {
             formMode={props.mode}
             label="充电连接故障"
             name="chargingConnectionError"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'vehicleChargingError'} id={'vehicleChargingError'}>
@@ -227,7 +222,7 @@ const genLvl1Alarm = props => {
             formMode={props.mode}
             label="整车充电故障"
             name="vehicleChargingError"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'excessiveDriveMotorSpeedAlarm'} id={'excessiveDriveMotorSpeedAlarm'}>
@@ -235,16 +230,11 @@ const genLvl1Alarm = props => {
             formMode={props.mode}
             label="驱动电机转速过高报警(r/min)"
             name="excessiveDriveMotorSpeedAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'lowSocAlarm'} id={'lowSocAlarm'}>
-          <FlexFormItem
-            formMode={props.mode}
-            label="SOC低报警(%)"
-            name="lowSocAlarm"
-            rules={[{ required: true }]}
-          />
+          <FlexFormItem formMode={props.mode} label="SOC低报警(%)" name="lowSocAlarm" rules={[]} />
         </Col>
 
         <Col span={12} key={'dcDcTempAlarm'} id={'dcDcTempAlarm'}>
@@ -252,7 +242,7 @@ const genLvl1Alarm = props => {
             formMode={props.mode}
             label="DC-DC温度报警(℃)"
             name="dcDcTempAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'chargingStatusFaultAlarm'} id={'chargingStatusFaultAlarm'}>
@@ -260,7 +250,7 @@ const genLvl1Alarm = props => {
             formMode={props.mode}
             label="充电状态故障报警"
             name="chargingStatusFaultAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col
@@ -272,7 +262,7 @@ const genLvl1Alarm = props => {
             formMode={props.mode}
             label="充电通讯故障报警"
             name="chargingCommunicationErrorAlarm"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
       </Row>

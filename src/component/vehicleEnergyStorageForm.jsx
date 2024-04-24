@@ -14,7 +14,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置生产企业"
             name="producer"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'warrantyPeriodOfVehicle'} id={'warrantyPeriodOfVehicle'}>
@@ -22,7 +22,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置质保期(年/万千米)"
             name="warrantyPeriodOfVehicle"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'devicePackCount'} id={'devicePackCount'}>
@@ -30,7 +30,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置个数"
             name="devicePackCount"
-            rules={[integerValidator(), { required: true }]}
+            rules={[integerValidator()]}
           />
         </Col>
 
@@ -39,7 +39,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能模组个数"
             name="modulesCount"
-            rules={[integerValidator(), { required: true }]}
+            rules={[integerValidator()]}
           />
         </Col>
 
@@ -48,7 +48,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能单体个数"
             name="cellCount"
-            rules={[integerValidator(), { required: true }]}
+            rules={[integerValidator()]}
           />
         </Col>
         <Col span={12} key={'connectionMethodPack'} id={'connectionMethodPack'}>
@@ -56,7 +56,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置连接方式(_箱总共_并_串)"
             name="connectionMethodPack"
-            rules={[integerValidator(), { required: true }]}
+            rules={[integerValidator()]}
           />
         </Col>
         <Col span={12} key={'probeCount'} id={'probeCount'}>
@@ -64,7 +64,7 @@ const subForm = props => {
             formMode={props.mode}
             label="探针个数"
             name="probeCount"
-            rules={[integerValidator(), { required: true }]}
+            rules={[integerValidator()]}
           />
         </Col>
 
@@ -73,7 +73,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置类型"
             name="type"
-            rules={[{ required: true }]}
+            rules={[]}
             options={props.selectInfo?.vehicleEnergyStorageDeviceType || []}
           />
         </Col>
@@ -82,7 +82,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置总成型号"
             name="assemblyModel"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
 
@@ -91,7 +91,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置总成标称容量(Ah)"
             name="assemblyCapacity"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}
           />
         </Col>
         <Col span={12} key={'ratedTotalEnergy'} id={'ratedTotalEnergy'}>
@@ -99,7 +99,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置额定总能量(kWh)"
             name="ratedTotalEnergy"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}
           />
         </Col>
         <Col span={12} key={'ratedVoltage'} id={'ratedVoltage'}>
@@ -107,7 +107,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置额定电压(V)"
             name="ratedVoltage"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
           />
         </Col>
         <Col span={12} key={'assemblyOutputCurrent'} id={'assemblyOutputCurrent'}>
@@ -115,7 +115,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置总成额定输出电流(A)"
             name="assemblyOutputCurrent"
-            rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
           />
         </Col>
         <Col span={12} key={'coolingMethod'} id={'coolingMethod'}>
@@ -123,7 +123,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置冷却方式"
             name="coolingMethod"
-            rules={[{ required: true }]}
+            rules={[]}
             options={props.selectInfo?.vehicleEnergyStorageDeviceCoolingMethod || []}
           />
         </Col>
@@ -132,7 +132,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置总成质量(KG)"
             name="assemblyMass"
-            rules={[digitValidator(3), numberLimitValidator(0, 1000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
           />
         </Col>
 
@@ -141,7 +141,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置加热方式"
             name="heatingMethod"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'batteryCellProducer'} id={'batteryCellProducer'}>
@@ -149,7 +149,7 @@ const subForm = props => {
             formMode={props.mode}
             label="动力电池单体生产企业"
             name="batteryCellProducer"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
 
@@ -158,7 +158,7 @@ const subForm = props => {
             formMode={props.mode}
             label="动力电池单体容量(Ah)"
             name="batteryCellCapacity"
-            rules={[digitValidator(3), { required: true }]}
+            rules={[digitValidator(3)]}
           />
         </Col>
         <Col span={12} key={'cellNominalVoltage'} id={'cellNominalVoltage'}>
@@ -166,7 +166,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置单体标称电压(V)"
             name="cellNominalVoltage"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
           />
         </Col>
         <Col span={12} key={'cellModel'} id={'cellModel'}>
@@ -174,7 +174,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置单体型号"
             name="cellModel"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'cellShape'} id={'cellShape'}>
@@ -182,7 +182,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置单体外形"
             name="cellShape"
-            rules={[{ required: true }]}
+            rules={[]}
             placeholder={'可填写多个尺寸，例：10×20×30,40×50×60（英文逗号隔开）'}
           />
         </Col>
@@ -191,7 +191,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置单体外形尺寸(mm)"
             name="cellShapeDimensions)"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'systemEnergyDensity'} id={'systemEnergyDensity'}>
@@ -199,7 +199,7 @@ const subForm = props => {
             formMode={props.mode}
             label="车载储能装置系统能量密度(Wh/kg)"
             name="systemEnergyDensity"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
           />
         </Col>
       </Row>

@@ -10,19 +10,14 @@ const subForm = props => {
     <Form layout="vertical" ref={props.ref}>
       <Row gutter={24}>
         <Col span={12} key={'producer'} id={'producer'}>
-          <FlexFormItem
-            formMode={props.mode}
-            label="驱动电机生产企业"
-            name="producer"
-            rules={[{ required: true }]}
-          />
+          <FlexFormItem formMode={props.mode} label="驱动电机生产企业" name="producer" rules={[]} />
         </Col>
         <Col span={12} key={'type'} id={'type'}>
           <FlexFormItem
             formMode={props.mode}
             label="驱动电机类型"
             name="type"
-            rules={[{ required: true }]}
+            rules={[]}
             options={props.selectInfo?.driverMotorType}
           />
         </Col>
@@ -31,7 +26,7 @@ const subForm = props => {
             formMode={props.mode}
             label="驱动电机冷却方式"
             name="coolingMethod"
-            rules={[{ required: true }]}
+            rules={[]}
             options={props.selectInfo?.vehicleEnergyStorageDeviceCoolingMethod}
           />
         </Col>
@@ -40,7 +35,7 @@ const subForm = props => {
             formMode={props.mode}
             label="驱动电机额定电压(V)"
             name="ratedVoltage"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
           />
         </Col>
 
@@ -49,7 +44,7 @@ const subForm = props => {
             formMode={props.mode}
             label="驱动电机额定功率(KW)"
             name="ratedPower"
-            rules={[digitValidator(3), numberLimitValidator(0, 10000000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 10000000)]}
           />
         </Col>
         <Col span={12} key={'ratedSpeed'} id={'ratedSpeed'}>
@@ -57,7 +52,7 @@ const subForm = props => {
             formMode={props.mode}
             label="驱动电机额定转速(r/min)"
             name="ratedSpeed"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}
           />
         </Col>
 
@@ -66,16 +61,11 @@ const subForm = props => {
             formMode={props.mode}
             label="驱动电机额定转距(N.m)"
             name="ratedTorque"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}
           />
         </Col>
         <Col span={12} key={'model'} id={'model'}>
-          <FlexFormItem
-            formMode={props.mode}
-            label="驱动电机型号"
-            name="model"
-            rules={[{ required: true }]}
-          />
+          <FlexFormItem formMode={props.mode} label="驱动电机型号" name="model" rules={[]} />
         </Col>
 
         <Col span={12} key={'controllerProducer'} id={'controllerProducer'}>
@@ -83,7 +73,7 @@ const subForm = props => {
             formMode={props.mode}
             label="驱动电机控制器生产企业"
             name="controllerProducer"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'controllerModel'} id={'controllerModel'}>
@@ -91,7 +81,7 @@ const subForm = props => {
             formMode={props.mode}
             label="驱动电机控制器型号"
             name="controllerModel"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'layoutTypePosition'} id={'layoutTypePosition'}>
@@ -100,7 +90,7 @@ const subForm = props => {
             label="驱动电机布置型式/位置"
             name="layoutTypePosition"
             placeholder="如：横置/后置"
-            rules={[{ required: true }]}
+            rules={[]}
           />
         </Col>
         <Col span={12} key={'maxOperatingCurrent'} id={'maxOperatingCurrent'}>
@@ -108,7 +98,7 @@ const subForm = props => {
             formMode={props.mode}
             label="驱动电机最大工作电流(A)"
             name="maxOperatingCurrent"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
           />
         </Col>
         <Col span={12} key={'peakPower'} id={'peakPower'}>
@@ -116,7 +106,7 @@ const subForm = props => {
             formMode={props.mode}
             label="驱动电机峰值功率(KW)"
             name="peakPower"
-            rules={[digitValidator(3), numberLimitValidator(0, 10000000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 10000000)]}
           />
         </Col>
         <Col span={12} key={'maxSpeed'} id={'maxSpeed'}>
@@ -124,7 +114,7 @@ const subForm = props => {
             formMode={props.mode}
             label="驱动电机最高转速(r/min)"
             name="maxSpeed"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}
           />
         </Col>
 
@@ -133,7 +123,7 @@ const subForm = props => {
             formMode={props.mode}
             label="驱动电机峰值转矩(N.m)"
             name="peakTorque"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}
           />
         </Col>
         <Col span={12} key={'maxOutputTorque'} id={'maxOutputTorque'}>
@@ -141,7 +131,7 @@ const subForm = props => {
             formMode={props.mode}
             label="驱动电机最大输出转矩(N.m)"
             name="maxOutputTorque"
-            rules={[digitValidator(3), numberLimitValidator(0, 100000000), { required: true }]}
+            rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}
           />
         </Col>
       </Row>

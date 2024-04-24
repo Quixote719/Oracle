@@ -13,7 +13,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="突发事故处置措施"
               name="emergencyHandlingMeasure"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col
@@ -25,7 +25,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="三级报警处置措施"
               name="levelThreeAlarmDisposalMeasure"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'levelTwoAlarmDisposalMeasure'} id={'levelTwoAlarmDisposalMeasure'}>
@@ -33,7 +33,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="二级报警处置措施"
               name="levelTwoAlarmDisposalMeasure"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'levelOneAlarmDisposalMeasure'} id={'levelOneAlarmDisposalMeasure'}>
@@ -41,7 +41,7 @@ const VehicleForm = props => {
               formMode={props.mode}
               label="一级报警处置措施"
               name="levelOneAlarmDisposalMeasure"
-              rules={[{ required: true }]}
+              rules={[]}
             />
           </Col>
         </Row>
