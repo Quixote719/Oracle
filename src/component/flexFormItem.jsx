@@ -20,7 +20,12 @@ const FlexFormItem = props => {
   };
 
   return props.formMode === 'edit' ? (
-    <Form.Item label={props.label} name={props.name} rules={props.rules} style={{ width: '70%' }}>
+    <Form.Item
+      label={props.label}
+      name={props.name}
+      rules={props.rules}
+      style={{ width: '75%', ...props.itemStyle }}
+    >
       {genFormItem()}
     </Form.Item>
   ) : (
@@ -40,7 +45,8 @@ FlexFormItem.propTypes = {
   options: PropTypes.array,
   selectMode: PropTypes.string,
   placeholder: PropTypes.string,
-  isDatePicker: PropTypes.bool
+  isDatePicker: PropTypes.bool,
+  itemStyle: PropTypes.object
 };
 
 export default FlexFormItem;
