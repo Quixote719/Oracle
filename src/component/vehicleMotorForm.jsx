@@ -3,11 +3,16 @@ import { Row, Col, Form, Collapse, Button, Modal } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
 import styles from './compStyle.module.less';
 import { numberLimitValidator, digitValidator } from '@/utils/validator';
+import { addOtherOption, checkOtherOption } from '@/utils/compMethods';
 import PropTypes from 'prop-types';
 
-const subForm = props => {
+const SubForm = React.forwardRef((props, ref) => {
+  const [typeOther, setTypeOther] = useState(false);
+  const [coolingMethodOther, setCoolingMethodOther] = useState(false);
+  const { selectInfo = {} } = props;
+
   return (
-    <Form layout="vertical" ref={props.ref}>
+    <Form layout="vertical" ref={ref}>
       <Row gutter={24}>
         <Col span={12} key={'producer'} id={'producer'}>
           <FlexFormItem formMode={props.mode} label="驱动电机生产企业" name="producer" rules={[]} />
@@ -18,7 +23,17 @@ const subForm = props => {
             label="驱动电机类型"
             name="type"
             rules={[]}
-            options={props.selectInfo?.driverMotorType}
+            options={addOtherOption(selectInfo.driverMotorType)}
+            onChange={param => checkOtherOption(setTypeOther, param, selectInfo.driverMotorType)}
+          />
+        </Col>
+        <Col span={12} key={'typeValue'} id={'typeValue'}>
+          <FlexFormItem
+            formMode={props.mode}
+            label="驱动电机类型自定义输入"
+            name="typeValue"
+            rules={[]}
+            disabled={!typeOther}
           />
         </Col>
         <Col span={12} key={'coolingMethod'} id={'coolingMethod'}>
@@ -27,7 +42,23 @@ const subForm = props => {
             label="驱动电机冷却方式"
             name="coolingMethod"
             rules={[]}
-            options={props.selectInfo?.vehicleEnergyStorageDeviceCoolingMethod}
+            options={addOtherOption(selectInfo.vehicleEnergyStorageDeviceCoolingMethod)}
+            onChange={param =>
+              checkOtherOption(
+                setCoolingMethodOther,
+                param,
+                selectInfo.vehicleEnergyStorageDeviceCoolingMethod
+              )
+            }
+          />
+        </Col>
+        <Col span={12} key={'coolingMethodValue'} id={'coolingMethodValue'}>
+          <FlexFormItem
+            formMode={props.mode}
+            label="驱动电机冷却方式自定义输入"
+            name="coolingMethodValue"
+            rules={[]}
+            disabled={!coolingMethodOther}
           />
         </Col>
         <Col span={12} key={'ratedVoltage'} id={'ratedVoltage'}>
@@ -137,7 +168,7 @@ const subForm = props => {
       </Row>
     </Form>
   );
-};
+});
 const VehicleForm = props => {
   const [subFormList, setSubFormList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -158,7 +189,7 @@ const VehicleForm = props => {
         key: `VehicleMotor1${curIndex}`,
         label: <div>{`驱动电机${curIndex}`}</div>,
         style: { padding: 5 },
-        children: subForm({ mode: props.mode, ref: refArr[0], selectInfo: props.selectInfo })
+        children: <SubForm mode={props.mode} ref={refArr[0]} selectInfo={props.selectInfo} />
       }
     ];
     listCopy.current = initSubForm;
@@ -183,14 +214,13 @@ const VehicleForm = props => {
           </div>
         ),
         style: { padding: 5 },
-        children: subForm({
-          mode: props.mode,
-          ref: refArr[subFormLen],
-          selectInfo: props.selectInfo
-        })
+        children: (
+          <SubForm mode={props.mode} ref={refArr[subFormLen]} selectInfo={props.selectInfo} />
+        )
       };
-      listCopy.current = [...subFormList, newSubForm];
-      setSubFormList([...subFormList, newSubForm]);
+      const updatedList = [...subFormList, newSubForm];
+      listCopy.current = updatedList;
+      setSubFormList(updatedList);
       maxIndex.current++;
     }
   };
@@ -212,6 +242,7 @@ const VehicleForm = props => {
       }
     });
     listCopy.current = res;
+    maxIndex.current = Number(res[res.length - 1].key.replace('VehicleMotor', '')) + 1;
     setSubFormList(res);
     setIsModalOpen(false);
   };
@@ -229,7 +260,6 @@ const VehicleForm = props => {
             <div>{props?.formData?.vehicleChargerNum}</div>
           </div>
         )}
-        {/* <Input style={{ width: '35%' }}></Input> */}
       </div>
       <Collapse items={subFormList} />
       <Button
@@ -256,6 +286,11 @@ const VehicleForm = props => {
       </Modal>
     </div>
   );
+};
+
+SubForm.propTypes = {
+  selectInfo: PropTypes.object,
+  mode: PropTypes.string
 };
 
 VehicleForm.propTypes = {
