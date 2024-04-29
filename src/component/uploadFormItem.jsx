@@ -1,22 +1,20 @@
 import React from 'react';
-import { Form, Input, Select, DatePicker } from 'antd';
+import { Form, Upload, Button } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import styles from './compStyle.module.less';
 
 const FlexFormItem = props => {
-  const genFormItem = () => {
-    return Array.isArray(props.options) ? (
-      <Select className={styles.formItem} mode={props.selectMode} {...props} />
-    ) : props.isDatePicker ? (
-      <DatePicker
-        className={styles.formItem}
-        style={{ width: '100%' }}
-        format="YYYY-MM-DD"
-        {...props}
-      />
-    ) : (
-      <Input className={styles.formItem} {...props} />
-    );
+  const uploadProps = {
+    beforeUpload: () => {
+      return false;
+    },
+    onChange: info => {
+      if (info.fileList.length > 1) {
+        info.fileList.splice(0);
+        info.fileList.push(info.file);
+      }
+    }
   };
 
   return props.formMode === 'edit' ? (
@@ -26,7 +24,9 @@ const FlexFormItem = props => {
       rules={props.rules}
       style={{ width: '75%', ...props.itemStyle }}
     >
-      {genFormItem()}
+      <Upload {...uploadProps}>
+        <Button icon={<UploadOutlined />}>点击上传</Button>
+      </Upload>
     </Form.Item>
   ) : (
     <div className={styles.itemInfo}>
@@ -42,10 +42,6 @@ FlexFormItem.propTypes = {
   name: PropTypes.string,
   rules: PropTypes.array,
   text: PropTypes.string,
-  options: PropTypes.array,
-  selectMode: PropTypes.string,
-  placeholder: PropTypes.string,
-  isDatePicker: PropTypes.bool,
   itemStyle: PropTypes.object
 };
 

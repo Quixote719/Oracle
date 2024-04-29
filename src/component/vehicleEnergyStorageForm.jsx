@@ -3,11 +3,16 @@ import { Row, Col, Form, Collapse, Button, Modal } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
 import styles from './compStyle.module.less';
 import { digitValidator, numberLimitValidator, integerValidator } from '@/utils/validator';
+import { addOtherOption, checkOtherOption } from '@/utils/compMethods';
 import PropTypes from 'prop-types';
 
-const subForm = props => {
+const SubForm = React.forwardRef((props, ref) => {
+  const [typeOther, setTypeOther] = useState(false);
+  const [coolingMethodOther, setCoolingMethodOther] = useState(false);
+  const { selectInfo = {} } = props;
+
   return (
-    <Form layout="vertical" ref={props.ref}>
+    <Form layout="vertical" ref={ref}>
       <Row gutter={24}>
         <Col span={12} key={'producer'} id={'producer'}>
           <FlexFormItem
@@ -25,38 +30,65 @@ const subForm = props => {
             rules={[]}
           />
         </Col>
-        <Col span={12} key={'devicePackCount'} id={'devicePackCount'}>
+        <Col span={3} key={'devicePackCount'} id={'devicePackCount'}>
           <FlexFormItem
+            itemStyle={{ width: '100%' }}
             formMode={props.mode}
-            label="车载储能装置个数"
+            label="车载储能"
             name="devicePackCount"
             rules={[integerValidator()]}
+            addonAfter={'装置'}
           />
         </Col>
-
-        <Col span={12} key={'modulesCount'} id={'modulesCount'}>
+        <Col span={3} key={'modulesCount'} id={'modulesCount'}>
           <FlexFormItem
+            itemStyle={{ width: '100%' }}
             formMode={props.mode}
-            label="车载储能模组个数"
+            label=" "
             name="modulesCount"
             rules={[integerValidator()]}
+            addonAfter={'模组'}
           />
         </Col>
-
-        <Col span={12} key={'cellCount'} id={'cellCount'}>
+        <Col span={3} key={'cellCount'} id={'cellCount'}>
           <FlexFormItem
+            itemStyle={{ width: '100%' }}
             formMode={props.mode}
-            label="车载储能单体个数"
+            label=" "
             name="cellCount"
             rules={[integerValidator()]}
+            addonAfter={'单体'}
           />
         </Col>
-        <Col span={12} key={'connectionMethodPack'} id={'connectionMethodPack'}>
+        <Col span={3}></Col>
+        <Col span={3} key={'connectionMethodPack'} id={'connectionMethodPack'}>
           <FlexFormItem
+            itemStyle={{ width: '100%' }}
             formMode={props.mode}
-            label="车载储能装置连接方式(_箱总共_并_串)"
+            label="车载储能装置连接方式"
             name="connectionMethodPack"
             rules={[integerValidator()]}
+            addonAfter={'箱'}
+          />
+        </Col>
+        <Col span={3} key={'parallel'} id={'parallel'}>
+          <FlexFormItem
+            itemStyle={{ width: '100%' }}
+            formMode={props.mode}
+            label=" "
+            name="parallel"
+            rules={[integerValidator()]}
+            addonAfter={'并'}
+          />
+        </Col>
+        <Col span={3} key={'string'} id={'string'}>
+          <FlexFormItem
+            itemStyle={{ width: '100%' }}
+            formMode={props.mode}
+            label=" "
+            name="string"
+            rules={[integerValidator()]}
+            addonAfter={'串'}
           />
         </Col>
         <Col span={12} key={'probeCount'} id={'probeCount'}>
@@ -67,14 +99,23 @@ const subForm = props => {
             rules={[integerValidator()]}
           />
         </Col>
-
         <Col span={12} key={'type'} id={'type'}>
           <FlexFormItem
             formMode={props.mode}
             label="车载储能装置类型"
             name="type"
             rules={[]}
-            options={props.selectInfo?.vehicleEnergyStorageDeviceType || []}
+            options={addOtherOption(selectInfo.driverMotorType)}
+            onChange={param => checkOtherOption(setTypeOther, param, selectInfo.driverMotorType)}
+          />
+        </Col>
+        <Col span={12} key={'typeValue'} id={'typeValue'}>
+          <FlexFormItem
+            formMode={props.mode}
+            label="车载储能装置类型自定义输入"
+            name="typeValue"
+            rules={[]}
+            disabled={!typeOther}
           />
         </Col>
         <Col span={12} key={'assemblyModel'} id={'assemblyModel'}>
@@ -85,7 +126,6 @@ const subForm = props => {
             rules={[]}
           />
         </Col>
-
         <Col span={12} key={'assemblyCapacity'} id={'assemblyCapacity'}>
           <FlexFormItem
             formMode={props.mode}
@@ -124,7 +164,23 @@ const subForm = props => {
             label="车载储能装置冷却方式"
             name="coolingMethod"
             rules={[]}
-            options={props.selectInfo?.vehicleEnergyStorageDeviceCoolingMethod || []}
+            options={addOtherOption(selectInfo.vehicleEnergyStorageDeviceCoolingMethod)}
+            onChange={param =>
+              checkOtherOption(
+                setCoolingMethodOther,
+                param,
+                selectInfo.vehicleEnergyStorageDeviceCoolingMethod
+              )
+            }
+          />
+        </Col>
+        <Col span={12} key={'coolingMethodValue'} id={'coolingMethodValue'}>
+          <FlexFormItem
+            formMode={props.mode}
+            label="车载储能装置冷却方式自定义输入"
+            name="coolingMethodValue"
+            rules={[]}
+            disabled={!coolingMethodOther}
           />
         </Col>
         <Col span={12} key={'assemblyMass'} id={'assemblyMass'}>
@@ -135,7 +191,6 @@ const subForm = props => {
             rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
           />
         </Col>
-
         <Col span={12} key={'heatingMethod'} id={'heatingMethod'}>
           <FlexFormItem
             formMode={props.mode}
@@ -205,7 +260,7 @@ const subForm = props => {
       </Row>
     </Form>
   );
-};
+});
 
 const VehicleForm = props => {
   const [subFormList, setSubFormList] = useState([]);
@@ -227,7 +282,7 @@ const VehicleForm = props => {
         key: `VehicleEnergyStorage${curIndex}`,
         label: <div>{`车载储能装置${curIndex}`}</div>,
         style: { padding: 5 },
-        children: subForm({ mode: props.mode, ref: refArr[0], selectInfo: props.selectInfo })
+        children: <SubForm mode={props.mode} ref={refArr[0]} selectInfo={props.selectInfo} />
       }
     ];
     listCopy.current = initSubForm;
@@ -252,14 +307,13 @@ const VehicleForm = props => {
           </div>
         ),
         style: { padding: 5 },
-        children: subForm({
-          mode: props.mode,
-          ref: refArr[subFormLen],
-          selectInfo: props.selectInfo
-        })
+        children: (
+          <SubForm mode={props.mode} ref={refArr[subFormLen]} selectInfo={props.selectInfo} />
+        )
       };
-      listCopy.current = [...subFormList, newSubForm];
-      setSubFormList([...subFormList, newSubForm]);
+      const updatedList = [...subFormList, newSubForm];
+      listCopy.current = updatedList;
+      setSubFormList(updatedList);
       maxIndex.current++;
     }
   };
@@ -281,6 +335,7 @@ const VehicleForm = props => {
       }
     });
     listCopy.current = res;
+    maxIndex.current = Number(res[res.length - 1].key.replace('VehicleEnergyStorage', '')) + 1;
     setSubFormList(res);
     setIsModalOpen(false);
   };
@@ -325,6 +380,11 @@ const VehicleForm = props => {
       </Modal>
     </div>
   );
+};
+
+SubForm.propTypes = {
+  selectInfo: PropTypes.object,
+  mode: PropTypes.string
 };
 
 VehicleForm.propTypes = {

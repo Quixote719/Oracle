@@ -1,24 +1,34 @@
-import React from 'react';
-import { Row, Col, Form } from 'antd';
+import React, { useState } from 'react';
+import { Row, Col, Form, Checkbox } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
 import { digitValidator, numberLimitValidator, integerValidator } from '@/utils/validator';
 import { yesOrNo } from '@/constant/vehicleModel';
+import { addOtherOption, checkOtherOption } from '@/utils/compMethods';
 import PropTypes from 'prop-types';
 
 const VehicleForm = props => {
+  const [vehicleRegistrationBrandOther, setVehicleRegistrationBrandOther] = useState(false);
+  const [productionMethodOther, setProductionMethodOther] = useState(false);
+  const [brandCategoryOther, setBrandCategoryOther] = useState(false);
+  const [vehicleTypeOther, setVehicleTypeOther] = useState(false);
+  const [passengerVehicleClassOther, setPassengerVehicleClassOther] = useState(false);
+  const [energyTypeOther, setEnergyTypeOther] = useState(false);
+  const CheckboxGroup = Checkbox.Group;
+  const { selectInfo = {} } = props;
+  const platformOptions = [
+    { label: '国家', value: '0' },
+    { label: '上海', value: '1' },
+    { label: '天津', value: '2' },
+    { label: '广州', value: '3' }
+  ];
   return (
     <div>
       <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
           <Col span={12} key={'reportPlatform'} id={'reportPlatform'}>
-            <FlexFormItem
-              formMode={props.mode}
-              label="上报平台"
-              name="reportPlatform"
-              rules={[]}
-              options={props.selectInfo?.governmentPlatform || []}
-              selectMode="multiple"
-            />
+            <Form.Item formMode={props.mode} label="上报平台" name="reportPlatform">
+              <CheckboxGroup options={selectInfo.governmentPlatform || platformOptions} />
+            </Form.Item>
           </Col>
           <Col span={12} key={'vehicleRegistrationBrand'} id={'vehicleRegistrationBrand'}>
             <FlexFormItem
@@ -26,7 +36,23 @@ const VehicleForm = props => {
               label="车辆登记品牌"
               name="vehicleRegistrationBrand"
               rules={[]}
-              options={props.selectInfo?.vehicleRegistrationBrand || []}
+              options={addOtherOption(selectInfo.vehicleRegistrationBrand)}
+              onChange={param =>
+                checkOtherOption(
+                  setVehicleRegistrationBrandOther,
+                  param,
+                  selectInfo.vehicleRegistrationBrand
+                )
+              }
+            />
+          </Col>
+          <Col span={12} key={'vehicleRegistrationBrandValue'} id={'vehicleRegistrationBrandValue'}>
+            <FlexFormItem
+              formMode={props.mode}
+              label="车辆登记品牌自定义输入"
+              name="vehicleRegistrationBrandValue"
+              rules={[]}
+              disabled={!vehicleRegistrationBrandOther}
             />
           </Col>
           <Col span={12} key={'producerFullName'} id={'producerFullName'}>
@@ -35,7 +61,7 @@ const VehicleForm = props => {
               label="生产企业全称"
               name="producerFullName"
               rules={[]}
-              options={props.selectInfo?.producerFullName || []}
+              options={selectInfo.producerFullName || []}
             />
           </Col>
           <Col span={12} key={'modelSalesName'} id={'modelSalesName'}>
@@ -98,7 +124,19 @@ const VehicleForm = props => {
               label="生产方式"
               name="productionMethod"
               rules={[]}
-              options={props.selectInfo?.productionMethod || []}
+              options={addOtherOption(selectInfo.productionMethod)}
+              onChange={param =>
+                checkOtherOption(setProductionMethodOther, param, selectInfo.productionMethod)
+              }
+            />
+          </Col>
+          <Col span={12} key={'productionMethodValue'} id={'productionMethodValue'}>
+            <FlexFormItem
+              formMode={props.mode}
+              label="生产方式自定义输入"
+              name="productionMethodValue"
+              rules={[]}
+              disabled={!productionMethodOther}
             />
           </Col>
           <Col span={12} key={'brandCategory'} id={'brandCategory'}>
@@ -107,7 +145,19 @@ const VehicleForm = props => {
               label="品牌系别"
               name="brandCategory"
               rules={[]}
-              options={props.selectInfo?.brandCategory || []}
+              options={addOtherOption(selectInfo.brandCategory)}
+              onChange={param =>
+                checkOtherOption(setBrandCategoryOther, param, selectInfo.brandCategory)
+              }
+            />
+          </Col>
+          <Col span={12} key={'brandCategoryValue'} id={'brandCategoryValue'}>
+            <FlexFormItem
+              formMode={props.mode}
+              label="品牌系别自定义输入"
+              name="brandCategoryValue"
+              rules={[]}
+              disabled={!brandCategoryOther}
             />
           </Col>
           <Col span={12} key={'registrationModel'} id={'registrationModel'}>
@@ -132,7 +182,19 @@ const VehicleForm = props => {
               label="车辆种类"
               name="vehicleType"
               rules={[]}
-              options={props.selectInfo?.vehicleType || []}
+              options={addOtherOption(selectInfo.vehicleType)}
+              onChange={param =>
+                checkOtherOption(setVehicleTypeOther, param, selectInfo.vehicleType)
+              }
+            />
+          </Col>
+          <Col span={12} key={'vehicleTypeValue'} id={'vehicleTypeValue'}>
+            <FlexFormItem
+              formMode={props.mode}
+              label="车辆种类自定义输入"
+              name="vehicleTypeValue"
+              rules={[]}
+              disabled={!vehicleTypeOther}
             />
           </Col>
           <Col span={12} key={'passengerVehicleClass'} id={'passengerVehicleClass'}>
@@ -141,18 +203,48 @@ const VehicleForm = props => {
               label="乘用车级别"
               name="passengerVehicleClass"
               rules={[]}
-              options={props.selectInfo?.passengerVehicleClass || []}
+              options={addOtherOption(selectInfo.passengerVehicleClass)}
+              onChange={param =>
+                checkOtherOption(
+                  setPassengerVehicleClassOther,
+                  param,
+                  selectInfo.passengerVehicleClass
+                )
+              }
             />
           </Col>
+
+          <Col span={12} key={'passengerVehicleClassValue'} id={'passengerVehicleClassValue'}>
+            <FlexFormItem
+              formMode={props.mode}
+              label="乘用车级别"
+              name="passengerVehicleClassValue"
+              rules={[]}
+              disabled={!passengerVehicleClassOther}
+            />
+          </Col>
+
           <Col span={12} key={'energyType'} id={'energyType'}>
             <FlexFormItem
               formMode={props.mode}
               label="能源类型"
               name="energyType"
               rules={[]}
-              options={props.selectInfo?.energyType || []}
+              options={addOtherOption(selectInfo.energyType)}
+              onChange={param => checkOtherOption(setEnergyTypeOther, param, selectInfo.energyType)}
             />
           </Col>
+
+          <Col span={12} key={'energyTypeValue'} id={'energyTypeValue'}>
+            <FlexFormItem
+              formMode={props.mode}
+              label="能源类型自定义输入"
+              name="energyTypeValue"
+              rules={[]}
+              disabled={!energyTypeOther}
+            />
+          </Col>
+
           <Col span={12} key={'pureElectricRange'} id={'pureElectricRange'}>
             <FlexFormItem
               formMode={props.mode}

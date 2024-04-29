@@ -8,7 +8,6 @@ const useMount = () => {
       mountRef.current = false;
     };
   }, []);
-  console.log('useMount', mountRef.current);
   return () => mountRef.current;
 };
 

@@ -176,8 +176,9 @@ const VehicleForm = props => {
         style: { padding: 5 },
         children: subForm({ mode: props.mode, ref: refArr[subFormLen] })
       };
-      listCopy.current = [...subFormList, newSubForm];
-      setSubFormList([...subFormList, newSubForm]);
+      const updatedList = [...subFormList, newSubForm];
+      listCopy.current = updatedList;
+      setSubFormList(updatedList);
       maxIndex.current++;
     }
   };
@@ -199,6 +200,7 @@ const VehicleForm = props => {
       }
     });
     listCopy.current = res;
+    maxIndex.current = Number(res[res.length - 1].key.replace('VehicleCharger', '')) + 1;
     setSubFormList(res);
     setIsModalOpen(false);
   };

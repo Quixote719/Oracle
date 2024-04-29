@@ -3,6 +3,8 @@ const yesOrNo = [
   { value: '0', label: '否' }
 ];
 
+const other = [{ value: 'Others', label: '其他' }];
+
 const vehicleModelColumns = [
   {
     title: '序号',
@@ -28,7 +30,27 @@ const vehicleModelColumns = [
     title: '车型销售名称',
     dataIndex: 'modelSalesName',
     key: 'modelSalesName'
+  },
+  {
+    title: '能源类型',
+    dataIndex: 'energyType',
+    key: 'energyType'
+  },
+  {
+    title: '规约',
+    dataIndex: 'specifications',
+    key: 'specifications'
+  },
+  {
+    title: '上报平台',
+    dataIndex: 'modelSalesName',
+    key: 'modelSalesName'
+  },
+  {
+    title: '操作',
+    dataIndex: 'operations',
+    key: 'operations'
   }
 ];
 
-export { yesOrNo, vehicleModelColumns };
+export { yesOrNo, other, vehicleModelColumns };

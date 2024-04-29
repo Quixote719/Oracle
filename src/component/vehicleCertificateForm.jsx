@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Row, Col, Form } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
+import UploadFormItem from '@/component/uploadFormItem';
 import { yesOrNo } from '@/constant/vehicleModel';
+import { addOtherOption, checkOtherOption } from '@/utils/compMethods';
 import PropTypes from 'prop-types';
 
 const VehicleForm = props => {
+  const [specifictionOther, setSpecificationOther] = useState(false);
+  const { selectInfo = {} } = props;
+
   return (
     <div>
       <Form layout="vertical" form={props.form}>
@@ -77,11 +82,16 @@ const VehicleForm = props => {
             />
           </Col>
           <Col span={12} key={'uploadComplianceTestingReport'} id={'uploadComplianceTestingReport'}>
-            <FlexFormItem
+            {/* <FlexFormItem
               formMode={props.mode}
               label="上传检测符合性报告"
               name="uploadComplianceTestingReport"
               rules={[]}
+            /> */}
+            <UploadFormItem
+              formMode={props.mode}
+              label="上传检测符合性报告"
+              name="uploadComplianceTestingReport"
             />
           </Col>
           <Col span={12} key={'vehicleConfigurationName'} id={'vehicleConfigurationName'}>
@@ -98,7 +108,18 @@ const VehicleForm = props => {
               label="规约"
               name="specifications"
               rules={[]}
-              options={[]}
+              options={addOtherOption(selectInfo.specifications)}
+              onChange={param =>
+                checkOtherOption(setSpecificationOther, param, selectInfo.specifications)
+              }
+            />
+          </Col>
+          <Col span={12} key={'specificationsValue'} id={'specificationsValue'}>
+            <FlexFormItem
+              formMode={props.mode}
+              label="规约自定义输入"
+              name="specificationsValue"
+              disabled={!specifictionOther}
             />
           </Col>
           <Col
@@ -106,19 +127,17 @@ const VehicleForm = props => {
             key={'importedVehicle3cCertificateNumber'}
             id={'importedVehicle3cCertificateNumber'}
           >
-            <FlexFormItem
+            <UploadFormItem
               formMode={props.mode}
               label="进口车3C证书号"
               name="importedVehicle3cCertificateNumber"
-              rules={[]}
             />
           </Col>
           <Col span={12} key={'recommendedModelCatalogBatch'} id={'recommendedModelCatalogBatch'}>
-            <FlexFormItem
+            <UploadFormItem
               formMode={props.mode}
               label="推荐车型目录批次"
               name="recommendedModelCatalogBatch"
-              rules={[]}
             />
           </Col>
           <Col
@@ -126,43 +145,38 @@ const VehicleForm = props => {
             key={'recommendedVehicleCatalogBatch'}
             id={'recommendedVehicleCatalogBatch'}
           >
-            <FlexFormItem
+            <UploadFormItem
               formMode={props.mode}
               label="推荐车型目录序号"
               name="recommendedVehicleCatalogBatch"
-              rules={[]}
             />
           </Col>
           <Col span={12} key={'roadMotorVehicleProducer'} id={'roadMotorVehicleProducer'}>
-            <FlexFormItem
+            <UploadFormItem
               formMode={props.mode}
               label="《道路机动车辆生产企业及产品公告》汽车产品技术参数页或机动车整车出厂合格证影印件"
               name="roadMotorVehicleProducer"
-              rules={[]}
             />
           </Col>
           <Col span={12} key={'nationalPlatformCertificate'} id={'nationalPlatformCertificate'}>
-            <FlexFormItem
+            <UploadFormItem
               formMode={props.mode}
               label="车型接入国家平台认证证书附件上传"
               name="nationalPlatformCertificate"
-              rules={[]}
             />
           </Col>
           <Col span={12} key={'modelTestReport'} id={'modelTestReport'}>
-            <FlexFormItem
+            <UploadFormItem
               formMode={props.mode}
               label="车型检测报告（佐证车型技术参数）附件上传"
               name="modelTestReport"
-              rules={[]}
             />
           </Col>
           <Col span={12} key={'modelChangeApplication'} id={'modelChangeApplication'}>
-            <FlexFormItem
+            <UploadFormItem
               formMode={props.mode}
               label="车型变更申请附件"
               name="modelChangeApplication"
-              rules={[]}
             />
           </Col>
           <Col span={12} key={'gbDataProtocolComparisonTable'} id={'gbDataProtocolComparisonTable'}>
@@ -204,6 +218,7 @@ const VehicleForm = props => {
 
 VehicleForm.propTypes = {
   form: PropTypes.object,
+  selectInfo: PropTypes.object,
   mode: PropTypes.string
 };
 
