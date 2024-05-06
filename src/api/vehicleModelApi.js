@@ -3,7 +3,7 @@ import { genApiPrefix } from '@/api/getApiPrefix';
 const prefix = genApiPrefix();
 
 const enumListUrl = `${prefix}/vehicle-service/dictionary/enumList`;
-const createVehicleModelUrl = `${prefix}/vehicle-service/VehicleModel`;
+const vehicleModelUrl = `${prefix}/vehicle-service/VehicleModel`;
 
 const getVehicleEnumList = () => {
   return fetch(enumListUrl).then(res => {
@@ -11,8 +11,14 @@ const getVehicleEnumList = () => {
   });
 };
 
+const getVehicleModelList = param => {
+  return fetch(vehicleModelUrl + param).then(res => {
+    return res.json();
+  });
+};
+
 const submitVehicleModel = param => {
-  return fetch(createVehicleModelUrl, {
+  return fetch(vehicleModelUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -23,4 +29,4 @@ const submitVehicleModel = param => {
   });
 };
 
-export { getVehicleEnumList, submitVehicleModel };
+export { getVehicleEnumList, getVehicleModelList, submitVehicleModel };
