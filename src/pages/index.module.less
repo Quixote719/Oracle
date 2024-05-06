@@ -38,7 +38,8 @@
   line-height: 300px;
 }
 
-.collapsePage {
+.collapsePage,
+.vehicleModelPage {
   width: calc(100vw - 340px);
   margin-left: 300px;
   margin-top: 30px;
@@ -73,12 +74,18 @@
   margin: auto;
 }
 
-.resetBtn {
+.resetBtn,
+.exportBtn {
   @platFormBtn();
   margin: 10px;
 }
 
-.searchBtn {
+.exportBtn {
+  float: right;
+}
+
+.searchBtn,
+.createBtn {
   @platFormBtn();
   @darkBtn();
   margin: 10px;
@@ -93,4 +100,5 @@
   margin: 0 5px;
   display: inline-block;
   color: #035ade;
+  cursor: pointer;
 }

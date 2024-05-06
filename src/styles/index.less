@@ -30,20 +30,16 @@ body {
 
 :global {
   .ant-collapse,
-  :where(.css-dev-only-do-not-override-djtmh8).ant-collapse
-    .ant-collapse-item:last-child
-    > .ant-collapse-content,
-  :where(.css-dev-only-do-not-override-djtmh8).ant-collapse > .ant-collapse-item:last-child,
-  :where(.css-dev-only-do-not-override-djtmh8).ant-collapse
-    > .ant-collapse-item:last-child
-    > .ant-collapse-header {
+  .ant-collapse .ant-collapse-item:last-child > .ant-collapse-content,
+  .ant-collapse > .ant-collapse-item:last-child,
+  .ant-collapse > .ant-collapse-item:last-child > .ant-collapse-header {
     border-radius: 0px;
   }
   .ant-collapse-item {
     background: #eae8e4;
   }
-  :where(.css-dev-only-do-not-override-djtmh8).ant-menu-light .ant-menu-item-selected,
-  :where(.css-dev-only-do-not-override-djtmh8).ant-menu-light > .ant-menu .ant-menu-item-selected {
+  .ant-menu-light .ant-menu-item-selected,
+  .ant-menu-light > .ant-menu .ant-menu-item-selected {
     color: #0c121c !important;
     background-color: #eae8e4 !important;
   }
@@ -51,22 +47,17 @@ body {
     color: #0c121c !important;
     background-color: #eae8e4 !important;
   }
-  :where(.css-dev-only-do-not-override-djtmh8).ant-form-item .ant-form-item-label > label {
+  .ant-form-item .ant-form-item-label > label {
     color: #767676;
   }
-  :where(.css-dev-only-do-not-override-djtmh8).ant-input-group-wrapper-outlined
-    .ant-input-group-addon:last-child {
+  .ant-input-group-wrapper-outlined .ant-input-group-addon:last-child {
     border: none;
     background: transparent;
   }
-  :where(.css-dev-only-do-not-override-djtmh8).ant-input-group > .ant-input:first-child,
-  :where(.css-dev-only-do-not-override-djtmh8).ant-input-group .ant-input-group-addon:first-child {
+  .ant-input-group > .ant-input:first-child,
+  .ant-input-group .ant-input-group-addon:first-child {
     border-radius: 6px;
   }
-  // :where(.css-dev-only-do-not-override-djtmh8).ant-checkbox-checked .ant-checkbox-inner {
-  //   background-color: #1B1A18;
-  //   border-color: #1B1A18;
-  // }
 
   .ant-checkbox-checked .ant-checkbox-inner {
     border-color: #1b1a18;

@@ -5,16 +5,18 @@ const yesOrNo = [
 
 const other = [{ value: 'Others', label: '其他' }];
 
+const pageSizeOpt = [5, 10, 20, 50];
+
 const vehicleModelColumns = [
   {
     title: '序号',
-    dataIndex: 'No',
-    key: 'No'
+    dataIndex: 'id',
+    key: 'id'
   },
   {
     title: '生产企业',
-    dataIndex: 'producer',
-    key: 'producer'
+    dataIndex: 'producerFullName',
+    key: 'producerFullName'
   },
   {
     title: '车辆备案品牌',
@@ -53,4 +55,4 @@ const vehicleModelColumns = [
   }
 ];
 
-export { yesOrNo, other, vehicleModelColumns };
+export { yesOrNo, other, vehicleModelColumns, pageSizeOpt };

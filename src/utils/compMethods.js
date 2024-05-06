@@ -1,5 +1,20 @@
 import { other } from '@/constant/vehicleModel';
 
+const parseVehicleModelSelectOptions = param => {
+  let options = param.data || [];
+  let selectDataByType = {};
+  options.forEach(item => {
+    item.label = item.itemCname;
+    item.value = item.itemCode;
+    if (selectDataByType[item.itemType]) {
+      selectDataByType[item.itemType].push(item);
+    } else {
+      selectDataByType[item.itemType] = [item];
+    }
+  });
+  return selectDataByType;
+};
+
 const addOtherOption = param => {
   if (!Array.isArray(param)) return [];
   let res = [...param];
@@ -17,4 +32,4 @@ const checkOtherOption = (setMethod, targetVal, options) => {
   return setMethod(check);
 };
 
-export { addOtherOption, checkOtherOption };
+export { parseVehicleModelSelectOptions, addOtherOption, checkOtherOption };

@@ -15,20 +15,18 @@ async function enableMocking() {
   }
 }
 
-class App extends React.PureComponent {
-  render() {
-    return (
-      <Router>
-        <Routes>
-          <Route path="/vehicleManagement" element={<RMSPortal />} />
-          <Route path="/vehicleModeList" element={<VehicleModelList />} />
-          <Route path="/vehicleModelManagement" element={<VehicleModelManagement />} />
-          <Route path="/" element={<VehicleModelManagement />} />
-        </Routes>
-      </Router>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/vehicleManagement" element={<RMSPortal />} />
+        <Route path="/vehicleModeList" element={<VehicleModelList />} />
+        <Route path="/vehicleModelManagement" element={<VehicleModelManagement />} />
+        <Route path="/" element={<VehicleModelList />} />
+      </Routes>
+    </Router>
+  );
+};
 
 const root = createRoot(document.getElementById('root'));
 

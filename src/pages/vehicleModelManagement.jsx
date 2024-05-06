@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Collapse, Button } from 'antd';
+import { Form, Collapse, Button, message } from 'antd';
 import Menu from '@/component/menu';
 import { useLocation } from 'react-router-dom';
 import VehicleBasicInfoForm from '@/component/vehicleBasicInfoForm';
@@ -15,6 +15,7 @@ import VehicleThresholdNSGForm from '@/component/vehicleThresholdNSGForm';
 import VehicleThresholdTJForm from '@/component/vehicleThresholdTJForm';
 import VehicleAlarmTJForm from '@/component/vehicleAlarmTJForm.jsx';
 import { getVehicleEnumList, submitVehicleModel } from '@/api/vehicleModelApi';
+import { parseVehicleModelSelectOptions } from '@/utils/compMethods';
 
 import styles from './index.module.less';
 /*
@@ -50,21 +51,6 @@ const Flow = () => {
       setFormState('edit');
     }
   }, []);
-
-  const parseVehicleModelSelectOptions = param => {
-    let options = param.data || [];
-    let selectDataByType = {};
-    options.forEach(item => {
-      item.label = item.itemCname;
-      item.value = item.itemCode;
-      if (selectDataByType[item.itemType]) {
-        selectDataByType[item.itemType].push(item);
-      } else {
-        selectDataByType[item.itemType] = [item];
-      }
-    });
-    return selectDataByType;
-  };
 
   const validateFields = () => {
     const normalForms = {
@@ -152,9 +138,13 @@ const Flow = () => {
   const onVehicleModelFinish = () => {
     const validateRes = validateFields();
     let res = parseVehicleModel(validateRes);
-    submitVehicleModel(res).then(data => {
-      console.log(data);
-    });
+    submitVehicleModel(res)
+      .then(() => {
+        message.success('保存成功');
+      })
+      .catch(err => {
+        message.error(`保存失败${err.toString()}`);
+      });
   };
 
   const formItems = [
@@ -221,26 +211,6 @@ const Flow = () => {
       children: <VehicleAlarmTJForm refInfo={vahTJform} mode={formState} />
     }
   ];
-
-  // useEffect(() => {
-  //   if (process.env.NODE_ENV === 'mock') {
-  //     fetch('./resource')
-  //       .then(res => {
-  //         return res.text();
-  //       })
-  //       .then(data => {
-  //         console.log('resource', data);
-  //       });
-
-  //     fetch('./auth', { method: 'POST' })
-  //       .then(res => {
-  //         return res.json();
-  //       })
-  //       .then(data => {
-  //         console.log('auth', data);
-  //       });
-  //   }
-  // }, []);
 
   const genCollapse = () => {
     return formItems.map((formCollapse, index) => (
