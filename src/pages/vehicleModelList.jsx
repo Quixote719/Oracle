@@ -23,51 +23,67 @@ const VehicleModelManagement = () => {
       setSelectInfo(parseVehicleModelSelectOptions(data));
     });
     let target = vehicleModelColumns.find(item => item.dataIndex === 'operations');
-    target.render = () => {
+    target.render = (_, record) => {
       return (
         <div>
-          <div className={styles.operationText}>查看</div>
+          <div className={styles.operationText} onClick={() => viewDetail(record)}>
+            查看
+          </div>
           <div className={styles.operationText}>流水</div>
         </div>
       );
     };
   }, []);
 
-  const searchVehicleModel = () => {
-    let formVals = fromRef.getFieldsValue();
-    let fieldValStr = '';
-    Object.keys(formVals).forEach(formKey => {
-      if (formVals[formKey] !== undefined) {
-        fieldValStr += `?${formKey}=${formVals[formKey]}`;
-      }
-    });
-    vehicleModelStore.fetchVMlist(fieldValStr);
+  const tableChange = (pagination, filters, sorter) => {
+    let queryUrl = '';
+    if (sorter?.order) {
+      queryUrl += `&orderBy=${sorter.columnKey}&ascending=${sorter.order === 'ascend' ? true : false}`;
+    }
+    if (pagination) {
+      queryUrl += `&page=${pagination?.current}`;
+    }
+    requestVehicleModelData(queryUrl);
   };
 
-  const exportRecord = () => {};
+  const exportRecord = param => {
+    console.log(3, param);
+  };
 
   const createNew = () => {
     navigate('/vehicleModelManagement');
+  };
+
+  const viewDetail = record => {
+    navigate('/vehicleModelManagement', { state: { vehicleModelId: record.id } });
   };
 
   const resetSearchCondition = () => {
     fromRef.resetFields();
   };
 
-  const onPageChange = param => {
+  const requestVehicleModelData = (basicUrl = '') => {
     let formVals = fromRef.getFieldsValue();
-    let fieldValStr = `?page=${param}`;
-    Object.keys(formVals).forEach(formKey => {
-      if (formVals[formKey] !== undefined) {
-        fieldValStr += `?${formKey}=${formVals[formKey]}`;
-      }
-    });
+    if (!(Object.keys(formVals).length === 0 && basicUrl === '')) {
+      Object.keys(formVals).forEach(formKey => {
+        if (formVals[formKey] !== undefined) {
+          basicUrl += `&${formKey}=${formVals[formKey]}`;
+        }
+      });
+    }
+    if (basicUrl.startsWith('&')) {
+      basicUrl = basicUrl.replace('&', '?');
+    } else if (!basicUrl.startsWith('?')) {
+      basicUrl = '?' + basicUrl;
+    }
+    vehicleModelStore.fetchVMlist(basicUrl);
+  };
 
-    vehicleModelStore.fetchVMlist(fieldValStr);
+  const searchVehicleModel = () => {
+    requestVehicleModelData();
   };
 
   const modelData = toJS(vehicleModelStore.vehicleModelList);
-  console.log('modelData', modelData, modelData.page, modelData.total);
   return (
     <div>
       <Menu />
@@ -124,9 +140,9 @@ const VehicleModelManagement = () => {
                   <FlexFormItem
                     label="上报平台"
                     formMode="edit"
-                    name="reportingPlatform"
+                    name="governmentPlatform"
                     itemStyle={{ width: '100%' }}
-                    options={selectInfo.vehicleRegistrationBrand || []}
+                    options={selectInfo.governmentPlatform || []}
                   />
                 </Col>
               </Row>
@@ -147,19 +163,19 @@ const VehicleModelManagement = () => {
           <Button className={styles.createBtn} onClick={createNew}>
             新增
           </Button>
-          <Button className={styles.exportBtn} onClick={exportRecord}>
+          <Button className={styles.exportBtn} onClick={param => exportRecord(param)}>
             导出
           </Button>
           <Table
             columns={vehicleModelColumns}
             dataSource={modelData.tableRows}
+            onChange={tableChange}
             pagination={{
               pageSizeOptions: pageSizeOpt,
               size: modelData.size,
               total: modelData.total,
               current: modelData.page,
-              position: ['bottomCenter'],
-              onChange: param => onPageChange(param)
+              position: ['bottomCenter']
             }}
           />
         </div>

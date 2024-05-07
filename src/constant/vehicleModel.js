@@ -16,17 +16,20 @@ const vehicleModelColumns = [
   {
     title: '生产企业',
     dataIndex: 'producerFullName',
-    key: 'producerFullName'
+    key: 'producerFullName',
+    sorter: true
   },
   {
     title: '车辆备案品牌',
-    dataIndex: 'vehicleBrand',
-    key: 'vehicleBrand'
+    dataIndex: 'vehicleRegistrationBrand',
+    key: 'vehicleRegistrationBrand',
+    sorter: true
   },
   {
     title: '车型登记型号',
     dataIndex: 'registrationModel',
-    key: 'registrationModel'
+    key: 'registrationModel',
+    sorter: true
   },
   {
     title: '车型销售名称',
