@@ -47,6 +47,7 @@ const Flow = () => {
     getVehicleEnumList().then(data => {
       setSelectInfo(parseVehicleModelSelectOptions(data));
     });
+    console.log('pagePath', pagePath);
     if (pagePath.pathname === '/vehicleModelManagement') {
       setFormState('edit');
     }
