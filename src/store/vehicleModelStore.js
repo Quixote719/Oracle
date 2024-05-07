@@ -16,6 +16,7 @@ class VehicleModelStore {
     if (Array.isArray(res?.rows)) {
       const tableRows = res.rows.map(item => {
         return {
+          key: item.id,
           id: item.id,
           producerFullName: item.producerFullName,
           vehicleBrand: item.vehicleBrand,
