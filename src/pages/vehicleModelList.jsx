@@ -15,6 +15,7 @@ import styles from '@/pages/index.module.less';
 const VehicleModelManagement = () => {
   const [fromRef] = Form.useForm();
   const [selectInfo, setSelectInfo] = useState({});
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const { vehicleModelStore } = useStore();
   const navigate = useNavigate();
 
@@ -46,8 +47,8 @@ const VehicleModelManagement = () => {
     requestVehicleModelData(queryUrl);
   };
 
-  const exportRecord = param => {
-    console.log(3, param);
+  const exportRecord = () => {
+    console.log('exportRecord', selectedRowKeys);
   };
 
   const createNew = () => {
@@ -83,7 +84,17 @@ const VehicleModelManagement = () => {
     requestVehicleModelData();
   };
 
+  const onSelectChange = selectedRowKeys => {
+    setSelectedRowKeys(selectedRowKeys);
+  };
+
   const modelData = toJS(vehicleModelStore.vehicleModelList);
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange
+  };
+
   return (
     <div>
       <Menu />
@@ -163,10 +174,11 @@ const VehicleModelManagement = () => {
           <Button className={styles.createBtn} onClick={createNew}>
             新增
           </Button>
-          <Button className={styles.exportBtn} onClick={param => exportRecord(param)}>
+          <Button className={styles.exportBtn} onClick={() => exportRecord()}>
             导出
           </Button>
           <Table
+            rowSelection={rowSelection}
             columns={vehicleModelColumns}
             dataSource={modelData.tableRows}
             onChange={tableChange}
