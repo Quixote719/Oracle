@@ -2,9 +2,10 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
-import RMSPortal from '@/pages/rmsPortal';
 import VehicleModelList from '@/pages/vehicleModelList';
 import VehicleModelManagement from '@/pages/vehicleModelManagement';
+import VehicleList from '@/pages/vehicleList';
+import DataCenter from '@/pages/dataCenter';
 import zhCN from 'antd/es/locale/zh_CN';
 import '@/styles/index.less';
 
@@ -19,9 +20,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/vehicleManagement" element={<RMSPortal />} />
-        <Route path="/vehicleModeList" element={<VehicleModelList />} />
+        <Route path="/vehicleModelList" element={<VehicleModelList />} />
         <Route path="/vehicleModelManagement" element={<VehicleModelManagement />} />
+        <Route path="/vehicleList" element={<VehicleList />} />
+        <Route path="/dataCenter" element={<DataCenter />} />
         <Route path="/" element={<VehicleModelList />} />
       </Routes>
     </Router>

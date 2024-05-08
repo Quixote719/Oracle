@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Form, Row, Col, Button } from 'antd';
+import Header from '@/component/header';
 import Menu from '@/component/menu';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
@@ -97,8 +98,9 @@ const VehicleModelManagement = () => {
 
   return (
     <div>
+      <Header />
       <Menu />
-      <div className={styles.vehicleModelPage}>
+      <div className={styles.menuPage}>
         <div className={styles.card}>
           <div className={styles.searchConditionBlock}>
             <Form form={fromRef} labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
@@ -170,7 +172,7 @@ const VehicleModelManagement = () => {
             </div>
           </div>
         </div>
-        <div className={styles.card}>
+        <div className={styles.card} style={{ padding: 20 }}>
           <Button className={styles.createBtn} onClick={createNew}>
             新增
           </Button>
