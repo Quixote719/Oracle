@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Collapse, Button, message } from 'antd';
+import Header from '@/component/header';
 import Menu from '@/component/menu';
 import { useLocation } from 'react-router-dom';
 import VehicleBasicInfoForm from '@/component/vehicleBasicInfoForm';
@@ -221,9 +222,9 @@ const Flow = () => {
 
   return (
     <div className={styles.flowPage}>
+      <Header />
       <Menu />
-      <div className={styles.collapsePage}>
-        {/* <Collapse items={[formItems[0]]} /> */}
+      <div className={styles.menuPage}>
         {genCollapse()}
         <Button className={styles.saveBtn} onClick={() => onVehicleModelFinish()}>
           保存
