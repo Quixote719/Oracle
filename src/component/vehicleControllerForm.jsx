@@ -10,7 +10,7 @@ const VehicleForm = props => {
         <Row gutter={24}>
           <Col span={12} key={'vehicleControllerProducer'} id={'vehicleControllerProducer'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="整车控制器生产企业"
               name="vehicleControllerProducer"
               rules={[]}
@@ -18,7 +18,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'vehicleControllerModel'} id={'vehicleControllerModel'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="整车控制器型号"
               name="vehicleControllerModel"
               rules={[]}

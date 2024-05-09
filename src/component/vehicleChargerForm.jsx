@@ -11,18 +11,18 @@ const subForm = props => {
       <Row gutter={24}>
         <Col span={12} key={'producer'} id={'producer'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载充电机生产企业"
             name="producer"
             rules={[]}
           />
         </Col>
         <Col span={12} key={'model'} id={'model'}>
-          <FlexFormItem formMode={props.mode} label="车载充电机型号" name="model" rules={[]} />
+          <FlexFormItem formformat={props.mode} label="车载充电机型号" name="model" rules={[]} />
         </Col>
         <Col span={12} key={'inputVoltage'} id={'inputVoltage'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载充电机额定输入电压(V)"
             name="inputVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
@@ -30,7 +30,7 @@ const subForm = props => {
         </Col>
         <Col span={12} key={'maxInputVoltage'} id={'maxInputVoltage'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载充电机额定输入最大电压(V)"
             name="maxInputVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
@@ -40,7 +40,7 @@ const subForm = props => {
 
         <Col span={12} key={'inputCurrent'} id={'inputCurrent'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载充电机额定输入电流(A)"
             name="inputCurrent"
             rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
@@ -48,7 +48,7 @@ const subForm = props => {
         </Col>
         <Col span={12} key={'maxInputCurrent'} id={'maxInputCurrent'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载充电机额定输入最大电流(A)"
             name="maxInputCurrent"
             rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
@@ -58,7 +58,7 @@ const subForm = props => {
 
         <Col span={12} key={'inputFrequency'} id={'inputFrequency'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载充电机额定输入频率(Hz)"
             name="inputFrequency"
             rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
@@ -66,7 +66,7 @@ const subForm = props => {
         </Col>
         <Col span={12} key={'maxInputFrequency'} id={'maxInputFrequency'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载充电机额定输入最大频率(Hz)"
             name="maxInputFrequency"
             rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
@@ -76,7 +76,7 @@ const subForm = props => {
 
         <Col span={12} key={'outputVoltage'} id={'outputVoltage'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载充电机输出电压(V)"
             name="outputVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
@@ -84,7 +84,7 @@ const subForm = props => {
         </Col>
         <Col span={12} key={'maxOutputVoltage'} id={'maxOutputVoltage'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载充电机输出最大电压(V)"
             name="maxOutputVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
@@ -93,7 +93,7 @@ const subForm = props => {
         </Col>
         <Col span={12} key={'outputCurrent'} id={'outputCurrent'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载充电机输出电流(A)"
             name="outputCurrent"
             rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
@@ -101,7 +101,7 @@ const subForm = props => {
         </Col>
         <Col span={12} key={'maxOutputCurrent'} id={'maxOutputCurrent'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载充电机输出最大电流(A)"
             name="maxOutputCurrent"
             rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
@@ -110,7 +110,7 @@ const subForm = props => {
         </Col>
         <Col span={12} key={'outputPower'} id={'outputPower'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载充电机输出功率(KW)"
             name="outputPower"
             rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
@@ -118,7 +118,7 @@ const subForm = props => {
         </Col>
         <Col span={12} key={'maxOutputPower'} id={'maxOutputPower'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载充电机输出最大功率(KW)"
             name="maxOutputPower"
             rules={[digitValidator(3), numberLimitValidator(0, 1000)]}

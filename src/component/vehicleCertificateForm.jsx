@@ -15,11 +15,11 @@ const VehicleForm = props => {
       <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
           <Col span={12} key={'batch'} id={'batch'}>
-            <FlexFormItem formMode={props.mode} label="公告批次" name="batch" rules={[]} />
+            <FlexFormItem formformat={props.mode} label="公告批次" name="batch" rules={[]} />
           </Col>
           <Col span={12} key={'releaseDate'} id={'releaseDate'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="发布日期"
               name="releaseDate"
               rules={[]}
@@ -27,11 +27,11 @@ const VehicleForm = props => {
             />
           </Col>
           <Col span={12} key={'englishBrand'} id={'englishBrand'}>
-            <FlexFormItem formMode={props.mode} label="英文品牌" name="englishBrand" rules={[]} />
+            <FlexFormItem formformat={props.mode} label="英文品牌" name="englishBrand" rules={[]} />
           </Col>
           <Col span={12} key={'exempt'} id={'exempt'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="是否免征"
               name="exempt"
               rules={[]}
@@ -40,7 +40,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'fuel'} id={'fuel'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="是否燃油"
               name="fuel"
               rules={[]}
@@ -49,7 +49,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'environmentallyFriendly'} id={'environmentallyFriendly'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="是否环保"
               name="environmentallyFriendly"
               rules={[]}
@@ -58,7 +58,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'fromOrganization'} id={'fromOrganization'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="是否本机构"
               name="fromOrganization"
               rules={[]}
@@ -67,7 +67,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'testingOrganization'} id={'testingOrganization'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="检测机构"
               name="testingOrganization"
               rules={[]}
@@ -75,7 +75,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'testingReportNumber'} id={'testingReportNumber'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="检测报告编号"
               name="testingReportNumber"
               rules={[]}
@@ -83,20 +83,20 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'uploadComplianceTestingReport'} id={'uploadComplianceTestingReport'}>
             {/* <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="上传检测符合性报告"
               name="uploadComplianceTestingReport"
               rules={[]}
             /> */}
             <UploadFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="上传检测符合性报告"
               name="uploadComplianceTestingReport"
             />
           </Col>
           <Col span={12} key={'vehicleConfigurationName'} id={'vehicleConfigurationName'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="车辆配置名称"
               name="vehicleConfigurationName"
               rules={[]}
@@ -104,7 +104,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'specifications'} id={'specifications'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="规约"
               name="specifications"
               rules={[]}
@@ -116,7 +116,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'specificationsValue'} id={'specificationsValue'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="规约自定义输入"
               name="specificationsValue"
               disabled={!specifictionOther}
@@ -128,14 +128,14 @@ const VehicleForm = props => {
             id={'importedVehicle3cCertificateNumber'}
           >
             <UploadFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="进口车3C证书号"
               name="importedVehicle3cCertificateNumber"
             />
           </Col>
           <Col span={12} key={'recommendedModelCatalogBatch'} id={'recommendedModelCatalogBatch'}>
             <UploadFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="推荐车型目录批次"
               name="recommendedModelCatalogBatch"
             />
@@ -146,49 +146,54 @@ const VehicleForm = props => {
             id={'recommendedVehicleCatalogBatch'}
           >
             <UploadFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="推荐车型目录序号"
               name="recommendedVehicleCatalogBatch"
             />
           </Col>
           <Col span={12} key={'roadMotorVehicleProducer'} id={'roadMotorVehicleProducer'}>
             <UploadFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="《道路机动车辆生产企业及产品公告》汽车产品技术参数页或机动车整车出厂合格证影印件"
               name="roadMotorVehicleProducer"
             />
           </Col>
           <Col span={12} key={'nationalPlatformCertificate'} id={'nationalPlatformCertificate'}>
             <UploadFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="车型接入国家平台认证证书附件上传"
               name="nationalPlatformCertificate"
             />
           </Col>
           <Col span={12} key={'modelTestReport'} id={'modelTestReport'}>
             <UploadFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="车型检测报告（佐证车型技术参数）附件上传"
               name="modelTestReport"
             />
           </Col>
           <Col span={12} key={'modelChangeApplication'} id={'modelChangeApplication'}>
             <UploadFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="车型变更申请附件"
               name="modelChangeApplication"
             />
           </Col>
           <Col span={12} key={'gbDataProtocolComparisonTable'} id={'gbDataProtocolComparisonTable'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="国标数据协议对照表"
               name="gbDataProtocolComparisonTable"
               rules={[]}
             />
           </Col>
           <Col span={12} key={'safetyPlan'} id={'safetyPlan'}>
-            <FlexFormItem formMode={props.mode} label="车型安全预案" name="safetyPlan" rules={[]} />
+            <FlexFormItem
+              formformat={props.mode}
+              label="车型安全预案"
+              name="safetyPlan"
+              rules={[]}
+            />
           </Col>
           <Col
             span={12}
@@ -196,7 +201,7 @@ const VehicleForm = props => {
             id={'noticeMainTechnicalParametersPage'}
           >
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="公告主要技术参数页"
               name="noticeMainTechnicalParametersPage"
               rules={[]}
@@ -204,7 +209,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'alarmContactEmail'} id={'alarmContactEmail'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="报警事宜联系邮箱"
               name="alarmContactEmail"
               rules={[]}

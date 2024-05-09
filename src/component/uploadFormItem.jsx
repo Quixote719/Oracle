@@ -17,12 +17,12 @@ const FlexFormItem = props => {
     }
   };
 
-  return props.formMode === 'edit' ? (
+  return props.formformat === 'edit' ? (
     <Form.Item
       label={props.label}
       name={props.name}
       rules={props.rules}
-      style={{ width: '75%', ...props.itemStyle }}
+      style={{ width: '75%', ...props.itemstyle }}
     >
       <Upload {...uploadProps}>
         <Button icon={<UploadOutlined />}>点击上传</Button>
@@ -30,19 +30,19 @@ const FlexFormItem = props => {
     </Form.Item>
   ) : (
     <div className={styles.itemInfo}>
-      <div>{props.label}</div>
-      <div>{props.text}</div>
+      <div className={styles.formLabel}>{props.label}</div>
+      <div className={styles.formText}>{props.text}</div>
     </div>
   );
 };
 
 FlexFormItem.propTypes = {
-  formMode: PropTypes.string,
+  formformat: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string,
   rules: PropTypes.array,
   text: PropTypes.string,
-  itemStyle: PropTypes.object
+  itemstyle: PropTypes.object
 };
 
 export default FlexFormItem;

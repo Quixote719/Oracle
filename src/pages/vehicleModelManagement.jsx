@@ -36,7 +36,7 @@ const Flow = () => {
   const [vtNSGForm] = Form.useForm();
   const [vahTJform] = Form.useForm();
 
-  const [formState, setFormState] = useState('edit');
+  const [formState, setFormState] = useState(null);
   const pagePath = useLocation();
 
   let vcFormRefs = {};
@@ -48,8 +48,7 @@ const Flow = () => {
     getVehicleEnumList().then(data => {
       setSelectInfo(parseVehicleModelSelectOptions(data));
     });
-    console.log('pagePath', pagePath);
-    if (pagePath.pathname === '/vehicleModelManagement') {
+    if (pagePath?.state?.createNew) {
       setFormState('edit');
     }
   }, []);

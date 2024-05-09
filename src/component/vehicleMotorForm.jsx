@@ -15,11 +15,16 @@ const SubForm = React.forwardRef((props, ref) => {
     <Form layout="vertical" ref={ref}>
       <Row gutter={24}>
         <Col span={12} key={'producer'} id={'producer'}>
-          <FlexFormItem formMode={props.mode} label="驱动电机生产企业" name="producer" rules={[]} />
+          <FlexFormItem
+            formformat={props.mode}
+            label="驱动电机生产企业"
+            name="producer"
+            rules={[]}
+          />
         </Col>
         <Col span={12} key={'type'} id={'type'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机类型"
             name="type"
             rules={[]}
@@ -29,7 +34,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'typeValue'} id={'typeValue'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机类型自定义输入"
             name="typeValue"
             rules={[]}
@@ -38,7 +43,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'coolingMethod'} id={'coolingMethod'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机冷却方式"
             name="coolingMethod"
             rules={[]}
@@ -54,7 +59,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'coolingMethodValue'} id={'coolingMethodValue'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机冷却方式自定义输入"
             name="coolingMethodValue"
             rules={[]}
@@ -63,7 +68,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'ratedVoltage'} id={'ratedVoltage'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机额定电压(V)"
             name="ratedVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
@@ -72,7 +77,7 @@ const SubForm = React.forwardRef((props, ref) => {
 
         <Col span={12} key={'ratedPower'} id={'ratedPower'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机额定功率(KW)"
             name="ratedPower"
             rules={[digitValidator(3), numberLimitValidator(0, 10000000)]}
@@ -80,7 +85,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'ratedSpeed'} id={'ratedSpeed'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机额定转速(r/min)"
             name="ratedSpeed"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}
@@ -89,19 +94,19 @@ const SubForm = React.forwardRef((props, ref) => {
 
         <Col span={12} key={'ratedTorque'} id={'ratedTorque'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机额定转距(N.m)"
             name="ratedTorque"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}
           />
         </Col>
         <Col span={12} key={'model'} id={'model'}>
-          <FlexFormItem formMode={props.mode} label="驱动电机型号" name="model" rules={[]} />
+          <FlexFormItem formformat={props.mode} label="驱动电机型号" name="model" rules={[]} />
         </Col>
 
         <Col span={12} key={'controllerProducer'} id={'controllerProducer'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机控制器生产企业"
             name="controllerProducer"
             rules={[]}
@@ -109,7 +114,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'controllerModel'} id={'controllerModel'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机控制器型号"
             name="controllerModel"
             rules={[]}
@@ -117,7 +122,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'layoutTypePosition'} id={'layoutTypePosition'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机布置型式/位置"
             name="layoutTypePosition"
             placeholder="如：横置/后置"
@@ -126,7 +131,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'maxOperatingCurrent'} id={'maxOperatingCurrent'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机最大工作电流(A)"
             name="maxOperatingCurrent"
             rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
@@ -134,7 +139,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'peakPower'} id={'peakPower'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机峰值功率(KW)"
             name="peakPower"
             rules={[digitValidator(3), numberLimitValidator(0, 10000000)]}
@@ -142,7 +147,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'maxSpeed'} id={'maxSpeed'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机最高转速(r/min)"
             name="maxSpeed"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}
@@ -151,7 +156,7 @@ const SubForm = React.forwardRef((props, ref) => {
 
         <Col span={12} key={'peakTorque'} id={'peakTorque'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机峰值转矩(N.m)"
             name="peakTorque"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}
@@ -159,7 +164,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'maxOutputTorque'} id={'maxOutputTorque'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="驱动电机最大输出转矩(N.m)"
             name="maxOutputTorque"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}

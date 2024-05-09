@@ -21,6 +21,7 @@ const VehicleModelManagement = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    vehicleModelStore.setTargetRecord(null);
     getVehicleEnumList().then(data => {
       setSelectInfo(parseVehicleModelSelectOptions(data));
     });
@@ -53,10 +54,11 @@ const VehicleModelManagement = () => {
   };
 
   const createNew = () => {
-    navigate('/vehicleModelManagement');
+    navigate('/vehicleModelManagement', { state: { createNew: true } });
   };
 
   const viewDetail = record => {
+    vehicleModelStore.setTargetRecord(record);
     navigate('/vehicleModelManagement', { state: { vehicleModelId: record.id } });
   };
 
@@ -108,53 +110,53 @@ const VehicleModelManagement = () => {
                 <Col className={styles.searchConditionCol} span={8}>
                   <FlexFormItem
                     label="生产企业"
-                    formMode="edit"
+                    formformat="edit"
                     name="producer"
-                    itemStyle={{ width: '100%' }}
+                    itemstyle={{ width: '100%' }}
                     options={selectInfo.producerFullName || []}
                   />
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
                   <FlexFormItem
                     label="车辆备案品牌"
-                    formMode="edit"
+                    formformat="edit"
                     name="vehicleBrand"
-                    itemStyle={{ width: '100%' }}
+                    itemstyle={{ width: '100%' }}
                     options={selectInfo.vehicleRegistrationBrand || []}
                   />
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
                   <FlexFormItem
                     label="车辆登记型号"
-                    formMode="edit"
+                    formformat="edit"
                     name="vehicleRegistrationModel"
-                    itemStyle={{ width: '100%' }}
+                    itemstyle={{ width: '100%' }}
                   />
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
                   <FlexFormItem
                     label="能源类型"
-                    formMode="edit"
+                    formformat="edit"
                     name="energyType"
-                    itemStyle={{ width: '100%' }}
+                    itemstyle={{ width: '100%' }}
                     options={selectInfo.energyType || []}
                   />
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
                   <FlexFormItem
                     label="规约"
-                    formMode="edit"
+                    formformat="edit"
                     name="specifications"
-                    itemStyle={{ width: '100%' }}
+                    itemstyle={{ width: '100%' }}
                     options={selectInfo.specifications || []}
                   />
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
                   <FlexFormItem
                     label="上报平台"
-                    formMode="edit"
+                    formformat="edit"
                     name="governmentPlatform"
-                    itemStyle={{ width: '100%' }}
+                    itemstyle={{ width: '100%' }}
                     options={selectInfo.governmentPlatform || []}
                   />
                 </Col>
