@@ -4,6 +4,8 @@ class VehicleModelStore {
   constructor() {
     makeAutoObservable(this, {
       vehicleModelList: observable,
+      targetRecord: observable,
+      setTargetRecord: action,
       parseVM: action,
       fetchVMlist: action
     });
@@ -29,6 +31,10 @@ class VehicleModelStore {
       res.tableRows = tableRows;
     }
     return res;
+  };
+
+  setTargetRecord = record => {
+    this.targetRecord = record;
   };
 
   fetchVMlist = param => {

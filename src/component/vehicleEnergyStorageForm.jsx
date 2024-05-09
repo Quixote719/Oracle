@@ -16,7 +16,7 @@ const SubForm = React.forwardRef((props, ref) => {
       <Row gutter={24}>
         <Col span={12} key={'producer'} id={'producer'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置生产企业"
             name="producer"
             rules={[]}
@@ -24,7 +24,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'warrantyPeriodOfVehicle'} id={'warrantyPeriodOfVehicle'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置质保期(年/万千米)"
             name="warrantyPeriodOfVehicle"
             rules={[]}
@@ -32,8 +32,8 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={3} key={'devicePackCount'} id={'devicePackCount'}>
           <FlexFormItem
-            itemStyle={{ width: '100%' }}
-            formMode={props.mode}
+            itemstyle={{ width: '100%' }}
+            formformat={props.mode}
             label="车载储能"
             name="devicePackCount"
             rules={[integerValidator()]}
@@ -42,8 +42,8 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={3} key={'modulesCount'} id={'modulesCount'}>
           <FlexFormItem
-            itemStyle={{ width: '100%' }}
-            formMode={props.mode}
+            itemstyle={{ width: '100%' }}
+            formformat={props.mode}
             label=" "
             name="modulesCount"
             rules={[integerValidator()]}
@@ -52,8 +52,8 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={3} key={'cellCount'} id={'cellCount'}>
           <FlexFormItem
-            itemStyle={{ width: '100%' }}
-            formMode={props.mode}
+            itemstyle={{ width: '100%' }}
+            formformat={props.mode}
             label=" "
             name="cellCount"
             rules={[integerValidator()]}
@@ -63,8 +63,8 @@ const SubForm = React.forwardRef((props, ref) => {
         <Col span={3}></Col>
         <Col span={3} key={'connectionMethodPack'} id={'connectionMethodPack'}>
           <FlexFormItem
-            itemStyle={{ width: '100%' }}
-            formMode={props.mode}
+            itemstyle={{ width: '100%' }}
+            formformat={props.mode}
             label="车载储能装置连接方式"
             name="connectionMethodPack"
             rules={[integerValidator()]}
@@ -73,8 +73,8 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={3} key={'parallel'} id={'parallel'}>
           <FlexFormItem
-            itemStyle={{ width: '100%' }}
-            formMode={props.mode}
+            itemstyle={{ width: '100%' }}
+            formformat={props.mode}
             label=" "
             name="parallel"
             rules={[integerValidator()]}
@@ -83,8 +83,8 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={3} key={'string'} id={'string'}>
           <FlexFormItem
-            itemStyle={{ width: '100%' }}
-            formMode={props.mode}
+            itemstyle={{ width: '100%' }}
+            formformat={props.mode}
             label=" "
             name="string"
             rules={[integerValidator()]}
@@ -93,7 +93,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'probeCount'} id={'probeCount'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="探针个数"
             name="probeCount"
             rules={[integerValidator()]}
@@ -101,7 +101,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'type'} id={'type'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置类型"
             name="type"
             rules={[]}
@@ -111,7 +111,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'typeValue'} id={'typeValue'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置类型自定义输入"
             name="typeValue"
             rules={[]}
@@ -120,7 +120,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'assemblyModel'} id={'assemblyModel'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置总成型号"
             name="assemblyModel"
             rules={[]}
@@ -128,7 +128,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'assemblyCapacity'} id={'assemblyCapacity'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置总成标称容量(Ah)"
             name="assemblyCapacity"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}
@@ -136,7 +136,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'ratedTotalEnergy'} id={'ratedTotalEnergy'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置额定总能量(kWh)"
             name="ratedTotalEnergy"
             rules={[digitValidator(3), numberLimitValidator(0, 100000000)]}
@@ -144,7 +144,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'ratedVoltage'} id={'ratedVoltage'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置额定电压(V)"
             name="ratedVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
@@ -152,7 +152,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'assemblyOutputCurrent'} id={'assemblyOutputCurrent'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置总成额定输出电流(A)"
             name="assemblyOutputCurrent"
             rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
@@ -160,7 +160,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'coolingMethod'} id={'coolingMethod'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置冷却方式"
             name="coolingMethod"
             rules={[]}
@@ -176,7 +176,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'coolingMethodValue'} id={'coolingMethodValue'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置冷却方式自定义输入"
             name="coolingMethodValue"
             rules={[]}
@@ -185,7 +185,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'assemblyMass'} id={'assemblyMass'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置总成质量(KG)"
             name="assemblyMass"
             rules={[digitValidator(3), numberLimitValidator(0, 1000)]}
@@ -193,7 +193,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'heatingMethod'} id={'heatingMethod'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置加热方式"
             name="heatingMethod"
             rules={[]}
@@ -201,7 +201,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'batteryCellProducer'} id={'batteryCellProducer'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="动力电池单体生产企业"
             name="batteryCellProducer"
             rules={[]}
@@ -210,7 +210,7 @@ const SubForm = React.forwardRef((props, ref) => {
 
         <Col span={12} key={'batteryCellCapacity'} id={'batteryCellCapacity'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="动力电池单体容量(Ah)"
             name="batteryCellCapacity"
             rules={[digitValidator(3)]}
@@ -218,7 +218,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'cellNominalVoltage'} id={'cellNominalVoltage'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置单体标称电压(V)"
             name="cellNominalVoltage"
             rules={[digitValidator(3), numberLimitValidator(0, 100000)]}
@@ -226,7 +226,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'cellModel'} id={'cellModel'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置单体型号"
             name="cellModel"
             rules={[]}
@@ -234,7 +234,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'cellShape'} id={'cellShape'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置单体外形"
             name="cellShape"
             rules={[]}
@@ -243,7 +243,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'cellShapeDimensions'} id={'cellShapeDimensions'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置单体外形尺寸(mm)"
             name="cellShapeDimensions)"
             rules={[]}
@@ -251,7 +251,7 @@ const SubForm = React.forwardRef((props, ref) => {
         </Col>
         <Col span={12} key={'systemEnergyDensity'} id={'systemEnergyDensity'}>
           <FlexFormItem
-            formMode={props.mode}
+            formformat={props.mode}
             label="车载储能装置系统能量密度(Wh/kg)"
             name="systemEnergyDensity"
             rules={[digitValidator(3), numberLimitValidator(0, 100000)]}

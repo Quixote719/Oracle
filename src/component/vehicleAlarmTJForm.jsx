@@ -10,7 +10,7 @@ const VehicleForm = props => {
         <Row gutter={24}>
           <Col span={12} key={'emergencyHandlingMeasure'} id={'emergencyHandlingMeasure'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="突发事故处置措施"
               name="emergencyHandlingMeasure"
               rules={[]}
@@ -22,7 +22,7 @@ const VehicleForm = props => {
             id={'levelThreeAlarmDisposalMeasure'}
           >
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="三级报警处置措施"
               name="levelThreeAlarmDisposalMeasure"
               rules={[]}
@@ -30,7 +30,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'levelTwoAlarmDisposalMeasure'} id={'levelTwoAlarmDisposalMeasure'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="二级报警处置措施"
               name="levelTwoAlarmDisposalMeasure"
               rules={[]}
@@ -38,7 +38,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'levelOneAlarmDisposalMeasure'} id={'levelOneAlarmDisposalMeasure'}>
             <FlexFormItem
-              formMode={props.mode}
+              formformat={props.mode}
               label="一级报警处置措施"
               name="levelOneAlarmDisposalMeasure"
               rules={[]}
