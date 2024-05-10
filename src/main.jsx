@@ -2,12 +2,12 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
-import VehicleModelList from '@/pages/vehicleModelList';
-import VehicleModelManagement from '@/pages/vehicleModelManagement';
-import VehicleList from '@/pages/vehicleList';
-import DataCenter from '@/pages/dataCenter';
+import VehicleModelList from '@/page/vehicleModelList';
+import VehicleModelManagement from '@/page/vehicleModelManagement';
+import VehicleList from '@/page/vehicleList';
+import DataCenter from '@/page/dataCenter';
 import zhCN from 'antd/es/locale/zh_CN';
-import '@/styles/index.less';
+import '@/style/index.less';
 
 async function enableMocking() {
   if (process.env.NODE_ENV === 'mock') {

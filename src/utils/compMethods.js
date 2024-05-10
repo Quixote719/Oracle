@@ -18,17 +18,18 @@ const parseVehicleModelSelectOptions = param => {
 const addOtherOption = param => {
   if (!Array.isArray(param)) return [];
   let res = [...param];
-  if (param.filter(item => item.itemEname.includes('Others')).length === 0) {
+  if (param.filter(item => item.itemEname.toLowerCase().includes('other')).length === 0) {
     res = [...param, ...other];
   }
   return res;
 };
 
 const checkOtherOption = (setMethod, targetVal, options) => {
-  if (typeof targetVal === 'string' && targetVal.includes('Others')) return setMethod(true);
+  if (typeof targetVal === 'string' && targetVal.toLowerCase().includes('other'))
+    return setMethod(true);
   const fullOptions = addOtherOption(options);
   const targetItem = fullOptions.filter(item => item.value === targetVal)[0];
-  const check = (targetItem?.itemEname || targetItem?.value || '').includes('Others');
+  const check = (targetItem?.itemEname || targetItem?.value || '').toLowerCase().includes('other');
   return setMethod(check);
 };
 

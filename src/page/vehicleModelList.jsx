@@ -11,7 +11,7 @@ import { getVehicleEnumList } from '@/api/vehicleModelApi';
 import { parseVehicleModelSelectOptions } from '@/utils/compMethods';
 import { pageSizeOpt } from '@/constant/vehicleModel';
 import { useStore } from '@/store';
-import styles from '@/pages/index.module.less';
+import styles from '@/page/index.module.less';
 
 const VehicleModelManagement = () => {
   const [fromRef] = Form.useForm();

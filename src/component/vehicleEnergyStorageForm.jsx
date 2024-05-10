@@ -105,8 +105,10 @@ const SubForm = React.forwardRef((props, ref) => {
             label="车载储能装置类型"
             name="type"
             rules={[]}
-            options={addOtherOption(selectInfo.driverMotorType)}
-            onChange={param => checkOtherOption(setTypeOther, param, selectInfo.driverMotorType)}
+            options={addOtherOption(selectInfo.vehicleEnergyStorageDeviceType)}
+            onChange={param =>
+              checkOtherOption(setTypeOther, param, selectInfo.vehicleEnergyStorageDeviceType)
+            }
           />
         </Col>
         <Col span={12} key={'typeValue'} id={'typeValue'}>
