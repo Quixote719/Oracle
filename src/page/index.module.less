@@ -1,4 +1,4 @@
-@import '@/styles/index.less';
+@import '@/style/index.less';
 
 .pageContainer {
   min-width: 100%;
@@ -71,7 +71,8 @@
 }
 
 .resetBtn,
-.exportBtn {
+.exportBtn,
+.lightBtn {
   @platFormBtn();
   margin: 10px;
 }
@@ -81,15 +82,33 @@
 }
 
 .searchBtn,
-.createBtn {
+.createBtn,
+.queryBtn {
   @platFormBtn();
   @darkBtn();
   margin: 10px;
 }
 
+.lightBtn,
+.queryBtn {
+  width: 125px;
+  height: 42px;
+}
+
+.queryBtn {
+  float: right;
+}
+
 .saveBtn {
   @platFormBtn();
   @darkBtn();
+}
+
+.inlineSearch {
+  margin: 10px;
+  width: 200px;
+  height: 42px;
+  float: right;
 }
 
 .operationText {
@@ -102,6 +121,10 @@
 .topSection {
   width: 100%;
   height: 90px;
+}
+
+.operationBar {
+  padding-top: 10px;
 }
 
 .bottomSection {

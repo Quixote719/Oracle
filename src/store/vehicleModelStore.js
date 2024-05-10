@@ -1,5 +1,6 @@
 import { action, makeAutoObservable, observable } from 'mobx';
 import { getVehicleModelList } from '@/api/vehicleModelApi';
+
 class VehicleModelStore {
   constructor() {
     makeAutoObservable(this, {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '@/component/header';
 import Menu from '@/component/menu';
-import styles from '@/pages/index.module.less';
+import styles from '@/page/index.module.less';
 
 const VehicleList = () => {
   return (

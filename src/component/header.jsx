@@ -1,5 +1,5 @@
 import React from 'react';
-import JLRLogo from '@/images/JLR.svg';
+import JLRLogo from '@/image/JLR.svg';
 import styles from '@/component/compStyle.module.less';
 
 const Header = () => {

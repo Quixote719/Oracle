@@ -420,7 +420,7 @@ const VehicleForm = props => {
               label="百公里加速时间（秒）"
               name="acceleration100kmTime"
               placeholder="可填写多个数值，例：3,3.5（英文逗号隔开）"
-              rules={[serialNumberValidator(0, 100, true)]}
+              rules={[serialNumberValidator(0, 100, false, 3)]}
             />
           </Col>
           <Col span={12} key={'acceleration50kmTime'} id={'acceleration50kmTime'}>
