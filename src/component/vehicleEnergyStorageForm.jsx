@@ -81,12 +81,12 @@ const SubForm = React.forwardRef((props, ref) => {
             addonAfter={'并'}
           />
         </Col>
-        <Col span={3} key={'string'} id={'string'}>
+        <Col span={3} key={'series'} id={'series'}>
           <FlexFormItem
             itemstyle={{ width: '100%' }}
             formformat={props.mode}
             label=" "
-            name="string"
+            name="series"
             rules={[integerValidator()]}
             addonAfter={'串'}
           />

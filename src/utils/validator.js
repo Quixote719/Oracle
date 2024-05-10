@@ -1,7 +1,7 @@
 const digitValidator = param => {
   return {
     validator: (_, value) => {
-      const reg = new RegExp(`^[0-9-]+(.[0-9]{0,${param}})?$`);
+      const reg = new RegExp(`^-?\\d+(\\.\\d{1,${param}})?$`);
       return reg.test(value)
         ? Promise.resolve()
         : Promise.reject(new Error(`仅支持输入数字，最多到小数点后${param}位`));
@@ -18,7 +18,7 @@ const serialNumberValidator = (min, max, integerCheck, decimalDigit) => {
         let val = Number(item.trim());
         if (
           Number.isInteger(decimalDigit) &&
-          !new RegExp(`^[0-9-]+(.[0-9]{0,${decimalDigit}})?$`).test(val)
+          !new RegExp(`^-?\\d+(\\.\\d{1,${decimalDigit}})?$`).test(item)
         ) {
           return Promise.reject(new Error(`仅支持输入数字，最多到小数点后${decimalDigit}位`));
         } else if (integerCheck && !Number.isInteger(val)) {
