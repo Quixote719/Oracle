@@ -19,13 +19,8 @@ class VehicleModelStore {
     if (Array.isArray(res?.rows)) {
       const tableRows = res.rows.map(item => {
         return {
+          ...item,
           key: item.id,
-          id: item.id,
-          producerFullName: item.producerFullName,
-          vehicleBrand: item.vehicleBrand,
-          registrationModel: item.registrationModel,
-          modelSalesName: item.modelSalesName,
-          energyType: item.energyType,
           specifications: item.bulletinCertInfo?.specifications
         };
       });
