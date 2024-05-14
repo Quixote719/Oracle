@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Row, Col, Form, Checkbox } from 'antd';
+import { Row, Col, Form, Checkbox, Button } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
 import { digitValidator, numberLimitValidator, serialNumberValidator } from '@/utils/validator';
 import { yesOrNo } from '@/constant/vehicleModel';
@@ -9,6 +9,7 @@ import styles from './compStyle.module.less';
 import PropTypes from 'prop-types';
 
 const VehicleForm = props => {
+  const [formMode, setFormMode] = useState(props.mode);
   const [vehicleRegistrationBrandOther, setVehicleRegistrationBrandOther] = useState(false);
   const [productionMethodOther, setProductionMethodOther] = useState(false);
   const [brandCategoryOther, setBrandCategoryOther] = useState(false);
@@ -28,18 +29,22 @@ const VehicleForm = props => {
     return options.find(item => item.value === target)?.label;
   };
 
+  const changeFormMode = param => {
+    setFormMode(param);
+  };
+
   const reportPlatformOpt = selectInfo.governmentPlatform || platformOptions;
   return (
     <div>
       <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
           <Col span={12} key={'reportPlatform'} id={'reportPlatform'}>
-            {props.mode === 'edit' && (
-              <Form.Item formformat={props.mode} label="上报平台" name="reportPlatform">
+            {formMode === 'edit' && (
+              <Form.Item formformat={formMode} label="上报平台" name="reportPlatform">
                 <Checkbox.Group options={reportPlatformOpt} />
               </Form.Item>
             )}
-            {props.mode !== 'edit' && (
+            {formMode !== 'edit' && (
               <div className={styles.itemInfo}>
                 <div className={styles.formLabel}>上报平台</div>
                 {(vehicleModelStore?.targetRecord?.reportPlatform || []).map((item, index) => {
@@ -54,7 +59,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'vehicleRegistrationBrand'} id={'vehicleRegistrationBrand'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={getTargetOptionLabel(
                 addOtherOption(selectInfo.vehicleRegistrationBrand),
                 vehicleModelStore?.targetRecord?.vehicleRegistrationBrand
@@ -74,7 +79,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'vehicleRegistrationBrandValue'} id={'vehicleRegistrationBrandValue'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.vehicleRegistrationBrandValue}
               label="车辆登记品牌自定义输入"
               name="vehicleRegistrationBrandValue"
@@ -84,7 +89,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'producerFullName'} id={'producerFullName'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={getTargetOptionLabel(
                 selectInfo.producerFullName || [],
                 vehicleModelStore?.targetRecord?.producerFullName
@@ -97,7 +102,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'modelSalesName'} id={'modelSalesName'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.modelSalesName}
               label="车型销售名称"
               name="modelSalesName"
@@ -106,7 +111,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'minSalesPrice'} id={'minSalesPrice'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.minSalesPrice}
               label="出厂销售价格下限（元）"
               name="minSalesPrice"
@@ -130,7 +135,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'maxSalesPrice'} id={'maxSalesPrice'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.maxSalesPrice}
               label="出厂销售价格上限（元）"
               name="maxSalesPrice"
@@ -154,7 +159,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'productionMethod'} id={'productionMethod'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={getTargetOptionLabel(
                 addOtherOption(selectInfo.productionMethod),
                 vehicleModelStore?.targetRecord?.productionMethod
@@ -170,7 +175,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'productionMethodValue'} id={'productionMethodValue'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.productionMethodValue}
               label="生产方式自定义输入"
               name="productionMethodValue"
@@ -180,7 +185,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'brandCategory'} id={'brandCategory'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={getTargetOptionLabel(
                 selectInfo.brandCategory || [],
                 vehicleModelStore?.targetRecord?.brandCategory
@@ -196,7 +201,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'brandCategoryValue'} id={'brandCategoryValue'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.brandCategoryValue}
               label="品牌系别自定义输入"
               name="brandCategoryValue"
@@ -206,7 +211,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'registrationModel'} id={'registrationModel'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.registrationModel}
               label="车型登记型号"
               name="registrationModel"
@@ -215,7 +220,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'configurationName'} id={'configurationName'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.configurationName}
               label="车辆配置名称"
               name="configurationName"
@@ -224,7 +229,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'vehicleType'} id={'vehicleType'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={getTargetOptionLabel(
                 selectInfo.vehicleType || [],
                 vehicleModelStore?.targetRecord?.vehicleType
@@ -240,7 +245,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'vehicleTypeValue'} id={'vehicleTypeValue'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.vehicleTypeValue}
               label="车辆种类自定义输入"
               name="vehicleTypeValue"
@@ -250,7 +255,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'passengerVehicleClass'} id={'passengerVehicleClass'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={getTargetOptionLabel(
                 selectInfo.passengerVehicleClass || [],
                 vehicleModelStore?.targetRecord?.passengerVehicleClass
@@ -270,7 +275,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'passengerVehicleClassValue'} id={'passengerVehicleClassValue'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.passengerVehicleClassValue}
               label="乘用车级别"
               name="passengerVehicleClassValue"
@@ -281,7 +286,7 @@ const VehicleForm = props => {
 
           <Col span={12} key={'energyType'} id={'energyType'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={getTargetOptionLabel(
                 addOtherOption(selectInfo.energyType),
                 vehicleModelStore?.targetRecord?.energyType
@@ -296,7 +301,7 @@ const VehicleForm = props => {
 
           <Col span={12} key={'energyTypeValue'} id={'energyTypeValue'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.energyTypeValue}
               label="能源类型自定义输入"
               name="energyTypeValue"
@@ -306,7 +311,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'pureElectricRange'} id={'pureElectricRange'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.pureElectricRange}
               label="纯电工况法续驶里程(KM)"
               name="pureElectricRange"
@@ -316,7 +321,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'constantSpeedRange'} id={'constantSpeedRange'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.constantSpeedRange}
               label="匀速法续驶里程(KM)"
               name="constantSpeedRange"
@@ -326,7 +331,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'vehicleWarranty'} id={'vehicleWarranty'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.vehicleWarranty}
               label="整车质保期(年/万公里)"
               name="vehicleWarranty"
@@ -335,7 +340,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'seatingCapacity'} id={'seatingCapacity'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.seatingCapacity}
               label="准载人数"
               name="seatingCapacity"
@@ -345,7 +350,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'totalMass'} id={'totalMass'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.totalMass}
               label="总质量(KG)"
               name="totalMass"
@@ -355,7 +360,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'curbWeight'} id={'curbWeight'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.curbWeight}
               label="整备质量(KG)"
               name="curbWeight"
@@ -365,7 +370,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'maxLoadWeight'} id={'maxLoadWeight'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.maxLoadWeight}
               label="最大允许装载质量(KG)"
               name="maxLoadWeight"
@@ -374,7 +379,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'additionalWeight'} id={'additionalWeight'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.additionalWeight}
               label="附加质量(KG)"
               name="additionalWeight"
@@ -383,7 +388,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'frontWheelbase'} id={'frontWheelbase'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.frontWheelbase}
               label="前轮距(MM)"
               name="frontWheelbase"
@@ -392,7 +397,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'rearWheelbase'} id={'rearWheelbase'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.rearWheelbase}
               label="后轮距(MM)"
               name="rearWheelbase"
@@ -401,7 +406,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'minTurningDiameter'} id={'minTurningDiameter'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.minTurningDiameter}
               label="最小转弯直径(MM)"
               name="minTurningDiameter"
@@ -410,7 +415,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'maxSpeed'} id={'maxSpeed'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.maxSpeed}
               label="最高车速(KM/H)"
               name="maxSpeed"
@@ -420,7 +425,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'energyRecoveryUnit'} id={'energyRecoveryUnit'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.energyRecoveryUnit}
               label="能量回收装置"
               name="energyRecoveryUnit"
@@ -430,7 +435,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'chargingMethod'} id={'chargingMethod'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.chargingMethod}
               label="充电方式"
               name="chargingMethod"
@@ -439,7 +444,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'chargingTime'} id={'chargingTime'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.chargingTime}
               label="充电时间（慢/快）(H)"
               name="chargingTime"
@@ -448,7 +453,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'transmissionRatio'} id={'transmissionRatio'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.transmissionRatio}
               label="各档位传动比"
               name="transmissionRatio"
@@ -458,7 +463,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'listingDate'} id={'listingDate'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.listingDate}
               label="上市时间"
               name="listingDate"
@@ -468,7 +473,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'dimensions'} id={'dimensions'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.dimensions}
               label="尺寸（长*宽*高）"
               name="dimensions"
@@ -478,7 +483,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'wheelbase'} id={'wheelbase'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.wheelbase}
               label="轴距"
               name="wheelbase"
@@ -488,7 +493,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'acceleration100kmTime'} id={'acceleration100kmTime'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.acceleration100kmTime}
               label="百公里加速时间（秒）"
               name="acceleration100kmTime"
@@ -498,7 +503,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'acceleration50kmTime'} id={'acceleration50kmTime'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.acceleration50kmTime}
               label="50公里加速时间(秒)"
               name="acceleration50kmTime"
@@ -508,7 +513,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'energyConsumption100km'} id={'energyConsumption100km'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.energyConsumption100km}
               label="百公里电耗(KWH)"
               name="energyConsumption100km "
@@ -518,7 +523,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'energyConsumptionStateA'} id={'energyConsumptionStateA'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.energyConsumptionStateA}
               label="状态A电能消耗量(WH/KM)"
               name="energyConsumptionStateA"
@@ -527,7 +532,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'fuelConsumptionStateB'} id={'fuelConsumptionStateB'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.fuelConsumptionStateB}
               label="状态B燃料消耗量(L/100km)"
               name="fuelConsumptionStateB"
@@ -536,7 +541,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'wltcEnergyConsumption'} id={'wltcEnergyConsumption'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.wltcEnergyConsumption}
               label="WLTC电量消耗量(CD,Wh/km)"
               name="wltcEnergyConsumption"
@@ -545,7 +550,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'wltcFuelConsumption'} id={'wltcFuelConsumption'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.wltcFuelConsumption}
               label="WLTC燃料消耗量(CS,L/100km)"
               name="wltcFuelConsumption"
@@ -554,7 +559,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'fuelEconomyRate'} id={'fuelEconomyRate'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.fuelEconomyRate}
               label="节油率(%)"
               name="fuelEconomyRate"
@@ -563,7 +568,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'hybridPowerStructureType'} id={'hybridPowerStructureType'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={vehicleModelStore?.targetRecord?.hybridPowerStructureType}
               label="混合动力结构类型"
               name="hybridPowerStructureType"
@@ -572,7 +577,7 @@ const VehicleForm = props => {
           </Col>
           <Col span={12} key={'drivingModeManualSelection'} id={'drivingModeManualSelection'}>
             <FlexFormItem
-              formformat={props.mode}
+              formformat={formMode}
               text={getTargetOptionLabel(
                 yesOrNo || [],
                 vehicleModelStore?.targetRecord?.drivingModeManualSelection
@@ -585,6 +590,11 @@ const VehicleForm = props => {
           </Col>
         </Row>
       </Form>
+      {formMode !== 'edit' && (
+        <Button className={styles.editBtn} onClick={() => changeFormMode('edit')}>
+          编辑
+        </Button>
+      )}
     </div>
   );
 };

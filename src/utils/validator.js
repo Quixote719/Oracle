@@ -12,7 +12,7 @@ const digitValidator = param => {
 const serialNumberValidator = (min, max, integerCheck, decimalDigit) => {
   return {
     validator: (_, value) => {
-      let valueArr = value.trim().split(',');
+      let valueArr = (value || '').toString().trim().split(',');
       for (let item of valueArr) {
         if (item === '') continue;
         let val = Number(item.trim());
