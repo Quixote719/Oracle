@@ -17,7 +17,6 @@ import VehicleThresholdTJForm from '@/component/vehicleThresholdTJForm';
 import VehicleAlarmTJForm from '@/component/vehicleAlarmTJForm.jsx';
 import { getVehicleEnumList, submitVehicleModel } from '@/api/vehicleModelApi';
 import { parseVehicleModelSelectOptions } from '@/utils/compMethods';
-
 import styles from './index.module.less';
 /*
   every form should be a component, based on the mode(create/edit/observe), the form item 
@@ -100,7 +99,8 @@ const Flow = () => {
       driverMotors: param.vmFormRefs,
       energyStorageDevices: param.vesFormRefs,
       generatorTerminal: {
-        ...param.vtform
+        ...param.vtform,
+        ...param.vdmform
       },
       hybridFuelPart: {
         ...param.vhfform
@@ -197,19 +197,19 @@ const Flow = () => {
       children: <VehicleCertificateForm form={vcfform} mode={formState} />
     },
     {
-      key: 'VehicleCertificateForm',
+      key: 'VehicleThresholdFormNSG',
       label: '阈值信息(国家/上海/广州)',
       children: <VehicleThresholdNSGForm form={vtNSGForm} mode={formState} />
     },
     {
-      key: 'VehicleThresholdForm',
+      key: 'VehicleThresholdFormTJ',
       label: '阈值信息(天津)',
       children: <VehicleThresholdTJForm refInfo={vtTJFormRefs} mode={formState} />
     },
     {
       key: 'VehicleAlarmTJForm',
       label: '报警处置措施备案信息（天津）',
-      children: <VehicleAlarmTJForm refInfo={vahTJform} mode={formState} />
+      children: <VehicleAlarmTJForm form={vahTJform} mode={formState} />
     }
   ];
 

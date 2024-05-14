@@ -24,6 +24,7 @@ const FlexFormItem = props => {
       label={props.label}
       name={props.name}
       rules={props.rules}
+      initialValue={props.text}
       style={{ width: '75%', ...props.itemstyle }}
     >
       {genFormItem()}
@@ -41,7 +42,7 @@ FlexFormItem.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
   rules: PropTypes.array,
-  text: PropTypes.string,
+  text: PropTypes.oneOfType([PropTypes.string, null]),
   options: PropTypes.array,
   selectMode: PropTypes.string,
   placeholder: PropTypes.string,
