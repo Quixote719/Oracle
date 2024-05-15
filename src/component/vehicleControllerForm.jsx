@@ -12,6 +12,7 @@ const VehicleForm = props => {
   const changeFormMode = param => {
     setFormMode(param);
   };
+
   return (
     <div>
       <Form layout="vertical" form={props.form}>
