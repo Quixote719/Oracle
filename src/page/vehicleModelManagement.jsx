@@ -128,11 +128,6 @@ const Flow = () => {
         value: param.vtNSGForm[vtKey]
       };
     });
-    if (res.bulletinCertInfo.releaseDate) {
-      res.bulletinCertInfo.releaseDate = new Date(res.bulletinCertInfo.releaseDate)
-        .toLocaleDateString()
-        .replaceAll('/', '-');
-    }
     return res;
   };
 
@@ -194,7 +189,7 @@ const Flow = () => {
     {
       key: 'VehicleCertificateForm',
       label: '公告/认证相关信息',
-      children: <VehicleCertificateForm form={vcfform} mode={formState} />
+      children: <VehicleCertificateForm form={vcfform} mode={formState} selectInfo={selectInfo} />
     },
     {
       key: 'VehicleThresholdFormNSG',

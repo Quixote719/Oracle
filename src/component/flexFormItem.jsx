@@ -32,7 +32,10 @@ const FlexFormItem = props => {
   ) : (
     <div className={styles.itemInfo}>
       <div className={styles.formLabel}>{props.label}</div>
-      <div className={styles.formText}>{props.text}</div>
+      <div className={styles.formText}>
+        {props.text}
+        {props.addonAfter}
+      </div>
     </div>
   );
 };
@@ -47,7 +50,8 @@ FlexFormItem.propTypes = {
   selectMode: PropTypes.string,
   placeholder: PropTypes.string,
   isDatePicker: PropTypes.bool,
-  itemstyle: PropTypes.object
+  itemstyle: PropTypes.object,
+  addonAfter: PropTypes.string
 };
 
 export default FlexFormItem;

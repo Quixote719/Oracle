@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import FlexFormItem from '@/component/flexFormItem';
 import { vehicleModelColumns } from '@/constant/vehicleModel.js';
 import { getVehicleEnumList } from '@/api/vehicleModelApi';
-import { parseVehicleModelSelectOptions } from '@/utils/compMethods';
+import { addOtherOption, parseVehicleModelSelectOptions } from '@/utils/compMethods';
 import { pageSizeOpt } from '@/constant/vehicleModel';
 import { useStore } from '@/store';
 import styles from '@/page/index.module.less';
@@ -122,7 +122,7 @@ const VehicleModelManagement = () => {
                     formformat="edit"
                     name="vehicleBrand"
                     itemstyle={{ width: '100%' }}
-                    options={selectInfo.vehicleRegistrationBrand || []}
+                    options={addOtherOption(selectInfo.vehicleRegistrationBrand)}
                   />
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
@@ -139,7 +139,7 @@ const VehicleModelManagement = () => {
                     formformat="edit"
                     name="energyType"
                     itemstyle={{ width: '100%' }}
-                    options={selectInfo.energyType || []}
+                    options={addOtherOption(selectInfo.energyType)}
                   />
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
@@ -148,7 +148,7 @@ const VehicleModelManagement = () => {
                     formformat="edit"
                     name="specifications"
                     itemstyle={{ width: '100%' }}
-                    options={selectInfo.specifications || []}
+                    options={addOtherOption(selectInfo.specifications)}
                   />
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
