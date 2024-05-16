@@ -14,11 +14,20 @@ const DataCenter = () => {
       <div className={styles.menuPage}>
         <div className={styles.card}>
           <div className={styles.topSection}>
-            <Button className={styles.lightBtn}>历史数据</Button>
-            <Button className={styles.lightBtn}>车辆管理</Button>
-            <Button className={styles.lightBtn}>终端管理</Button>
-            <Button className={styles.queryBtn}>查询</Button>
+            <Button id={'historyBtn'} className={styles.lightBtn}>
+              历史数据
+            </Button>
+            <Button id={'vehicleBtn'} className={styles.lightBtn}>
+              车辆管理
+            </Button>
+            <Button id={'terminalBtn'} className={styles.lightBtn}>
+              终端管理
+            </Button>
+            <Button id={'vinSearchBtn'} className={styles.queryBtn}>
+              查询
+            </Button>
             <Input
+              id={'vinSearchInput'}
               className={styles.inlineSearch}
               placeholder={'VIN'}
               suffix={<SearchOutlined />}
@@ -46,7 +55,7 @@ const DataCenter = () => {
             </div>
             <div className={styles.rightSection}>
               <InfoSection
-                compstyle={{ marginBottom: 20 }}
+                compstyle={{ marginBottom: 30 }}
                 header={'整车数据'}
                 info={{
                   是否补发: '是',
@@ -57,8 +66,19 @@ const DataCenter = () => {
                 }}
               />
               <InfoSection
-                compstyle={{ marginBottom: 20 }}
+                compstyle={{ marginBottom: 30 }}
                 header={'驱动电机数据'}
+                info={{
+                  是否补发: '是',
+                  车辆状态: '熄火',
+                  总电压: '435.9',
+                  加速踏板行程值: '0%',
+                  制动踏板状态: '制动关'
+                }}
+              />
+              <InfoSection
+                compstyle={{ marginBottom: 30 }}
+                header={'发动电机数据'}
                 info={{
                   是否补发: '是',
                   车辆状态: '熄火',

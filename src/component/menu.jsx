@@ -19,9 +19,24 @@ const MenuApp = () => {
   }
 
   const menuItems = [
-    getItem(<div className={styles.vehicleMenuItem}>数据中心</div>, 'dataCenter'),
-    getItem(<div className={styles.vehicleMenuItem}>车型管理</div>, 'vehicleModelList'),
-    getItem(<div className={styles.vehicleMenuItem}>车辆管理</div>, 'vehicleList')
+    getItem(
+      <div id={'dataCenterMenuItem'} className={styles.vehicleMenuItem}>
+        数据中心
+      </div>,
+      'dataCenter'
+    ),
+    getItem(
+      <div id={'vehicleModelMenuItem'} className={styles.vehicleMenuItem}>
+        车型管理
+      </div>,
+      'vehicleModelList'
+    ),
+    getItem(
+      <div id={'vehicleMenuItem'} className={styles.vehicleMenuItem}>
+        车辆管理
+      </div>,
+      'vehicleList'
+    )
   ];
 
   const menuClick = param => {

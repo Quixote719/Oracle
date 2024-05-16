@@ -39,16 +39,9 @@
 }
 
 .menuPage {
-  width: calc(100vw - 340px);
-  margin-left: 300px;
+  width: calc(100vw - 280px);
+  margin-left: 260px;
   margin-top: 20px;
-  display: inline-block;
-}
-
-.chartBlock {
-  width: calc(100vw - 340px);
-  margin-left: 300px;
-  margin-top: 30px;
   display: inline-block;
 }
 
@@ -146,19 +139,24 @@
 }
 
 .leftSection {
-  width: 39%;
+  width: 50vh;
   height: 100%;
   display: inline-block;
 }
 
 .rightSection {
   float: right;
-  width: 60%;
+  width: calc(100% - 50vh - 20px);
   height: 100%;
+  overflow: auto;
 }
 
+.vehicleMapInfo {
+  margin-top: 30px;
+}
 .infoPair {
   margin: 15px;
+  font-size: 14px;
 }
 
 .infoKey,
@@ -167,12 +165,12 @@
 }
 
 .infoKey {
-  width: 45%;
+  width: 24%;
   color: #4c4843;
   font-weight: 300;
 }
 
 .infoVal {
-  width: 54%;
+  width: 74%;
   font-weight: 400;
 }
