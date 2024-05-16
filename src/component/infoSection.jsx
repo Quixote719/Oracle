@@ -7,8 +7,8 @@ const InfoSection = props => {
     if (typeof param === 'object') {
       return Object.keys(param).map((infoKey, index) => (
         <div key={index} className={styles.infoPair}>
-          <div className={styles.infoKey}>{infoKey}</div>
-          <div className={styles.infoVal}>{param[infoKey]}</div>
+          <div className={styles.infoPairKey}>{infoKey}</div>
+          <div className={styles.infoPairVal}>{param[infoKey]}</div>
         </div>
       ));
     }
