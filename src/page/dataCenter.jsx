@@ -1,12 +1,51 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Button, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import Header from '@/component/header';
 import Menu from '@/component/menu';
 import InfoSection from '@/component/infoSection';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '@/store';
+import { toJS } from 'mobx';
+import { useNavigate } from 'react-router-dom';
 import styles from '@/page/index.module.less';
 
 const DataCenter = () => {
+  const vinInputRef = useRef('');
+  const navigate = useNavigate();
+  const { dataCenterStore } = useStore();
+
+  const routeHistoryData = () => {};
+
+  const routeVehicleManagement = () => {
+    navigate('/vehicleList');
+  };
+
+  const routeTerminalManagement = () => {};
+
+  const vinSearch = () => {
+    dataCenterStore.fetchVehicleInfoByVin(`?vin=${vinInputRef.current?.input?.value}`);
+  };
+
+  const genInfoSection = () => {
+    const vehicleInfo = toJS(dataCenterStore.vehicleInfo);
+    const infoKeyArr = Object.keys(vehicleInfo).filter(
+      infoKey =>
+        Object.prototype.toString.call(vehicleInfo[infoKey]) === '[object Object]' ||
+        Object.prototype.toString.call(vehicleInfo[infoKey]) === '[object Array]'
+    );
+    return infoKeyArr.map((infoKey, index) => {
+      return (
+        <InfoSection
+          key={index}
+          compstyle={{ marginBottom: 30 }}
+          header={infoKey}
+          info={vehicleInfo[infoKey]}
+        />
+      );
+    });
+  };
+
   return (
     <div>
       <Header />
@@ -14,19 +53,24 @@ const DataCenter = () => {
       <div className={styles.menuPage}>
         <div className={styles.card}>
           <div className={styles.topSection}>
-            <Button id={'historyBtn'} className={styles.lightBtn}>
+            <Button id={'historyBtn'} className={styles.lightBtn} onClick={routeHistoryData}>
               历史数据
             </Button>
-            <Button id={'vehicleBtn'} className={styles.lightBtn}>
+            <Button id={'vehicleBtn'} className={styles.lightBtn} onClick={routeVehicleManagement}>
               车辆管理
             </Button>
-            <Button id={'terminalBtn'} className={styles.lightBtn}>
+            <Button
+              id={'terminalBtn'}
+              className={styles.lightBtn}
+              onClick={routeTerminalManagement}
+            >
               终端管理
             </Button>
-            <Button id={'vinSearchBtn'} className={styles.queryBtn}>
+            <Button id={'vinSearchBtn'} className={styles.queryBtn} onClick={vinSearch}>
               查询
             </Button>
             <Input
+              ref={vinInputRef}
               id={'vinSearchInput'}
               className={styles.inlineSearch}
               placeholder={'VIN'}
@@ -53,41 +97,7 @@ const DataCenter = () => {
                 </div>
               </div>
             </div>
-            <div className={styles.rightSection}>
-              <InfoSection
-                compstyle={{ marginBottom: 30 }}
-                header={'整车数据'}
-                info={{
-                  是否补发: '是',
-                  车辆状态: '熄火',
-                  总电压: '435.9',
-                  加速踏板行程值: '0%',
-                  制动踏板状态: '制动关'
-                }}
-              />
-              <InfoSection
-                compstyle={{ marginBottom: 30 }}
-                header={'驱动电机数据'}
-                info={{
-                  是否补发: '是',
-                  车辆状态: '熄火',
-                  总电压: '435.9',
-                  加速踏板行程值: '0%',
-                  制动踏板状态: '制动关'
-                }}
-              />
-              <InfoSection
-                compstyle={{ marginBottom: 30 }}
-                header={'发动电机数据'}
-                info={{
-                  是否补发: '是',
-                  车辆状态: '熄火',
-                  总电压: '435.9',
-                  加速踏板行程值: '0%',
-                  制动踏板状态: '制动关'
-                }}
-              />
-            </div>
+            <div className={styles.rightSection}>{genInfoSection()}</div>
             <div></div>
           </div>
         </div>
@@ -96,4 +106,4 @@ const DataCenter = () => {
   );
 };
 
-export default DataCenter;
+export default observer(DataCenter);

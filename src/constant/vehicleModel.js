@@ -48,8 +48,8 @@ const vehicleModelColumns = [
   },
   {
     title: '上报平台',
-    dataIndex: 'modelSalesName',
-    key: 'modelSalesName'
+    dataIndex: 'reportPlatform',
+    key: 'reportPlatform'
   },
   {
     title: '操作',
