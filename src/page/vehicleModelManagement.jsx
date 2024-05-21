@@ -134,12 +134,21 @@ const Flow = () => {
   const onVehicleModelFinish = () => {
     const validateRes = validateFields();
     let res = parseVehicleModel(validateRes);
+    Object.keys(res.bulletinCertInfo || {}).forEach(bulletinKey => {
+      if (Array.isArray(res.bulletinCertInfo[bulletinKey]?.fileList)) {
+        delete res.bulletinCertInfo[bulletinKey];
+      }
+    });
     submitVehicleModel(res)
-      .then(() => {
-        message.success('保存成功');
+      .then(res => {
+        if (res.code === 200) {
+          message.success('保存成功');
+        } else {
+          message.error(`保存失败：${(res?.msg || '').toString()}`);
+        }
       })
       .catch(err => {
-        message.error(`保存失败${err.toString()}`);
+        message.error(`保存失败：${err.toString()}`);
       });
   };
 

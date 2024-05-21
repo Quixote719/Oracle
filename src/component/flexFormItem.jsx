@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Input, Select, DatePicker } from 'antd';
+import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import styles from './compStyle.module.less';
 
@@ -24,7 +25,7 @@ const FlexFormItem = props => {
       label={props.label}
       name={props.name}
       rules={props.rules}
-      initialValue={props.text}
+      initialValue={props.isDatePicker ? dayjs(props.text) : props.text}
       style={{ width: '75%', ...props.itemstyle }}
     >
       {genFormItem()}

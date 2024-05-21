@@ -7,7 +7,7 @@ import { toJS } from 'mobx';
 import { useNavigate } from 'react-router-dom';
 import FlexFormItem from '@/component/flexFormItem';
 import { vehicleModelColumns } from '@/constant/vehicleModel.js';
-import { getVehicleEnumList } from '@/api/vehicleModelApi';
+import { getVehicleEnumList, exportVehicleModel } from '@/api/vehicleModelApi';
 import { addOtherOption, parseVehicleModelSelectOptions } from '@/utils/compMethods';
 import { pageSizeOpt } from '@/constant/vehicleModel';
 import { useStore } from '@/store';
@@ -38,6 +38,35 @@ const VehicleModelManagement = () => {
     };
   }, []);
 
+  useEffect(() => {
+    renderSelectionCol('producerFullName');
+    renderSelectionCol('vehicleRegistrationBrand');
+    renderSelectionCol('reportPlatform', 'governmentPlatform');
+  }, [selectInfo]);
+
+  const renderSelectionCol = (recordKey, selectCol) => {
+    let targetCol = vehicleModelColumns.find(item => item.dataIndex === recordKey);
+    if (!targetCol) return;
+    targetCol.render = (_, record) => {
+      const selectColName = selectCol || recordKey;
+      if (Array.isArray(selectInfo[selectColName])) {
+        const resArr = selectInfo[selectColName].filter(selectItem => {
+          if (Array.isArray(record[recordKey])) {
+            return record[recordKey].includes(selectItem?.value);
+          } else {
+            return selectItem?.value === record[recordKey];
+          }
+        });
+        let res = '';
+        resArr.forEach(item => {
+          res += item.itemCname + ' ';
+        });
+        return res;
+      }
+      return record[recordKey];
+    };
+  };
+
   const tableChange = (pagination, filters, sorter) => {
     let queryUrl = '';
     if (sorter?.order) {
@@ -50,7 +79,7 @@ const VehicleModelManagement = () => {
   };
 
   const exportRecord = () => {
-    console.log('exportRecord', selectedRowKeys);
+    exportVehicleModel({ ids: selectedRowKeys, queryParams: {} });
   };
 
   const createNew = () => {
@@ -109,6 +138,7 @@ const VehicleModelManagement = () => {
               <Row gutter={24}>
                 <Col className={styles.searchConditionCol} span={8}>
                   <FlexFormItem
+                    id={'vmlProducer'}
                     label="生产企业"
                     formformat="edit"
                     name="producer"
@@ -118,6 +148,7 @@ const VehicleModelManagement = () => {
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
                   <FlexFormItem
+                    id={'vmlVehicleBrand'}
                     label="车辆备案品牌"
                     formformat="edit"
                     name="vehicleBrand"
@@ -127,6 +158,7 @@ const VehicleModelManagement = () => {
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
                   <FlexFormItem
+                    id={'vmlVehicleRegistrationModel'}
                     label="车辆登记型号"
                     formformat="edit"
                     name="vehicleRegistrationModel"
@@ -135,6 +167,7 @@ const VehicleModelManagement = () => {
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
                   <FlexFormItem
+                    id={'vmlEnergyType'}
                     label="能源类型"
                     formformat="edit"
                     name="energyType"
@@ -144,6 +177,7 @@ const VehicleModelManagement = () => {
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
                   <FlexFormItem
+                    id={'vmlSpecifications'}
                     label="规约"
                     formformat="edit"
                     name="specifications"
@@ -153,6 +187,7 @@ const VehicleModelManagement = () => {
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
                   <FlexFormItem
+                    id={'vmlGovernmentPlatform'}
                     label="上报平台"
                     formformat="edit"
                     name="governmentPlatform"
