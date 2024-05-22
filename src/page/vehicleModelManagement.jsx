@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Collapse, Button, message } from 'antd';
+import { observer } from 'mobx-react-lite';
 import Header from '@/component/header';
 import Menu from '@/component/menu';
 import { useLocation } from 'react-router-dom';
@@ -15,8 +16,8 @@ import VehicleCertificateForm from '@/component/vehicleCertificateForm';
 import VehicleThresholdNSGForm from '@/component/vehicleThresholdNSGForm';
 import VehicleThresholdTJForm from '@/component/vehicleThresholdTJForm';
 import VehicleAlarmTJForm from '@/component/vehicleAlarmTJForm.jsx';
-import { getVehicleEnumList, submitVehicleModel } from '@/api/vehicleModelApi';
-import { parseVehicleModelSelectOptions } from '@/utils/compMethods';
+import { submitVehicleModel } from '@/api/vehicleModelApi';
+import { useStore } from '@/store';
 import styles from './index.module.less';
 /*
   every form should be a component, based on the mode(create/edit/observe), the form item 
@@ -25,7 +26,7 @@ import styles from './index.module.less';
 */
 
 const Flow = () => {
-  const [selectInfo, setSelectInfo] = useState({});
+  const { enumDataStore } = useStore();
   const [vbiform] = Form.useForm();
   const [vdmform] = Form.useForm();
   const [vtform] = Form.useForm();
@@ -44,9 +45,7 @@ const Flow = () => {
   let vtTJFormRefs = {};
 
   useEffect(() => {
-    getVehicleEnumList().then(data => {
-      setSelectInfo(parseVehicleModelSelectOptions(data));
-    });
+    enumDataStore.fetchEnumData();
     if (pagePath?.state?.createNew) {
       setFormState('edit');
     }
@@ -156,7 +155,9 @@ const Flow = () => {
     {
       key: 'VehicleBasicInfoForm',
       label: '车辆基本信息',
-      children: <VehicleBasicInfoForm form={vbiform} mode={formState} selectInfo={selectInfo} />
+      children: (
+        <VehicleBasicInfoForm form={vbiform} mode={formState} selectInfo={enumDataStore.enumData} />
+      )
     },
     {
       key: 'VehicleChargerForm',
@@ -166,13 +167,23 @@ const Flow = () => {
     {
       key: 'VehicleMotorForm',
       label: '驱动电机信息',
-      children: <VehicleMotorForm refInfo={vmFormRefs} mode={formState} selectInfo={selectInfo} />
+      children: (
+        <VehicleMotorForm
+          refInfo={vmFormRefs}
+          mode={formState}
+          selectInfo={enumDataStore.enumData}
+        />
+      )
     },
     {
       key: 'VehicleEnergyStorageForm',
       label: '车载储能信息',
       children: (
-        <VehicleEnergyStorageForm refInfo={vesFormRefs} mode={formState} selectInfo={selectInfo} />
+        <VehicleEnergyStorageForm
+          refInfo={vesFormRefs}
+          mode={formState}
+          selectInfo={enumDataStore.enumData}
+        />
       )
     },
     {
@@ -198,7 +209,13 @@ const Flow = () => {
     {
       key: 'VehicleCertificateForm',
       label: '公告/认证相关信息',
-      children: <VehicleCertificateForm form={vcfform} mode={formState} selectInfo={selectInfo} />
+      children: (
+        <VehicleCertificateForm
+          form={vcfform}
+          mode={formState}
+          selectInfo={enumDataStore.enumData}
+        />
+      )
     },
     {
       key: 'VehicleThresholdFormNSG',
@@ -237,4 +254,4 @@ const Flow = () => {
   );
 };
 
-export default Flow;
+export default observer(Flow);

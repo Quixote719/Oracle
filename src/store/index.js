@@ -1,11 +1,13 @@
 import VehicleModelStore from './vehicleModelStore';
 import DataCenterStore from './dataCenterStore';
+import EnumDataStore from './enumDataStore';
 import React from 'react';
 
 class Store {
   constructor() {
     this.vehicleModelStore = new VehicleModelStore();
     this.dataCenterStore = new DataCenterStore();
+    this.enumDataStore = new EnumDataStore();
   }
 }
 

@@ -75,6 +75,7 @@ const SubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'ratedVoltage'} id={'ratedVoltage'}>
           <FlexFormItem
             formformat={props.mode}
+            placeholder="仅支持输入数字，小于100000，最多到小数点后3位"
             text={props.initialData?.ratedVoltage}
             label="驱动电机额定电压(V)"
             name="ratedVoltage"
@@ -84,6 +85,7 @@ const SubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'ratedPower'} id={'ratedPower'}>
           <FlexFormItem
             formformat={props.mode}
+            placeholder="仅支持输入数字，小于10000000，最多到小数点后3位"
             text={props.initialData?.ratedPower}
             label="驱动电机额定功率(KW)"
             name="ratedPower"
@@ -93,6 +95,7 @@ const SubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'ratedSpeed'} id={'ratedSpeed'}>
           <FlexFormItem
             formformat={props.mode}
+            placeholder="仅支持输入数字，小于100000000，最多到小数点后3位"
             text={props.initialData?.ratedSpeed}
             label="驱动电机额定转速(r/min)"
             name="ratedSpeed"
@@ -103,6 +106,7 @@ const SubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'ratedTorque'} id={'ratedTorque'}>
           <FlexFormItem
             formformat={props.mode}
+            placeholder="仅支持输入数字，小于100000000，最多到小数点后3位"
             text={props.initialData?.ratedTorque}
             label="驱动电机额定转距(N.m)"
             name="ratedTorque"
@@ -149,6 +153,7 @@ const SubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'maxOperatingCurrent'} id={'maxOperatingCurrent'}>
           <FlexFormItem
             formformat={props.mode}
+            placeholder="仅支持输入数字，小于100000，最多到小数点后3位"
             text={props.initialData?.maxOperatingCurrent}
             label="驱动电机最大工作电流(A)"
             name="maxOperatingCurrent"
@@ -158,6 +163,7 @@ const SubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'peakPower'} id={'peakPower'}>
           <FlexFormItem
             formformat={props.mode}
+            placeholder="仅支持输入数字，小于10000000，最多到小数点后3位"
             text={props.initialData?.peakPower}
             label="驱动电机峰值功率(KW)"
             name="peakPower"
@@ -167,6 +173,7 @@ const SubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'maxSpeed'} id={'maxSpeed'}>
           <FlexFormItem
             formformat={props.mode}
+            placeholder="仅支持输入数字，小于100000000，最多到小数点后3位"
             text={props.initialData?.maxSpeed}
             label="驱动电机最高转速(r/min)"
             name="maxSpeed"
@@ -177,6 +184,7 @@ const SubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'peakTorque'} id={'peakTorque'}>
           <FlexFormItem
             formformat={props.mode}
+            placeholder="仅支持输入数字，小于100000000，最多到小数点后3位"
             text={props.initialData?.peakTorque}
             label="驱动电机峰值转矩(N.m)"
             name="peakTorque"
@@ -186,6 +194,7 @@ const SubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'maxOutputTorque'} id={'maxOutputTorque'}>
           <FlexFormItem
             formformat={props.mode}
+            placeholder="仅支持输入数字，小于100000000，最多到小数点后3位"
             text={props.initialData?.maxOutputTorque}
             label="驱动电机最大输出转矩(N.m)"
             name="maxOutputTorque"

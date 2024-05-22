@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Modal, Button } from 'antd';
 import PropTypes from 'prop-types';
 import styles from '@/component/compStyle.module.less';
 
 const InfoSection = props => {
+  const [infoModalVisible, setInfoModalVisible] = useState(false);
   const pluralToSingular = param => {
     if (typeof param !== 'string') return '';
     if (param.endsWith('es')) {
@@ -11,6 +13,26 @@ const InfoSection = props => {
       param = param.slice(0, param.length - 1);
     }
     return param;
+  };
+
+  const closeInfoModal = () => {
+    setInfoModalVisible(false);
+  };
+
+  const genInfoValue = (info, targetKey) => {
+    let targetVal = info[targetKey];
+    if (Array.isArray(targetVal) && targetVal.length > 0) {
+      return (
+        <div
+          className={styles.infoValArr}
+          onClick={() => setInfoModalVisible({ targetKey, targetVal })}
+        >
+          查看
+        </div>
+      );
+    } else {
+      return targetVal;
+    }
   };
 
   const genInfoSection = param => {
@@ -27,7 +49,7 @@ const InfoSection = props => {
       return Object.keys(param || {}).map((infoKey, index) => (
         <div key={index} className={styles.infoPair}>
           <div className={styles.infoPairKey}>{infoKey}</div>
-          <div className={styles.infoPairVal}>{param[infoKey]}</div>
+          <div className={styles.infoPairVal}>{genInfoValue(param, infoKey)}</div>
         </div>
       ));
     }
@@ -37,6 +59,29 @@ const InfoSection = props => {
     <div style={{ ...props.compstyle }}>
       <div className={styles.infoHeader}>{props.header}</div>
       <div className={styles.infoStream}>{genInfoSection(props.info)}</div>
+      <Modal
+        width={'60%'}
+        open={infoModalVisible}
+        onOk={closeInfoModal}
+        onCancel={closeInfoModal}
+        title={infoModalVisible?.targetKey}
+        footer={[
+          <Button key="submit" className={styles.confirmBtn} onClick={closeInfoModal}>
+            确认
+          </Button>
+        ]}
+      >
+        <div className={styles.infoArrValBox}>
+          {(infoModalVisible?.targetVal || []).map((item, index) => {
+            return (
+              <div className={styles.infoArrValElement} key={index}>
+                <div className={styles.eleKey}>{index}</div>
+                <div className={styles.eleVal}>{item}</div>
+              </div>
+            );
+          })}
+        </div>
+      </Modal>
     </div>
   );
 };
