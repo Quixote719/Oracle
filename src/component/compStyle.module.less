@@ -180,17 +180,23 @@ div#devicePackCount {
   display: inline-block;
 }
 
-.infoPairKey {
+.infoPairKey,
+.eleKey {
   color: #4c4843;
   font-weight: 300;
-  display: inline-block;
-  width: 50%;
+  word-break: break-all;
 }
 
-.infoPairVal {
+.infoPairVal,
+.eleVal {
   font-weight: 400;
-  display: inline-block;
+  word-break: break-all;
+}
+
+.infoPairKey,
+.infoPairVal {
   width: 50%;
+  display: inline-block;
 }
 
 .infoHeader {
@@ -202,4 +208,17 @@ div#devicePackCount {
 
 .compSingularTitle {
   padding: 1%;
+}
+
+.infoValArr {
+  color: #035ade;
+  cursor: pointer;
+}
+
+.infoArrValBox {
+  .infoArrValElement {
+    width: 8%;
+    padding: 1%;
+    display: inline-block;
+  }
 }

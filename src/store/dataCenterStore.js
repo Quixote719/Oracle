@@ -13,8 +13,8 @@ class DataCenterStore {
 
   fetchVehicleInfoByVin = param => {
     getVehicleDataByVin(param).then(res => {
-      this.vehicleInfo = res?.data?.data?.data?.payload || {};
-      console.log('vehicleInfo', this.vehicleInfo);
+      const vehicleData = res?.data?.data?.data?.payload || {};
+      this.vehicleInfo = { ...vehicleData, vin: res?.data?.vin };
     });
   };
 }

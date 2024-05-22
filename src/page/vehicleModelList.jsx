@@ -7,24 +7,23 @@ import { toJS } from 'mobx';
 import { useNavigate } from 'react-router-dom';
 import FlexFormItem from '@/component/flexFormItem';
 import { vehicleModelColumns } from '@/constant/vehicleModel.js';
-import { getVehicleEnumList, exportVehicleModel } from '@/api/vehicleModelApi';
-import { addOtherOption, parseVehicleModelSelectOptions } from '@/utils/compMethods';
+import { exportVehicleModel } from '@/api/vehicleModelApi';
+import { addOtherOption } from '@/utils/compMethods';
 import { pageSizeOpt } from '@/constant/vehicleModel';
 import { useStore } from '@/store';
 import styles from '@/page/index.module.less';
 
 const VehicleModelManagement = () => {
+  const { vehicleModelStore, enumDataStore } = useStore();
   const [fromRef] = Form.useForm();
-  const [selectInfo, setSelectInfo] = useState({});
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const { vehicleModelStore } = useStore();
+
   const navigate = useNavigate();
 
   useEffect(() => {
+    enumDataStore.fetchEnumData();
     vehicleModelStore.setTargetRecord(null);
-    getVehicleEnumList().then(data => {
-      setSelectInfo(parseVehicleModelSelectOptions(data));
-    });
+
     let target = vehicleModelColumns.find(item => item.dataIndex === 'operations');
     target.render = (_, record) => {
       return (
@@ -39,18 +38,20 @@ const VehicleModelManagement = () => {
   }, []);
 
   useEffect(() => {
+    renderSelectionCol('energyType');
+    renderSelectionCol('specifications');
     renderSelectionCol('producerFullName');
     renderSelectionCol('vehicleRegistrationBrand');
     renderSelectionCol('reportPlatform', 'governmentPlatform');
-  }, [selectInfo]);
+  }, [enumDataStore.enumData]);
 
   const renderSelectionCol = (recordKey, selectCol) => {
     let targetCol = vehicleModelColumns.find(item => item.dataIndex === recordKey);
     if (!targetCol) return;
     targetCol.render = (_, record) => {
       const selectColName = selectCol || recordKey;
-      if (Array.isArray(selectInfo[selectColName])) {
-        const resArr = selectInfo[selectColName].filter(selectItem => {
+      if (Array.isArray(enumDataStore.enumData[selectColName])) {
+        const resArr = enumDataStore.enumData[selectColName].filter(selectItem => {
           if (Array.isArray(record[recordKey])) {
             return record[recordKey].includes(selectItem?.value);
           } else {
@@ -79,7 +80,7 @@ const VehicleModelManagement = () => {
   };
 
   const exportRecord = () => {
-    exportVehicleModel({ ids: selectedRowKeys, queryParams: {} });
+    exportVehicleModel({ idList: selectedRowKeys, queryParams: {} });
   };
 
   const createNew = () => {
@@ -143,7 +144,7 @@ const VehicleModelManagement = () => {
                     formformat="edit"
                     name="producer"
                     itemstyle={{ width: '100%' }}
-                    options={selectInfo.producerFullName || []}
+                    options={enumDataStore.enumData.producerFullName || []}
                   />
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
@@ -153,7 +154,7 @@ const VehicleModelManagement = () => {
                     formformat="edit"
                     name="vehicleBrand"
                     itemstyle={{ width: '100%' }}
-                    options={addOtherOption(selectInfo.vehicleRegistrationBrand)}
+                    options={addOtherOption(enumDataStore.enumData.vehicleRegistrationBrand)}
                   />
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
@@ -172,7 +173,7 @@ const VehicleModelManagement = () => {
                     formformat="edit"
                     name="energyType"
                     itemstyle={{ width: '100%' }}
-                    options={addOtherOption(selectInfo.energyType)}
+                    options={addOtherOption(enumDataStore.enumData.energyType)}
                   />
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
@@ -182,7 +183,7 @@ const VehicleModelManagement = () => {
                     formformat="edit"
                     name="specifications"
                     itemstyle={{ width: '100%' }}
-                    options={addOtherOption(selectInfo.specifications)}
+                    options={addOtherOption(enumDataStore.enumData.specifications)}
                   />
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
@@ -192,7 +193,7 @@ const VehicleModelManagement = () => {
                     formformat="edit"
                     name="governmentPlatform"
                     itemstyle={{ width: '100%' }}
-                    options={selectInfo.governmentPlatform || []}
+                    options={enumDataStore.enumData.governmentPlatform || []}
                   />
                 </Col>
               </Row>

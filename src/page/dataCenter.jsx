@@ -23,12 +23,13 @@ const DataCenter = () => {
 
   const routeTerminalManagement = () => {};
 
+  const vehicleInfo = toJS(dataCenterStore.vehicleInfo);
+
   const vinSearch = () => {
     dataCenterStore.fetchVehicleInfoByVin(`?vin=${vinInputRef.current?.input?.value}`);
   };
 
   const genInfoSection = () => {
-    const vehicleInfo = toJS(dataCenterStore.vehicleInfo);
     const infoKeyArr = Object.keys(vehicleInfo).filter(
       infoKey =>
         Object.prototype.toString.call(vehicleInfo[infoKey]) === '[object Object]' ||
@@ -85,15 +86,15 @@ const DataCenter = () => {
               <div className={styles.vehicleMapInfo}>
                 <div className={styles.infoPair}>
                   <div className={styles.infoKey}>VIN</div>
-                  <div className={styles.infoVal}>JDAFISROCSAE49105</div>
+                  <div className={styles.infoVal}>{vehicleInfo.vin}</div>
                 </div>
                 <div className={styles.infoPair}>
                   <div className={styles.infoKey}>车牌号</div>
-                  <div className={styles.infoVal}>沪A123456</div>
+                  <div className={styles.infoVal}></div>
                 </div>
                 <div className={styles.infoPair}>
                   <div className={styles.infoKey}>位置</div>
-                  <div className={styles.infoVal}>上海市浦东新区长清路135号</div>
+                  <div className={styles.infoVal}></div>
                 </div>
               </div>
             </div>
