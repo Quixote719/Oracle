@@ -85,6 +85,13 @@ div#devicePackCount {
   margin-left: 15px;
 }
 
+.closeBtn {
+  @platFormBtn();
+  @smallBtn();
+  margin: auto;
+  display: block;
+}
+
 .leftSider {
   width: 240px;
   min-height: calc(100vh - 64px);
@@ -163,7 +170,7 @@ div#devicePackCount {
 .formItemInfoSpan {
   vertical-align: bottom;
   margin-right: 20px;
-  padding-top: 8px;
+  padding-top: 14px;
   display: inline-block;
 }
 
@@ -174,7 +181,7 @@ div#devicePackCount {
 .infoPair {
   box-sizing: border-box;
   margin-right: 1%;
-  padding: 1%;
+  padding: 6px 12px;
   width: 48%;
   font-size: 14px;
   display: inline-block;
@@ -185,6 +192,17 @@ div#devicePackCount {
   color: #4c4843;
   font-weight: 300;
   word-break: break-all;
+}
+
+.eleKey {
+  background: #f7f6fd;
+}
+
+.eleKey,
+.eleVal {
+  font-weight: 600;
+  padding: 15px 0;
+  text-align: center;
 }
 
 .infoPairVal,
@@ -202,12 +220,12 @@ div#devicePackCount {
 .infoHeader {
   font-size: 16px;
   margin-bottom: 14px;
-  padding: 10px 15px;
+  padding: 8px 12px;
   background: #f9f7f6;
 }
 
 .compSingularTitle {
-  padding: 1%;
+  padding: 6px 12px;
 }
 
 .infoValArr {
@@ -217,8 +235,13 @@ div#devicePackCount {
 
 .infoArrValBox {
   .infoArrValElement {
-    width: 8%;
-    padding: 1%;
+    width: 8.8%;
     display: inline-block;
+    box-sizing: border-box;
+  }
+  .infoArrValTitle {
+    width: 12%;
+    display: inline-block;
+    box-sizing: border-box;
   }
 }
