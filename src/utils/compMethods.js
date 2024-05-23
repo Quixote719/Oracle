@@ -1,5 +1,9 @@
 import { other } from '@/constant/vehicleModel';
 
+const getTargetOptionLabel = (options, target) => {
+  return options.find(item => (item.value || '').toString() === (target || '').toString())?.label;
+};
+
 const parseVehicleModelSelectOptions = param => {
   let options = param.data || [];
   let selectDataByType = {};
@@ -33,4 +37,4 @@ const checkOtherOption = (setMethod, targetVal, options) => {
   return setMethod(check);
 };
 
-export { parseVehicleModelSelectOptions, addOtherOption, checkOtherOption };
+export { getTargetOptionLabel, parseVehicleModelSelectOptions, addOtherOption, checkOtherOption };

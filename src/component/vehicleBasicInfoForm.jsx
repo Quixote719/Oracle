@@ -3,7 +3,7 @@ import { Row, Col, Form, Checkbox, Button } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
 import { digitValidator, numberLimitValidator, serialNumberValidator } from '@/utils/validator';
 import { yesOrNo } from '@/constant/vehicleModel';
-import { addOtherOption, checkOtherOption } from '@/utils/compMethods';
+import { getTargetOptionLabel, addOtherOption, checkOtherOption } from '@/utils/compMethods';
 import { useStore } from '@/store';
 import styles from './compStyle.module.less';
 import PropTypes from 'prop-types';
@@ -24,10 +24,6 @@ const VehicleForm = props => {
     { label: '天津', value: '2' },
     { label: '广州', value: '3' }
   ];
-
-  const getTargetOptionLabel = (options, target) => {
-    return options.find(item => item.value === target)?.label;
-  };
 
   const changeFormMode = param => {
     setFormMode(param);
@@ -451,12 +447,12 @@ const VehicleForm = props => {
               rules={[]}
             />
           </Col>
-          <Col span={12} key={'transmissionRatio'} id={'transmissionRatio'}>
+          <Col span={12} key={'transmissionRatios'} id={'transmissionRatios'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleModelStore?.targetRecord?.transmissionRatio}
+              text={vehicleModelStore?.targetRecord?.transmissionRatios}
               label="各档位传动比"
-              name="transmissionRatio"
+              name="transmissionRatios"
               placeholder="可填写多个各档位传动比，用英文逗号隔开；若无传动比可填写'/'"
               rules={[]}
             />
