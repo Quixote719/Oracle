@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Row, Col, Form, Collapse, Button, Modal } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
 import { digitValidator, numberLimitValidator, integerValidator } from '@/utils/validator';
-import { addOtherOption, checkOtherOption } from '@/utils/compMethods';
+import { getTargetOptionLabel, addOtherOption, checkOtherOption } from '@/utils/compMethods';
 import { useStore } from '@/store';
 import styles from './compStyle.module.less';
 import PropTypes from 'prop-types';
@@ -113,7 +113,10 @@ const SubForm = React.forwardRef((props, ref) => {
           <FlexFormItem
             formformat={props.mode}
             label="车载储能装置类型"
-            text={props.initialData?.type}
+            text={getTargetOptionLabel(
+              addOtherOption(selectInfo.vehicleEnergyStorageDeviceType),
+              props.initialData?.type
+            )}
             name="type"
             rules={[]}
             options={addOtherOption(selectInfo.vehicleEnergyStorageDeviceType)}
@@ -180,7 +183,10 @@ const SubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'coolingMethod'} id={'coolingMethod'}>
           <FlexFormItem
             formformat={props.mode}
-            text={props.initialData?.coolingMethod}
+            text={getTargetOptionLabel(
+              addOtherOption(selectInfo.vehicleEnergyStorageDeviceCoolingMethod),
+              props.initialData?.coolingMethod
+            )}
             label="车载储能装置冷却方式"
             name="coolingMethod"
             rules={[]}

@@ -3,7 +3,7 @@ import { Row, Col, Form, Button } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
 import UploadFormItem from '@/component/uploadFormItem';
 import { yesOrNo } from '@/constant/vehicleModel';
-import { addOtherOption, checkOtherOption } from '@/utils/compMethods';
+import { getTargetOptionLabel, addOtherOption, checkOtherOption } from '@/utils/compMethods';
 import { useStore } from '@/store';
 import styles from './compStyle.module.less';
 import PropTypes from 'prop-types';
@@ -53,7 +53,10 @@ const VehicleForm = props => {
           <Col span={12} key={'exempt'} id={'exempt'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleModelStore?.targetRecord?.bulletinCertInfo?.exempt}
+              text={getTargetOptionLabel(
+                yesOrNo || [],
+                vehicleModelStore?.targetRecord?.bulletinCertInfo?.exempt
+              )}
               label="是否免征"
               name="exempt"
               rules={[]}
@@ -63,7 +66,10 @@ const VehicleForm = props => {
           <Col span={12} key={'fuel'} id={'fuel'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleModelStore?.targetRecord?.bulletinCertInfo?.fuel}
+              text={getTargetOptionLabel(
+                yesOrNo || [],
+                vehicleModelStore?.targetRecord?.bulletinCertInfo?.fuel
+              )}
               label="是否燃油"
               name="fuel"
               rules={[]}
@@ -73,7 +79,10 @@ const VehicleForm = props => {
           <Col span={12} key={'environmentallyFriendly'} id={'environmentallyFriendly'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleModelStore?.targetRecord?.bulletinCertInfo?.environmentallyFriendly}
+              text={getTargetOptionLabel(
+                yesOrNo || [],
+                vehicleModelStore?.targetRecord?.bulletinCertInfo?.environmentallyFriendly
+              )}
               label="是否环保"
               name="environmentallyFriendly"
               rules={[]}
@@ -83,7 +92,10 @@ const VehicleForm = props => {
           <Col span={12} key={'fromOrganization'} id={'fromOrganization'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleModelStore?.targetRecord?.bulletinCertInfo?.fromOrganization}
+              text={getTargetOptionLabel(
+                yesOrNo || [],
+                vehicleModelStore?.targetRecord?.bulletinCertInfo?.fromOrganization
+              )}
               label="是否本机构"
               name="fromOrganization"
               rules={[]}
@@ -127,7 +139,10 @@ const VehicleForm = props => {
           <Col span={12} key={'specifications'} id={'specifications'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleModelStore?.targetRecord?.bulletinCertInfo?.specifications}
+              text={getTargetOptionLabel(
+                addOtherOption(selectInfo.specifications),
+                vehicleModelStore?.targetRecord?.bulletinCertInfo?.specifications
+              )}
               label="规约"
               name="specifications"
               rules={[]}
