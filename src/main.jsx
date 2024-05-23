@@ -34,7 +34,16 @@ const root = createRoot(document.getElementById('root'));
 
 enableMocking().then(() => {
   root.render(
-    <ConfigProvider locale={zhCN}>
+    <ConfigProvider
+      locale={zhCN}
+      theme={{
+        components: {
+          Modal: {
+            titleFontSize: 24
+          }
+        }
+      }}
+    >
       <App />
     </ConfigProvider>
   );

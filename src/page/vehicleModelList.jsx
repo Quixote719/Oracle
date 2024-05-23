@@ -74,7 +74,7 @@ const VehicleModelManagement = () => {
       queryUrl += `&orderBy=${sorter.columnKey}&ascending=${sorter.order === 'ascend' ? true : false}`;
     }
     if (pagination) {
-      queryUrl += `&page=${pagination?.current}`;
+      queryUrl += `&page=${pagination?.current}&size=${pagination?.pageSize}`;
     }
     requestVehicleModelData(queryUrl);
   };
@@ -224,7 +224,6 @@ const VehicleModelManagement = () => {
             onChange={tableChange}
             pagination={{
               pageSizeOptions: pageSizeOpt,
-              size: modelData.size,
               total: modelData.total,
               current: modelData.page,
               position: ['bottomCenter']
