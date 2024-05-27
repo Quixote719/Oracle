@@ -26,7 +26,7 @@ import styles from './index.module.less';
 */
 
 const Flow = () => {
-  const { enumDataStore } = useStore();
+  const { vehicleModelStore, enumDataStore } = useStore();
   const [vbiform] = Form.useForm();
   const [vdmform] = Form.useForm();
   const [vtform] = Form.useForm();
@@ -51,18 +51,20 @@ const Flow = () => {
     }
   }, []);
 
+  const normalForms = {
+    vbiform,
+    vdmform,
+    vtform,
+    vhfform,
+    vclform,
+    vcfform,
+    vtNSGForm,
+    vahTJform
+  };
+
+  const formLists = { vcFormRefs, vmFormRefs, vesFormRefs, vtTJFormRefs };
+
   const validateFields = () => {
-    const normalForms = {
-      vbiform,
-      vdmform,
-      vtform,
-      vhfform,
-      vclform,
-      vcfform,
-      vtNSGForm,
-      vahTJform
-    };
-    const formLists = { vcFormRefs, vmFormRefs, vesFormRefs, vtTJFormRefs };
     let res = {};
     Object.keys(normalForms).forEach(formName => {
       if (normalForms[formName] && typeof normalForms[formName].validateFields === 'function') {
@@ -89,27 +91,82 @@ const Flow = () => {
     else if (param.includes(3)) return 3;
   };
 
+  const updateVehicleModel = ({ curFormVals, formNames = [], recordForms = [] }) => {
+    let res = {};
+    if (pagePath?.state?.createNew) {
+      formNames.forEach(formName => {
+        res = Array.isArray(curFormVals[formName])
+          ? curFormVals[formName]
+          : { ...res, ...curFormVals[formName] };
+      });
+    } else {
+      recordForms.forEach(recordForm => {
+        if (Array.isArray(vehicleModelStore.targetRecord?.[recordForm])) {
+          res = vehicleModelStore.targetRecord?.[recordForm];
+        } else {
+          res = { ...res, ...vehicleModelStore.targetRecord?.[recordForm] };
+        }
+      });
+      formNames.forEach(formName => {
+        let targetForm = formName.includes('Refs') ? formLists[formName] : normalForms[formName];
+        console.log('targetForm', targetForm);
+        if (Array.isArray(targetForm?.info)) {
+          targetForm.info.forEach((item, index) => {
+            if (item?.current && Array.isArray(res)) {
+              res[index] = { ...res[index], ...item.current.getFieldsValue() };
+            }
+          });
+        } else if (targetForm?.isFieldsTouched && targetForm?.isFieldsTouched()) {
+          res = Array.isArray(curFormVals[formName])
+            ? curFormVals[formName]
+            : { ...res, ...curFormVals[formName] };
+        }
+      });
+    }
+    return res;
+  };
+
   const parseVehicleModel = param => {
     let res = {};
     res = {
-      ...param.vbiform,
-      ...param.vclform,
-      onboardChargers: param.vcFormRefs,
-      driverMotors: param.vmFormRefs,
-      energyStorageDevices: param.vesFormRefs,
+      ...updateVehicleModel({ curFormVals: param, formNames: ['vbiform', 'vclform'] }),
+      onboardChargers: updateVehicleModel({
+        curFormVals: param,
+        formNames: ['vcFormRefs'],
+        recordForms: ['onboardChargers']
+      }),
+      driverMotors: updateVehicleModel({
+        curFormVals: param,
+        formNames: ['vmFormRefs'],
+        recordForms: ['driverMotors']
+      }),
+      energyStorageDevices: updateVehicleModel({
+        curFormVals: param,
+        formNames: ['vesFormRefs'],
+        recordForms: ['energyStorageDevices']
+      }),
       generatorTerminal: {
-        ...param.vtform,
-        ...param.vdmform
+        ...updateVehicleModel({
+          curFormVals: param,
+          formNames: ['vtform', 'vdmform'],
+          recordForms: ['generatorTerminal']
+        })
       },
-      hybridFuelPart: {
-        ...param.vhfform
-      },
-      bulletinCertInfo: {
-        ...param.vcfform
-      },
-      alarmRegistration: {
-        ...param.vahTJform
-      },
+      hybridFuelPart: updateVehicleModel({
+        curFormVals: param,
+        formNames: ['vhfform'],
+        recordForms: ['hybridFuelPart']
+      }),
+      bulletinCertInfo: updateVehicleModel({
+        curFormVals: param,
+        formNames: ['vcfform'],
+        recordForms: ['bulletinCertInfo']
+      }),
+      alarmRegistration: updateVehicleModel({
+        curFormVals: param,
+        formNames: ['vahTJform'],
+        recordForms: ['alarmRegistration']
+      }),
       levelOneAlarms: {
         ...param.vtTJFormRefs[2]
       },
@@ -127,17 +184,21 @@ const Flow = () => {
         value: param.vtNSGForm[vtKey]
       };
     });
+    Object.keys(res?.bulletinCertInfo || {}).forEach(bulletinKey => {
+      if (Array.isArray(res.bulletinCertInfo[bulletinKey]?.fileList)) {
+        delete res.bulletinCertInfo[bulletinKey];
+      }
+    });
+    if (!pagePath?.state?.createNew) {
+      res.id = vehicleModelStore.targetRecord?.id;
+    }
     return res;
   };
 
   const onVehicleModelFinish = () => {
     const validateRes = validateFields();
     let res = parseVehicleModel(validateRes);
-    Object.keys(res.bulletinCertInfo || {}).forEach(bulletinKey => {
-      if (Array.isArray(res.bulletinCertInfo[bulletinKey]?.fileList)) {
-        delete res.bulletinCertInfo[bulletinKey];
-      }
-    });
+
     submitVehicleModel(res)
       .then(res => {
         if (res.code === 200) {

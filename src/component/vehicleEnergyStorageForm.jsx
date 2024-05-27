@@ -24,12 +24,12 @@ const SubForm = React.forwardRef((props, ref) => {
             rules={[]}
           />
         </Col>
-        <Col span={12} key={'warrantyPeriodOfVehicle'} id={'warrantyPeriodOfVehicle'}>
+        <Col span={12} key={'warrantyPeriod'} id={'warrantyPeriod'}>
           <FlexFormItem
             formformat={props.mode}
-            text={props.initialData?.warrantyPeriodOfVehicle}
+            text={props.initialData?.warrantyPeriod}
             label="车载储能装置质保期(年/万千米)"
-            name="warrantyPeriodOfVehicle"
+            name="warrantyPeriod"
             rules={[]}
           />
         </Col>
@@ -280,7 +280,7 @@ const SubForm = React.forwardRef((props, ref) => {
             formformat={props.mode}
             text={props.initialData?.cellShapeDimensions}
             label="车载储能装置单体外形尺寸(mm)"
-            name="cellShapeDimensions)"
+            name="cellShapeDimensions"
             rules={[]}
           />
         </Col>
