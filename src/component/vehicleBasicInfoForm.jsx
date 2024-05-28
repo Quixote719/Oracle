@@ -36,7 +36,12 @@ const VehicleForm = props => {
         <Row gutter={24}>
           <Col span={12} key={'reportPlatform'} id={'reportPlatform'}>
             {formMode === 'edit' && (
-              <Form.Item formformat={formMode} label="上报平台" name="reportPlatform">
+              <Form.Item
+                formformat={formMode}
+                label="上报平台"
+                name="reportPlatform"
+                initialValue={vehicleModelStore?.targetRecord?.reportPlatform}
+              >
                 <Checkbox.Group options={reportPlatformOpt} />
               </Form.Item>
             )}
@@ -512,7 +517,7 @@ const VehicleForm = props => {
               formformat={formMode}
               text={vehicleModelStore?.targetRecord?.energyConsumption100km}
               label="百公里电耗(KWH)"
-              name="energyConsumption100km "
+              name="energyConsumption100km"
               placeholder="可填写多个数值，例：20,25（英文逗号隔开）"
               rules={[serialNumberValidator(0, 1000, false, 3)]}
             />
