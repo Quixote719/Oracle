@@ -1,4 +1,4 @@
-import { action, makeAutoObservable, observable } from 'mobx';
+import { action, runInAction, makeAutoObservable, observable } from 'mobx';
 import { getVehicleDataByVin } from '@/api/vehicleModelApi';
 
 class DataCenterStore {
@@ -13,8 +13,10 @@ class DataCenterStore {
 
   fetchVehicleInfoByVin = param => {
     getVehicleDataByVin(param).then(res => {
-      const vehicleData = res?.data?.realTimeReport || {};
-      this.vehicleInfo = { ...vehicleData, vin: res?.data?.vin };
+      runInAction(() => {
+        const vehicleData = res?.data?.realTimeReport || {};
+        this.vehicleInfo = { ...vehicleData, vin: res?.data?.vin };
+      });
     });
   };
 }

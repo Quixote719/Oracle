@@ -46,7 +46,7 @@ FlexFormItem.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
   rules: PropTypes.array,
-  text: PropTypes.oneOfType([PropTypes.string, null]),
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.oneOf([undefined])]),
   options: PropTypes.array,
   selectMode: PropTypes.string,
   placeholder: PropTypes.string,

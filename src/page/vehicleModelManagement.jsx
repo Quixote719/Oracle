@@ -35,9 +35,9 @@ const Flow = () => {
   const [vcfform] = Form.useForm();
   const [vtNSGForm] = Form.useForm();
   const [vahTJform] = Form.useForm();
-
   const [formState, setFormState] = useState(null);
   const pagePath = useLocation();
+  const [messageApi, contextHolder] = message.useMessage();
 
   let vcFormRefs = {};
   let vmFormRefs = {};
@@ -91,12 +91,14 @@ const Flow = () => {
     else if (param.includes(3)) return 3;
   };
 
-  const updateVehicleModel = ({ curFormVals, formNames = [], recordForms = [] }) => {
+  const updateVehicleModel = ({ curFormVals, formNames = [], recordForms = [], formNo }) => {
     let res = {};
     if (pagePath?.state?.createNew) {
       formNames.forEach(formName => {
         res = Array.isArray(curFormVals[formName])
-          ? curFormVals[formName]
+          ? Number.isInteger(formNo)
+            ? curFormVals[formName][formNo]
+            : curFormVals[formName]
           : { ...res, ...curFormVals[formName] };
       });
     } else {
@@ -109,14 +111,20 @@ const Flow = () => {
       });
       formNames.forEach(formName => {
         let targetForm = formName.includes('Refs') ? formLists[formName] : normalForms[formName];
-        console.log('targetForm', targetForm);
+        // 特殊表单，内部包含数组表格, 例如驱动电机信息表格
         if (Array.isArray(targetForm?.info)) {
-          targetForm.info.forEach((item, index) => {
-            if (item?.current && Array.isArray(res)) {
-              res[index] = { ...res[index], ...item.current.getFieldsValue() };
-            }
-          });
-        } else if (targetForm?.isFieldsTouched && targetForm?.isFieldsTouched()) {
+          if (Number.isInteger(formNo)) {
+            res = { ...res, ...targetForm.info?.[formNo]?.current?.getFieldsValue() };
+          } else {
+            targetForm.info.forEach((item, index) => {
+              if (item?.current && Array.isArray(res)) {
+                res[index] = { ...res[index], ...item.current.getFieldsValue() };
+              }
+            });
+          }
+        }
+        // 一般表单
+        else if (targetForm?.isFieldsTouched && targetForm?.isFieldsTouched()) {
           res = Array.isArray(curFormVals[formName])
             ? curFormVals[formName]
             : { ...res, ...curFormVals[formName] };
@@ -167,15 +175,36 @@ const Flow = () => {
         formNames: ['vahTJform'],
         recordForms: ['alarmRegistration']
       }),
-      levelOneAlarms: {
-        ...param.vtTJFormRefs[2]
-      },
-      levelTwoAlarms: {
-        ...param.vtTJFormRefs[1]
-      },
-      levelThreeAlarms: {
-        ...param.vtTJFormRefs[0]
-      }
+      levelOneAlarms:
+        // {
+        //   ...param.vtTJFormRefs[2]
+        // }
+        updateVehicleModel({
+          curFormVals: param,
+          formNames: ['vtTJFormRefs'],
+          recordForms: ['levelOneAlarms'],
+          formNo: 2
+        }),
+      levelTwoAlarms:
+        // {
+        //   ...param.vtTJFormRefs[1]
+        // },
+        updateVehicleModel({
+          curFormVals: param,
+          formNames: ['vtTJFormRefs'],
+          recordForms: ['levelTwoAlarms'],
+          formNo: 1
+        }),
+      levelThreeAlarms:
+        // {
+        //   ...param.vtTJFormRefs[0]
+        // }
+        updateVehicleModel({
+          curFormVals: param,
+          formNames: ['vtTJFormRefs'],
+          recordForms: ['levelThreeAlarms'],
+          formNo: 0
+        })
     };
     res.alarmThresholds = Object.keys(param.vtNSGForm).map(vtKey => {
       return {
@@ -202,13 +231,13 @@ const Flow = () => {
     submitVehicleModel(res)
       .then(res => {
         if (res.code === 200) {
-          message.success('保存成功');
+          messageApi.success('保存成功');
         } else {
-          message.error(`保存失败：${(res?.msg || '').toString()}`);
+          messageApi.error(`保存失败：${(res?.msg || '').toString()}`);
         }
       })
       .catch(err => {
-        message.error(`保存失败：${err.toString()}`);
+        messageApi.error(`保存失败：${err.toString()}`);
       });
   };
 
@@ -310,6 +339,7 @@ const Flow = () => {
         <Button className={styles.saveBtn} onClick={() => onVehicleModelFinish()}>
           保存
         </Button>
+        {contextHolder}
       </div>
     </div>
   );
