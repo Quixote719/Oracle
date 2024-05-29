@@ -11,9 +11,10 @@ const SubForm = React.forwardRef((props, ref) => {
   const [typeOther, setTypeOther] = useState(false);
   const [coolingMethodOther, setCoolingMethodOther] = useState(false);
   const { selectInfo = {} } = props;
+  const { setFieldValue } = props.form;
 
   return (
-    <Form layout="vertical" ref={ref}>
+    <Form layout="vertical" ref={ref} form={props.form}>
       <Row gutter={24}>
         <Col span={12} key={'producer'} id={'producer'}>
           <FlexFormItem
@@ -35,7 +36,11 @@ const SubForm = React.forwardRef((props, ref) => {
             name="type"
             rules={[]}
             options={addOtherOption(selectInfo.driverMotorType)}
-            onChange={param => checkOtherOption(setTypeOther, param, selectInfo.driverMotorType)}
+            onChange={param =>
+              checkOtherOption(setTypeOther, param, selectInfo.driverMotorType, val =>
+                setFieldValue('typeValue', val)
+              )
+            }
           />
         </Col>
         <Col span={12} key={'typeValue'} id={'typeValue'}>
@@ -63,7 +68,8 @@ const SubForm = React.forwardRef((props, ref) => {
               checkOtherOption(
                 setCoolingMethodOther,
                 param,
-                selectInfo.vehicleEnergyStorageDeviceCoolingMethod
+                selectInfo.vehicleEnergyStorageDeviceCoolingMethod,
+                val => setFieldValue('coolingMethodValue', val)
               )
             }
           />
@@ -218,11 +224,16 @@ const VehicleForm = props => {
   const listCopy = useRef([]);
   const maxIndex = useRef(1);
   const deleteIndex = useRef(null);
-  let ref1 = useRef();
-  let ref2 = useRef();
-  let ref3 = useRef();
-  let ref4 = useRef();
-  let refArr = [ref1, ref2, ref3, ref4];
+  const [form1] = Form.useForm();
+  const [form2] = Form.useForm();
+  const [form3] = Form.useForm();
+  const [form4] = Form.useForm();
+  const formArr = [form1, form2, form3, form4];
+  const ref1 = useRef();
+  const ref2 = useRef();
+  const ref3 = useRef();
+  const ref4 = useRef();
+  const refArr = [ref1, ref2, ref3, ref4];
   props.refInfo.info = refArr;
   const [formMode, setFormMode] = useState(props.mode);
   const { vehicleModelStore } = useStore();
@@ -253,6 +264,7 @@ const VehicleForm = props => {
             <SubForm
               mode={formMode}
               ref={refArr[i]}
+              form={formArr[i]}
               selectInfo={props.selectInfo}
               initialData={vehicleModelStore?.targetRecord?.driverMotors[i]}
             />
@@ -266,7 +278,14 @@ const VehicleForm = props => {
           key: `VehicleMotor${maxIndex.current}`,
           label: <div>{`驱动电机${maxIndex.current}`}</div>,
           style: { padding: 5 },
-          children: <SubForm mode={formMode} ref={refArr[0]} selectInfo={props.selectInfo} />
+          children: (
+            <SubForm
+              mode={formMode}
+              ref={refArr[0]}
+              form={formArr[0]}
+              selectInfo={props.selectInfo}
+            />
+          )
         }
       ];
       maxIndex.current++;
@@ -375,6 +394,7 @@ const VehicleForm = props => {
 };
 
 SubForm.propTypes = {
+  form: PropTypes.object,
   selectInfo: PropTypes.object,
   mode: PropTypes.string,
   initialData: PropTypes.object
