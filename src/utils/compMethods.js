@@ -1,6 +1,6 @@
 import { other } from '@/constant/vehicleModel';
 
-const getTargetOptionLabel = (options, target) => {
+const getTargetOptionLabel = (options = [], target) => {
   return options.find(item => (item.value || '').toString() === (target || '').toString())?.label;
 };
 
@@ -28,13 +28,31 @@ const addOtherOption = param => {
   return res;
 };
 
-const checkOtherOption = (setMethod, targetVal, options) => {
-  if (typeof targetVal === 'string' && targetVal.toLowerCase().includes('other'))
-    return setMethod(true);
+const checkOtherOption = (setMethod, targetVal, options, setCustomVal) => {
   const fullOptions = addOtherOption(options);
   const targetItem = fullOptions.filter(item => item.value === targetVal)[0];
-  const check = (targetItem?.itemEname || targetItem?.value || '').toLowerCase().includes('other');
+  const check =
+    (targetItem?.itemEname || targetItem?.value || '').toLowerCase().includes('other') ||
+    (targetItem?.itemCname || '').includes('其他');
+  if (check) {
+    typeof setCustomVal === 'function' && setCustomVal('');
+    return setMethod(true);
+  } else {
+    typeof setCustomVal === 'function' && setCustomVal(targetItem?.itemCname);
+  }
   return setMethod(check);
 };
 
-export { getTargetOptionLabel, parseVehicleModelSelectOptions, addOtherOption, checkOtherOption };
+const setSelectLabel = (targetVal, options, setValFunc) => {
+  const opt = Array.isArray(options) ? options : [];
+  const targetItem = opt.filter(item => item.value === targetVal)[0];
+  setValFunc(targetItem?.itemCname);
+};
+
+export {
+  getTargetOptionLabel,
+  parseVehicleModelSelectOptions,
+  addOtherOption,
+  checkOtherOption,
+  setSelectLabel
+};

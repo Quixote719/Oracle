@@ -1,4 +1,4 @@
-import { action, makeAutoObservable, observable } from 'mobx';
+import { action, runInAction, makeAutoObservable, observable } from 'mobx';
 import { parseVehicleModelSelectOptions } from '@/utils/compMethods';
 import { getVehicleEnumList } from '@/api/vehicleModelApi';
 
@@ -14,7 +14,9 @@ class EnumDataStore {
 
   fetchEnumData = () => {
     getVehicleEnumList().then(res => {
-      this.enumData = parseVehicleModelSelectOptions(res);
+      runInAction(() => {
+        this.enumData = parseVehicleModelSelectOptions(res);
+      });
     });
   };
 }

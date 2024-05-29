@@ -1,4 +1,4 @@
-import { action, makeAutoObservable, observable } from 'mobx';
+import { action, runInAction, makeAutoObservable, observable } from 'mobx';
 import { getVehicleModelList } from '@/api/vehicleModelApi';
 
 class VehicleModelStore {
@@ -35,7 +35,9 @@ class VehicleModelStore {
 
   fetchVMlist = param => {
     getVehicleModelList(param).then(res => {
-      this.vehicleModelList = this.parseVM(res.data);
+      runInAction(() => {
+        this.vehicleModelList = this.parseVM(res.data);
+      });
     });
   };
 }

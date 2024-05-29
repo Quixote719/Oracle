@@ -173,7 +173,7 @@ const VehicleModelManagement = () => {
                     formformat="edit"
                     name="energyType"
                     itemstyle={{ width: '100%' }}
-                    options={addOtherOption(enumDataStore.enumData.energyType)}
+                    options={enumDataStore.enumData.energyType}
                   />
                 </Col>
                 <Col className={styles.searchConditionCol} span={8}>
