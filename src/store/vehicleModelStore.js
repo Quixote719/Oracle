@@ -8,7 +8,8 @@ class VehicleModelStore {
       targetRecord: observable,
       setTargetRecord: action,
       parseVM: action,
-      fetchVMlist: action
+      fetchVMlist: action,
+      clearVMList: action
     });
   }
 
@@ -39,6 +40,10 @@ class VehicleModelStore {
         this.vehicleModelList = this.parseVM(res.data);
       });
     });
+  };
+
+  clearVMList = () => {
+    this.vehicleModelList = [];
   };
 }
 

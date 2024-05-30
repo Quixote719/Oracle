@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { Button, Input } from 'antd';
+import React, { useRef, useState, useEffect } from 'react';
+import { Button, Input, Spin } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import Header from '@/component/header';
 import Menu from '@/component/menu';
@@ -14,6 +14,19 @@ const DataCenter = () => {
   const vinInputRef = useRef('');
   const navigate = useNavigate();
   const { dataCenterStore } = useStore();
+  const [isLoading, setIsLoading] = useState(false);
+  const vehicleInfo = toJS(dataCenterStore.vehicleInfo);
+
+  const vinSearch = () => {
+    setIsLoading(true);
+    dataCenterStore.fetchVehicleInfoByVin(`?vin=${vinInputRef.current?.input?.value}`);
+  };
+
+  useEffect(() => {
+    if (isLoading) {
+      setIsLoading(false);
+    }
+  }, [dataCenterStore.vehicleInfo]);
 
   const routeHistoryData = () => {};
 
@@ -22,12 +35,6 @@ const DataCenter = () => {
   };
 
   const routeTerminalManagement = () => {};
-
-  const vehicleInfo = toJS(dataCenterStore.vehicleInfo);
-
-  const vinSearch = () => {
-    dataCenterStore.fetchVehicleInfoByVin(`?vin=${vinInputRef.current?.input?.value}`);
-  };
 
   const genInfoSection = () => {
     const infoKeyArr = Object.keys(vehicleInfo).filter(
@@ -52,56 +59,62 @@ const DataCenter = () => {
       <Header />
       <Menu />
       <div className={styles.menuPage}>
-        <div className={styles.card}>
-          <div className={styles.topSection}>
-            <Button id={'historyBtn'} className={styles.lightBtn} onClick={routeHistoryData}>
-              历史数据
-            </Button>
-            <Button id={'vehicleBtn'} className={styles.lightBtn} onClick={routeVehicleManagement}>
-              车辆管理
-            </Button>
-            <Button
-              id={'terminalBtn'}
-              className={styles.lightBtn}
-              onClick={routeTerminalManagement}
-            >
-              终端管理
-            </Button>
-            <Button id={'vinSearchBtn'} className={styles.queryBtn} onClick={vinSearch}>
-              查询
-            </Button>
-            <Input
-              ref={vinInputRef}
-              id={'vinSearchInput'}
-              className={styles.inlineSearch}
-              placeholder={'VIN'}
-              suffix={<SearchOutlined />}
-            />
+        <Spin className={styles.spin} tip="请求中" size="large" spinning={isLoading}>
+          <div className={styles.card}>
+            <div className={styles.topSection}>
+              <Button id={'historyBtn'} className={styles.lightBtn} onClick={routeHistoryData}>
+                历史数据
+              </Button>
+              <Button
+                id={'vehicleBtn'}
+                className={styles.lightBtn}
+                onClick={routeVehicleManagement}
+              >
+                车辆管理
+              </Button>
+              <Button
+                id={'terminalBtn'}
+                className={styles.lightBtn}
+                onClick={routeTerminalManagement}
+              >
+                终端管理
+              </Button>
+              <Button id={'vinSearchBtn'} className={styles.queryBtn} onClick={vinSearch}>
+                查询
+              </Button>
+              <Input
+                ref={vinInputRef}
+                id={'vinSearchInput'}
+                className={styles.inlineSearch}
+                placeholder={'VIN'}
+                suffix={<SearchOutlined />}
+              />
+            </div>
           </div>
-        </div>
-        <div className={styles.card}>
-          <div className={styles.bottomSection}>
-            <div className={styles.leftSection}>
-              <div className={styles.mapSection}></div>
-              <div className={styles.vehicleMapInfo}>
-                <div className={styles.infoPair}>
-                  <div className={styles.infoKey}>VIN</div>
-                  <div className={styles.infoVal}>{vehicleInfo.vin}</div>
-                </div>
-                <div className={styles.infoPair}>
-                  <div className={styles.infoKey}>车牌号</div>
-                  <div className={styles.infoVal}></div>
-                </div>
-                <div className={styles.infoPair}>
-                  <div className={styles.infoKey}>位置</div>
-                  <div className={styles.infoVal}></div>
+          <div className={styles.card}>
+            <div className={styles.bottomSection}>
+              <div className={styles.leftSection}>
+                <div className={styles.mapSection}></div>
+                <div className={styles.vehicleMapInfo}>
+                  <div className={styles.infoPair}>
+                    <div className={styles.infoKey}>VIN</div>
+                    <div className={styles.infoVal}>{vehicleInfo.vin}</div>
+                  </div>
+                  <div className={styles.infoPair}>
+                    <div className={styles.infoKey}>车牌号</div>
+                    <div className={styles.infoVal}></div>
+                  </div>
+                  <div className={styles.infoPair}>
+                    <div className={styles.infoKey}>位置</div>
+                    <div className={styles.infoVal}></div>
+                  </div>
                 </div>
               </div>
+              <div className={styles.rightSection}>{genInfoSection()}</div>
+              <div></div>
             </div>
-            <div className={styles.rightSection}>{genInfoSection()}</div>
-            <div></div>
           </div>
-        </div>
+        </Spin>
       </div>
     </div>
   );
