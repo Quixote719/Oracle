@@ -19,6 +19,7 @@ class DataCenterStore {
           const vehicleData = res?.data?.realTimeReport || {};
           this.vehicleInfo = { ...vehicleData, vin: res?.data?.vin };
         } else {
+          this.vehicleInfo = {};
           message.error(res.msg.toString(), 5);
         }
       });

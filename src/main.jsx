@@ -37,6 +37,9 @@ enableMocking().then(() => {
     <ConfigProvider
       locale={zhCN}
       theme={{
+        token: {
+          colorPrimary: '#302e2b'
+        },
         components: {
           Modal: {
             titleFontSize: 24

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Collapse, Button, message } from 'antd';
+import { Form, Collapse, Button, message, Spin } from 'antd';
 import { observer } from 'mobx-react-lite';
 import Header from '@/component/header';
 import Menu from '@/component/menu';
@@ -38,6 +38,7 @@ const Flow = () => {
   const [formState, setFormState] = useState(null);
   const pagePath = useLocation();
   const [messageApi, contextHolder] = message.useMessage();
+  const [isLoading, setIsLoading] = useState(false);
 
   let vcFormRefs = {};
   let vmFormRefs = {};
@@ -226,10 +227,11 @@ const Flow = () => {
 
   const onVehicleModelFinish = () => {
     const validateRes = validateFields();
-    let res = parseVehicleModel(validateRes);
-
+    const res = parseVehicleModel(validateRes);
+    setIsLoading(true);
     submitVehicleModel(res)
       .then(res => {
+        setIsLoading(false);
         if (res.code === 200) {
           messageApi.success('保存成功');
         } else {
@@ -237,6 +239,7 @@ const Flow = () => {
         }
       })
       .catch(err => {
+        setIsLoading(false);
         messageApi.error(`保存失败：${err.toString()}`);
       });
   };
@@ -335,11 +338,13 @@ const Flow = () => {
       <Header />
       <Menu />
       <div className={styles.menuPage}>
-        {genCollapse()}
-        <Button className={styles.saveBtn} onClick={() => onVehicleModelFinish()}>
-          保存
-        </Button>
-        {contextHolder}
+        <Spin className={styles.spin} tip="请求中" size="large" spinning={isLoading}>
+          {genCollapse()}
+          <Button className={styles.saveBtn} onClick={() => onVehicleModelFinish()}>
+            保存
+          </Button>
+          {contextHolder}
+        </Spin>
       </div>
     </div>
   );

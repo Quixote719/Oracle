@@ -1,3 +1,5 @@
+@primaryColor: #302e2b;
+
 body {
   margin: 0px;
   padding: 0px;
@@ -18,10 +20,10 @@ body {
 };
 
 @darkBtn: {
-  background: #302e2b;
+  background: @primaryColor;
   color: #ffffff;
   &:hover {
-    background: #666666 !important;
+    background: lighten(@primaryColor, 15%) !important;
     color: #ffffff !important;
     border: none;
   }

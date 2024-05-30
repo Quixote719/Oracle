@@ -46,7 +46,7 @@ const exportVehicleModel = param => {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'vehicle-models.xls';
+      a.download = 'vehicle-models.xlsx';
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
