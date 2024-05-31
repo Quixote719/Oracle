@@ -15,585 +15,585 @@ const VehicleForm = props => {
   };
 
   const findAlarmVal = type => {
-    return alarmThresholds.find(item => item.alarmType === type)?.value;
+    return alarmThresholds.find(item => item.alarmType + item.level === type)?.value;
   };
 
   return (
     <div>
       <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
-          <Col span={8} key={'temperatureDifferenceWarningLevel1'}>
+          <Col span={8} key={'温度差异报警一级'}>
             <FlexFormItem
               formformat={formMode}
-              text={findAlarmVal('temperatureDifferenceWarningLevel1')}
+              text={findAlarmVal('温度差异报警一级')}
               itemstyle={{ width: '100%' }}
               label="温度差异报警一级"
-              name="temperatureDifferenceWarningLevel1"
+              name="温度差异报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'temperatureDifferenceWarningLevel2'}>
+          <Col span={8} key={'温度差异报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('temperatureDifferenceWarningLevel2')}
+              text={findAlarmVal('温度差异报警二级')}
               label="温度差异报警二级"
-              name="temperatureDifferenceWarningLevel2"
+              name="温度差异报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'temperatureDifferenceWarningLevel3'}>
+          <Col span={8} key={'温度差异报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('temperatureDifferenceWarningLevel3')}
+              text={findAlarmVal('温度差异报警三级')}
               label="温度差异报警三级"
-              name="temperatureDifferenceWarningLevel3"
+              name="温度差异报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'batteryHighTemperatureWarningLevel1'}>
+          <Col span={8} key={'电池高温报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('batteryHighTemperatureWarningLevel1')}
+              text={findAlarmVal('电池高温报警一级')}
               label="电池高温报警一级"
-              name="batteryHighTemperatureWarningLevel1"
+              name="电池高温报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'batteryHighTemperatureWarningLevel2'}>
+          <Col span={8} key={'电池高温报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('batteryHighTemperatureWarningLevel2')}
+              text={findAlarmVal('电池高温报警二级')}
               label="电池高温报警二级"
-              name="batteryHighTemperatureWarningLevel2"
+              name="电池高温报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'batteryHighTemperatureWarningLevel3'}>
+          <Col span={8} key={'电池高温报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('batteryHighTemperatureWarningLevel3')}
+              text={findAlarmVal('电池高温报警三级')}
               label="电池高温报警三级"
-              name="batteryHighTemperatureWarningLevel3"
+              name="电池高温报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'vehicleOverVoltageWarningLvl1'}>
+          <Col span={8} key={'车载储能装置类型过压报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('vehicleOverVoltageWarningLvl1')}
+              text={findAlarmVal('车载储能装置类型过压报警一级')}
               label="车载储能装置类型过压报警一级"
-              name="vehicleOverVoltageWarningLvl1"
+              name="车载储能装置类型过压报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'vehicleOverVoltageWarningLvl2'}>
+          <Col span={8} key={'车载储能装置类型过压报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('vehicleOverVoltageWarningLvl2')}
+              text={findAlarmVal('车载储能装置类型过压报警二级')}
               label="车载储能装置类型过压报警二级"
-              name="vehicleOverVoltageWarningLvl2"
+              name="车载储能装置类型过压报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'vehicleOverVoltageWarningLvl3'}>
+          <Col span={8} key={'车载储能装置类型过压报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('vehicleOverVoltageWarningLvl3')}
+              text={findAlarmVal('车载储能装置类型过压报警三级')}
               label="车载储能装置类型过压报警三级"
-              name="vehicleOverVoltageWarningLvl3"
+              name="车载储能装置类型过压报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'vehicleUnderVoltageWarningLvl1'}>
+          <Col span={8} key={'车载储能装置类型欠压报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('vehicleUnderVoltageWarningLvl1')}
+              text={findAlarmVal('车载储能装置类型欠压报警一级')}
               label="车载储能装置类型欠压报警一级"
-              name="vehicleUnderVoltageWarningLvl1"
+              name="车载储能装置类型欠压报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'vehicleUnderVoltageWarningLvl2'}>
+          <Col span={8} key={'车载储能装置类型欠压报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('vehicleUnderVoltageWarningLvl2')}
+              text={findAlarmVal('车载储能装置类型欠压报警二级')}
               label="车载储能装置类型欠压报警二级"
-              name="vehicleUnderVoltageWarningLvl2"
+              name="车载储能装置类型欠压报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'vehicleUnderVoltageWarningLvl3'}>
+          <Col span={8} key={'车载储能装置类型欠压报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('vehicleUnderVoltageWarningLvl3')}
+              text={findAlarmVal('车载储能装置类型欠压报警三级')}
               label="车载储能装置类型欠压报警三级"
-              name="vehicleUnderVoltageWarningLvl3"
+              name="车载储能装置类型欠压报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'lowSOCwarningLvl1'}>
+          <Col span={8} key={'SOC低报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('lowSOCwarningLvl1')}
+              text={findAlarmVal('SOC低报警一级')}
               label="SOC低报警一级"
-              name="lowSOCwarningLvl1"
+              name="SOC低报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'lowSOCwarningLvl2'}>
+          <Col span={8} key={'SOC低报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('lowSOCwarningLvl2')}
+              text={findAlarmVal('SOC低报警二级')}
               label="SOC低报警二级"
-              name="lowSOCwarningLvl2"
+              name="SOC低报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'lowSOCwarningLvl3'}>
+          <Col span={8} key={'SOC低报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('lowSOCwarningLvl3')}
+              text={findAlarmVal('SOC低报警三级')}
               label="SOC低报警三级"
-              name="lowSOCwarningLvl3"
+              name="SOC低报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'cellOverVoltageWarningLvl1'}>
+          <Col span={8} key={'单体电池过压报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('cellOverVoltageWarningLvl1')}
+              text={findAlarmVal('单体电池过压报警一级')}
               label="单体电池过压报警一级"
-              name="cellOverVoltageWarningLvl1"
+              name="单体电池过压报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'cellOverVoltageWarningLvl2'}>
+          <Col span={8} key={'单体电池过压报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('cellOverVoltageWarningLvl2')}
+              text={findAlarmVal('单体电池过压报警二级')}
               label="单体电池过压报警二级"
-              name="cellOverVoltageWarningLvl2"
+              name="单体电池过压报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'cellOverVoltageWarningLvl3'}>
+          <Col span={8} key={'单体电池过压报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('cellOverVoltageWarningLvl3')}
+              text={findAlarmVal('单体电池过压报警三级')}
               label="单体电池过压报警三级"
-              name="cellOverVoltageWarningLvl3"
+              name="单体电池过压报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'cellUnderVoltageWarningLvl1'}>
+          <Col span={8} key={'单体电池欠压报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('cellUnderVoltageWarningLvl1')}
+              text={findAlarmVal('单体电池欠压报警一级')}
               label="单体电池欠压报警一级"
-              name="cellUnderVoltageWarningLvl1"
+              name="单体电池欠压报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'cellUnderVoltageWarningLvl2'}>
+          <Col span={8} key={'单体电池欠压报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('cellUnderVoltageWarningLvl2')}
+              text={findAlarmVal('单体电池欠压报警二级')}
               label="单体电池欠压报警二级"
-              name="cellUnderVoltageWarningLvl2"
+              name="单体电池欠压报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'cellUnderVoltageWarningLvl3'}>
+          <Col span={8} key={'单体电池欠压报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('cellUnderVoltageWarningLvl3')}
+              text={findAlarmVal('单体电池欠压报警三级')}
               label="单体电池欠压报警三级"
-              name="cellUnderVoltageWarningLvl3"
+              name="单体电池欠压报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'excessivelyHighSOCWarningLvl1'}>
+          <Col span={8} key={'SOC过高报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('excessivelyHighSOCWarningLvl1')}
+              text={findAlarmVal('SOC过高报警一级')}
               label="SOC过高报警一级"
-              name="excessivelyHighSOCWarningLvl1"
+              name="SOC过高报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'excessivelyHighSOCWarningLvl2'}>
+          <Col span={8} key={'SOC过高报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('excessivelyHighSOCWarningLvl2')}
+              text={findAlarmVal('SOC过高报警二级')}
               label="SOC过高报警二级"
-              name="excessivelyHighSOCWarningLvl2"
+              name="SOC过高报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'excessivelyHighSOCWarningLvl3'}>
+          <Col span={8} key={'SOC过高报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('excessivelyHighSOCWarningLvl3')}
+              text={findAlarmVal('SOC过高报警三级')}
               label="SOC过高报警三级"
-              name="excessivelyHighSOCWarningLvl3"
+              name="SOC过高报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'SOCJumpWarningLvl1'}>
+          <Col span={8} key={'SOC跳变报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('SOCJumpWarningLvl1')}
+              text={findAlarmVal('SOC跳变报警一级')}
               label="SOC跳变报警一级"
-              name="SOCJumpWarningLvl1"
+              name="SOC跳变报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'SOCJumpWarningLvl2'}>
+          <Col span={8} key={'SOC跳变报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('SOCJumpWarningLvl2')}
+              text={findAlarmVal('SOC跳变报警二级')}
               label="SOC跳变报警二级"
-              name="SOCJumpWarningLvl2"
+              name="SOC跳变报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'SOCJumpWarningLvl3'}>
+          <Col span={8} key={'SOC跳变报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('SOCJumpWarningLvl3')}
+              text={findAlarmVal('SOC跳变报警三级')}
               label="SOC跳变报警三级"
-              name="SOCJumpWarningLvl3"
+              name="SOC跳变报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'ChargeableUnmatchedWarningLvl1'}>
+          <Col span={8} key={'可充电储能系统不匹配报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('ChargeableUnmatchedWarningLvl1')}
+              text={findAlarmVal('可充电储能系统不匹配报警一级')}
               label="可充电储能系统不匹配报警一级"
-              name="ChargeableUnmatchedWarningLvl1"
+              name="可充电储能系统不匹配报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'ChargeableUnmatchedWarningLvl2'}>
+          <Col span={8} key={'可充电储能系统不匹配报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('ChargeableUnmatchedWarningLvl2')}
+              text={findAlarmVal('可充电储能系统不匹配报警二级')}
               label="可充电储能系统不匹配报警二级"
-              name="ChargeableUnmatchedWarningLvl2"
+              name="可充电储能系统不匹配报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'ChargeableUnmatchedWarningLvl3'}>
+          <Col span={8} key={'可充电储能系统不匹配报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('ChargeableUnmatchedWarningLvl3')}
+              text={findAlarmVal('可充电储能系统不匹配报警三级')}
               label="可充电储能系统不匹配报警三级"
-              name="ChargeableUnmatchedWarningLvl3"
+              name="可充电储能系统不匹配报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'cellPoorConsistencyWarningLvl1'}>
+          <Col span={8} key={'电池单体一致性差报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('cellPoorConsistencyWarningLvl1')}
+              text={findAlarmVal('电池单体一致性差报警一级')}
               label="电池单体一致性差报警一级"
-              name="cellPoorConsistencyWarningLvl1"
+              name="电池单体一致性差报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'cellPoorConsistencyWarningLvl2'}>
+          <Col span={8} key={'电池单体一致性差报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('cellPoorConsistencyWarningLvl2')}
+              text={findAlarmVal('电池单体一致性差报警二级')}
               label="电池单体一致性差报警二级"
-              name="cellPoorConsistencyWarningLvl2"
+              name="电池单体一致性差报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'cellPoorConsistencyWarningLvl3'}>
+          <Col span={8} key={'电池单体一致性差报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('cellPoorConsistencyWarningLvl3')}
+              text={findAlarmVal('电池单体一致性差报警三级')}
               label="电池单体一致性差报警三级"
-              name="cellPoorConsistencyWarningLvl3"
+              name="电池单体一致性差报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'insulationWarningLvl1'}>
+          <Col span={8} key={'绝缘报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('insulationWarningLvl1')}
+              text={findAlarmVal('绝缘报警一级')}
               label="绝缘报警一级"
-              name="insulationWarningLvl1"
+              name="绝缘报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'insulationWarningLvl2'}>
+          <Col span={8} key={'绝缘报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('insulationWarningLvl2')}
-              label="绝缘报警一级"
-              name="insulationWarningLvl2"
+              text={findAlarmVal('绝缘报警二级')}
+              label="绝缘报警二级"
+              name="绝缘报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'insulationWarningLvl3'}>
+          <Col span={8} key={'绝缘报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('insulationWarningLvl3')}
+              text={findAlarmVal('绝缘报警三级')}
               label="绝缘报警三级"
-              name="insulationWarningLvl3"
+              name="绝缘报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'DC-DCTemperatureWarningLvl1'}>
+          <Col span={8} key={'DC-DC-DC温度报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('DC-DCTemperatureWarningLvl1')}
+              text={findAlarmVal('DC-DC-DC温度报警一级')}
               label="DC-DC温度报警一级"
-              name="DC-DCTemperatureWarningLvl1"
+              name="DC-DC-DC温度报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'DC-DCTemperatureWarningLvl2'}>
+          <Col span={8} key={'DC-DC温度报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('DC-DCTemperatureWarningLvl2')}
+              text={findAlarmVal('DC-DC温度报警二级')}
               label="DC-DC温度报警二级"
-              name="DC-DCTemperatureWarningLvl2"
+              name="DC-DC温度报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'DC-DCTemperatureWarningLvl3'}>
+          <Col span={8} key={'DC-DC温度报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('DC-DCTemperatureWarningLvl3')}
+              text={findAlarmVal('DC-DC温度报警三级')}
               label="DC-DC温度报警三级"
-              name="DC-DCTemperatureWarningLvl3"
+              name="DC-DC温度报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'ElectricalMachineControllerTemperaturewarningLvl1'}>
+          <Col span={8} key={'驱动电机控制器温度报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('ElectricalMachineControllerTemperaturewarningLvl1')}
+              text={findAlarmVal('驱动电机控制器温度报警一级')}
               label="驱动电机控制器温度报警一级"
-              name="ElectricalMachineControllerTemperaturewarningLvl1"
+              name="驱动电机控制器温度报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'ElectricalMachineControllerTemperaturewarningLvl2'}>
+          <Col span={8} key={'驱动电机控制器温度报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('ElectricalMachineControllerTemperaturewarningLvl2')}
+              text={findAlarmVal('驱动电机控制器温度报警二级')}
               label="驱动电机控制器温度报警二级"
-              name="DC-ElectricalMachineControllerTemperaturewarningLvl2"
+              name="DC-驱动电机控制器温度报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'ElectricalMachineControllerTemperaturewarningLvl3'}>
+          <Col span={8} key={'驱动电机控制器温度报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('ElectricalMachineControllerTemperaturewarningLvl3')}
+              text={findAlarmVal('驱动电机控制器温度报警三级')}
               label="驱动电机控制器温度报警三级"
-              name="ElectricalMachineControllerTemperaturewarningLvl3"
+              name="驱动电机控制器温度报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'HighVoltageInterlockingStateSarningLvl1'}>
+          <Col span={8} key={'高压互锁状态报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('HighVoltageInterlockingStateSarningLvl1')}
+              text={findAlarmVal('高压互锁状态报警一级')}
               label="高压互锁状态报警一级"
-              name="HighVoltageInterlockingStateSarningLvl1"
+              name="高压互锁状态报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'HighVoltageInterlockingStateSarningLvl2'}>
+          <Col span={8} key={'高压互锁状态报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('HighVoltageInterlockingStateSarningLvl2')}
+              text={findAlarmVal('高压互锁状态报警二级')}
               label="高压互锁状态报警二级"
-              name="HighVoltageInterlockingStateSarningLvl2"
+              name="高压互锁状态报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'HighVoltageInterlockingStateSarningLvl3'}>
+          <Col span={8} key={'高压互锁状态报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('HighVoltageInterlockingStateSarningLvl3')}
+              text={findAlarmVal('高压互锁状态报警三级')}
               label="高压互锁状态报警三级"
-              name="HighVoltageInterlockingStateSarningLvl3"
+              name="高压互锁状态报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'electricalMachineTemperatureWarningLvl1'}>
+          <Col span={8} key={'驱动电机温度报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('electricalMachineTemperatureWarningLvl1')}
+              text={findAlarmVal('驱动电机温度报警一级')}
               label="驱动电机温度报警一级"
-              name="electricalMachineTemperatureWarningLvl1"
+              name="驱动电机温度报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'electricalMachineTemperatureWarningLvl2'}>
+          <Col span={8} key={'驱动电机温度报警二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('electricalMachineTemperatureWarningLvl2')}
+              text={findAlarmVal('驱动电机温度报警二级')}
               label="驱动电机温度报警二级"
-              name="electricalMachineTemperatureWarningLvl2"
+              name="驱动电机温度报警二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'electricalMachineTemperatureWarningLvl3'}>
+          <Col span={8} key={'驱动电机温度报警三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('electricalMachineTemperatureWarningLvl3')}
+              text={findAlarmVal('驱动电机温度报警三级')}
               label="驱动电机温度报警三级"
-              name="electricalMachineTemperatureWarningLvl3"
+              name="驱动电机温度报警三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
 
-          <Col span={8} key={'vehicleEnergyStorageDeviceTypeOverChargingLvl1'}>
+          <Col span={8} key={'车载储能装置类型过充一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('vehicleEnergyStorageDeviceTypeOverChargingLvl1')}
+              text={findAlarmVal('车载储能装置类型过充一级')}
               label="车载储能装置类型过充一级"
-              name="vehicleEnergyStorageDeviceTypeOverChargingLvl1"
+              name="车载储能装置类型过充一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'vehicleEnergyStorageDeviceTypeOverChargingLvl2'}>
+          <Col span={8} key={'车载储能装置类型过充二级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('vehicleEnergyStorageDeviceTypeOverChargingLvl2')}
+              text={findAlarmVal('车载储能装置类型过充二级')}
               label="车载储能装置类型过充二级"
-              name="vehicleEnergyStorageDeviceTypeOverChargingLvl2"
+              name="车载储能装置类型过充二级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />
           </Col>
-          <Col span={8} key={'vehicleEnergyStorageDeviceTypeOverChargingLvl3'}>
+          <Col span={8} key={'车载储能装置类型过充三级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('vehicleEnergyStorageDeviceTypeOverChargingLvl3')}
+              text={findAlarmVal('车载储能装置类型过充三级')}
               label="车载储能装置类型过充三级"
-              name="vehicleEnergyStorageDeviceTypeOverChargingLvl3"
+              name="车载储能装置类型过充三级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />

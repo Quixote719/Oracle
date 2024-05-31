@@ -86,10 +86,18 @@ const Flow = () => {
     return res;
   };
 
-  const getLvl = param => {
-    if (param.includes(1)) return 1;
-    else if (param.includes(2)) return 2;
-    else if (param.includes(3)) return 3;
+  const genAlamThresholds = (vrFormParam = []) => {
+    let res = Object.keys(vrFormParam).map(vtKey => {
+      return {
+        alarmType: vtKey.slice(0, vtKey.length - 2),
+        level: vtKey.slice(vtKey.length - 2),
+        value: vrFormParam[vtKey]
+      };
+    });
+    if (!pagePath?.state?.createNew) {
+      res = [...vehicleModelStore.targetRecord.alarmThresholds, ...res];
+    }
+    return res;
   };
 
   const updateVehicleModel = ({ curFormVals, formNames = [], recordForms = [], formNo }) => {
@@ -176,44 +184,26 @@ const Flow = () => {
         formNames: ['vahTJform'],
         recordForms: ['alarmRegistration']
       }),
-      levelOneAlarms:
-        // {
-        //   ...param.vtTJFormRefs[2]
-        // }
-        updateVehicleModel({
-          curFormVals: param,
-          formNames: ['vtTJFormRefs'],
-          recordForms: ['levelOneAlarms'],
-          formNo: 2
-        }),
-      levelTwoAlarms:
-        // {
-        //   ...param.vtTJFormRefs[1]
-        // },
-        updateVehicleModel({
-          curFormVals: param,
-          formNames: ['vtTJFormRefs'],
-          recordForms: ['levelTwoAlarms'],
-          formNo: 1
-        }),
-      levelThreeAlarms:
-        // {
-        //   ...param.vtTJFormRefs[0]
-        // }
-        updateVehicleModel({
-          curFormVals: param,
-          formNames: ['vtTJFormRefs'],
-          recordForms: ['levelThreeAlarms'],
-          formNo: 0
-        })
+      levelOneAlarms: updateVehicleModel({
+        curFormVals: param,
+        formNames: ['vtTJFormRefs'],
+        recordForms: ['levelOneAlarms'],
+        formNo: 2
+      }),
+      levelTwoAlarms: updateVehicleModel({
+        curFormVals: param,
+        formNames: ['vtTJFormRefs'],
+        recordForms: ['levelTwoAlarms'],
+        formNo: 1
+      }),
+      levelThreeAlarms: updateVehicleModel({
+        curFormVals: param,
+        formNames: ['vtTJFormRefs'],
+        recordForms: ['levelThreeAlarms'],
+        formNo: 0
+      })
     };
-    res.alarmThresholds = Object.keys(param.vtNSGForm).map(vtKey => {
-      return {
-        alarmType: vtKey,
-        level: getLvl(vtKey),
-        value: param.vtNSGForm[vtKey]
-      };
-    });
+    res.alarmThresholds = genAlamThresholds(param.vtNSGForm);
     Object.keys(res?.bulletinCertInfo || {}).forEach(bulletinKey => {
       if (Array.isArray(res.bulletinCertInfo[bulletinKey]?.fileList)) {
         delete res.bulletinCertInfo[bulletinKey];
