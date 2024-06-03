@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'antd';
+import { Modal, Button, Popover } from 'antd';
 import PropTypes from 'prop-types';
 import styles from '@/component/compStyle.module.less';
 
@@ -55,10 +55,22 @@ const InfoSection = props => {
     }
   };
 
+  const getUnit = (param = '') => {
+    const unitMap = { 电压: 'V', 温度: '℃' };
+    let res = '';
+    Object.keys(unitMap).map(unitKey => {
+      if (param.includes(unitKey)) {
+        res = unitMap[unitKey];
+      }
+    });
+    return res;
+  };
+
   const genModalStatitics = (statistics, infoKey) => {
     let regroupArr = [],
       slen = (statistics || []).length,
-      seqMark = '序号';
+      seqMark = '序号',
+      unit = getUnit(infoKey);
     for (let i = 0; i * 10 < slen; i++) {
       let dataSlice = statistics.slice(i * 10, i * 10 + 10);
       dataSlice.unshift({ [seqMark]: infoKey });
@@ -70,14 +82,16 @@ const InfoSection = props => {
         return (
           <div className={styles.infoArrValTitle} key={index}>
             <div className={styles.eleKey}>{seqMark}</div>
-            <div className={styles.eleVal}>{item[seqMark]}</div>
+            <div className={`${styles.eleVal} ${styles.eleValTitle}`}>
+              <Popover title={item[seqMark]}>{item[seqMark]}</Popover>
+            </div>
           </div>
         );
       } else {
         return (
           <div className={styles.infoArrValElement} key={index}>
             <div className={styles.eleKey}>{count++}</div>
-            <div className={styles.eleVal}>{item}</div>
+            <div className={styles.eleVal}>{item + unit}</div>
           </div>
         );
       }
@@ -90,11 +104,11 @@ const InfoSection = props => {
       <div className={styles.infoStream}>{genInfoSection(props.info)}</div>
       <Modal
         width={'75%'}
-        styles={{ body: { maxHeight: '650px', overflow: 'auto' } }}
+        styles={{ body: { marginTop: 30, maxHeight: '650px', overflow: 'auto' } }}
         open={infoModalVisible}
         onOk={closeInfoModal}
         onCancel={closeInfoModal}
-        title={infoModalVisible?.targetKey}
+        title={null}
         footer={[
           <Button key="submit" className={styles.closeBtn} onClick={closeInfoModal}>
             关闭

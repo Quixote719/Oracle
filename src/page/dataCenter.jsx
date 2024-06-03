@@ -108,10 +108,13 @@ const DataCenter = () => {
                     <div className={styles.infoKey}>位置</div>
                     <div className={styles.infoVal}></div>
                   </div>
+                  <div className={styles.infoPair}>
+                    <div className={styles.infoKey}>数据采集时间</div>
+                    <div className={styles.infoVal}>{vehicleInfo['数据采集时间']}</div>
+                  </div>
                 </div>
               </div>
               <div className={styles.rightSection}>{genInfoSection()}</div>
-              <div></div>
             </div>
           </div>
         </Spin>
