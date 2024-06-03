@@ -5,15 +5,6 @@ import styles from '@/component/compStyle.module.less';
 
 const InfoSection = props => {
   const [infoModalVisible, setInfoModalVisible] = useState(false);
-  const pluralToSingular = param => {
-    if (typeof param !== 'string') return '';
-    if (param.endsWith('es')) {
-      param = param.slice(0, param.length - 2);
-    } else if (param.endsWith('s')) {
-      param = param.slice(0, param.length - 1);
-    }
-    return param;
-  };
 
   const closeInfoModal = () => {
     setInfoModalVisible(false);
@@ -39,9 +30,7 @@ const InfoSection = props => {
     if (Array.isArray(param)) {
       return param.map((item, index) => (
         <div key={index}>
-          <div
-            className={styles.compSingularTitle}
-          >{`${pluralToSingular(props.header)} ${index}`}</div>
+          <div className={styles.compSingularTitle}>{`${props.header} ${index + 1}`}</div>
           {genInfoSection(item)}
         </div>
       ));
