@@ -5,7 +5,7 @@ const prefix = genApiPrefix();
 const enumListUrl = `${prefix}/vehicle-service/dictionary/enumList`;
 const vehicleModelUrl = `${prefix}/vehicle-service/VehicleModel`;
 const vehicleModelExportUrl = `${prefix}/Export/VehicleModel`;
-const searchVehicleDataByVin = `${prefix}/data-management/getCNevDataByVin`;
+const searchVehicleDataByVin = `${prefix}/data-management/getLatestCNevDataByVin`;
 
 const getVehicleEnumList = () => {
   return fetch(enumListUrl).then(res => {
