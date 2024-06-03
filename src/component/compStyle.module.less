@@ -188,19 +188,27 @@ div#devicePackCount {
 }
 
 .infoPairKey,
-.eleKey {
+.infoPairVal {
+  width: 45%;
+  display: inline-block;
+}
+
+.infoPairKey {
   color: #4c4843;
-  font-weight: 300;
+  font-weight: 400;
   word-break: break-all;
 }
 
-.eleKey {
-  background: #f7f6fd;
+.infoPairVal {
+  margin-left: 10%;
+  vertical-align: top;
+  color: #1b1a18;
+  font-weight: 400;
+  word-break: break-all;
 }
 
 .eleKey,
 .eleVal {
-  font-weight: 600;
   padding: 15px 0;
   text-align: center;
   white-space: nowrap;
@@ -208,16 +216,20 @@ div#devicePackCount {
   text-overflow: ellipsis;
 }
 
-.infoPairVal,
-.eleVal {
-  font-weight: 400;
-  word-break: break-all;
+.eleKey {
+  font-weight: 600;
+  color: #000000;
+  background: #f7f6fd;
 }
 
-.infoPairKey,
-.infoPairVal {
-  width: 50%;
-  display: inline-block;
+.eleVal {
+  font-weight: 400;
+  color: #000000;
+  background: #ffffff;
+}
+
+.eleValTitle {
+  cursor: pointer;
 }
 
 .infoHeader {
