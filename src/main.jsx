@@ -5,6 +5,7 @@ import { ConfigProvider } from 'antd';
 import VehicleModelList from '@/page/vehicleModelList';
 import VehicleModelManagement from '@/page/vehicleModelManagement';
 import VehicleList from '@/page/vehicleList';
+import VehicleManagement from '@/page/vehicleManagement';
 import DataCenter from '@/page/dataCenter';
 import zhCN from 'antd/es/locale/zh_CN';
 import '@/style/index.less';
@@ -22,6 +23,7 @@ const App = () => {
       <Routes>
         <Route path="/vehicleModelList" element={<VehicleModelList />} />
         <Route path="/vehicleModelManagement" element={<VehicleModelManagement />} />
+        <Route path="/vehicleManagement" element={<VehicleManagement />} />
         <Route path="/vehicleList" element={<VehicleList />} />
         <Route path="/dataCenter" element={<DataCenter />} />
         <Route path="/" element={<VehicleModelList />} />
