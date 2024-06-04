@@ -1,4 +1,5 @@
 import VehicleModelStore from './vehicleModelStore';
+import VehicleInfolStore from './vehicleInfoStore';
 import DataCenterStore from './dataCenterStore';
 import EnumDataStore from './enumDataStore';
 import React from 'react';
@@ -8,6 +9,7 @@ class Store {
     this.vehicleModelStore = new VehicleModelStore();
     this.dataCenterStore = new DataCenterStore();
     this.enumDataStore = new EnumDataStore();
+    this.vehicleInfoStore = new VehicleInfolStore();
   }
 }
 

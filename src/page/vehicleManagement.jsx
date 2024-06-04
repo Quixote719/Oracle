@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Collapse, Button, Spin } from 'antd';
+import { Collapse, Button, Spin, Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useLocation } from 'react-router-dom';
 import Header from '@/component/header';
 import Menu from '@/component/menu';
 import VehicleProductionInfoForm from '@/component/vehicleProductionForm';
+import VehicleSalesInfoForm from '@/component/vehicleSalesForm';
+import VehicleOptionalInfoForm from '@/component/vehicleOptionalForm';
 import { useStore } from '@/store';
 import styles from './index.module.less';
 /*
@@ -14,10 +16,12 @@ import styles from './index.module.less';
 */
 
 const Flow = () => {
-  const [formState, setFormState] = useState(null);
+  const [formState, setFormState] = useState('edit');
   const { enumDataStore } = useStore();
   const [isLoading, setIsLoading] = useState(false);
   const pagePath = useLocation();
+  const [vsform] = Form.useForm();
+  const [voform] = Form.useForm();
   let vpFormRefs = {};
 
   useEffect(() => {
@@ -38,6 +42,28 @@ const Flow = () => {
       children: (
         <VehicleProductionInfoForm
           refInfo={vpFormRefs}
+          mode={formState}
+          selectInfo={enumDataStore.enumData}
+        />
+      )
+    },
+    {
+      key: 'VehicleProductionInfoForm',
+      label: '车辆销售信息',
+      children: (
+        <VehicleSalesInfoForm
+          refInfo={vsform}
+          mode={formState}
+          selectInfo={enumDataStore.enumData}
+        />
+      )
+    },
+    {
+      key: 'VehicleProductionInfoForm',
+      label: '其他非必填项',
+      children: (
+        <VehicleOptionalInfoForm
+          refInfo={voform}
           mode={formState}
           selectInfo={enumDataStore.enumData}
         />

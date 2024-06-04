@@ -9,6 +9,17 @@ const digitValidator = param => {
   };
 };
 
+const lengthValidator = param => {
+  if (!Array.isArray(param)) return false;
+  return {
+    validator: (_, value) => {
+      return param.includes(value.length)
+        ? Promise.resolve()
+        : Promise.reject(new Error(`输入长度只能为${param.toString()}位`));
+    }
+  };
+};
+
 const serialNumberValidator = (min, max, integerCheck, decimalDigit) => {
   return {
     validator: (_, value) => {
@@ -57,4 +68,10 @@ const integerValidator = () => {
   };
 };
 
-export { digitValidator, numberLimitValidator, serialNumberValidator, integerValidator };
+export {
+  digitValidator,
+  numberLimitValidator,
+  serialNumberValidator,
+  integerValidator,
+  lengthValidator
+};
