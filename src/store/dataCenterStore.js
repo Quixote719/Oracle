@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import { action, runInAction, makeAutoObservable, observable } from 'mobx';
-import { getVehicleDataByVin } from '@/api/vehicleModelApi';
+import { getVehicleDataByVin } from '@/api/vehicleApi';
 
 class DataCenterStore {
   constructor() {

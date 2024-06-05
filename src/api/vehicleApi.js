@@ -6,6 +6,7 @@ const enumListUrl = `${prefix}/vehicle-service/dictionary/enumList`;
 const vehicleModelUrl = `${prefix}/vehicle-service/VehicleModel`;
 const vehicleModelExportUrl = `${prefix}/Export/VehicleModel`;
 const searchVehicleDataByVin = `${prefix}/data-management/getLatestCNevDataByVin`;
+const vehicleUrl = `${prefix}/vehicle-service/Vehicle`;
 
 const getVehicleEnumList = () => {
   return fetch(enumListUrl).then(res => {
@@ -59,10 +60,23 @@ const getVehicleDataByVin = param => {
   });
 };
 
+const submitVehicle = param => {
+  return fetch(vehicleUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(param)
+  }).then(res => {
+    return res.json();
+  });
+};
+
 export {
   getVehicleEnumList,
   getVehicleModelList,
   submitVehicleModel,
   exportVehicleModel,
-  getVehicleDataByVin
+  getVehicleDataByVin,
+  submitVehicle
 };

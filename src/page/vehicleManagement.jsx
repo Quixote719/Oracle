@@ -24,6 +24,11 @@ const Flow = () => {
   const [voform] = Form.useForm();
   let vpFormRefs = {};
 
+  const normalForms = {
+    vsform,
+    voform
+  };
+
   useEffect(() => {
     enumDataStore.fetchEnumData();
     if (pagePath?.state?.createNew) {
@@ -31,8 +36,26 @@ const Flow = () => {
     }
   }, []);
 
+  const validateFields = () => {
+    let res = {};
+    Object.keys(normalForms).forEach(formName => {
+      if (normalForms[formName] && typeof normalForms[formName].validateFields === 'function') {
+        normalForms[formName].validateFields();
+        res[formName] = normalForms[formName].getFieldsValue();
+      }
+    });
+    return res;
+  };
+
+  const parseVehicleModel = param => {
+    return param;
+  };
+
   const onVehicleModelFinish = () => {
+    const validateRes = validateFields();
+    const res = parseVehicleModel(validateRes);
     setIsLoading(true);
+    return res;
   };
 
   const formItems = [
@@ -48,22 +71,18 @@ const Flow = () => {
       )
     },
     {
-      key: 'VehicleProductionInfoForm',
+      key: 'VehicleProductionSalesForm',
       label: '车辆销售信息',
       children: (
-        <VehicleSalesInfoForm
-          refInfo={vsform}
-          mode={formState}
-          selectInfo={enumDataStore.enumData}
-        />
+        <VehicleSalesInfoForm form={vsform} mode={formState} selectInfo={enumDataStore.enumData} />
       )
     },
     {
-      key: 'VehicleProductionInfoForm',
+      key: 'VehicleProductionOptionalForm',
       label: '其他非必填项',
       children: (
         <VehicleOptionalInfoForm
-          refInfo={voform}
+          form={voform}
           mode={formState}
           selectInfo={enumDataStore.enumData}
         />
