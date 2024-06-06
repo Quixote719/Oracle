@@ -27,6 +27,7 @@ const FlexFormItem = props => {
       rules={props.rules}
       initialValue={props.isDatePicker ? dayjs(props.text) : props.text}
       style={{ width: '75%', ...props.itemstyle }}
+      disabled={props.disabled}
     >
       {genFormItem()}
     </Form.Item>
@@ -52,7 +53,8 @@ FlexFormItem.propTypes = {
   placeholder: PropTypes.string,
   isDatePicker: PropTypes.bool,
   itemstyle: PropTypes.object,
-  addonAfter: PropTypes.string
+  addonAfter: PropTypes.string,
+  disabled: PropTypes.bool
 };
 
 export default FlexFormItem;

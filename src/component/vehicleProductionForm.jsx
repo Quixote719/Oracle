@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Row, Col, Form, Collapse, Button, Modal } from 'antd';
+import dayjs from 'dayjs';
 import FlexFormItem from '@/component/flexFormItem';
 import { getTargetOptionLabel, addOtherOption } from '@/utils/compMethods';
 import { useStore } from '@/store';
@@ -17,6 +18,7 @@ const MotorSubForm = React.forwardRef((props, ref) => {
             label="驱动电机序号"
             name="driverMotorNo"
             rules={[]}
+            disabled={true}
           />
         </Col>
         <Col span={12} key={'type'} id={'type'}>
@@ -63,6 +65,7 @@ const BatterySubForm = React.forwardRef((props, ref) => {
             label="储能装置电池包序号"
             name="batteryPackNo"
             rules={[]}
+            disabled={true}
           />
         </Col>
         <Col span={12} key={'batteryPackCode'} id={'batteryPackCode'}>
@@ -91,6 +94,7 @@ const BatterySubForm = React.forwardRef((props, ref) => {
             label="动力蓄电池生产日期"
             name="batteryPackManufactureDate"
             rules={[]}
+            isDatePicker={true}
           />
         </Col>
       </Row>
@@ -111,7 +115,7 @@ const VehicleProductionMotorForm = props => {
   let ref3 = useRef();
   let ref4 = useRef();
   let refArr = [ref1, ref2, ref3, ref4];
-  props.refInfo.info = refArr;
+  props.refInfo.motorInfo = refArr;
 
   const changeFormMode = param => {
     setFormMode(param);
@@ -278,7 +282,7 @@ const VehicleProductionBatteryForm = props => {
   let ref3 = useRef();
   let ref4 = useRef();
   let refArr = [ref1, ref2, ref3, ref4];
-  props.refInfo.info = refArr;
+  props.refInfo.batteryInfo = refArr;
 
   const changeFormMode = param => {
     setFormMode(param);
@@ -455,6 +459,7 @@ const VehicleProductionForm = props => {
               label="VIN"
               name="vin"
               placeholder=""
+              disabled={true}
             />
           </Col>
           <Col span={12} key={'listingDate'} id={'listingDate'}>
@@ -465,6 +470,7 @@ const VehicleProductionForm = props => {
               name="listingDate"
               rules={[]}
               isDatePicker={true}
+              disabledDate={current => current && current > dayjs().endOf('day')}
             />
           </Col>
           <Col span={12} key={'vehicleModelId'} id={'vehicleModelId'}>
