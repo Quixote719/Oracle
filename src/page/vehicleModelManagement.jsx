@@ -16,7 +16,7 @@ import VehicleCertificateForm from '@/component/vehicleCertificateForm';
 import VehicleThresholdNSGForm from '@/component/vehicleThresholdNSGForm';
 import VehicleThresholdTJForm from '@/component/vehicleThresholdTJForm';
 import VehicleAlarmTJForm from '@/component/vehicleAlarmTJForm.jsx';
-import { submitVehicleModel } from '@/api/vehicleModelApi';
+import { submitVehicleModel } from '@/api/vehicleApi';
 import { useStore } from '@/store';
 import styles from './index.module.less';
 /*

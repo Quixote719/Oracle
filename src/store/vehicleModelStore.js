@@ -1,5 +1,5 @@
 import { action, runInAction, makeAutoObservable, observable } from 'mobx';
-import { getVehicleModelList } from '@/api/vehicleModelApi';
+import { getVehicleModelList } from '@/api/vehicleApi';
 
 class VehicleModelStore {
   constructor() {
