@@ -1,3 +1,14 @@
+const digitCapLetterValidator = param => {
+  return {
+    validator: (_, value) => {
+      const reg = new RegExp(`^[0-9A-Z]{${param}}$`);
+      return reg.test(value)
+        ? Promise.resolve()
+        : Promise.reject(new Error(`仅支持输入数字和大写字母，长度为${param}位`));
+    }
+  };
+};
+
 const digitValidator = param => {
   return {
     validator: (_, value) => {
@@ -13,7 +24,7 @@ const lengthValidator = param => {
   if (!Array.isArray(param)) return false;
   return {
     validator: (_, value) => {
-      return param.includes(value.length)
+      return param.includes(value?.length)
         ? Promise.resolve()
         : Promise.reject(new Error(`输入长度只能为${param.toString()}位`));
     }
@@ -69,6 +80,7 @@ const integerValidator = () => {
 };
 
 export {
+  digitCapLetterValidator,
   digitValidator,
   numberLimitValidator,
   serialNumberValidator,

@@ -22,6 +22,7 @@ const Flow = () => {
   const pagePath = useLocation();
   const [vsform] = Form.useForm();
   const [voform] = Form.useForm();
+  const [vpform] = Form.useForm();
   let vpFormRefs = {};
 
   const normalForms = {
@@ -34,6 +35,7 @@ const Flow = () => {
     if (pagePath?.state?.createNew) {
       setFormState('edit');
     }
+    enumDataStore.parseAreaData();
   }, []);
 
   const validateFields = () => {
@@ -44,6 +46,22 @@ const Flow = () => {
         res[formName] = normalForms[formName].getFieldsValue();
       }
     });
+    if (Array.isArray(vpFormRefs.motorInfo)) {
+      res.motorInfo = [];
+      vpFormRefs.motorInfo.forEach(form => {
+        if (typeof form?.current?.getFieldsValue === 'function') {
+          res.motorInfo.push(form.current.getFieldsValue());
+        }
+      });
+    }
+    if (Array.isArray(vpFormRefs.batteryInfo)) {
+      res.batteryInfo = [];
+      vpFormRefs.batteryInfo.forEach(form => {
+        if (typeof form?.current?.getFieldsValue === 'function') {
+          res.batteryInfo.push(form.current.getFieldsValue());
+        }
+      });
+    }
     return res;
   };
 
@@ -64,6 +82,7 @@ const Flow = () => {
       label: '车辆生产信息',
       children: (
         <VehicleProductionInfoForm
+          form={vpform}
           refInfo={vpFormRefs}
           mode={formState}
           selectInfo={enumDataStore.enumData}

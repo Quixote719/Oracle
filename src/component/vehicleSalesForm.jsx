@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Row, Col, Form, Button } from 'antd';
 import FlexFormItem from '@/component/flexFormItem';
-import { digitValidator, lengthValidator } from '@/utils/validator';
+import { digitValidator, lengthValidator, digitCapLetterValidator } from '@/utils/validator';
 import { useStore } from '@/store';
 import styles from './compStyle.module.less';
 import PropTypes from 'prop-types';
@@ -109,6 +109,7 @@ const VehicleForm = props => {
               label="上报平台"
               name="reportPlatform"
               rules={[]}
+              disabled={true}
             />
           </Col>
           <Col span={12} key={'customerResidence'} id={'customerResidence'}>
@@ -118,6 +119,7 @@ const VehicleForm = props => {
               label="购车人居住地"
               name="customerResidence"
               rules={[]}
+              options={[]}
             />
           </Col>
           <Col span={12} key={'customerResidenceAreaCode'} id={'customerResidenceAreaCode'}>
@@ -169,6 +171,7 @@ const VehicleForm = props => {
               label="投运时间"
               name="operationStartDate"
               rules={[]}
+              disabled={true}
             />
           </Col>
           <Col span={24}>
@@ -190,6 +193,7 @@ const VehicleForm = props => {
               label="车主性别"
               name="customerGender"
               rules={[]}
+              options={[]}
             />
           </Col>
           <Col span={12} key={'customerPhoneNumber'} id={'customerPhoneNumber'}>
@@ -237,7 +241,7 @@ const VehicleForm = props => {
               text={vehicleInfoStore?.targetRecord?.generatorTerminal?.organizationUsci}
               label="统一社会信用代码"
               name="organizationUsci"
-              rules={[]}
+              rules={[digitCapLetterValidator(18)]}
             />
           </Col>
           <Col span={12} key={'vehicleStorageLocation'} id={'vehicleStorageLocation'}>
