@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Select, DatePicker } from 'antd';
+import { Form, Input, Select, Cascader, DatePicker } from 'antd';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import styles from './compStyle.module.less';
@@ -7,7 +7,11 @@ import styles from './compStyle.module.less';
 const FlexFormItem = props => {
   const genFormItem = () => {
     return Array.isArray(props.options) ? (
-      <Select className={styles.formItem} mode={props.selectMode} {...props} />
+      props.isCascade ? (
+        <Cascader className={styles.formItem} mode={props.selectMode} {...props} />
+      ) : (
+        <Select className={styles.formItem} mode={props.selectMode} {...props} />
+      )
     ) : props.isDatePicker ? (
       <DatePicker
         className={styles.formItem}
@@ -52,6 +56,7 @@ FlexFormItem.propTypes = {
   selectMode: PropTypes.string,
   placeholder: PropTypes.string,
   isDatePicker: PropTypes.bool,
+  isCascade: PropTypes.bool,
   itemstyle: PropTypes.object,
   addonAfter: PropTypes.string,
   disabled: PropTypes.bool

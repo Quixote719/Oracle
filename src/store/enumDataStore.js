@@ -1,7 +1,7 @@
 import { action, runInAction, makeAutoObservable, observable } from 'mobx';
 import { parseVehicleModelSelectOptions } from '@/utils/compMethods';
+import regionJSON from '@/region.json';
 import { getVehicleEnumList } from '@/api/vehicleApi';
-import AreaJSON from '@/area.json';
 
 class EnumDataStore {
   constructor() {
@@ -22,8 +22,8 @@ class EnumDataStore {
     });
   };
 
-  parseAreaData = () => {
-    console.log(AreaJSON);
+  getRegionData = () => {
+    return regionJSON;
   };
 }
 

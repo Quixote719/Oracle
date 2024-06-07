@@ -35,7 +35,6 @@ const Flow = () => {
     if (pagePath?.state?.createNew) {
       setFormState('edit');
     }
-    enumDataStore.parseAreaData();
   }, []);
 
   const validateFields = () => {
