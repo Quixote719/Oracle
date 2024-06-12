@@ -430,13 +430,13 @@ const VehicleForm = props => {
             />
           </Col>
 
-          <Col span={8} key={'DC-DC-DC温度报警一级'}>
+          <Col span={8} key={'DC-DC温度报警一级'}>
             <FlexFormItem
               formformat={formMode}
               itemstyle={{ width: '100%' }}
-              text={findAlarmVal('DC-DC-DC温度报警一级')}
+              text={findAlarmVal('DC-DC温度报警一级')}
               label="DC-DC温度报警一级"
-              name="DC-DC-DC温度报警一级"
+              name="DC-DC温度报警一级"
               rules={[]}
               placeholder={'需要输入具体的触发条件，包含文字、数字等信息'}
             />

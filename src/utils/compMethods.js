@@ -1,7 +1,9 @@
 import { other } from '@/constant/vehicleModel';
 
-const getTargetOptionLabel = (options = [], target) => {
-  return options.find(item => (item.value || '').toString() === (target || '').toString())?.label;
+const getTargetOptionLabel = (options = [], target, mode) => {
+  const resOpt = options.find(item => (item.value || '').toString() === (target || '').toString());
+  let res = mode === 'edit' ? resOpt?.value : resOpt?.label;
+  return res;
 };
 
 const parseVehicleModelSelectOptions = param => {

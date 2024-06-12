@@ -7,7 +7,7 @@ import styles from './compStyle.module.less';
 const FlexFormItem = props => {
   const genFormItem = () => {
     return Array.isArray(props.options) ? (
-      props.isCascade ? (
+      props.selectCascade ? (
         <Cascader className={styles.formItem} mode={props.selectMode} {...props} />
       ) : (
         <Select className={styles.formItem} mode={props.selectMode} {...props} />
@@ -56,7 +56,7 @@ FlexFormItem.propTypes = {
   selectMode: PropTypes.string,
   placeholder: PropTypes.string,
   isDatePicker: PropTypes.bool,
-  isCascade: PropTypes.bool,
+  selectCascade: PropTypes.bool,
   itemstyle: PropTypes.object,
   addonAfter: PropTypes.string,
   disabled: PropTypes.bool

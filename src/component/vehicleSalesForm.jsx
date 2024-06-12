@@ -128,7 +128,7 @@ const VehicleForm = props => {
               rules={[]}
               onChange={residenceChange}
               options={enumDataStore.getRegionData()}
-              isCascade={true}
+              selectCascade={true}
             />
           </Col>
           <Col span={12} key={'customerResidenceAreaCode'} id={'customerResidenceAreaCode'}>
