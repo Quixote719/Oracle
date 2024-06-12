@@ -55,7 +55,8 @@ const VehicleForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 yesOrNo || [],
-                vehicleModelStore?.targetRecord?.bulletinCertInfo?.exempt
+                vehicleModelStore?.targetRecord?.bulletinCertInfo?.exempt,
+                formMode
               )}
               label="是否免征"
               name="exempt"
@@ -68,7 +69,8 @@ const VehicleForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 yesOrNo || [],
-                vehicleModelStore?.targetRecord?.bulletinCertInfo?.fuel
+                vehicleModelStore?.targetRecord?.bulletinCertInfo?.fuel,
+                formMode
               )}
               label="是否燃油"
               name="fuel"
@@ -81,7 +83,8 @@ const VehicleForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 yesOrNo || [],
-                vehicleModelStore?.targetRecord?.bulletinCertInfo?.environmentallyFriendly
+                vehicleModelStore?.targetRecord?.bulletinCertInfo?.environmentallyFriendly,
+                formMode
               )}
               label="是否环保"
               name="environmentallyFriendly"
@@ -94,7 +97,8 @@ const VehicleForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 yesOrNo || [],
-                vehicleModelStore?.targetRecord?.bulletinCertInfo?.fromOrganization
+                vehicleModelStore?.targetRecord?.bulletinCertInfo?.fromOrganization,
+                formMode
               )}
               label="是否本机构"
               name="fromOrganization"
@@ -141,7 +145,8 @@ const VehicleForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 addOtherOption(selectInfo.specifications),
-                vehicleModelStore?.targetRecord?.bulletinCertInfo?.specifications
+                vehicleModelStore?.targetRecord?.bulletinCertInfo?.specifications,
+                formMode
               )}
               label="规约"
               name="specifications"

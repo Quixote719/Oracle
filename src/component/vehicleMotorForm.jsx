@@ -30,7 +30,8 @@ const SubForm = React.forwardRef((props, ref) => {
             formformat={props.mode}
             text={getTargetOptionLabel(
               addOtherOption(selectInfo.driverMotorType),
-              props.initialData?.type
+              props.initialData?.type,
+              props.mode
             )}
             label="驱动电机类型"
             name="type"
@@ -58,7 +59,8 @@ const SubForm = React.forwardRef((props, ref) => {
             formformat={props.mode}
             text={getTargetOptionLabel(
               addOtherOption(selectInfo.vehicleEnergyStorageDeviceCoolingMethod),
-              props.initialData?.coolingMethod
+              props.initialData?.coolingMethod,
+              props.mode
             )}
             label="驱动电机冷却方式"
             name="coolingMethod"

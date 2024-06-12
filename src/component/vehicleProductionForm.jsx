@@ -478,7 +478,8 @@ const VehicleProductionForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 addOtherOption(selectInfo.vehicleModelId),
-                vehicleModelStore?.targetRecord?.vehicleModelId
+                vehicleModelStore?.targetRecord?.vehicleModelId,
+                formMode
               )}
               label="车辆型号"
               name="vehicleModelId"
@@ -491,7 +492,8 @@ const VehicleProductionForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 addOtherOption(selectInfo.engineNo),
-                vehicleModelStore?.targetRecord?.engineNo
+                vehicleModelStore?.targetRecord?.engineNo,
+                formMode
               )}
               label="发动机编号"
               name="engineNo"
@@ -503,7 +505,8 @@ const VehicleProductionForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 addOtherOption(selectInfo.productionBatch),
-                vehicleModelStore?.targetRecord?.productionBatch
+                vehicleModelStore?.targetRecord?.productionBatch,
+                formMode
               )}
               label="生产批次"
               name="productionBatch"

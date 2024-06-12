@@ -67,7 +67,8 @@ const VehicleForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 addOtherOption(selectInfo.vehicleRegistrationBrand),
-                vehicleModelStore?.targetRecord?.vehicleRegistrationBrand
+                vehicleModelStore?.targetRecord?.vehicleRegistrationBrand,
+                formMode
               )}
               label="车辆登记品牌"
               name="vehicleRegistrationBrand"
@@ -88,7 +89,8 @@ const VehicleForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 selectInfo.producerFullName,
-                vehicleModelStore?.targetRecord?.producerFullName
+                vehicleModelStore?.targetRecord?.producerFullName,
+                formMode
               )}
               label="生产企业全称"
               name="producerFullName"
@@ -166,7 +168,8 @@ const VehicleForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 addOtherOption(selectInfo.productionMethod),
-                vehicleModelStore?.targetRecord?.productionMethod
+                vehicleModelStore?.targetRecord?.productionMethod,
+                formMode
               )}
               label="生产方式"
               name="productionMethod"
@@ -187,7 +190,8 @@ const VehicleForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 selectInfo.brandCategory || [],
-                vehicleModelStore?.targetRecord?.brandCategory
+                vehicleModelStore?.targetRecord?.brandCategory,
+                formMode
               )}
               label="品牌系别"
               name="brandCategory"
@@ -233,7 +237,8 @@ const VehicleForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 selectInfo.vehicleType || [],
-                vehicleModelStore?.targetRecord?.vehicleType
+                vehicleModelStore?.targetRecord?.vehicleType,
+                formMode
               )}
               label="车辆种类"
               name="vehicleType"
@@ -261,7 +266,8 @@ const VehicleForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 selectInfo.passengerVehicleClass || [],
-                vehicleModelStore?.targetRecord?.passengerVehicleClass
+                vehicleModelStore?.targetRecord?.passengerVehicleClass,
+                formMode
               )}
               label="乘用车级别"
               name="passengerVehicleClass"
@@ -292,7 +298,8 @@ const VehicleForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 selectInfo.energyType,
-                vehicleModelStore?.targetRecord?.energyType
+                vehicleModelStore?.targetRecord?.energyType,
+                formMode
               )}
               label="能源类型"
               name="energyType"
@@ -579,7 +586,8 @@ const VehicleForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 yesOrNo || [],
-                vehicleModelStore?.targetRecord?.drivingModeManualSelection
+                vehicleModelStore?.targetRecord?.drivingModeManualSelection,
+                formMode
               )}
               label="是否有行驶模式手动选择模式"
               name="drivingModeManualSelection"

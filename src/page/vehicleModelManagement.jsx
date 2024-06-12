@@ -111,13 +111,17 @@ const Flow = () => {
           : { ...res, ...curFormVals[formName] };
       });
     } else {
-      recordForms.forEach(recordForm => {
-        if (Array.isArray(vehicleModelStore.targetRecord?.[recordForm])) {
-          res = vehicleModelStore.targetRecord?.[recordForm];
-        } else {
-          res = { ...res, ...vehicleModelStore.targetRecord?.[recordForm] };
-        }
-      });
+      if (recordForms.length === 0) {
+        res = vehicleModelStore.targetRecord;
+      } else {
+        recordForms.forEach(recordForm => {
+          if (Array.isArray(vehicleModelStore.targetRecord?.[recordForm])) {
+            res = vehicleModelStore.targetRecord?.[recordForm];
+          } else {
+            res = { ...res, ...vehicleModelStore.targetRecord?.[recordForm] };
+          }
+        });
+      }
       formNames.forEach(formName => {
         let targetForm = formName.includes('Refs') ? formLists[formName] : normalForms[formName];
         // 特殊表单，内部包含数组表格, 例如驱动电机信息表格
