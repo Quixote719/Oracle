@@ -8,10 +8,17 @@ import PropTypes from 'prop-types';
 
 const VehicleForm = props => {
   const [formMode, setFormMode] = useState(props.mode);
-  const { vehicleInfoStore } = useStore();
+  const { enumDataStore, vehicleInfoStore } = useStore();
+  const { setFieldValue } = props.form;
 
   const changeFormMode = param => {
     setFormMode(param);
+  };
+
+  const residenceChange = param => {
+    if (Array.isArray(param)) {
+      setFieldValue('customerResidenceAreaCode', param[param.length - 1]);
+    }
   };
 
   return (
@@ -119,7 +126,9 @@ const VehicleForm = props => {
               label="购车人居住地"
               name="customerResidence"
               rules={[]}
-              options={[]}
+              onChange={residenceChange}
+              options={enumDataStore.getRegionData()}
+              isCascade={true}
             />
           </Col>
           <Col span={12} key={'customerResidenceAreaCode'} id={'customerResidenceAreaCode'}>
@@ -129,6 +138,7 @@ const VehicleForm = props => {
               label="购车人居住地区编码"
               name="customerResidenceAreaCode"
               rules={[]}
+              disabled={true}
             />
           </Col>
           <Col span={12} key={'drivingLicenseNumber'} id={'drivingLicenseNumber'}>
