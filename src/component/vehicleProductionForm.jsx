@@ -170,39 +170,39 @@ const VehicleProductionMotorForm = props => {
     setSubFormList(initSubForm);
   }, []);
 
-  const addEnergyStorage = () => {
-    const subFormLen = subFormList.length;
-    const curIndex = maxIndex.current;
-    if (subFormLen < 4) {
-      let newSubForm = {
-        key: `VehicleEnergyStorage${curIndex}`,
-        label: (
-          <div>
-            {`驱动电机${curIndex}`}
-            {subFormLen > 0 && (
-              <div className={styles.deleteBtn} onClick={e => removeEnergyStorage(e, curIndex)}>
-                删除
-              </div>
-            )}
-          </div>
-        ),
-        style: { padding: 5 },
-        children: (
-          <MotorSubForm mode={props.mode} ref={refArr[subFormLen]} selectInfo={props.selectInfo} />
-        )
-      };
-      const updatedList = [...subFormList, newSubForm];
-      listCopy.current = updatedList;
-      setSubFormList(updatedList);
-      maxIndex.current++;
-    }
-  };
+  // const addEnergyStorage = () => {
+  //   const subFormLen = subFormList.length;
+  //   const curIndex = maxIndex.current;
+  //   if (subFormLen < 4) {
+  //     let newSubForm = {
+  //       key: `VehicleEnergyStorage${curIndex}`,
+  //       label: (
+  //         <div>
+  //           {`驱动电机${curIndex}`}
+  //           {subFormLen > 0 && (
+  //             <div className={styles.deleteBtn} onClick={e => removeEnergyStorage(e, curIndex)}>
+  //               删除
+  //             </div>
+  //           )}
+  //         </div>
+  //       ),
+  //       style: { padding: 5 },
+  //       children: (
+  //         <MotorSubForm mode={props.mode} ref={refArr[subFormLen]} selectInfo={props.selectInfo} />
+  //       )
+  //     };
+  //     const updatedList = [...subFormList, newSubForm];
+  //     listCopy.current = updatedList;
+  //     setSubFormList(updatedList);
+  //     maxIndex.current++;
+  //   }
+  // };
 
-  const removeEnergyStorage = (e, param) => {
-    e.stopPropagation();
-    deleteIndex.current = param;
-    setIsModalOpen(true);
-  };
+  // const removeEnergyStorage = (e, param) => {
+  //   e.stopPropagation();
+  //   deleteIndex.current = param;
+  //   setIsModalOpen(true);
+  // };
 
   const deleteConfirm = () => {
     if (!Number.isInteger(deleteIndex.current)) {
@@ -227,23 +227,20 @@ const VehicleProductionMotorForm = props => {
   return (
     <div>
       <div className={styles.singleItem}>
-        {props.mode === 'display' && (
-          <div>
-            <div className={styles.inputTitle}>驱动电机安装数量</div>
-            <div>{props?.formData?.vehicleChargerNum}</div>
-          </div>
-        )}
-        {/* <Input style={{ width: '35%' }}></Input> */}
+        <div>
+          <div className={styles.inputTitle}>驱动电机安装数量</div>
+          <div>{2}</div>
+        </div>
       </div>
       <div className={styles.inFormCollapse}>
         <Collapse items={subFormList} />
-        <Button
+        {/* <Button
           className={styles.addFormBtn}
           onClick={() => addEnergyStorage()}
           disabled={subFormList.length >= 4}
         >
           增加
-        </Button>
+        </Button> */}
         <Modal
           open={isModalOpen}
           onOk={deleteConfirm}
@@ -337,43 +334,43 @@ const VehicleProductionBatteryForm = props => {
     setSubFormList(initSubForm);
   }, []);
 
-  const addEnergyStorage = () => {
-    const subFormLen = subFormList.length;
-    const curIndex = maxIndex.current;
-    if (subFormLen < 4) {
-      let newSubForm = {
-        key: `VehicleEnergyStorage${curIndex}`,
-        label: (
-          <div>
-            {`储能装置电池包${curIndex}`}
-            {subFormLen > 0 && (
-              <div className={styles.deleteBtn} onClick={e => removeEnergyStorage(e, curIndex)}>
-                删除
-              </div>
-            )}
-          </div>
-        ),
-        style: { padding: 5 },
-        children: (
-          <BatterySubForm
-            mode={props.mode}
-            ref={refArr[subFormLen]}
-            selectInfo={props.selectInfo}
-          />
-        )
-      };
-      const updatedList = [...subFormList, newSubForm];
-      listCopy.current = updatedList;
-      setSubFormList(updatedList);
-      maxIndex.current++;
-    }
-  };
+  // const addEnergyStorage = () => {
+  //   const subFormLen = subFormList.length;
+  //   const curIndex = maxIndex.current;
+  //   if (subFormLen < 4) {
+  //     let newSubForm = {
+  //       key: `VehicleEnergyStorage${curIndex}`,
+  //       label: (
+  //         <div>
+  //           {`储能装置电池包${curIndex}`}
+  //           {subFormLen > 0 && (
+  //             <div className={styles.deleteBtn} onClick={e => removeEnergyStorage(e, curIndex)}>
+  //               删除
+  //             </div>
+  //           )}
+  //         </div>
+  //       ),
+  //       style: { padding: 5 },
+  //       children: (
+  //         <BatterySubForm
+  //           mode={props.mode}
+  //           ref={refArr[subFormLen]}
+  //           selectInfo={props.selectInfo}
+  //         />
+  //       )
+  //     };
+  //     const updatedList = [...subFormList, newSubForm];
+  //     listCopy.current = updatedList;
+  //     setSubFormList(updatedList);
+  //     maxIndex.current++;
+  //   }
+  // };
 
-  const removeEnergyStorage = (e, param) => {
-    e.stopPropagation();
-    deleteIndex.current = param;
-    setIsModalOpen(true);
-  };
+  // const removeEnergyStorage = (e, param) => {
+  //   e.stopPropagation();
+  //   deleteIndex.current = param;
+  //   setIsModalOpen(true);
+  // };
 
   const deleteConfirm = () => {
     if (!Number.isInteger(deleteIndex.current)) {
@@ -398,22 +395,20 @@ const VehicleProductionBatteryForm = props => {
   return (
     <div>
       <div className={styles.singleItem}>
-        {props.mode === 'display' && (
-          <div>
-            <div className={styles.inputTitle}>储能装置电池包安装数量</div>
-            <div>{props?.formData?.vehicleChargerNum}</div>
-          </div>
-        )}
+        <div>
+          <div className={styles.inputTitle}>储能装置电池包安装数量</div>
+          <div>{2}</div>
+        </div>
       </div>
       <div className={styles.inFormCollapse}>
         <Collapse items={subFormList} />
-        <Button
+        {/* <Button
           className={styles.addFormBtn}
           onClick={() => addEnergyStorage()}
           disabled={subFormList.length >= 4}
         >
           增加
-        </Button>
+        </Button> */}
         <Modal
           open={isModalOpen}
           onOk={deleteConfirm}
@@ -515,16 +510,20 @@ const VehicleProductionForm = props => {
           </Col>
         </Row>
       </Form>
-      <VehicleProductionMotorForm
-        refInfo={props.refInfo}
-        mode={props.mode}
-        selectInfo={enumDataStore.enumData}
-      />
-      <VehicleProductionBatteryForm
-        refInfo={props.refInfo}
-        mode={props.mode}
-        selectInfo={enumDataStore.enumData}
-      />
+      <div className={styles.innerFormSection}>
+        <VehicleProductionMotorForm
+          refInfo={props.refInfo}
+          mode={props.mode}
+          selectInfo={enumDataStore.enumData}
+        />
+      </div>
+      <div className={styles.innerFormSection}>
+        <VehicleProductionBatteryForm
+          refInfo={props.refInfo}
+          mode={props.mode}
+          selectInfo={enumDataStore.enumData}
+        />
+      </div>
       <div className={styles.generalInfo}>终端</div>
       <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
