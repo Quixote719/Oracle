@@ -6,10 +6,9 @@ import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
 import { useNavigate } from 'react-router-dom';
 import FlexFormItem from '@/component/flexFormItem';
-import { vehicleModelColumns } from '@/constant/vehicleModel.js';
 import { exportVehicleModel } from '@/api/vehicleApi';
 import { addOtherOption } from '@/utils/compMethods';
-import { pageSizeOpt } from '@/constant/vehicleModel';
+import { vehicleModelColumns, pageSizeOpt } from '@/constant/vehicleModel';
 import { useStore } from '@/store';
 import styles from '@/page/index.module.less';
 
