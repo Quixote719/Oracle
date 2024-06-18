@@ -3,10 +3,12 @@ import { genApiPrefix } from '@/api/getApiPrefix';
 const prefix = genApiPrefix();
 
 const enumListUrl = `${prefix}/vehicle-service/dictionary/enumList`;
+const vehicleModelOptionUrl = `${prefix}/vehicle-service/VehicleModel/Options`;
 const vehicleModelUrl = `${prefix}/vehicle-service/VehicleModel`;
 const vehicleModelExportUrl = `${prefix}/Export/VehicleModel`;
-const searchVehicleDataByVin = `${prefix}/data-management/getLatestCNevDataByVin`;
+const searchVehicleDataByVinUrl = `${prefix}/data-management/getLatestCNevDataByVin`;
 const vehicleUrl = `${prefix}/vehicle-service/Vehicle`;
+const queryVehicleUrl = `${prefix}/vehicle-service/Vehicle/queryVehicle`;
 
 const getVehicleEnumList = () => {
   return fetch(enumListUrl).then(res => {
@@ -14,8 +16,35 @@ const getVehicleEnumList = () => {
   });
 };
 
+const getVehicleModelOptions = () => {
+  return fetch(vehicleModelOptionUrl).then(res => {
+    return res.json();
+  });
+};
+
 const getVehicleModelList = param => {
   return fetch(vehicleModelUrl + param).then(res => {
+    return res.json();
+  });
+};
+
+const getVehicleList = param => {
+  // return fetch(queryVehicleUrl + param).then(res => {
+  //   return res.json();
+  // });
+  return fetch(queryVehicleUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(param)
+  }).then(res => {
+    return res.json();
+  });
+};
+
+const getVehicleModelById = id => {
+  return fetch(vehicleModelUrl + `/${id}`).then(res => {
     return res.json();
   });
 };
@@ -55,7 +84,7 @@ const exportVehicleModel = param => {
 };
 
 const getVehicleDataByVin = param => {
-  return fetch(searchVehicleDataByVin + param).then(res => {
+  return fetch(searchVehicleDataByVinUrl + param).then(res => {
     return res.json();
   });
 };
@@ -74,7 +103,10 @@ const submitVehicle = param => {
 
 export {
   getVehicleEnumList,
+  getVehicleModelOptions,
   getVehicleModelList,
+  getVehicleList,
+  getVehicleModelById,
   submitVehicleModel,
   exportVehicleModel,
   getVehicleDataByVin,

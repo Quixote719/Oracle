@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Collapse, Button, Spin, Form } from 'antd';
+import { Collapse, Button, Spin, message, Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useLocation } from 'react-router-dom';
 import Header from '@/component/header';
@@ -7,6 +7,7 @@ import Menu from '@/component/menu';
 import VehicleProductionInfoForm from '@/component/vehicleProductionForm';
 import VehicleSalesInfoForm from '@/component/vehicleSalesForm';
 import VehicleOptionalInfoForm from '@/component/vehicleOptionalForm';
+import { submitVehicle } from '@/api/vehicleApi';
 import { useStore } from '@/store';
 import styles from './index.module.less';
 /*
@@ -14,53 +15,62 @@ import styles from './index.module.less';
   could be input/select(disable or available) or plain text.
   formItem: flexInput, flexSelect, etc
 */
-
 const Flow = () => {
   const [formState, setFormState] = useState('edit');
-  const { enumDataStore } = useStore();
+  const { vehicleModelStore, enumDataStore } = useStore();
   const [isLoading, setIsLoading] = useState(false);
   const pagePath = useLocation();
   const [vsform] = Form.useForm();
   const [voform] = Form.useForm();
   const [vpform] = Form.useForm();
   let vpFormRefs = {};
-
+  const [messageApi, contextHolder] = message.useMessage();
   const normalForms = {
+    vpform,
     vsform,
     voform
   };
 
   useEffect(() => {
     enumDataStore.fetchEnumData();
+    vehicleModelStore.fetchVehicleModelOptions();
     if (pagePath?.state?.createNew) {
       setFormState('edit');
     }
   }, []);
 
   const validateFields = () => {
-    let res = {};
+    let formRes = {},
+      res = {};
     Object.keys(normalForms).forEach(formName => {
       if (normalForms[formName] && typeof normalForms[formName].validateFields === 'function') {
         normalForms[formName].validateFields();
-        res[formName] = normalForms[formName].getFieldsValue();
+        formRes[formName] = normalForms[formName].getFieldsValue();
       }
     });
     if (Array.isArray(vpFormRefs.motorInfo)) {
-      res.motorInfo = [];
+      formRes.motorInfo = [];
       vpFormRefs.motorInfo.forEach(form => {
         if (typeof form?.current?.getFieldsValue === 'function') {
-          res.motorInfo.push(form.current.getFieldsValue());
+          formRes.motorInfo.push(form.current.getFieldsValue());
         }
       });
     }
     if (Array.isArray(vpFormRefs.batteryInfo)) {
-      res.batteryInfo = [];
+      formRes.batteryInfo = [];
       vpFormRefs.batteryInfo.forEach(form => {
         if (typeof form?.current?.getFieldsValue === 'function') {
-          res.batteryInfo.push(form.current.getFieldsValue());
+          formRes.batteryInfo.push(form.current.getFieldsValue());
         }
       });
     }
+    res = {
+      ...formRes.vpform
+    };
+    res.salesInfo = {
+      ...formRes.vsform,
+      ...formRes.voform
+    };
     return res;
   };
 
@@ -71,6 +81,19 @@ const Flow = () => {
   const onVehicleModelFinish = () => {
     const validateRes = validateFields();
     const res = parseVehicleModel(validateRes);
+    submitVehicle(res)
+      .then(res => {
+        setIsLoading(false);
+        if (res.code === 200) {
+          messageApi.success('保存成功');
+        } else {
+          messageApi.error(`保存失败：${(res?.msg || '').toString()}`);
+        }
+      })
+      .catch(err => {
+        setIsLoading(false);
+        messageApi.error(`保存失败：${err.toString()}`);
+      });
     setIsLoading(true);
     return res;
   };
@@ -85,6 +108,7 @@ const Flow = () => {
           refInfo={vpFormRefs}
           mode={formState}
           selectInfo={enumDataStore.enumData}
+          registrationModelOptions={vehicleModelStore.registrationModelOptions}
         />
       )
     },
@@ -124,6 +148,7 @@ const Flow = () => {
           <Button className={styles.saveBtn} onClick={() => onVehicleModelFinish()}>
             保存
           </Button>
+          {contextHolder}
         </Spin>
       </div>
     </div>

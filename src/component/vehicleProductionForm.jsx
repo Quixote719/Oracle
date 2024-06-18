@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Row, Col, Form, Collapse, Button, Modal } from 'antd';
+import { observer } from 'mobx-react-lite';
 import dayjs from 'dayjs';
 import FlexFormItem from '@/component/flexFormItem';
 import { getTargetOptionLabel, addOtherOption } from '@/utils/compMethods';
@@ -14,7 +15,7 @@ const MotorSubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'driverMotorNo'} id={'driverMotorNo'}>
           <FlexFormItem
             formformat={props.mode}
-            text={props.initialData?.driverMotorNo}
+            text={props.index}
             label="驱动电机序号"
             name="driverMotorNo"
             rules={[]}
@@ -61,7 +62,7 @@ const BatterySubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'batteryPackNo'} id={'batteryPackNo'}>
           <FlexFormItem
             formformat={props.mode}
-            text={props.initialData?.batteryPackNo}
+            text={props.index}
             label="储能装置电池包序号"
             name="batteryPackNo"
             rules={[]}
@@ -109,7 +110,6 @@ const VehicleProductionMotorForm = props => {
   const maxIndex = useRef(1);
   const deleteIndex = useRef(null);
   const [formMode, setFormMode] = useState(props.mode);
-  const { vehicleModelStore } = useStore();
   let ref1 = useRef();
   let ref2 = useRef();
   let ref3 = useRef();
@@ -133,18 +133,19 @@ const VehicleProductionMotorForm = props => {
 
   const genInitialSubForm = () => {
     let initSubForm = [];
-    if (vehicleModelStore?.targetRecord?.onboardChargers?.length > 0) {
-      for (let i = 0; i < vehicleModelStore?.targetRecord?.onboardChargers?.length; i++) {
+    if (props.selectedVehicleModel?.driverMotors?.length > 0) {
+      for (let i = 0; i < props.selectedVehicleModel?.driverMotors?.length; i++) {
         initSubForm.push({
           key: `VehicleMotor${maxIndex.current}`,
           label: <div>{`驱动电机${maxIndex.current}`}</div>,
           style: { padding: 5 },
           children: (
             <MotorSubForm
+              index={i + 1}
               mode={formMode}
               ref={refArr[i]}
               selectInfo={props.selectInfo}
-              initialData={vehicleModelStore?.targetRecord?.energyStorageDevices[i]}
+              initialData={props.selectedVehicleModel?.driverMotors[i]}
             />
           )
         });
@@ -229,7 +230,7 @@ const VehicleProductionMotorForm = props => {
       <div className={styles.singleItem}>
         <div>
           <div className={styles.inputTitle}>驱动电机安装数量</div>
-          <div>{2}</div>
+          <div>{props.selectedVehicleModel?.driverMotors?.length}</div>
         </div>
       </div>
       <div className={styles.inFormCollapse}>
@@ -273,7 +274,6 @@ const VehicleProductionBatteryForm = props => {
   const maxIndex = useRef(1);
   const deleteIndex = useRef(null);
   const [formMode, setFormMode] = useState(props.mode);
-  const { vehicleModelStore } = useStore();
   let ref1 = useRef();
   let ref2 = useRef();
   let ref3 = useRef();
@@ -297,18 +297,19 @@ const VehicleProductionBatteryForm = props => {
 
   const genInitialSubForm = () => {
     let initSubForm = [];
-    if (vehicleModelStore?.targetRecord?.onboardChargers?.length > 0) {
-      for (let i = 0; i < vehicleModelStore?.targetRecord?.onboardChargers?.length; i++) {
+    if (props.selectedVehicleModel?.energyStorageDevices?.length > 0) {
+      for (let i = 0; i < props.selectedVehicleModel?.energyStorageDevices?.length; i++) {
         initSubForm.push({
           key: `VehicleBattery${maxIndex.current}`,
           label: <div>{`储能装置电池包${maxIndex.current}`}</div>,
           style: { padding: 5 },
           children: (
             <BatterySubForm
+              index={i + 1}
               mode={formMode}
               ref={refArr[i]}
               selectInfo={props.selectInfo}
-              initialData={vehicleModelStore?.targetRecord?.energyStorageDevices[i]}
+              initialData={props.selectedVehicleModel?.energyStorageDevices[i]}
             />
           )
         });
@@ -397,7 +398,7 @@ const VehicleProductionBatteryForm = props => {
       <div className={styles.singleItem}>
         <div>
           <div className={styles.inputTitle}>储能装置电池包安装数量</div>
-          <div>{2}</div>
+          <div>{props.selectedVehicleModel?.energyStorageDevices?.length}</div>
         </div>
       </div>
       <div className={styles.inFormCollapse}>
@@ -436,11 +437,23 @@ const VehicleProductionBatteryForm = props => {
 
 const VehicleProductionForm = props => {
   const [formMode, setFormMode] = useState(props.mode);
-  const { vehicleModelStore, enumDataStore } = useStore();
+  const { vehicleModelStore, vehicleInfoStore, enumDataStore } = useStore();
   const { selectInfo = {} } = props;
+  const [isLoading, setIsLoading] = useState(false);
   const changeFormMode = param => {
     setFormMode(param);
   };
+
+  const vehicleModelIdChange = id => {
+    setIsLoading(true);
+    vehicleModelStore.fetchVehicleModelInfoById(id);
+  };
+
+  useEffect(() => {
+    if (isLoading) {
+      setIsLoading(false);
+    }
+  }, [vehicleModelStore.selectedVehicleModel]);
 
   return (
     <div>
@@ -450,17 +463,17 @@ const VehicleProductionForm = props => {
           <Col span={12} key={'vin'} id={'vin'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleModelStore?.targetRecord?.totalMass}
+              text={vehicleInfoStore?.targetRecord?.totalMass}
               label="VIN"
               name="vin"
               placeholder=""
-              disabled={true}
+              // disabled={true}
             />
           </Col>
           <Col span={12} key={'listingDate'} id={'listingDate'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleModelStore?.targetRecord?.listingDate}
+              text={vehicleInfoStore?.targetRecord?.listingDate}
               label="出厂日期"
               name="listingDate"
               rules={[]}
@@ -471,15 +484,16 @@ const VehicleProductionForm = props => {
           <Col span={12} key={'vehicleModelId'} id={'vehicleModelId'}>
             <FlexFormItem
               formformat={formMode}
+              onChange={vehicleModelIdChange}
               text={getTargetOptionLabel(
                 addOtherOption(selectInfo.vehicleModelId),
-                vehicleModelStore?.targetRecord?.vehicleModelId,
+                vehicleInfoStore?.targetRecord?.vehicleModelId,
                 formMode
               )}
               label="车辆型号"
               name="vehicleModelId"
               rules={[]}
-              options={[]}
+              options={props.registrationModelOptions}
             />
           </Col>
           <Col span={12} key={'engineNo'} id={'engineNo'}>
@@ -487,7 +501,7 @@ const VehicleProductionForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 addOtherOption(selectInfo.engineNo),
-                vehicleModelStore?.targetRecord?.engineNo,
+                vehicleInfoStore?.targetRecord?.engineNo,
                 formMode
               )}
               label="发动机编号"
@@ -500,7 +514,7 @@ const VehicleProductionForm = props => {
               formformat={formMode}
               text={getTargetOptionLabel(
                 addOtherOption(selectInfo.productionBatch),
-                vehicleModelStore?.targetRecord?.productionBatch,
+                vehicleInfoStore?.targetRecord?.productionBatch,
                 formMode
               )}
               label="生产批次"
@@ -510,27 +524,34 @@ const VehicleProductionForm = props => {
           </Col>
         </Row>
       </Form>
-      <div className={styles.innerFormSection}>
-        <VehicleProductionMotorForm
-          refInfo={props.refInfo}
-          mode={props.mode}
-          selectInfo={enumDataStore.enumData}
-        />
-      </div>
-      <div className={styles.innerFormSection}>
-        <VehicleProductionBatteryForm
-          refInfo={props.refInfo}
-          mode={props.mode}
-          selectInfo={enumDataStore.enumData}
-        />
-      </div>
+
+      {!isLoading && (
+        <div className={styles.innerFormSection}>
+          <VehicleProductionMotorForm
+            refInfo={props.refInfo}
+            mode={props.mode}
+            selectInfo={enumDataStore.enumData}
+            selectedVehicleModel={vehicleModelStore?.selectedVehicleModel}
+          />
+        </div>
+      )}
+      {!isLoading && (
+        <div className={styles.innerFormSection}>
+          <VehicleProductionBatteryForm
+            refInfo={props.refInfo}
+            mode={props.mode}
+            selectInfo={enumDataStore.enumData}
+            selectedVehicleModel={vehicleModelStore?.selectedVehicleModel}
+          />
+        </div>
+      )}
       <div className={styles.generalInfo}>终端</div>
       <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
           <Col span={12} key={'tboxSn'} id={'tboxSn'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleModelStore?.targetRecord?.totalMass}
+              text={vehicleInfoStore?.targetRecord?.totalMass}
               label="终端厂商"
               name="tboxSn"
               placeholder=""
@@ -539,7 +560,7 @@ const VehicleProductionForm = props => {
           <Col span={12} key={'vin'} id={'vin'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleModelStore?.targetRecord?.totalMass}
+              text={vehicleInfoStore?.targetRecord?.totalMass}
               label="SIM卡号"
               name="simMsisdn"
               placeholder=""
@@ -558,7 +579,7 @@ const VehicleProductionForm = props => {
           <Col span={12} key={'iccid'} id={'iccid'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleModelStore?.targetRecord?.totalMass}
+              text={vehicleInfoStore?.targetRecord?.totalMass}
               label="ICCID"
               name="iccid"
               placeholder=""
@@ -567,7 +588,7 @@ const VehicleProductionForm = props => {
           <Col span={12} key={'terminalModelId'} id={'terminalModelId'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleModelStore?.targetRecord?.totalMass}
+              text={vehicleInfoStore?.targetRecord?.totalMass}
               label="车载终端编号"
               name="terminalModelId"
               placeholder=""
@@ -587,13 +608,15 @@ const VehicleProductionForm = props => {
 MotorSubForm.propTypes = {
   selectInfo: PropTypes.object,
   mode: PropTypes.string,
-  initialData: PropTypes.object
+  initialData: PropTypes.object,
+  index: PropTypes.number
 };
 
 BatterySubForm.propTypes = {
   selectInfo: PropTypes.object,
   mode: PropTypes.string,
-  initialData: PropTypes.object
+  initialData: PropTypes.object,
+  index: PropTypes.number
 };
 
 VehicleProductionMotorForm.propTypes = {
@@ -601,7 +624,8 @@ VehicleProductionMotorForm.propTypes = {
   mode: PropTypes.string,
   refInfo: PropTypes.object,
   selectInfo: PropTypes.object,
-  formData: PropTypes.object
+  formData: PropTypes.object,
+  selectedVehicleModel: PropTypes.array
 };
 
 VehicleProductionBatteryForm.propTypes = {
@@ -609,7 +633,8 @@ VehicleProductionBatteryForm.propTypes = {
   mode: PropTypes.string,
   refInfo: PropTypes.object,
   selectInfo: PropTypes.object,
-  formData: PropTypes.object
+  formData: PropTypes.object,
+  selectedVehicleModel: PropTypes.array
 };
 
 VehicleProductionForm.propTypes = {
@@ -617,7 +642,8 @@ VehicleProductionForm.propTypes = {
   mode: PropTypes.string,
   refInfo: PropTypes.object,
   selectInfo: PropTypes.object,
-  formData: PropTypes.object
+  formData: PropTypes.object,
+  registrationModelOptions: PropTypes.array
 };
 
-export default VehicleProductionForm;
+export default observer(VehicleProductionForm);
