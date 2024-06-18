@@ -463,7 +463,7 @@ const VehicleProductionForm = props => {
           <Col span={12} key={'vin'} id={'vin'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.targetRecord?.totalMass}
+              text={vehicleInfoStore?.targetRecord?.vin || vehicleInfoStore?.targetRecord?.vuid}
               label="VIN"
               name="vin"
               placeholder=""
@@ -499,11 +499,7 @@ const VehicleProductionForm = props => {
           <Col span={12} key={'engineNo'} id={'engineNo'}>
             <FlexFormItem
               formformat={formMode}
-              text={getTargetOptionLabel(
-                addOtherOption(selectInfo.engineNo),
-                vehicleInfoStore?.targetRecord?.engineNo,
-                formMode
-              )}
+              text={vehicleInfoStore?.targetRecord?.engineNo}
               label="发动机编号"
               name="engineNo"
               rules={[]}
@@ -512,11 +508,7 @@ const VehicleProductionForm = props => {
           <Col span={12} key={'productionBatch'} id={'productionBatch'}>
             <FlexFormItem
               formformat={formMode}
-              text={getTargetOptionLabel(
-                addOtherOption(selectInfo.productionBatch),
-                vehicleInfoStore?.targetRecord?.productionBatch,
-                formMode
-              )}
+              text={vehicleInfoStore?.targetRecord?.productionBatch}
               label="生产批次"
               name="productionBatch"
               rules={[]}

@@ -16,7 +16,7 @@ import styles from './index.module.less';
   formItem: flexInput, flexSelect, etc
 */
 const Flow = () => {
-  const [formState, setFormState] = useState('edit');
+  const [formState, setFormState] = useState(null);
   const { vehicleModelStore, enumDataStore } = useStore();
   const [isLoading, setIsLoading] = useState(false);
   const pagePath = useLocation();
