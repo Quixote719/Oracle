@@ -95,7 +95,7 @@ const VehicleForm = props => {
               label="生产企业全称"
               name="producerFullName"
               rules={[]}
-              options={selectInfo.producerFullName || []}
+              options={selectInfo.producerFullName}
               onChange={param =>
                 setSelectLabel(param, selectInfo.producerFullName, val =>
                   setFieldValue('producerFullNameValue', val)

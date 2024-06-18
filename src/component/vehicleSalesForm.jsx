@@ -31,32 +31,39 @@ const VehicleForm = props => {
     }
   };
 
+  const platforms =
+    vehicleInfoStore?.targetRecord?.reportPlatform ||
+    vehicleModelStore?.selectedVehicleModel?.reportPlatform ||
+    [];
+
   return (
     <div>
       <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
           <Col span={12} key={'vehicleStatus'} id={'vehicleStatus'}>
             <FlexFormItem
-              text={vehicleInfoStore?.selectedVehicle?.salesInfo?.vehicleStatus}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.vehicleStatus}
               formformat={formMode}
               label="车辆状态"
               name="vehicleStatus"
+              options={selectInfo.vehicleStatus}
               rules={[]}
             />
           </Col>
           <Col span={12} key={'vehiclePurpose'} id={'vehiclePurpose'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.selectedVehicle?.salesInfo?.vehiclePurpose}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.vehiclePurpose}
               label="车辆用途"
               name="vehiclePurpose"
+              options={selectInfo.vehiclePurpose}
               rules={[]}
             />
           </Col>
           <Col span={12} key={'vehicleForRent'} id={'vehicleForRent'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.selectedVehicle?.salesInfo?.ratedPower}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.ratedPower}
               label="是否租赁"
               name="vehicleForRent"
               rules={[digitValidator(3)]}
@@ -66,7 +73,7 @@ const VehicleForm = props => {
           <Col span={12} key={'salesDate'} id={'salesDate'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.selectedVehicle?.salesInfo?.salesDate}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.salesDate}
               label="销售日期"
               name="salesDate"
               rules={[]}
@@ -77,7 +84,7 @@ const VehicleForm = props => {
           <Col span={12} key={'dealerName'} id={'dealerName'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.selectedVehicle?.salesInfo?.dealerName}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.dealerName}
               label="所属经销商"
               name="dealerName"
               rules={[]}
@@ -86,7 +93,7 @@ const VehicleForm = props => {
           <Col span={12} key={'dealerCode'} id={'dealerCode'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.selectedVehicle?.salesInfo?.dealerCode}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.dealerCode}
               label="经销商代码"
               name="dealerCode"
               rules={[]}
@@ -95,7 +102,7 @@ const VehicleForm = props => {
           <Col span={12} key={'dealerSalesAreaCode'} id={'dealerSalesAreaCode'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.selectedVehicle?.salesInfo?.dealerSalesAreaCode}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.dealerSalesAreaCode}
               label="销售区域"
               name="dealerSalesAreaCode"
               rules={[]}
@@ -104,8 +111,8 @@ const VehicleForm = props => {
           <Col span={12} key={'licensePlateNo'} id={'licensePlateNo'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.selectedVehicle?.salesInfo?.licensePlateNo}
-              value={vehicleInfoStore?.selectedVehicle?.salesInfo?.licensePlateNo}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.licensePlateNo}
+              value={vehicleInfoStore?.targetRecord?.salesInfo?.licensePlateNo}
               label="车牌"
               name="licensePlateNo"
               rules={[lengthValidator([7, 8])]}
@@ -114,30 +121,29 @@ const VehicleForm = props => {
           <Col span={12} key={'licensePlateColor'} id={'licensePlateColor'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.selectedVehicle?.salesInfo?.licensePlateColor}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.licensePlateColor}
               label="车牌颜色"
               name="licensePlateColor"
+              options={selectInfo.licensePlateColor}
               rules={[]}
             />
           </Col>
           <Col span={12} key={'reportPlatform'} id={'reportPlatform'}>
             <div className={styles.itemInfo}>
               <div className={styles.formLabel}>上报平台</div>
-              {(vehicleModelStore?.selectedVehicleModel?.reportPlatform || []).map(
-                (item, index) => {
-                  return (
-                    <div key={index} className={styles.formItemInfoSpan}>
-                      {reportPlatformOpt.find(opt => opt.value === item)?.label}
-                    </div>
-                  );
-                }
-              )}
+              {platforms.map((item, index) => {
+                return (
+                  <div key={index} className={styles.formItemInfoSpan}>
+                    {reportPlatformOpt.find(opt => opt.value === item)?.label}
+                  </div>
+                );
+              })}
             </div>
           </Col>
           <Col span={12} key={'customerResidence'} id={'customerResidence'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.customerResidence}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.customerResidence}
               label="购车人居住地"
               name="customerResidence"
               rules={[]}
@@ -149,7 +155,7 @@ const VehicleForm = props => {
           <Col span={12} key={'customerResidenceAreaCode'} id={'customerResidenceAreaCode'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.customerResidenceAreaCode}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.customerResidenceAreaCode}
               label="购车人居住地区编码"
               name="customerResidenceAreaCode"
               rules={[]}
@@ -159,7 +165,7 @@ const VehicleForm = props => {
           <Col span={12} key={'drivingLicenseNumber'} id={'drivingLicenseNumber'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.selectedVehicle?.salesInfo?.drivingLicenseNumber}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.drivingLicenseNumber}
               label="行驶证号"
               name="drivingLicenseNumber"
               rules={[]}
@@ -172,7 +178,7 @@ const VehicleForm = props => {
           >
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.drivingLicenseRegistrationTime}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.drivingLicenseRegistrationTime}
               label="行驶证注册时间"
               name="drivingLicenseRegistrationTime"
               rules={[]}
@@ -181,7 +187,7 @@ const VehicleForm = props => {
           <Col span={12} key={'licensePlateGrantDate'} id={'licensePlateGrantDate'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.licensePlateGrantDate}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.licensePlateGrantDate}
               label="上牌日期"
               name="licensePlateGrantDate"
               rules={[]}
@@ -190,7 +196,7 @@ const VehicleForm = props => {
           <Col span={12} key={'operationStartDate'} id={'operationStartDate'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.operationStartDate}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.operationStartDate}
               label="投运时间"
               name="operationStartDate"
               rules={[]}
@@ -203,7 +209,7 @@ const VehicleForm = props => {
           <Col span={12} key={'customerName'} id={'customerName'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.customerName}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.customerName}
               label="车主姓名"
               name="customerName"
               rules={[]}
@@ -212,7 +218,7 @@ const VehicleForm = props => {
           <Col span={12} key={'customerGender'} id={'customerGender'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.customerGender}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.customerGender}
               label="车主性别"
               name="customerGender"
               rules={[]}
@@ -222,7 +228,7 @@ const VehicleForm = props => {
           <Col span={12} key={'customerPhoneNumber'} id={'customerPhoneNumber'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.customerPhoneNumber}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.customerPhoneNumber}
               label="车主手机号"
               name="customerPhoneNumber"
               rules={[]}
@@ -231,16 +237,17 @@ const VehicleForm = props => {
           <Col span={12} key={'idType'} id={'idType'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.idType}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.idType}
               label="证件类型"
               name="idType"
+              options={selectInfo.idType}
               rules={[]}
             />
           </Col>
           <Col span={12} key={'idNumber'} id={'idNumber'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.idNumber}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.idNumber}
               label="证件号码"
               name="idNumber"
               rules={[]}
@@ -252,7 +259,7 @@ const VehicleForm = props => {
           <Col span={12} key={'organizationName'} id={'organizationName'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.organizationName}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.organizationName}
               label="运营单位"
               name="organizationName"
               rules={[]}
@@ -261,7 +268,7 @@ const VehicleForm = props => {
           <Col span={12} key={'organizationUsci'} id={'organizationUsci'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.organizationUsci}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.organizationUsci}
               label="统一社会信用代码"
               name="organizationUsci"
               rules={[digitCapLetterValidator(18)]}
@@ -270,7 +277,7 @@ const VehicleForm = props => {
           <Col span={12} key={'vehicleStorageLocation'} id={'vehicleStorageLocation'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.vehicleStorageLocation}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.vehicleStorageLocation}
               label="存放地点"
               name="vehicleStorageLocation"
               rules={[]}
@@ -279,7 +286,7 @@ const VehicleForm = props => {
           <Col span={12} key={'contactPerson'} id={'contactPerson'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.contactPerson}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.contactPerson}
               label="联系人"
               name="contactPerson"
               rules={[]}
@@ -288,7 +295,7 @@ const VehicleForm = props => {
           <Col span={12} key={'contactPersonPhoneNumber'} id={'contactPersonPhoneNumber'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.contactPersonPhoneNumber}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.contactPersonPhoneNumber}
               label="联系电话"
               name="contactPersonPhoneNumber"
               rules={[]}
@@ -297,7 +304,7 @@ const VehicleForm = props => {
           <Col span={12} key={'legalRepresentativeName'} id={'legalRepresentativeName'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.legalRepresentativeName}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.legalRepresentativeName}
               label="运营单位法人代表姓名"
               name="legalRepresentativeName"
               rules={[]}
@@ -310,7 +317,7 @@ const VehicleForm = props => {
           >
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.legalRepresentativePhoneNumber}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.legalRepresentativePhoneNumber}
               label="法人代表手机"
               name="legalRepresentativePhoneNumber"
               rules={[]}
@@ -319,7 +326,7 @@ const VehicleForm = props => {
           <Col span={12} key={'organizationAddress'} id={'organizationAddress'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.select?.salesInfo?.organizationAddress}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.organizationAddress}
               label="运营单位地址"
               name="organizationAddress"
               rules={[]}
@@ -328,7 +335,7 @@ const VehicleForm = props => {
           <Col span={12} key={'operatingAddresss'} id={'operatingAddresss'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.selectedVehicle?.salesInfo?.operatingAddresss}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.operatingAddresss}
               label="运营地址"
               name="operatingAddresss"
               rules={[]}
@@ -337,7 +344,7 @@ const VehicleForm = props => {
           <Col span={12} key={'chargingPileAddress'} id={'chargingPileAddress'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.selectedVehicle?.salesInfo?.chargingPileAddress}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.chargingPileAddress}
               label="对应车辆充电桩地址"
               name="chargingPileAddress"
               rules={[]}

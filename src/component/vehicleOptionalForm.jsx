@@ -20,7 +20,7 @@ const VehicleForm = props => {
         <Row gutter={24}>
           <Col span={12} key={'complianceReportNumber'} id={'complianceReportNumber'}>
             <FlexFormItem
-              text={vehicleInfoStore?.targetRecord?.generatorTerminal?.type}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.complianceReportNumber}
               formformat={formMode}
               label="车型符合性报告编号"
               name="complianceReportNumber"
@@ -30,7 +30,7 @@ const VehicleForm = props => {
           <Col span={12} key={'invoicePrice'} id={'invoicePrice'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.targetRecord?.generatorTerminal?.model}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.invoicePrice}
               label="发票价格（万元）"
               name="invoicePrice"
               rules={[]}
@@ -39,7 +39,7 @@ const VehicleForm = props => {
           <Col span={12} key={'vehicleCertificationNumber'} id={'vehicleCertificationNumber'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.targetRecord?.generatorTerminal?.ratedPower}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.vehicleCertificationNumber}
               label="车辆合格证编号"
               name="vehicleCertificationNumber"
               rules={[digitValidator(3)]}
@@ -48,7 +48,7 @@ const VehicleForm = props => {
           <Col span={12} key={'invoiceNo'} id={'invoiceNo'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.targetRecord?.generatorTerminal?.producer}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.invoiceNo}
               label="销售发票编号"
               name="invoiceNo"
               rules={[]}
@@ -57,7 +57,7 @@ const VehicleForm = props => {
           <Col span={12} key={'manufacturingInternalNumber'} id={'manufacturingInternalNumber'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.targetRecord?.generatorTerminal?.producer}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.manufacturingInternalNumber}
               label="生产内部编号"
               name="manufacturingInternalNumber"
               rules={[]}
@@ -66,7 +66,7 @@ const VehicleForm = props => {
           <Col span={12} key={'remark'} id={'remark'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.targetRecord?.generatorTerminal?.producer}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.remark}
               label="备注"
               name="remark"
               rules={[]}
