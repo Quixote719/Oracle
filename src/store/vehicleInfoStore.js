@@ -1,5 +1,5 @@
 import { action, runInAction, makeAutoObservable, observable } from 'mobx';
-import { getVehicleModelList } from '@/api/vehicleApi';
+import { getVehicleList } from '@/api/vehicleApi';
 
 class VehicleModelStore {
   constructor() {
@@ -35,7 +35,8 @@ class VehicleModelStore {
   };
 
   fetchVIlist = param => {
-    getVehicleModelList(param).then(res => {
+    if (param === '?') param = '';
+    getVehicleList(param).then(res => {
       runInAction(() => {
         this.vehicleList = this.parseVI(res.data);
       });

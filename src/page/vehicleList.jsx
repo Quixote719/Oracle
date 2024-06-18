@@ -13,7 +13,7 @@ import { useStore } from '@/store';
 import styles from '@/page/index.module.less';
 
 const VehicleManagement = () => {
-  const { vehicleModelStore, enumDataStore } = useStore();
+  const { vehicleInfoStore, enumDataStore } = useStore();
   const tablePagination = useRef({});
   const [fromRef] = Form.useForm();
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -22,8 +22,8 @@ const VehicleManagement = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    vehicleModelStore.clearVMList();
-    vehicleModelStore.setTargetRecord(null);
+    vehicleInfoStore.clearVIList();
+    vehicleInfoStore.setTargetRecord(null);
     enumDataStore.fetchEnumData();
 
     let target = vehicleModelColumns.find(item => item.dataIndex === 'operations');
@@ -51,7 +51,7 @@ const VehicleManagement = () => {
     if (isLoading) {
       setIsLoading(false);
     }
-  }, [vehicleModelStore.vehicleModelList]);
+  }, [vehicleInfoStore.vehicleList]);
 
   const renderSelectionCol = (recordKey, selectCol) => {
     let targetCol = vehicleModelColumns.find(item => item.dataIndex === recordKey);
@@ -77,17 +77,25 @@ const VehicleManagement = () => {
   };
 
   const tableChange = (pagination, filters, sorter) => {
-    let queryUrl = '';
+    let pageParam = {};
     if (sorter?.order) {
-      queryUrl += `&orderBy=${sorter.columnKey}&ascending=${sorter.order === 'ascend' ? true : false}`;
+      pageParam = {
+        ...pageParam,
+        orderBy: sorter.columnKey,
+        ascending: sorter.order === 'ascend' ? true : false
+      };
     }
     if (pagination) {
-      queryUrl += `&page=${pagination?.current}&size=${pagination?.pageSize}`;
+      pageParam = {
+        ...pageParam,
+        page: pagination?.current,
+        size: pagination?.pageSize
+      };
     }
     tablePagination.current = {
       size: pagination?.pageSize
     };
-    requestVehicleModelData(queryUrl);
+    requestVehicleModelData(pageParam);
   };
 
   const createNew = () => {
@@ -95,7 +103,7 @@ const VehicleManagement = () => {
   };
 
   const viewDetail = record => {
-    vehicleModelStore.setTargetRecord(record);
+    vehicleInfoStore.setTargetRecord(record);
     navigate('/VehicleManagement', { state: { vehicleModelId: record.id } });
   };
 
@@ -103,35 +111,19 @@ const VehicleManagement = () => {
     fromRef.resetFields();
   };
 
-  const genUrlQuery = (param, baseUrl = '') => {
-    if (!(Object.keys(param).length === 0)) {
-      Object.keys(param).forEach(formKey => {
-        if (param[formKey] !== undefined) {
-          baseUrl += `&${formKey}=${param[formKey]}`;
-        }
-      });
-    }
-    if (baseUrl.startsWith('&')) {
-      baseUrl = baseUrl.replace('&', '?');
-    } else if (!baseUrl.startsWith('?')) {
-      baseUrl = '?' + baseUrl;
-    }
-    return baseUrl;
-  };
-
-  const requestVehicleModelData = paramUrl => {
+  const requestVehicleModelData = pageParam => {
     const formVals = fromRef.getFieldsValue();
-    const urlQuery = genUrlQuery(formVals, paramUrl);
+    const reqParam = { page: 1, size: 10, ...formVals, ...pageParam };
     setIsLoading(true);
-    vehicleModelStore.fetchVMlist(urlQuery);
+    vehicleInfoStore.fetchVIlist(reqParam);
   };
 
   const searchVehicleModel = () => {
-    let baseUrl = '';
+    let pageParam = {};
     Object.keys(tablePagination.current).forEach(pagKey => {
-      baseUrl += `&${pagKey}=${tablePagination.current[pagKey]}`;
+      pageParam[pagKey] = tablePagination.current[pagKey];
     });
-    requestVehicleModelData(baseUrl);
+    requestVehicleModelData(pageParam);
   };
 
   const onSelectChange = selectedRowKeys => {
@@ -147,7 +139,7 @@ const VehicleManagement = () => {
     }
   };
 
-  const modelData = toJS(vehicleModelStore.vehicleModelList);
+  const vehicleData = toJS(vehicleInfoStore.vehicleList);
 
   const rowSelection = {
     selectedRowKeys,
@@ -236,12 +228,12 @@ const VehicleManagement = () => {
             <Table
               rowSelection={rowSelection}
               columns={vehicleModelColumns}
-              dataSource={modelData.tableRows}
+              dataSource={vehicleData.tableRows}
               onChange={tableChange}
               pagination={{
                 pageSizeOptions: pageSizeOpt,
-                total: modelData.total,
-                current: modelData.page,
+                total: vehicleData.total,
+                current: vehicleData.page,
                 position: ['bottomCenter']
               }}
             />
