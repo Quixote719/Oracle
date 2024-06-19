@@ -13,6 +13,8 @@ class VehicleModelStore {
     });
   }
 
+  targetRecord = null;
+
   vehicleList = [];
 
   parseVI = param => {

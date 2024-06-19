@@ -17,7 +17,7 @@ import styles from './index.module.less';
 */
 const Flow = () => {
   const [formState, setFormState] = useState(null);
-  const { vehicleModelStore, enumDataStore } = useStore();
+  const { vehicleModelStore, vehicleInfoStore, enumDataStore } = useStore();
   const [isLoading, setIsLoading] = useState(false);
   const pagePath = useLocation();
   const [vsform] = Form.useForm();
@@ -36,6 +36,7 @@ const Flow = () => {
     vehicleModelStore.fetchVehicleModelOptions();
     if (pagePath?.state?.createNew) {
       setFormState('edit');
+      vehicleInfoStore.setTargetRecord(null);
     }
   }, []);
 
@@ -48,28 +49,31 @@ const Flow = () => {
         formRes[formName] = normalForms[formName].getFieldsValue();
       }
     });
-    if (Array.isArray(vpFormRefs.motorInfo)) {
-      formRes.motorInfo = [];
-      vpFormRefs.motorInfo.forEach(form => {
+    if (Array.isArray(vpFormRefs.driverMotors)) {
+      formRes.driverMotors = [];
+      vpFormRefs.driverMotors.forEach(form => {
         if (typeof form?.current?.getFieldsValue === 'function') {
-          formRes.motorInfo.push(form.current.getFieldsValue());
+          formRes.driverMotors.push(form.current.getFieldsValue());
         }
       });
     }
-    if (Array.isArray(vpFormRefs.batteryInfo)) {
-      formRes.batteryInfo = [];
-      vpFormRefs.batteryInfo.forEach(form => {
+    if (Array.isArray(vpFormRefs.batteryPacks)) {
+      formRes.batteryPacks = [];
+      vpFormRefs.batteryPacks.forEach(form => {
         if (typeof form?.current?.getFieldsValue === 'function') {
-          formRes.batteryInfo.push(form.current.getFieldsValue());
+          formRes.batteryPacks.push(form.current.getFieldsValue());
         }
       });
     }
+
     res = {
-      ...formRes.vpform
-    };
-    res.salesInfo = {
-      ...formRes.vsform,
-      ...formRes.voform
+      ...formRes.vpform,
+      driverMotors: formRes.driverMotors,
+      batteryPacks: formRes.batteryPacks,
+      salesInfo: {
+        ...formRes.vsform,
+        ...formRes.voform
+      }
     };
     return res;
   };

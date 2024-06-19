@@ -19,21 +19,28 @@ const VehicleForm = props => {
     { label: '天津', value: '2' },
     { label: '广州', value: '3' }
   ];
-  const reportPlatformOpt = selectInfo.governmentPlatform || platformOptions;
+  const governmentPlatformOpt = selectInfo.governmentPlatform || platformOptions;
 
   const changeFormMode = param => {
     setFormMode(param);
   };
 
-  const residenceChange = param => {
+  const residenceChange = (param, selectedOptions) => {
+    setFieldValue(
+      'customerResidence',
+      selectedOptions
+        .map(item => item.label)
+        .join('')
+        .toString()
+    );
     if (Array.isArray(param)) {
       setFieldValue('customerResidenceAreaCode', param[param.length - 1]);
     }
   };
 
   const platforms =
-    vehicleInfoStore?.targetRecord?.reportPlatform ||
-    vehicleModelStore?.selectedVehicleModel?.reportPlatform ||
+    vehicleInfoStore?.targetRecord?.governmentPlatform ||
+    vehicleModelStore?.selectedVehicleModel?.governmentPlatform ||
     [];
 
   return (
@@ -128,28 +135,36 @@ const VehicleForm = props => {
               rules={[]}
             />
           </Col>
-          <Col span={12} key={'reportPlatform'} id={'reportPlatform'}>
+          <Col span={12} key={'governmentPlatform'} id={'governmentPlatform'}>
             <div className={styles.itemInfo}>
               <div className={styles.formLabel}>上报平台</div>
               {platforms.map((item, index) => {
                 return (
                   <div key={index} className={styles.formItemInfoSpan}>
-                    {reportPlatformOpt.find(opt => opt.value === item)?.label}
+                    {governmentPlatformOpt.find(opt => opt.value === item)?.label}
                   </div>
                 );
               })}
             </div>
           </Col>
-          <Col span={12} key={'customerResidence'} id={'customerResidence'}>
+          <Col span={12} key={'customerResidenceCode'} id={'customerResidenceCode'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.targetRecord?.salesInfo?.customerResidence}
+              text={vehicleInfoStore?.targetRecord?.salesInfo?.customerResidenceCode}
               label="购车人居住地"
-              name="customerResidence"
+              name="customerResidenceCode"
               rules={[]}
               onChange={residenceChange}
               options={enumDataStore.getRegionData()}
               isCascadeSelect={true}
+            />
+          </Col>
+          <Col span={0} key={'customerResidence'} id={'customerResidence'}>
+            <FlexFormItem
+              formformat={formMode}
+              label="购车人居住地址"
+              name="customerResidence"
+              rules={[]}
             />
           </Col>
           <Col span={12} key={'customerResidenceAreaCode'} id={'customerResidenceAreaCode'}>
