@@ -48,8 +48,8 @@ const vehicleModelColumns = [
   },
   {
     title: '上报平台',
-    dataIndex: 'reportPlatform',
-    key: 'reportPlatform'
+    dataIndex: 'governmentPlatform',
+    key: 'governmentPlatform'
   },
   {
     title: '操作',

@@ -44,7 +44,7 @@ const VehicleModelManagement = () => {
     renderSelectionCol('specifications');
     renderSelectionCol('producerFullName');
     renderSelectionCol('vehicleRegistrationBrand');
-    renderSelectionCol('reportPlatform', 'governmentPlatform');
+    renderSelectionCol('governmentPlatform');
   }, [enumDataStore.enumData]);
 
   useEffect(() => {

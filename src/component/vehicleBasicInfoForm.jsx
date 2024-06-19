@@ -31,31 +31,31 @@ const VehicleForm = props => {
     setFormMode(param);
   };
 
-  const reportPlatformOpt = selectInfo.governmentPlatform || platformOptions;
+  const governmentPlatformOpt = selectInfo.governmentPlatform || platformOptions;
   const { setFieldValue } = props.form;
 
   return (
     <div>
       <Form layout="vertical" form={props.form}>
         <Row gutter={24}>
-          <Col span={12} key={'reportPlatform'} id={'reportPlatform'}>
+          <Col span={12} key={'governmentPlatform'} id={'governmentPlatform'}>
             {formMode === 'edit' && (
               <Form.Item
                 formformat={formMode}
                 label="上报平台"
-                name="reportPlatform"
-                initialValue={vehicleModelStore?.targetRecord?.reportPlatform}
+                name="governmentPlatform"
+                initialValue={vehicleModelStore?.targetRecord?.governmentPlatform}
               >
-                <Checkbox.Group options={reportPlatformOpt} />
+                <Checkbox.Group options={governmentPlatformOpt} />
               </Form.Item>
             )}
             {formMode !== 'edit' && (
               <div className={styles.itemInfo}>
                 <div className={styles.formLabel}>上报平台</div>
-                {(vehicleModelStore?.targetRecord?.reportPlatform || []).map((item, index) => {
+                {(vehicleModelStore?.targetRecord?.governmentPlatform || []).map((item, index) => {
                   return (
                     <div key={index} className={styles.formItemInfoSpan}>
-                      {reportPlatformOpt.find(opt => opt.value === item)?.label}
+                      {governmentPlatformOpt.find(opt => opt.value === item)?.label}
                     </div>
                   );
                 })}

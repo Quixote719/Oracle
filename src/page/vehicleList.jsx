@@ -44,7 +44,7 @@ const VehicleManagement = () => {
     renderSelectionCol('specifications');
     renderSelectionCol('producerFullName');
     renderSelectionCol('vehicleRegistrationBrand');
-    renderSelectionCol('reportPlatform', 'governmentPlatform');
+    renderSelectionCol('governmentPlatform');
   }, [enumDataStore.enumData]);
 
   useEffect(() => {
@@ -176,12 +176,12 @@ const VehicleManagement = () => {
                   </Col>
                   <Col className={styles.searchConditionCol} span={8}>
                     <FlexFormItem
-                      id={'vehicleBrandNumber'}
+                      id={'licensePlateNo'}
                       label="车牌号"
                       formformat="edit"
-                      name="vehicleBrandNumber"
+                      name="licensePlateNo"
                       itemstyle={{ width: '100%' }}
-                      options={enumDataStore.enumData.vehicleBrandNumber}
+                      options={enumDataStore.enumData.licensePlateNo}
                     />
                   </Col>
                   <Col className={styles.searchConditionCol} span={8}>

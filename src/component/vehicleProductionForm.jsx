@@ -12,6 +12,16 @@ const MotorSubForm = React.forwardRef((props, ref) => {
   return (
     <Form layout="vertical" ref={ref}>
       <Row gutter={24}>
+        <Col span={0} key={'driverMotorInfoId'} id={'driverMotorInfoId'}>
+          <FlexFormItem
+            formformat={props.mode}
+            text={props.initialData?.driverMotorInfoId}
+            label="驱动电机ID"
+            name="driverMotorInfoId"
+            rules={[]}
+            // disabled={true}
+          />
+        </Col>
         <Col span={12} key={'driverMotorNo'} id={'driverMotorNo'}>
           <FlexFormItem
             formformat={props.mode}
@@ -25,17 +35,21 @@ const MotorSubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'type'} id={'type'}>
           <FlexFormItem
             formformat={props.mode}
-            text={props.initialData?.warrantyPeriod}
+            text={getTargetOptionLabel(
+              addOtherOption(props.selectInfo.driverMotorType),
+              props.initialData?.type,
+              props.mode
+            )}
             label="驱动电机型号"
             name="type"
             rules={[]}
-            options={[]}
+            options={props.selectInfo.driverMotorType}
           />
         </Col>
         <Col span={12} key={'driverMotorSn'} id={'driverMotorSn'}>
           <FlexFormItem
             formformat={props.mode}
-            text={props.initialData?.warrantyPeriod}
+            text={props.initialData?.driverMotorSn}
             label="驱动电机编号"
             name="driverMotorSn"
             rules={[]}
@@ -44,7 +58,7 @@ const MotorSubForm = React.forwardRef((props, ref) => {
         <Col span={12} key={'driverMotorPosition'} id={'driverMotorPosition'}>
           <FlexFormItem
             formformat={props.mode}
-            text={props.initialData?.warrantyPeriod}
+            text={props.initialData?.driverMotorPosition}
             label="电机位置"
             name="driverMotorPosition"
             rules={[]}
@@ -59,24 +73,24 @@ const BatterySubForm = React.forwardRef((props, ref) => {
   return (
     <Form layout="vertical" ref={ref}>
       <Row gutter={24}>
+        <Col span={0} key={'batteryPackModelId'} id={'batteryPackModelId'}>
+          <FlexFormItem
+            formformat={props.mode}
+            text={props.initialData?.batteryPackModelId}
+            label="储能装置ID"
+            name="batteryPackModelId"
+            rules={[]}
+            // disabled={true}
+          />
+        </Col>
         <Col span={12} key={'batteryPackNo'} id={'batteryPackNo'}>
           <FlexFormItem
             formformat={props.mode}
-            text={props.index}
+            text={props.initialData?.batteryPackNo}
             label="储能装置电池包序号"
             name="batteryPackNo"
             rules={[]}
             disabled={true}
-          />
-        </Col>
-        <Col span={12} key={'batteryPackCode'} id={'batteryPackCode'}>
-          <FlexFormItem
-            formformat={props.mode}
-            text={props.initialData?.batteryPackCode}
-            label="储能装置电池包编码"
-            name="batteryPackCode"
-            rules={[]}
-            options={[]}
           />
         </Col>
         <Col span={12} key={'batteryPackModelId'} id={'batteryPackModelId'}>
@@ -85,6 +99,16 @@ const BatterySubForm = React.forwardRef((props, ref) => {
             text={props.initialData?.batteryPackModelId}
             label="储能装置电池包型号"
             name="batteryPackModelId"
+            options={[]}
+            rules={[]}
+          />
+        </Col>
+        <Col span={12} key={'batteryPackCode'} id={'batteryPackCode'}>
+          <FlexFormItem
+            formformat={props.mode}
+            text={props.initialData?.batteryPackCode}
+            label="储能装置电池包编码"
+            name="batteryPackCode"
             rules={[]}
           />
         </Col>
@@ -110,12 +134,14 @@ const VehicleProductionMotorForm = props => {
   const maxIndex = useRef(1);
   const deleteIndex = useRef(null);
   const [formMode, setFormMode] = useState(props.mode);
+  const driveMotors =
+    props.targetRecord?.driverMotors || props.selectedVehicleModel?.driverMotors || [];
   let ref1 = useRef();
   let ref2 = useRef();
   let ref3 = useRef();
   let ref4 = useRef();
   let refArr = [ref1, ref2, ref3, ref4];
-  props.refInfo.motorInfo = refArr;
+  props.refInfo.driverMotors = refArr;
 
   const changeFormMode = param => {
     setFormMode(param);
@@ -133,8 +159,8 @@ const VehicleProductionMotorForm = props => {
 
   const genInitialSubForm = () => {
     let initSubForm = [];
-    if (props.selectedVehicleModel?.driverMotors?.length > 0) {
-      for (let i = 0; i < props.selectedVehicleModel?.driverMotors?.length; i++) {
+    if (driveMotors.length > 0) {
+      for (let i = 0; i < driveMotors.length; i++) {
         initSubForm.push({
           key: `VehicleMotor${maxIndex.current}`,
           label: <div>{`驱动电机${maxIndex.current}`}</div>,
@@ -145,22 +171,12 @@ const VehicleProductionMotorForm = props => {
               mode={formMode}
               ref={refArr[i]}
               selectInfo={props.selectInfo}
-              initialData={props.selectedVehicleModel?.driverMotors[i]}
+              initialData={driveMotors[i]}
             />
           )
         });
         maxIndex.current++;
       }
-    } else {
-      initSubForm = [
-        {
-          key: `VehicleMotor${maxIndex.current}`,
-          label: <div>{`驱动电机${maxIndex.current}`}</div>,
-          style: { padding: 5 },
-          children: <MotorSubForm mode={formMode} ref={refArr[0]} selectInfo={props.selectInfo} />
-        }
-      ];
-      maxIndex.current++;
     }
     return initSubForm;
   };
@@ -170,40 +186,6 @@ const VehicleProductionMotorForm = props => {
     listCopy.current = initSubForm;
     setSubFormList(initSubForm);
   }, []);
-
-  // const addEnergyStorage = () => {
-  //   const subFormLen = subFormList.length;
-  //   const curIndex = maxIndex.current;
-  //   if (subFormLen < 4) {
-  //     let newSubForm = {
-  //       key: `VehicleEnergyStorage${curIndex}`,
-  //       label: (
-  //         <div>
-  //           {`驱动电机${curIndex}`}
-  //           {subFormLen > 0 && (
-  //             <div className={styles.deleteBtn} onClick={e => removeEnergyStorage(e, curIndex)}>
-  //               删除
-  //             </div>
-  //           )}
-  //         </div>
-  //       ),
-  //       style: { padding: 5 },
-  //       children: (
-  //         <MotorSubForm mode={props.mode} ref={refArr[subFormLen]} selectInfo={props.selectInfo} />
-  //       )
-  //     };
-  //     const updatedList = [...subFormList, newSubForm];
-  //     listCopy.current = updatedList;
-  //     setSubFormList(updatedList);
-  //     maxIndex.current++;
-  //   }
-  // };
-
-  // const removeEnergyStorage = (e, param) => {
-  //   e.stopPropagation();
-  //   deleteIndex.current = param;
-  //   setIsModalOpen(true);
-  // };
 
   const deleteConfirm = () => {
     if (!Number.isInteger(deleteIndex.current)) {
@@ -226,7 +208,7 @@ const VehicleProductionMotorForm = props => {
   };
 
   return (
-    <div>
+    <div style={{ display: driveMotors.length > 0 ? 'block' : 'none' }}>
       <div className={styles.singleItem}>
         <div>
           <div className={styles.inputTitle}>驱动电机安装数量</div>
@@ -235,13 +217,6 @@ const VehicleProductionMotorForm = props => {
       </div>
       <div className={styles.inFormCollapse}>
         <Collapse items={subFormList} />
-        {/* <Button
-          className={styles.addFormBtn}
-          onClick={() => addEnergyStorage()}
-          disabled={subFormList.length >= 4}
-        >
-          增加
-        </Button> */}
         <Modal
           open={isModalOpen}
           onOk={deleteConfirm}
@@ -274,12 +249,17 @@ const VehicleProductionBatteryForm = props => {
   const maxIndex = useRef(1);
   const deleteIndex = useRef(null);
   const [formMode, setFormMode] = useState(props.mode);
+  const batteryPacks =
+    props.targetRecord?.batteryPacks ||
+    props.selectedVehicleModel?.energyStorageDevices ||
+    props.selectedVehicleModel?.batteryPacks ||
+    [];
   let ref1 = useRef();
   let ref2 = useRef();
   let ref3 = useRef();
   let ref4 = useRef();
   let refArr = [ref1, ref2, ref3, ref4];
-  props.refInfo.batteryInfo = refArr;
+  props.refInfo.batteryPacks = refArr;
 
   const changeFormMode = param => {
     setFormMode(param);
@@ -297,8 +277,8 @@ const VehicleProductionBatteryForm = props => {
 
   const genInitialSubForm = () => {
     let initSubForm = [];
-    if (props.selectedVehicleModel?.energyStorageDevices?.length > 0) {
-      for (let i = 0; i < props.selectedVehicleModel?.energyStorageDevices?.length; i++) {
+    if (batteryPacks.length > 0) {
+      for (let i = 0; i < batteryPacks.length; i++) {
         initSubForm.push({
           key: `VehicleBattery${maxIndex.current}`,
           label: <div>{`储能装置电池包${maxIndex.current}`}</div>,
@@ -309,22 +289,12 @@ const VehicleProductionBatteryForm = props => {
               mode={formMode}
               ref={refArr[i]}
               selectInfo={props.selectInfo}
-              initialData={props.selectedVehicleModel?.energyStorageDevices[i]}
+              initialData={batteryPacks[i]}
             />
           )
         });
         maxIndex.current++;
       }
-    } else {
-      initSubForm = [
-        {
-          key: `VehicleBattery${maxIndex.current}`,
-          label: <div>{`储能装置电池包${maxIndex.current}`}</div>,
-          style: { padding: 5 },
-          children: <BatterySubForm mode={formMode} ref={refArr[0]} selectInfo={props.selectInfo} />
-        }
-      ];
-      maxIndex.current++;
     }
     return initSubForm;
   };
@@ -334,44 +304,6 @@ const VehicleProductionBatteryForm = props => {
     listCopy.current = initSubForm;
     setSubFormList(initSubForm);
   }, []);
-
-  // const addEnergyStorage = () => {
-  //   const subFormLen = subFormList.length;
-  //   const curIndex = maxIndex.current;
-  //   if (subFormLen < 4) {
-  //     let newSubForm = {
-  //       key: `VehicleEnergyStorage${curIndex}`,
-  //       label: (
-  //         <div>
-  //           {`储能装置电池包${curIndex}`}
-  //           {subFormLen > 0 && (
-  //             <div className={styles.deleteBtn} onClick={e => removeEnergyStorage(e, curIndex)}>
-  //               删除
-  //             </div>
-  //           )}
-  //         </div>
-  //       ),
-  //       style: { padding: 5 },
-  //       children: (
-  //         <BatterySubForm
-  //           mode={props.mode}
-  //           ref={refArr[subFormLen]}
-  //           selectInfo={props.selectInfo}
-  //         />
-  //       )
-  //     };
-  //     const updatedList = [...subFormList, newSubForm];
-  //     listCopy.current = updatedList;
-  //     setSubFormList(updatedList);
-  //     maxIndex.current++;
-  //   }
-  // };
-
-  // const removeEnergyStorage = (e, param) => {
-  //   e.stopPropagation();
-  //   deleteIndex.current = param;
-  //   setIsModalOpen(true);
-  // };
 
   const deleteConfirm = () => {
     if (!Number.isInteger(deleteIndex.current)) {
@@ -394,22 +326,15 @@ const VehicleProductionBatteryForm = props => {
   };
 
   return (
-    <div>
+    <div style={{ display: batteryPacks.length > 0 ? 'block' : 'none' }}>
       <div className={styles.singleItem}>
         <div>
           <div className={styles.inputTitle}>储能装置电池包安装数量</div>
-          <div>{props.selectedVehicleModel?.energyStorageDevices?.length}</div>
+          <div>{props.selectedVehicleModel?.batteryPacks?.length}</div>
         </div>
       </div>
       <div className={styles.inFormCollapse}>
         <Collapse items={subFormList} />
-        {/* <Button
-          className={styles.addFormBtn}
-          onClick={() => addEnergyStorage()}
-          disabled={subFormList.length >= 4}
-        >
-          增加
-        </Button> */}
         <Modal
           open={isModalOpen}
           onOk={deleteConfirm}
@@ -470,12 +395,12 @@ const VehicleProductionForm = props => {
               // disabled={true}
             />
           </Col>
-          <Col span={12} key={'listingDate'} id={'listingDate'}>
+          <Col span={12} key={'dateOfManufacture'} id={'dateOfManufacture'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.targetRecord?.listingDate}
+              text={vehicleInfoStore?.targetRecord?.dateOfManufacture}
               label="出厂日期"
-              name="listingDate"
+              name="dateOfManufacture"
               rules={[]}
               isDatePicker={true}
               disabledDate={current => current && current > dayjs().endOf('day')}
@@ -524,6 +449,7 @@ const VehicleProductionForm = props => {
             mode={props.mode}
             selectInfo={enumDataStore.enumData}
             selectedVehicleModel={vehicleModelStore?.selectedVehicleModel}
+            targetRecord={vehicleInfoStore?.targetRecord}
           />
         </div>
       )}
@@ -534,6 +460,7 @@ const VehicleProductionForm = props => {
             mode={props.mode}
             selectInfo={enumDataStore.enumData}
             selectedVehicleModel={vehicleModelStore?.selectedVehicleModel}
+            targetRecord={vehicleInfoStore?.targetRecord}
           />
         </div>
       )}
@@ -616,8 +543,9 @@ VehicleProductionMotorForm.propTypes = {
   mode: PropTypes.string,
   refInfo: PropTypes.object,
   selectInfo: PropTypes.object,
+  targetRecord: PropTypes.object,
   formData: PropTypes.object,
-  selectedVehicleModel: PropTypes.array
+  selectedVehicleModel: PropTypes.object
 };
 
 VehicleProductionBatteryForm.propTypes = {
@@ -625,8 +553,9 @@ VehicleProductionBatteryForm.propTypes = {
   mode: PropTypes.string,
   refInfo: PropTypes.object,
   selectInfo: PropTypes.object,
+  targetRecord: PropTypes.object,
   formData: PropTypes.object,
-  selectedVehicleModel: PropTypes.array
+  selectedVehicleModel: PropTypes.object
 };
 
 VehicleProductionForm.propTypes = {
