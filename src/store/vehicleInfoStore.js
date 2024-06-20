@@ -23,12 +23,14 @@ class VehicleModelStore {
       const tableRows = res.rows.map(item => {
         return {
           ...item,
-          key: item.id,
-          specifications: item.bulletinCertInfo?.specifications
+          ...item.salesInfo,
+          ...item.terminalInfo,
+          key: item.id
         };
       });
       res.tableRows = tableRows;
     }
+    delete res.rows;
     return res;
   };
 

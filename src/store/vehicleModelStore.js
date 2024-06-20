@@ -58,6 +58,7 @@ class VehicleModelStore {
       });
       res.tableRows = tableRows;
     }
+    delete res.rows;
     return res;
   };
 

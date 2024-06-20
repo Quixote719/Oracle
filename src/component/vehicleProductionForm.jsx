@@ -365,6 +365,9 @@ const VehicleProductionForm = props => {
   const { vehicleModelStore, vehicleInfoStore, enumDataStore } = useStore();
   const { selectInfo = {} } = props;
   const [isLoading, setIsLoading] = useState(false);
+  const terminalModel =
+    vehicleInfoStore?.targetRecord?.terminalModel ||
+    vehicleModelStore?.selectedVehicleModel?.terminalModel;
   const changeFormMode = param => {
     setFormMode(param);
   };
@@ -470,35 +473,34 @@ const VehicleProductionForm = props => {
           <Col span={12} key={'tboxSn'} id={'tboxSn'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.targetRecord?.totalMass}
+              text={vehicleInfoStore?.targetRecord?.tboxSn}
               label="终端厂商"
               name="tboxSn"
               placeholder=""
             />
           </Col>
-          <Col span={12} key={'vin'} id={'vin'}>
+          <Col span={12} key={'simMsisdn'} id={'simMsisdn'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.targetRecord?.totalMass}
+              text={vehicleInfoStore?.targetRecord?.simMsisdn}
               label="SIM卡号"
               name="simMsisdn"
               placeholder=""
             />
           </Col>
-          <Col span={12} key={'coolingMethod'} id={'coolingMethod'}>
+          <Col span={12} key={'terminalModel'} id={'terminalModel'}>
             <FlexFormItem
               formformat={props.mode}
-              text={''}
+              text={terminalModel}
               label="终端型号"
               name="terminalModel"
               rules={[]}
-              options={[]}
             />
           </Col>
           <Col span={12} key={'iccid'} id={'iccid'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.targetRecord?.totalMass}
+              text={vehicleInfoStore?.targetRecord?.iccid}
               label="ICCID"
               name="iccid"
               placeholder=""
@@ -507,7 +509,7 @@ const VehicleProductionForm = props => {
           <Col span={12} key={'terminalModelId'} id={'terminalModelId'}>
             <FlexFormItem
               formformat={formMode}
-              text={vehicleInfoStore?.targetRecord?.totalMass}
+              text={vehicleInfoStore?.targetRecord?.terminalModelId}
               label="车载终端编号"
               name="terminalModelId"
               placeholder=""
