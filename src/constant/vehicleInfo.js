@@ -3,6 +3,11 @@ const yesOrNo = [
   { value: '0', label: '否' }
 ];
 
+const gender = [
+  { value: '男', label: '男' },
+  { value: '女', label: '女' }
+];
+
 const other = [{ value: 'Others', label: '其他' }];
 
 const pageSizeOpt = [5, 10, 20, 50];
@@ -71,4 +76,4 @@ const vehicleModelColumns = [
   }
 ];
 
-export { yesOrNo, other, vehicleModelColumns, pageSizeOpt };
+export { yesOrNo, gender, other, vehicleModelColumns, pageSizeOpt };

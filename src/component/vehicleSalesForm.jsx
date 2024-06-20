@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Row, Col, Form, Button } from 'antd';
 import { observer } from 'mobx-react-lite';
 import FlexFormItem from '@/component/flexFormItem';
-import { yesOrNo } from '@/constant/vehicleInfo';
+import { yesOrNo, gender } from '@/constant/vehicleInfo';
 import { digitValidator, lengthValidator, digitCapLetterValidator } from '@/utils/validator';
 import { useStore } from '@/store';
 import styles from './compStyle.module.less';
@@ -196,6 +196,7 @@ const VehicleForm = props => {
               text={vehicleInfoStore?.targetRecord?.salesInfo?.drivingLicenseRegistrationTime}
               label="行驶证注册时间"
               name="drivingLicenseRegistrationTime"
+              isDatePicker={true}
               rules={[]}
             />
           </Col>
@@ -205,6 +206,7 @@ const VehicleForm = props => {
               text={vehicleInfoStore?.targetRecord?.salesInfo?.licensePlateGrantDate}
               label="上牌日期"
               name="licensePlateGrantDate"
+              isDatePicker={true}
               rules={[]}
             />
           </Col>
@@ -215,6 +217,7 @@ const VehicleForm = props => {
               label="投运时间"
               name="operationStartDate"
               rules={[]}
+              isDatePicker={true}
               disabled={true}
             />
           </Col>
@@ -237,7 +240,7 @@ const VehicleForm = props => {
               label="车主性别"
               name="customerGender"
               rules={[]}
-              options={[]}
+              options={gender}
             />
           </Col>
           <Col span={12} key={'customerPhoneNumber'} id={'customerPhoneNumber'}>

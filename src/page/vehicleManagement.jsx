@@ -68,6 +68,7 @@ const Flow = () => {
 
     res = {
       ...formRes.vpform,
+      terminalInfo: { ...formRes.vpform },
       driverMotors: formRes.driverMotors,
       batteryPacks: formRes.batteryPacks,
       salesInfo: {
