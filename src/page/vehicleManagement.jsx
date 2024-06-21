@@ -33,6 +33,7 @@ const Flow = () => {
 
   useEffect(() => {
     enumDataStore.fetchEnumData();
+    vehicleModelStore.setSelectedVehicleModel(null);
     vehicleModelStore.fetchVehicleModelOptions();
     if (pagePath?.state?.createNew) {
       setFormState('edit');
