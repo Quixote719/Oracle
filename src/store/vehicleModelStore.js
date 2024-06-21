@@ -66,6 +66,10 @@ class VehicleModelStore {
     this.targetRecord = record;
   };
 
+  setSelectedVehicleModel = record => {
+    this.selectedVehicleModel = record;
+  };
+
   fetchVehicleModelInfoById = param => {
     getVehicleModelById(param).then(res => {
       runInAction(() => {

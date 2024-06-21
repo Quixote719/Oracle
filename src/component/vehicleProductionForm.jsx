@@ -12,16 +12,6 @@ const MotorSubForm = React.forwardRef((props, ref) => {
   return (
     <Form layout="vertical" ref={ref}>
       <Row gutter={24}>
-        <Col span={0} key={'driverMotorInfoId'} id={'driverMotorInfoId'}>
-          <FlexFormItem
-            formformat={props.mode}
-            text={props.initialData?.driverMotorInfoId}
-            label="驱动电机ID"
-            name="driverMotorInfoId"
-            rules={[]}
-            // disabled={true}
-          />
-        </Col>
         <Col span={12} key={'driverMotorNo'} id={'driverMotorNo'}>
           <FlexFormItem
             formformat={props.mode}
@@ -32,18 +22,14 @@ const MotorSubForm = React.forwardRef((props, ref) => {
             disabled={true}
           />
         </Col>
-        <Col span={12} key={'type'} id={'type'}>
+        <Col span={12} key={'driverMotorInfoId'} id={'driverMotorInfoId'}>
           <FlexFormItem
             formformat={props.mode}
-            text={getTargetOptionLabel(
-              addOtherOption(props.selectInfo.driverMotorType),
-              props.initialData?.type,
-              props.mode
-            )}
+            text={props.initialData?.driverMotorInfoId}
             label="驱动电机型号"
-            name="type"
+            name="driverMotorInfoId"
             rules={[]}
-            options={props.selectInfo.driverMotorType}
+            options={props.motorModelOptions}
           />
         </Col>
         <Col span={12} key={'driverMotorSn'} id={'driverMotorSn'}>
@@ -73,20 +59,10 @@ const BatterySubForm = React.forwardRef((props, ref) => {
   return (
     <Form layout="vertical" ref={ref}>
       <Row gutter={24}>
-        <Col span={0} key={'batteryPackModelId'} id={'batteryPackModelId'}>
-          <FlexFormItem
-            formformat={props.mode}
-            text={props.initialData?.batteryPackModelId}
-            label="储能装置ID"
-            name="batteryPackModelId"
-            rules={[]}
-            // disabled={true}
-          />
-        </Col>
         <Col span={12} key={'batteryPackNo'} id={'batteryPackNo'}>
           <FlexFormItem
             formformat={props.mode}
-            text={props.initialData?.batteryPackNo}
+            text={props.index}
             label="储能装置电池包序号"
             name="batteryPackNo"
             rules={[]}
@@ -99,7 +75,7 @@ const BatterySubForm = React.forwardRef((props, ref) => {
             text={props.initialData?.batteryPackModelId}
             label="储能装置电池包型号"
             name="batteryPackModelId"
-            options={[]}
+            options={props.batteryModelOptions}
             rules={[]}
           />
         </Col>
@@ -130,11 +106,12 @@ const BatterySubForm = React.forwardRef((props, ref) => {
 const VehicleProductionMotorForm = props => {
   const [subFormList, setSubFormList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formMode, setFormMode] = useState(props.mode);
   const listCopy = useRef([]);
   const maxIndex = useRef(1);
   const deleteIndex = useRef(null);
-  const [formMode, setFormMode] = useState(props.mode);
-  const driveMotors =
+  const { vehicleModelStore } = useStore();
+  const driverMotors =
     props.targetRecord?.driverMotors || props.selectedVehicleModel?.driverMotors || [];
   let ref1 = useRef();
   let ref2 = useRef();
@@ -142,6 +119,19 @@ const VehicleProductionMotorForm = props => {
   let ref4 = useRef();
   let refArr = [ref1, ref2, ref3, ref4];
   props.refInfo.driverMotors = refArr;
+
+  const getMotorModelOptions = () => {
+    let options = [];
+    if (Array.isArray(vehicleModelStore?.selectedVehicleModel?.driverMotors)) {
+      vehicleModelStore?.selectedVehicleModel.driverMotors.forEach(item => {
+        options.push({
+          value: item.id,
+          label: item.model
+        });
+      });
+    }
+    return options;
+  };
 
   const changeFormMode = param => {
     setFormMode(param);
@@ -159,8 +149,8 @@ const VehicleProductionMotorForm = props => {
 
   const genInitialSubForm = () => {
     let initSubForm = [];
-    if (driveMotors.length > 0) {
-      for (let i = 0; i < driveMotors.length; i++) {
+    if (driverMotors.length > 0) {
+      for (let i = 0; i < driverMotors.length; i++) {
         initSubForm.push({
           key: `VehicleMotor${maxIndex.current}`,
           label: <div>{`驱动电机${maxIndex.current}`}</div>,
@@ -171,7 +161,8 @@ const VehicleProductionMotorForm = props => {
               mode={formMode}
               ref={refArr[i]}
               selectInfo={props.selectInfo}
-              initialData={driveMotors[i]}
+              initialData={driverMotors[i]}
+              motorModelOptions={getMotorModelOptions()}
             />
           )
         });
@@ -208,7 +199,7 @@ const VehicleProductionMotorForm = props => {
   };
 
   return (
-    <div style={{ display: driveMotors.length > 0 ? 'block' : 'none' }}>
+    <div style={{ display: driverMotors.length > 0 ? 'block' : 'none' }}>
       <div className={styles.singleItem}>
         <div>
           <div className={styles.inputTitle}>驱动电机安装数量</div>
@@ -249,6 +240,7 @@ const VehicleProductionBatteryForm = props => {
   const maxIndex = useRef(1);
   const deleteIndex = useRef(null);
   const [formMode, setFormMode] = useState(props.mode);
+  const { vehicleModelStore } = useStore();
   const batteryPacks =
     props.targetRecord?.batteryPacks ||
     props.selectedVehicleModel?.energyStorageDevices ||
@@ -260,6 +252,19 @@ const VehicleProductionBatteryForm = props => {
   let ref4 = useRef();
   let refArr = [ref1, ref2, ref3, ref4];
   props.refInfo.batteryPacks = refArr;
+
+  const getBatteryModelOptions = () => {
+    let options = [];
+    if (Array.isArray(vehicleModelStore?.selectedVehicleModel?.energyStorageDevices)) {
+      vehicleModelStore?.selectedVehicleModel.energyStorageDevices.forEach(item => {
+        options.push({
+          value: item.id,
+          label: item.cellModel
+        });
+      });
+    }
+    return options;
+  };
 
   const changeFormMode = param => {
     setFormMode(param);
@@ -290,6 +295,7 @@ const VehicleProductionBatteryForm = props => {
               ref={refArr[i]}
               selectInfo={props.selectInfo}
               initialData={batteryPacks[i]}
+              batteryModelOptions={getBatteryModelOptions()}
             />
           )
         });
@@ -530,14 +536,16 @@ MotorSubForm.propTypes = {
   selectInfo: PropTypes.object,
   mode: PropTypes.string,
   initialData: PropTypes.object,
-  index: PropTypes.number
+  index: PropTypes.number,
+  motorModelOptions: PropTypes.array
 };
 
 BatterySubForm.propTypes = {
   selectInfo: PropTypes.object,
   mode: PropTypes.string,
   initialData: PropTypes.object,
-  index: PropTypes.number
+  index: PropTypes.number,
+  batteryModelOptions: PropTypes.array
 };
 
 VehicleProductionMotorForm.propTypes = {
