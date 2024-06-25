@@ -171,6 +171,7 @@ const VehicleModelManagement = () => {
                       formformat="edit"
                       name="producer"
                       itemstyle={{ width: '100%' }}
+                      compstyle={{ height: '48px' }}
                       options={enumDataStore.enumData.producerFullName || []}
                     />
                   </Col>
@@ -181,6 +182,7 @@ const VehicleModelManagement = () => {
                       formformat="edit"
                       name="vehicleBrand"
                       itemstyle={{ width: '100%' }}
+                      compstyle={{ height: '48px' }}
                       options={addOtherOption(enumDataStore.enumData.vehicleRegistrationBrand)}
                     />
                   </Col>
@@ -191,6 +193,7 @@ const VehicleModelManagement = () => {
                       formformat="edit"
                       name="vehicleRegistrationModel"
                       itemstyle={{ width: '100%' }}
+                      compstyle={{ height: '48px' }}
                     />
                   </Col>
                   <Col className={styles.searchConditionCol} span={8}>
@@ -200,6 +203,7 @@ const VehicleModelManagement = () => {
                       formformat="edit"
                       name="energyType"
                       itemstyle={{ width: '100%' }}
+                      compstyle={{ height: '48px' }}
                       options={enumDataStore.enumData.energyType}
                     />
                   </Col>
@@ -210,6 +214,7 @@ const VehicleModelManagement = () => {
                       formformat="edit"
                       name="specifications"
                       itemstyle={{ width: '100%' }}
+                      compstyle={{ height: '48px' }}
                       options={addOtherOption(enumDataStore.enumData.specifications)}
                     />
                   </Col>
@@ -220,6 +225,7 @@ const VehicleModelManagement = () => {
                       formformat="edit"
                       name="governmentPlatform"
                       itemstyle={{ width: '100%' }}
+                      compstyle={{ height: '48px' }}
                       options={enumDataStore.enumData.governmentPlatform || []}
                     />
                   </Col>

@@ -7,6 +7,7 @@ const vehicleModelOptionUrl = `${prefix}/vehicle-service/VehicleModel/Options`;
 const vehicleModelUrl = `${prefix}/vehicle-service/VehicleModel`;
 const vehicleModelExportUrl = `${prefix}/Export/VehicleModel`;
 const searchVehicleDataByVinUrl = `${prefix}/data-management/getLatestCNevDataByVin`;
+const queryCNevData = `${prefix}/data-management/getCNevDataByVinByTimeRange`;
 const vehicleUrl = `${prefix}/vehicle-service/Vehicle`;
 const queryVehicleUrl = `${prefix}/vehicle-service/Vehicle/queryVehicle`;
 
@@ -101,6 +102,12 @@ const submitVehicle = param => {
   });
 };
 
+const getCNevList = param => {
+  return fetch(queryCNevData + param).then(res => {
+    return res.json();
+  });
+};
+
 export {
   getVehicleEnumList,
   getVehicleModelOptions,
@@ -110,5 +117,6 @@ export {
   submitVehicleModel,
   exportVehicleModel,
   getVehicleDataByVin,
-  submitVehicle
+  submitVehicle,
+  getCNevList
 };

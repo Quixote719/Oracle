@@ -119,7 +119,6 @@
 
 .topSection {
   padding: 15px;
-  height: 90px;
   box-sizing: border-box;
 }
 
@@ -179,4 +178,32 @@
 
 .spin {
   max-height: unset !important;
+}
+
+.sectionLabelText {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.modalTitle {
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.modalContent,
+.modalCollapseContent,
+.modalCheckboxGroup {
+  @modalContent();
+}
+
+.modalLine {
+  margin: 15px 0;
+}
+
+.searchConditionBlock {
+  :global {
+    .ant-form-item .ant-form-item-label > label {
+      height: 48px;
+    }
+  }
 }

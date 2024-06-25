@@ -26,6 +26,12 @@ const MenuApp = () => {
       'dataCenter'
     ),
     getItem(
+      <div id={'historyDataMenuItem'} className={styles.vehicleMenuItem}>
+        历史数据
+      </div>,
+      'historyData'
+    ),
+    getItem(
       <div id={'vehicleModelMenuItem'} className={styles.vehicleMenuItem}>
         车型管理
       </div>,
