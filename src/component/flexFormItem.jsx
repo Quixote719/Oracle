@@ -8,19 +8,38 @@ const FlexFormItem = props => {
   const genFormItem = () => {
     return Array.isArray(props.options) ? (
       props.isCascadeSelect ? (
-        <Cascader className={styles.formItem} mode={props.selectMode} {...props} />
+        <Cascader
+          className={styles.formItem}
+          style={props.compstyle}
+          mode={props.selectMode}
+          {...props}
+        />
       ) : (
-        <Select className={styles.formItem} mode={props.selectMode} {...props} />
+        <Select
+          className={styles.formItem}
+          style={props.compstyle}
+          mode={props.selectMode}
+          {...props}
+        />
       )
     ) : props.isDatePicker ? (
-      <DatePicker
-        className={styles.formItem}
-        style={{ width: '100%' }}
-        format="YYYY-MM-DD"
-        {...props}
-      />
+      props.isRangePicker ? (
+        <DatePicker.RangePicker
+          className={styles.formItem}
+          style={{ width: '100%', ...props.compstyle }}
+          format="YYYY-MM-DD"
+          {...props}
+        />
+      ) : (
+        <DatePicker
+          className={styles.formItem}
+          style={{ width: '100%', ...props.compstyle }}
+          format="YYYY-MM-DD"
+          {...props}
+        />
+      )
     ) : (
-      <Input className={styles.formItem} {...props} />
+      <Input className={styles.formItem} style={props.compstyle} {...props} />
     );
   };
 
@@ -56,8 +75,10 @@ FlexFormItem.propTypes = {
   selectMode: PropTypes.string,
   placeholder: PropTypes.string,
   isDatePicker: PropTypes.bool,
+  isRangePicker: PropTypes.bool,
   isCascadeSelect: PropTypes.bool,
   itemstyle: PropTypes.object,
+  compstyle: PropTypes.object,
   addonAfter: PropTypes.string,
   disabled: PropTypes.bool
 };

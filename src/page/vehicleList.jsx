@@ -163,6 +163,7 @@ const VehicleManagement = () => {
                       formformat="edit"
                       name="vin"
                       itemstyle={{ width: '100%' }}
+                      compstyle={{ height: '48px' }}
                     />
                   </Col>
                   <Col className={styles.searchConditionCol} span={8}>
@@ -172,6 +173,7 @@ const VehicleManagement = () => {
                       formformat="edit"
                       name="vehicleRegistrationModel"
                       itemstyle={{ width: '100%' }}
+                      compstyle={{ height: '48px' }}
                     />
                   </Col>
                   <Col className={styles.searchConditionCol} span={8}>
@@ -181,6 +183,7 @@ const VehicleManagement = () => {
                       formformat="edit"
                       name="licensePlateNo"
                       itemstyle={{ width: '100%' }}
+                      compstyle={{ height: '48px' }}
                       options={enumDataStore.enumData.licensePlateNo}
                     />
                   </Col>
@@ -191,6 +194,7 @@ const VehicleManagement = () => {
                       formformat="edit"
                       name="specifications"
                       itemstyle={{ width: '100%' }}
+                      compstyle={{ height: '48px' }}
                       options={addOtherOption(enumDataStore.enumData.specifications)}
                     />
                   </Col>
@@ -201,6 +205,7 @@ const VehicleManagement = () => {
                       formformat="edit"
                       name="governmentPlatform"
                       itemstyle={{ width: '100%' }}
+                      compstyle={{ height: '48px' }}
                       options={enumDataStore.enumData.governmentPlatform || []}
                     />
                   </Col>
