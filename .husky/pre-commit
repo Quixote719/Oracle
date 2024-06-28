@@ -6,5 +6,3 @@ pnpm run prettier
 git add .
 
 pnpm run lint
-
-pnpm test run

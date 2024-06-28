@@ -1,209 +1,103 @@
-@import '@/style/index.less';
-
-.pageContainer {
-  min-width: 100%;
-  min-height: 100%;
+.pageBg {
+  padding: 50px 120px;
+  background: #f0f0f0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.5rem;
 }
 
-.card {
-  margin-bottom: 20px;
-  box-shadow: 8px 8px 24px 0px #00000014;
-  background: #ffffff;
+.leftSection,
+.middleSection {
+  margin: 40px;
+  width: 30%;
 }
 
-.pageTitle {
-  margin: auto;
+#vcdpModule,
+#model {
+  margin: 20px auto;
+  width: 280px;
+  height: 180px;
+  line-height: 180px;
   text-align: center;
-  font-size: 28px;
-}
-
-.carouselWindow {
-  width: 600px;
-  height: 300px;
-  border: 1px solid #2a2d36;
-  overflow: hidden;
-}
-
-.carouselItemBlock {
-  height: 300px;
-  position: relative;
-}
-
-.carouselItem {
-  width: 600px;
-  height: 300px;
-  display: inline-block;
-  text-align: center;
-  vertical-align: bottom;
-  line-height: 300px;
-}
-
-.menuPage {
-  width: calc(100vw - 280px);
-  margin-left: 260px;
-  margin-top: 20px;
-  display: inline-block;
-}
-
-.flowPage {
-  background: #f3f3f3;
-}
-
-.searchConditionBlock {
-  padding-top: 24px;
-  height: auto;
-}
-
-.btnBlock {
-  width: 400px;
-  margin: auto;
-  padding-bottom: 24px;
-}
-
-.resetBtn,
-.exportBtn,
-.lightBtn {
-  @platFormBtn();
-  margin: 0 10px;
-}
-
-.exportBtn {
-  margin: 0 0 15px 0;
-  float: right;
-}
-
-.searchBtn,
-.createBtn,
-.queryBtn {
-  @platFormBtn();
-  @darkBtn();
-}
-
-.searchBtn,
-.queryBtn {
-  margin: 0 10px;
-}
-
-.createBtn {
-  margin-bottom: 15px;
-}
-
-.lightBtn,
-.queryBtn {
-  width: 125px;
-  height: 42px;
-}
-
-.queryBtn {
-  float: right;
-}
-
-.saveBtn {
-  @platFormBtn();
-  @darkBtn();
-}
-
-.inlineSearch {
-  margin: 0 10px;
-  width: 200px;
-  height: 42px;
-  float: right;
-}
-
-.operationText {
-  margin: 0 5px;
-  display: inline-block;
-  color: #035ade;
-  cursor: pointer;
-}
-
-.topSection {
-  padding: 15px;
   box-sizing: border-box;
+  border: 1px solid;
+  border-radius: 12px;
+  display: block;
 }
 
-.operationBar {
-  padding-top: 10px;
+#iphoneModule {
+  height: 500px;
 }
 
-.bottomSection {
-  margin-top: 20px;
-  padding: 15px;
-  height: calc(100vh - 210px);
-  box-sizing: border-box;
-}
-
-.mapSection {
-  width: 100%;
-  aspect-ratio: 1;
-  background: #f9f7f6;
-}
-
-.leftSection {
-  width: 50vh;
-  height: 100%;
+#vcdpModule {
   display: inline-block;
+}
+
+#model {
+  display: block;
 }
 
 .rightSection {
-  float: right;
-  width: calc(100% - 50vh - 20px);
-  height: 100%;
-  overflow: auto;
+  margin: 40px;
+  display: flex;
+  padding-top: 100px;
 }
 
-.vehicleMapInfo {
-  margin-top: 30px;
-}
-.infoPair {
-  margin: 15px;
-  font-size: 14px;
+#predictionModule {
+  width: 320px;
+  height: 280px;
+  display: block;
+  margin: 0 auto;
 }
 
-.infoKey,
-.infoVal {
+#carModule {
+  width: 280px;
+  display: block;
+}
+
+#storeModule {
+  width: 280px;
+  display: block;
+  margin: 0 auto;
+}
+
+#customerEnd {
+  margin: 20px;
+  width: 480px;
+  height: 600px;
+  background: #ffffff;
+  border-radius: 12px;
+  text-align: center;
   display: inline-block;
 }
 
-.infoKey {
-  width: 24%;
-  color: #4c4843;
-  font-weight: 400;
+.arrowUpSvg {
+  margin: 20px 120px;
+  font-size: 30px;
+  vertical-align: top;
 }
 
-.infoVal {
-  width: 74%;
-  font-weight: 500;
+.arrowRightSvg {
+  margin: 90px 40px;
+  font-size: 30px;
+  vertical-align: top;
+  position: relative;
+  left: 80px;
+  color: red;
 }
 
-.spin {
-  max-height: unset !important;
+.arrowDownSvg {
+  margin: 20px 120px;
+  font-size: 30px;
+  display: block;
+  position: relative;
+  top: 10px;
 }
 
-.sectionLabelText {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-.modalTitle {
-  font-weight: 400;
-  font-size: 24px;
-}
-
-.modalContent,
-.modalCollapseContent,
-.modalCheckboxGroup {
-  @modalContent();
-}
-
-.modalLine {
-  margin: 15px 0;
-}
-
-.searchConditionBlock {
-  :global {
-    .ant-form-item .ant-form-item-label > label {
-      height: 48px;
-    }
-  }
+#toClientArrow {
+  position: relative;
+  font-size: 30px;
+  bottom: 100px;
+  right: 50px;
 }
