@@ -10,12 +10,13 @@
 .leftSection,
 .middleSection {
   margin: 40px;
-  width: 30%;
+  width: 26%;
 }
 
 #vcdpModule,
 #model {
-  margin: 20px auto;
+  background: #afbdb0;
+  margin: 0px auto;
   width: 280px;
   height: 180px;
   line-height: 180px;
@@ -27,7 +28,8 @@
 }
 
 #iphoneModule {
-  height: 500px;
+  padding: 80px 0 0 60px;
+  height: 400px;
 }
 
 #vcdpModule {
@@ -48,7 +50,7 @@
   width: 320px;
   height: 280px;
   display: block;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 #carModule {
@@ -72,32 +74,156 @@
   display: inline-block;
 }
 
-.arrowUpSvg {
+#arrowUpSvg {
   margin: 20px 120px;
-  font-size: 30px;
+  font-size: 40px;
   vertical-align: top;
+  transform: rotate(90deg);
 }
 
-.arrowRightSvg {
-  margin: 90px 40px;
-  font-size: 30px;
-  vertical-align: top;
+#arrowBottomRightSvg {
+  font-size: 40px;
   position: relative;
-  left: 80px;
-  color: red;
+  left: 120px;
+  top: 200px;
+  transform: rotate(40deg);
 }
 
-.arrowDownSvg {
+#arrowDownSvg,
+#arrowSwapSvg {
   margin: 20px 120px;
-  font-size: 30px;
+  font-size: 40px;
   display: block;
   position: relative;
   top: 10px;
 }
 
+#arrowSwapSvg {
+  transform: rotate(90deg);
+}
+
 #toClientArrow {
   position: relative;
-  font-size: 30px;
+  font-size: 40px;
   bottom: 100px;
-  right: 50px;
+  right: 20px;
+}
+
+.VDPSMod {
+  margin-top: -45px;
+  border: 2px solid #8ca8be;
+}
+
+#vdpsLabel {
+  position: relative;
+  top: 260px;
+  left: 20px;
+  font-size: 2rem;
+  line-height: 45px;
+  color: #315098;
+}
+//["#315098", "#8ca8be", "#afbdb0", "#e4c0be", "#fbd0e0"]
+
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  12.5% {
+    transform: rotate(2deg);
+  }
+  25% {
+    transform: rotate(4deg);
+  }
+  37.5% {
+    transform: rotate(2deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  62.5% {
+    transform: rotate(-2deg);
+  }
+  75% {
+    transform: rotate(-4deg);
+  }
+  87.5% {
+    transform: rotate(-2deg);
+  }
+}
+
+.shakeAnimation {
+  animation: shake 0.2s; /* 摇晃动画的持续时间 */
+  animation-iteration-count: infinite; /* 动画无限次数播放 */
+}
+
+@keyframes arrow0Trans {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes arrow40Trans {
+  0% {
+    transform: translateX(0) rotate(40deg);
+  }
+  25% {
+    transform: translateX(-5px) rotate(40deg);
+  }
+  50% {
+    transform: translateX(5px) rotate(40deg);
+  }
+  75% {
+    transform: translateX(-5px) rotate(40deg);
+  }
+  100% {
+    transform: translateX(5px) rotate(40deg);
+  }
+}
+
+@keyframes arrow90Trans {
+  0% {
+    transform: translateX(0) rotate(90deg);
+  }
+  25% {
+    transform: translateX(-5px) rotate(90deg);
+  }
+  50% {
+    transform: translateX(5px) rotate(90deg);
+  }
+  75% {
+    transform: translateX(-5px) rotate(90deg);
+  }
+  100% {
+    transform: translateX(5px) rotate(90deg);
+  }
+}
+
+.arrow0Animation {
+  color: #d31638;
+  animation: arrow0Trans 1s; /* 摇晃动画的持续时间 */
+  animation-iteration-count: infinite; /* 动画无限次数播放 */
+}
+
+.arrow40Animation {
+  color: #d31638;
+  animation: arrow40Trans 1s; /* 摇晃动画的持续时间 */
+  animation-iteration-count: infinite; /* 动画无限次数播放 */
+}
+
+.arrow90Animation {
+  color: #d31638;
+  animation: arrow90Trans 1s; /* 摇晃动画的持续时间 */
+  animation-iteration-count: infinite; /* 动画无限次数播放 */
 }
