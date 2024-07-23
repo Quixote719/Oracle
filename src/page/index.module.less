@@ -13,6 +13,11 @@
   width: 26%;
 }
 
+.photoSquare {
+  width: 440px;
+  height: 330px;
+}
+
 #vcdpModule,
 #model {
   background: #afbdb0;
@@ -61,7 +66,7 @@
 #storeModule {
   width: 280px;
   display: block;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 #customerEnd {
@@ -89,17 +94,14 @@
   transform: rotate(40deg);
 }
 
-#arrowDownSvg,
-#arrowSwapSvg {
+#arrowSwapSvg,
+#arrowDownSwapSvg {
+  transform: rotate(90deg);
   margin: 20px 120px;
   font-size: 40px;
   display: block;
   position: relative;
   top: 10px;
-}
-
-#arrowSwapSvg {
-  transform: rotate(90deg);
 }
 
 #toClientArrow {
@@ -226,4 +228,22 @@
   color: #d31638;
   animation: arrow90Trans 1s; /* 摇晃动画的持续时间 */
   animation-iteration-count: infinite; /* 动画无限次数播放 */
+}
+
+.carDataLakeSwap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 4rem;
+  transform: translate(-50%, -50%);
+}
+
+.trainingResult {
+  display: block;
+  margin: 0 auto;
+  width: 900px;
+}
+
+.AISuggestion {
+  margin: 30px auto;
 }
